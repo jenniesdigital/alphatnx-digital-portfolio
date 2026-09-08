@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sub-Second Web Performance on 3G/4G African Mobile Networks · AlphaTNX Digital</title>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Sub-Second Web Performance on 3G/4G African Mobile Networks">
+  <meta property="og:description" content="Every 100ms delay costs 7% in conversions. How Next.js static asset optimization and Lagos edge CDN caching guarantee sub-second load times.">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/04_Favicons_and_App_Icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" href="assets/brand/02_Logo_Marks_Monogram/Transparent_PNG_HighRes/AlphaTNX_Mark_BrandColor_512px.png">
+  <link rel="apple-touch-icon" href="assets/brand/04_Favicons_and_App_Icons/apple-touch-icon-180x180.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-away-title="Have a wonderful day ♥">
+
+  <!-- Minimalist Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-content">
+      <span class="preloader-brand">AlphaTNX Digital</span>
+      <div class="preloader-bar-wrap">
+        <div class="preloader-bar" id="preloader-bar"></div>
+      </div>
+      <div class="preloader-meta">
+        <span class="preloader-status">Loading guide</span>
+        <span class="preloader-count" id="preloader-count">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header header--default" id="site-header">
+    <nav class="nav">
+      <a href="/" class="nav-brand-wrap" aria-label="AlphaTNX Digital Home">
+        <img src="assets/brand/01_Logos_Full_Lockup/Transparent_PNG_HighRes/AlphaTNX_FullLogo_White_1080p.png" alt="AlphaTNX Digital" class="nav-brand-img nav-brand-img--dark">
+        <img src="assets/brand/01_Logos_Full_Lockup/Transparent_PNG_HighRes/AlphaTNX_FullLogo_BrandColor_1080p.png" alt="AlphaTNX Digital" class="nav-brand-img nav-brand-img--light">
+      </a>
+
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about" class="nav-link">About</a>
+        <a href="/solutions" class="nav-link">Solutions</a>
+        <a href="/work" class="nav-link">Work</a>
+        <a href="/resources" class="nav-link" aria-current="page">Resources</a>
+      </div>
+
+      <div class="nav-right">
+        <button class="theme-switch-icon" id="theme-switch" aria-label="Toggle light/dark theme">
+          <svg class="theme-svg theme-svg--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="theme-svg theme-svg--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="nav-scroll-cta">Let’s Talk</a>
+      </div>
+
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile Navigation Modal -->
+  <div class="nav-modal" id="nav-modal" role="dialog" aria-label="Main menu" aria-hidden="true">
+    <div class="nav-modal-body">
+      <div class="nav-modal-group">
+        <a href="/" class="nav-modal-link">Home</a>
+        <a href="/about" class="nav-modal-link">About</a>
+        <a href="/solutions" class="nav-modal-link">Solutions</a>
+        <a href="/work" class="nav-modal-link">Work</a>
+        <a href="/resources" class="nav-modal-link" aria-current="page">Resources</a>
+      </div>
+    </div>
+    <div class="nav-modal-footer">
+      <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="nav-modal-cta">Let’s Talk</a>
+    </div>
+        <div class="nav-modal-contact">
+      <a href="https://facebook.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+      </a>
+      <a href="https://instagram.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+      </a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+      </a>
+      <a href="mailto:digital@alphatnx.com" class="nav-modal-contact-link" aria-label="Email">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="page-content" id="main-content">
+    <main class="blog-article-main">
+
+      <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/resources">Resources</a>
+        <span>/</span>
+        <span>Engineering Guide</span>
+      </nav>
+
+      <header>
+        <span class="blog-hero-tag">Web Engineering</span>
+        <h1 class="blog-hero-title">Sub-Second Web Performance on 3G/4G African Mobile Networks</h1>
+        <div class="blog-hero-meta">
+          <span>By Emmanuel, Tech & Design Lead</span>
+          <span>•</span>
+          <span>7 min read</span>
+          <span>•</span>
+          <span>Updated Q1 2026</span>
+        </div>
+      </header>
+
+      <div class="blog-hero-image-wrap">
+        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" alt="Mobile Web Performance" class="blog-hero-image">
+      </div>
+
+      <article class="blog-body">
+        <p>
+          Over 88% of internet access across Nigeria occurs on mobile devices over fluctuating 3G and 4G connections. When a corporate website or store takes 4.5 seconds to load, <strong>more than 53% of mobile visitors bounce before ever reading your headline.</strong>
+        </p>
+
+        <p>
+          In engineering, speed is not a vanity metric—it is a direct multiplier of customer acquisition cost and conversion rate.
+        </p>
+
+        <div class="blog-quote-box">
+          “If your website is built on heavy, unoptimized WordPress plugins hosted on cheap overseas shared servers, you are essentially throwing away half your marketing budget.”
+        </div>
+
+        <h2>The 3 Pillars of African Edge Performance</h2>
+        <div class="blog-callout-box">
+          <p>
+            <strong>1. Static Site Generation (SSG):</strong> Instead of running heavy database queries on every page hit, pages are pre-compiled into lightweight HTML/CSS at build time.<br><br>
+            <strong>2. Next-Gen Image Compression:</strong> All images are served in modern AVIF/WebP formats with responsive <code>srcset</code> attributes, reducing file sizes from 3MB down to under 80KB without visual loss.<br><br>
+            <strong>3. African Edge CDN Caching:</strong> Assets are served from Content Delivery Network points of presence (PoPs) in Lagos and Johannesburg, cutting round-trip network latency from 220ms down to 18ms.
+          </p>
+        </div>
+
+        <h2>Lighthouse 100/100 Results</h2>
+        <p>
+          Websites engineered by AlphaTNX Digital consistently score 95–100 on Google Core Web Vitals, resulting in higher organic search visibility, lower Google Ads cost-per-click, and sub-second loading on mobile devices.
+        </p>
+
+        <div class="blog-cta-box">
+          <h3 class="blog-cta-title">Is your current website feeling slow?</h3>
+          <p class="blog-cta-desc">
+            We build and rebuild high-speed web systems and applications engineered for sub-second performance.
+          </p>
+          <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20audit%20and%20improve%20our%20website%20performance." target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+            Discuss Speed Optimization on WhatsApp →
+          </a>
+        </div>
+      </article>
+
+      <section class="footer footer--minimal" style="margin-top: var(--space-5xl);">
+        <div class="footer-links">
+          <div class="footer-group">
+            <span class="footer-time">
+              <span class="footer-time-pulse"></span>
+              <span id="lagos-time">Lagos --:--:-- GMT+1</span>
+            </span>
+          </div>
+          <div class="footer-group">
+            <div class="footer-socials">
+              <a href="https://facebook.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="footer-link footer-link--icon" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              </a>
+              <a href="https://instagram.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="footer-link footer-link--icon" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-link footer-link--icon" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+              <a href="mailto:digital@alphatnx.com" class="footer-link footer-link--icon" aria-label="Email">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </a>
+            </div>
+            <p class="copyright">© 2026 <span class="brand">AlphaTNX Digital</span> · Digital Infrastructure for Nigerian Businesses</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

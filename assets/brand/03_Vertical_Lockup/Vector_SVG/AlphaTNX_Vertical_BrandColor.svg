@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" fill="none">
+  <!-- AlphaTNX Vertical / Stacked Lockup -->
+  <g transform="translate(125, 40)">
+    <path d="M175 15 L325 101.6 L250 145 L175 101.6 L100 145 L175 15 Z" fill="#3266FF" />
+    <path d="M25 101.6 L100 145 L100 231.6 L25 188.3 Z" fill="#1948EB" />
+    <path d="M25 188.3 L175 275 L175 188.3 L100 231.6 Z" fill="#0A1B5C" />
+    <path d="M175 275 L325 188.3 L325 101.6 L250 145 L250 231.6 L175 188.3 Z" fill="#050F2C" />
+    <path d="M100 231.6 L175 188.3 L250 231.6 L175 275 Z" fill="#0A1B5C" opacity="0.9" />
+  </g>
+  <text x="300" y="470" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="100" font-weight="800" fill="#050F2C" letter-spacing="-2">AlphaTNX</text>
+  <text x="300" y="550" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="44" font-weight="700" fill="#3266FF" letter-spacing="14">DIGITAL</text>
+</svg>

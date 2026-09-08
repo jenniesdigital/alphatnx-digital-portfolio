@@ -1,0 +1,21 @@
+/* AlphaTNX Digital Design Tokens */
+:root {
+  --alphatnx-obsidian: #050F2C;
+  --alphatnx-midnight: #0A1B5C;
+  --alphatnx-electric: #1948EB;
+  --alphatnx-bright-sky: #3266FF;
+  --alphatnx-ice-white: #F7F9FF;
+  --alphatnx-white: #FFFFFF;
+
+  /* Semantic UI Tokens */
+  --bg-primary: var(--alphatnx-obsidian);
+  --bg-surface: var(--alphatnx-midnight);
+  --brand-primary: var(--alphatnx-electric);
+  --brand-accent: var(--alphatnx-bright-sky);
+  --text-primary: var(--alphatnx-white);
+  --text-secondary: #8F9EB8;
+
+  /* Typography */
+  --font-primary: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}

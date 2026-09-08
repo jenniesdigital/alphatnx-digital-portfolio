@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlphaTNX Digital · Digital Infrastructure for Nigerian Businesses</title>
+  <meta name="description" content="We help businesses build the digital infrastructure they need to get online, operate better, and grow. From getting online to selling, automating and building systems.">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AlphaTNX Digital · Digital Infrastructure for Nigerian Businesses">
+  <meta property="og:description" content="We help businesses build the digital infrastructure they need to get online, operate better, and grow.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AlphaTNX Digital">
+  <meta name="twitter:description" content="Digital Infrastructure for Nigerian Businesses. Make technology work for your business.">
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/04_Favicons_and_App_Icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/brand/02_Logo_Marks_Monogram/Transparent_PNG_HighRes/AlphaTNX_Mark_BrandColor_512px.png">
+  <link rel="apple-touch-icon" href="assets/brand/04_Favicons_and_App_Icons/apple-touch-icon-180x180.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-away-title="Have a wonderful day ♥">
+
+  <!-- Minimalist Aesthetic Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-content">
+      <span class="preloader-brand">AlphaTNX Digital</span>
+      <div class="preloader-bar-wrap">
+        <div class="preloader-bar" id="preloader-bar"></div>
+      </div>
+      <div class="preloader-meta">
+        <span class="preloader-status">Initializing systems</span>
+        <span class="preloader-count" id="preloader-count">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header (Floating with Invisible Background) -->
+  <header class="header header--default" id="site-header">
+    <nav class="nav">
+      <!-- Left: Official AlphaTNX Digital Brand Logo (Dark & Light Authentic PNGs) -->
+      <a href="/" class="nav-brand-wrap" aria-label="AlphaTNX Digital Home">
+        <img src="assets/brand/01_Logos_Full_Lockup/Transparent_PNG_HighRes/AlphaTNX_FullLogo_White_1080p.png" alt="AlphaTNX Digital" class="nav-brand-img nav-brand-img--dark">
+        <img src="assets/brand/01_Logos_Full_Lockup/Transparent_PNG_HighRes/AlphaTNX_FullLogo_BrandColor_1080p.png" alt="AlphaTNX Digital" class="nav-brand-img nav-brand-img--light">
+      </a>
+
+      <!-- Center: Navigation links -->
+      <div class="nav-links">
+        <a href="/" class="nav-link" aria-current="page">Home</a>
+        <a href="/about" class="nav-link">About</a>
+        <a href="/solutions" class="nav-link">Solutions</a>
+        <a href="/work" class="nav-link">Work</a>
+        <a href="/resources" class="nav-link">Resources</a>
+      </div>
+
+      <!-- Right: Light / Dark Theme Icon Switcher & Scrolled CTA -->
+      <div class="nav-right">
+        <button class="theme-switch-icon" id="theme-switch" aria-label="Toggle light/dark theme">
+          <svg class="theme-svg theme-svg--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-svg theme-svg--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="nav-scroll-cta">Let’s Talk</a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile Navigation Modal -->
+  <div class="nav-modal" id="nav-modal" role="dialog" aria-label="Main menu" aria-hidden="true">
+    <div class="nav-modal-body">
+      <div class="nav-modal-group">
+        <a href="/" class="nav-modal-link" aria-current="page">Home</a>
+        <a href="/about" class="nav-modal-link">About</a>
+        <a href="/solutions" class="nav-modal-link">Solutions</a>
+        <a href="/work" class="nav-modal-link">Work</a>
+        <a href="/resources" class="nav-modal-link">Resources</a>
+      </div>
+    </div>
+    <div class="nav-modal-footer">
+      <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="nav-modal-cta">Let’s Talk</a>
+    </div>
+        <div class="nav-modal-contact">
+      <a href="https://facebook.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+      </a>
+      <a href="https://instagram.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+      </a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+      </a>
+      <a href="mailto:digital@alphatnx.com" class="nav-modal-contact-link" aria-label="Email">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="page-content" id="main-content">
+    <main>
+
+      <!-- HERO SECTION (VIEWPORT FITTED, EXPANSIVE TEXT OVERLAY, 3D GLOBE) -->
+      <section class="hero" id="intro">
+        <div class="hero-inner">
+          <div class="hero-text">
+            <h1 class="hero-heading" data-reveal>The trusted technology partner for ambitious businesses.</h1>
+            <p class="hero-sub" data-reveal style="--reveal-delay: 0.1s">
+              We help businesses build the digital infrastructure they need to get online, operate better, and grow.
+            </p>
+            <div class="hero-cta" data-reveal style="--reveal-delay: 0.2s">
+              <a href="/solutions" class="btn btn--secondary">
+                Explore Solutions
+              </a>
+              <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+                Contact Us
+              </a>
+            </div>
+          </div>
+
+          <!-- Interactive 3D Keyword Sphere Canvas -->
+          <div class="hero-globe" aria-hidden="true">
+            <canvas id="hero-globe"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- BRANDS SECTION (STATIC BIG BOXES, CONTINUOUS SLOW MARQUEE) -->
+      <section class="brands">
+        <div class="label-wrap">
+          <p class="label" data-reveal>Brands we've worked with</p>
+        </div>
+        <div class="marquee">
+          <div class="marquee-track">
+            <div class="cell"><span class="cell-logo-text">⚡ Apex Commerce</span></div>
+            <div class="cell"><span class="cell-logo-text">💎 Klarna</span></div>
+            <div class="cell"><span class="cell-logo-text">📦 Novak Freight</span></div>
+            <div class="cell"><span class="cell-logo-text">💳 Stripe Connect</span></div>
+            <div class="cell"><span class="cell-logo-text">🌐 Vortex AI</span></div>
+            <div class="cell"><span class="cell-logo-text">🛍️ Shopify Plus</span></div>
+            <div class="cell"><span class="cell-logo-text">⚡ Apex Commerce</span></div>
+            <div class="cell"><span class="cell-logo-text">💎 Klarna</span></div>
+            <div class="cell"><span class="cell-logo-text">📦 Novak Freight</span></div>
+            <div class="cell"><span class="cell-logo-text">💳 Stripe Connect</span></div>
+            <div class="cell"><span class="cell-logo-text">🌐 Vortex AI</span></div>
+            <div class="cell"><span class="cell-logo-text">🛍️ Shopify Plus</span></div>
+          </div>
+        </div>
+        <div class="marquee">
+          <div class="marquee-track marquee-track--reverse">
+            <div class="cell"><span class="cell-logo-text">🏢 Systembolaget</span></div>
+            <div class="cell"><span class="cell-logo-text">🏨 Clarion Hotels</span></div>
+            <div class="cell"><span class="cell-logo-text">🚗 Renault</span></div>
+            <div class="cell"><span class="cell-logo-text">📱 Benify Deals</span></div>
+            <div class="cell"><span class="cell-logo-text">📈 Fundler Invest</span></div>
+            <div class="cell"><span class="cell-logo-text">✨ Luminary Studio</span></div>
+            <div class="cell"><span class="cell-logo-text">🏢 Systembolaget</span></div>
+            <div class="cell"><span class="cell-logo-text">🏨 Clarion Hotels</span></div>
+            <div class="cell"><span class="cell-logo-text">🚗 Renault</span></div>
+            <div class="cell"><span class="cell-logo-text">📱 Benify Deals</span></div>
+            <div class="cell"><span class="cell-logo-text">📈 Fundler Invest</span></div>
+            <div class="cell"><span class="cell-logo-text">✨ Luminary Studio</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VALUE PROP & STATS SECTION -->
+      <section class="growth">
+        <canvas class="growth-nebula" aria-hidden="true"></canvas>
+        <div class="growth-inner">
+          <div class="growth-text">
+            <h2 class="growth-heading" data-reveal>
+              Growth comes from converting traffic into revenue <span class="fast"><span class="sk-l">f</span><span class="sk-l">a</span><span class="sk-l">s</span><span class="sk-l">t</span><span class="sk-l">e</span><span class="sk-l">r</span></span> than your competition
+            </h2>
+            <p class="growth-body" data-reveal style="--reveal-delay: 0.1s">
+              We help businesses identify where technology can make the biggest difference and build the right solution around the way they actually work. So that they're far ahead from their competitors.
+            </p>
+          </div>
+          <div class="growth-stats" data-reveal style="--reveal-delay: 0.2s">
+            <div class="stat">
+              <span class="stat-value">120+</span>
+              <span class="stat-label">Digital solutions</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">100+</span>
+              <span class="stat-label">Products launched</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">70+</span>
+              <span class="stat-label">E-commerce stores</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">$4.5M+</span>
+              <span class="stat-label">Client revenue</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOLUTIONS SECTION (INTERACTIVE CAROUSEL WITH STATIC CARDS) -->
+      <section class="solutions" id="solutions">
+        <div class="solutions-inner">
+          <div class="solutions-head" data-reveal>
+            <span class="solutions-eyebrow">SOLUTIONS</span>
+            <h2 class="solutions-heading">Whatever stage your business is at, there's a better way to work.</h2>
+          </div>
+
+          <div class="sol-viewport">
+            <div class="sol-track" id="sol-track">
+              
+              <!-- Solution 1: Get a Website (formerly Get Online) -->
+              <div class="sol-card" data-solution="get-online" tabindex="0" role="button" aria-label="Open Get a Website solution explainer">
+                <div class="sol-card-top">
+                  <span class="sol-card-num">01 · Get Online</span>
+                </div>
+                <h3 class="sol-card-title">Get a Website</h3>
+                <p class="sol-card-desc">
+                  A professional website that builds credibility and makes it easy for customers to find you, understand what you do, and reach out.
+                </p>
+                <ul class="sol-card-features">
+                  <li>Fast, mobile-friendly design</li>
+                  <li>Clear messaging and structure</li>
+                  <li>Contact and inquiry capture</li>
+                  <li>Search engine ready</li>
+                </ul>
+                <div class="sol-card-cta">
+                  <span>Explore solution breakdown →</span>
+                </div>
+              </div>
+
+              <!-- Solution 2: Your Own E-Commerce Store (formerly Sell Online) -->
+              <div class="sol-card" data-solution="sell-online" tabindex="0" role="button" aria-label="Open Your Own E-Commerce Store solution explainer">
+                <div class="sol-card-top">
+                  <span class="sol-card-num">02 · Sell Online</span>
+                </div>
+                <h3 class="sol-card-title">Your Own E-Commerce Store</h3>
+                <p class="sol-card-desc">
+                  From simple order forms to full e-commerce stores. We set up the easiest way for your customers to pay and for you to manage orders.
+                </p>
+                <ul class="sol-card-features">
+                  <li>Custom E-commerce stores & online storefronts</li>
+                  <li>Single-product sales funnels & order pages</li>
+                  <li>Payment gateway integration (Paystack, Flutterwave, Stripe)</li>
+                  <li>WhatsApp order integration</li>
+                </ul>
+                <div class="sol-card-cta">
+                  <span>Explore solution breakdown →</span>
+                </div>
+              </div>
+
+              <!-- Solution 3: Systemize Your Business (formerly Run Your Business Better) -->
+              <div class="sol-card" data-solution="operations" tabindex="0" role="button" aria-label="Open Systemize Your Business solution explainer">
+                <div class="sol-card-top">
+                  <span class="sol-card-num">03 · Run Your Business Better</span>
+                </div>
+                <h3 class="sol-card-title">Systemize Your Business</h3>
+                <p class="sol-card-desc">
+                  Custom internal tools and dashboards that replace messy spreadsheets, reduce manual work, and give you visibility into your operations.
+                </p>
+                <ul class="sol-card-features">
+                  <li>Inventory and order management</li>
+                  <li>Customer and lead management (CRM)</li>
+                  <li>Business performance dashboards</li>
+                  <li>Multi-location tracking</li>
+                </ul>
+                <div class="sol-card-cta">
+                  <span>Explore solution breakdown →</span>
+                </div>
+              </div>
+
+              <!-- Solution 4: Work Smarter in Your Business (formerly Work Smarter) -->
+              <div class="sol-card" data-solution="automation" tabindex="0" role="button" aria-label="Open Work Smarter in Your Business solution explainer">
+                <div class="sol-card-top">
+                  <span class="sol-card-num">04 · Work Smarter</span>
+                </div>
+                <h3 class="sol-card-title">Work Smarter in Your Business</h3>
+                <p class="sol-card-desc">
+                  Connect the tools you already use so routine tasks happen automatically — saving hours every week and eliminating human error.
+                </p>
+                <ul class="sol-card-features">
+                  <li>Automated customer notifications (Email, SMS, WhatsApp)</li>
+                  <li>Payment-to-fulfillment workflows</li>
+                  <li>Form responses to CRM/database sync</li>
+                  <li>Daily summary reports and alerts</li>
+                </ul>
+                <div class="sol-card-cta">
+                  <span>Explore solution breakdown →</span>
+                </div>
+              </div>
+
+              <!-- Solution 5: Custom Solutions for Your Business (formerly Build Something New) -->
+              <div class="sol-card" data-solution="custom-software" tabindex="0" role="button" aria-label="Open Custom Solutions for Your Business explainer">
+                <div class="sol-card-top">
+                  <span class="sol-card-num">05 · Build Something New</span>
+                </div>
+                <h3 class="sol-card-title">Custom Solutions for Your Business</h3>
+                <p class="sol-card-desc">
+                  Have an idea for a web app, customer portal, or digital platform? We design, build, and launch custom software tailored to your vision.
+                </p>
+                <ul class="sol-card-features">
+                  <li>Web applications & portals</li>
+                  <li>Booking and reservation platforms</li>
+                  <li>MVP development for startups</li>
+                  <li>API development and integration</li>
+                </ul>
+                <div class="sol-card-cta">
+                  <span>Explore solution breakdown →</span>
+                </div>
+              </div>
+
+              <!-- Solution 6: Tech Maintenance (formerly Keep It Running) -->
+              <div class="sol-card" data-solution="maintenance" tabindex="0" role="button" aria-label="Open Tech Maintenance solution explainer">
+                <div class="sol-card-top">
+                  <span class="sol-card-num">06 · Keep It Running</span>
+                </div>
+                <h3 class="sol-card-title">Tech Maintenance</h3>
+                <p class="sol-card-desc">
+                  Technology shouldn't give you headaches. We handle hosting, updates, security, and improvements so your systems stay fast and reliable.
+                </p>
+                <ul class="sol-card-features">
+                  <li>Website and app maintenance</li>
+                  <li>Performance optimization and speed</li>
+                  <li>Security monitoring and backups</li>
+                  <li>Ongoing feature improvements</li>
+                </ul>
+                <div class="sol-card-cta">
+                  <span>Explore solution breakdown →</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="sol-controls">
+            <div class="sol-dots" id="sol-dots"></div>
+            <div class="sol-arrows">
+              <button type="button" class="sol-arrow sol-prev" id="sol-prev" aria-label="Previous solution" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <button type="button" class="sol-arrow sol-next" id="sol-next" aria-label="Next solution">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SELECTED WORK CAROUSEL (6 SLIM CARDS, SMOOTH SCROLLING) -->
+      <section class="featured-work" id="case-studies">
+        <div class="cw-head">
+          <h2 class="section-heading" data-reveal>Selected work</h2>
+        </div>
+
+        <div class="cw-viewport">
+          <div class="cw-track" id="cw-track">
+            
+            <!-- Card 1 -->
+            <a href="/work#apex" class="cw-card" data-case="apex" draggable="false">
+              <div class="cw-media" aria-hidden="true">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80" alt="Apex Commerce" loading="lazy">
+              </div>
+              <div class="cw-bottom">
+                <div>
+                  <p class="cw-label">Apex Commerce</p>
+                  <h3 class="cw-title">A 960% usage lift on Apex Commerce's digital storefront</h3>
+                </div>
+                <div class="cw-view-wrap">
+                  <span class="cw-view">View case →</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Card 2 -->
+            <a href="/work#vortex" class="cw-card" data-case="vortex" draggable="false">
+              <div class="cw-media" aria-hidden="true">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="Vortex AI" loading="lazy">
+              </div>
+              <div class="cw-bottom">
+                <div>
+                  <p class="cw-label">Vortex AI</p>
+                  <h3 class="cw-title">How design strategy took Vortex from NPS -4 to +19</h3>
+                </div>
+                <div class="cw-view-wrap">
+                  <span class="cw-view">View case →</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Card 3 -->
+            <a href="/work#novak" class="cw-card" data-case="novak" draggable="false">
+              <div class="cw-media" aria-hidden="true">
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80" alt="Novak Freight" loading="lazy">
+              </div>
+              <div class="cw-bottom">
+                <div>
+                  <p class="cw-label">Novak Freight</p>
+                  <h3 class="cw-title">Automated instant quotation engine & high-ticket intake system</h3>
+                </div>
+                <div class="cw-view-wrap">
+                  <span class="cw-view">View case →</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Card 4 -->
+            <a href="/work#aura" class="cw-card" data-case="aura" draggable="false">
+              <div class="cw-media" aria-hidden="true">
+                <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1000&q=80" alt="Aura Pay" loading="lazy">
+              </div>
+              <div class="cw-bottom">
+                <div>
+                  <p class="cw-label">Aura Pay</p>
+                  <h3 class="cw-title">230% conversion lift on Aura Pay checkout in three weeks</h3>
+                </div>
+                <div class="cw-view-wrap">
+                  <span class="cw-view">View case →</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Card 5 -->
+            <a href="/work#luminary" class="cw-card" data-case="luminary" draggable="false">
+              <div class="cw-media" aria-hidden="true">
+                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1000&q=80" alt="Luminary Studio" loading="lazy">
+              </div>
+              <div class="cw-bottom">
+                <div>
+                  <p class="cw-label">Luminary Studio</p>
+                  <h3 class="cw-title">Complete brand architecture and high-velocity digital agency portal</h3>
+                </div>
+                <div class="cw-view-wrap">
+                  <span class="cw-view">View case →</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Card 6 -->
+            <a href="/work#orbit" class="cw-card" data-case="orbit" draggable="false">
+              <div class="cw-media" aria-hidden="true">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80" alt="Orbit SaaS" loading="lazy">
+              </div>
+              <div class="cw-bottom">
+                <div>
+                  <p class="cw-label">Orbit Cloud</p>
+                  <h3 class="cw-title">Multi-step self-serve onboarding funnel and automated billing engine</h3>
+                </div>
+                <div class="cw-view-wrap">
+                  <span class="cw-view">View case →</span>
+                </div>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+        <div class="cw-arrows">
+          <button type="button" class="cw-arrow cw-prev" aria-label="Previous case" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="cw-arrow cw-next" aria-label="Next case">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <div class="cw-dots"></div>
+      </section>
+
+      <!-- HOW WE WORK (CENTERED HEAD & STATIC INTERACTIVE CAROUSEL) -->
+      <section class="how" id="how">
+        <div class="how-inner">
+          <div class="how-head" data-reveal>
+            <span class="how-eyebrow">How We Work</span>
+            <h2 class="how-heading">We don't start with technology. We start with the problem.</h2>
+          </div>
+
+          <div class="how-viewport">
+            <div class="how-track" id="how-track">
+              
+              <!-- Step 1 -->
+              <div class="how-card" data-step="1">
+                <span class="how-step-badge">Step 01</span>
+                <h3 class="how-step-title">01 — Discover</h3>
+                <p class="how-step-desc">
+                  We learn how your business operates today, where things get stuck, and what you're trying to achieve.
+                </p>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="how-card" data-step="2">
+                <span class="how-step-badge">Step 02</span>
+                <h3 class="how-step-title">02 — Define</h3>
+                <p class="how-step-desc">
+                  We map out the simplest, most effective solution — no unnecessary features, no bloated scope.
+                </p>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="how-card" data-step="3">
+                <span class="how-step-badge">Step 03</span>
+                <h3 class="how-step-title">03 — Design</h3>
+                <p class="how-step-desc">
+                  We design the experience and interface, keeping it clean, intuitive, and easy for your team and customers to use.
+                </p>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="how-card" data-step="4">
+                <span class="how-step-badge">Step 04</span>
+                <h3 class="how-step-title">04 — Build</h3>
+                <p class="how-step-desc">
+                  We develop the solution using reliable, modern technology built to perform and scale.
+                </p>
+              </div>
+
+              <!-- Step 5 -->
+              <div class="how-card" data-step="5">
+                <span class="how-step-badge">Step 05</span>
+                <h3 class="how-step-title">05 — Launch</h3>
+                <p class="how-step-desc">
+                  We test everything thoroughly, train your team, and deploy with zero disruption to your business.
+                </p>
+              </div>
+
+              <!-- Step 6 -->
+              <div class="how-card" data-step="6">
+                <span class="how-step-badge">Step 06</span>
+                <h3 class="how-step-title">06 — Improve</h3>
+                <p class="how-step-desc">
+                  We don't disappear after launch. We monitor performance, gather feedback, and keep making things better.
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="how-controls">
+            <div class="how-dots" id="how-dots"></div>
+            <div class="how-arrows">
+              <button type="button" class="how-arrow how-prev" id="how-prev" aria-label="Previous step" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <button type="button" class="how-arrow how-next" id="how-next" aria-label="Next step">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT TEASER (FOUNDER INTRODUCTION) -->
+      <section class="about-teaser">
+        <div class="at-inner">
+          <div class="at-image" data-reveal>
+            <img src="assets/michael-ehiem.jpg" alt="Michael Ehiem" loading="lazy">
+          </div>
+          <div class="at-text" data-reveal style="--reveal-delay: 0.1s">
+            <h2 class="at-heading">
+              <span class="hw">I'm</span> <span class="hw">Michael,</span> <span class="hw">Founder</span> <span class="hw">of</span> <span class="hw">AlphaTNX</span> <span class="hw">Digital</span>
+            </h2>
+            <p class="at-body">
+              I started AlphaTNX Digital because too many Nigerian businesses are missing out on the millions of customers online and the opportunities technology can create for their business. AlphaTNX Digital helps ambitious business owners build the digital infrastructure they need to get online, operate better, and grow. From fast-loading websites and e-commerce stores to custom workflow automations and internal tools, we make technology work for your business.
+            </p>
+            <a class="at-link" href="/about">
+              Learn more about us →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHY ALPHATNX DIGITAL (ROUNDED ACCORDION DROPDOWN MENU - 5 PILLARS) -->
+      <section class="why-alphatnx" id="why-alphatnx">
+        <div class="why-inner">
+          <div class="why-head" data-reveal>
+            <span class="why-eyebrow">Why AlphaTNX Digital</span>
+            <h2 class="why-heading">Practical technology. Built around real businesses.</h2>
+          </div>
+
+          <div class="why-accordion" data-reveal style="--reveal-delay: 0.1s">
+            
+            <!-- Pillar 1 -->
+            <details class="why-item" open>
+              <summary class="why-trigger">
+                <span class="why-trigger-title">
+                  <span class="why-pillar-num">01</span>
+                  <span>Business-first</span>
+                </span>
+                <span class="why-icon">
+                  <svg viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1.5L7 7.5L13 1.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </summary>
+              <div class="why-answer">
+                <p class="why-answer-inner">
+                  We care about the result, not the buzzwords. If a simple form works better than a complex app, that's what we'll recommend. We prioritize ROI, operational clarity, and customer conversion over technical vanity.
+                </p>
+              </div>
+            </details>
+
+            <!-- Pillar 2 -->
+            <details class="why-item">
+              <summary class="why-trigger">
+                <span class="why-trigger-title">
+                  <span class="why-pillar-num">02</span>
+                  <span>Built around you</span>
+                </span>
+                <span class="why-icon">
+                  <svg viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1.5L7 7.5L13 1.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </summary>
+              <div class="why-answer">
+                <p class="why-answer-inner">
+                  Every solution is designed for how your business actually operates, not forced into a one-size-fits-all template. We adapt to your staff workflows, existing tools, and customer buying habits.
+                </p>
+              </div>
+            </details>
+
+            <!-- Pillar 3 -->
+            <details class="why-item">
+              <summary class="why-trigger">
+                <span class="why-trigger-title">
+                  <span class="why-pillar-num">03</span>
+                  <span>Simple to use</span>
+                </span>
+                <span class="why-icon">
+                  <svg viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1.5L7 7.5L13 1.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </summary>
+              <div class="why-answer">
+                <p class="why-answer-inner">
+                  If your team can't use it or your customers get confused, it failed. We design for clarity, speed, and ease so that adoption is instantaneous and friction is completely removed.
+                </p>
+              </div>
+            </details>
+
+            <!-- Pillar 4 -->
+            <details class="why-item">
+              <summary class="why-trigger">
+                <span class="why-trigger-title">
+                  <span class="why-pillar-num">04</span>
+                  <span>Built to grow</span>
+                </span>
+                <span class="why-icon">
+                  <svg viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1.5L7 7.5L13 1.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </summary>
+              <div class="why-answer">
+                <p class="why-answer-inner">
+                  We build with the future in mind so you don't outgrow your technology in six months. Modern architectures handle 10x traffic spikes, automated invoicing, and multi-location operations without breaking.
+                </p>
+              </div>
+            </details>
+
+            <!-- Pillar 5 -->
+            <details class="why-item">
+              <summary class="why-trigger">
+                <span class="why-trigger-title">
+                  <span class="why-pillar-num">05</span>
+                  <span>One technology partner</span>
+                </span>
+                <span class="why-icon">
+                  <svg viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1.5L7 7.5L13 1.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </summary>
+              <div class="why-answer">
+                <p class="why-answer-inner">
+                  From your first website to complex automations and ongoing support, we're the only team you need. No juggling disjointed freelancers or finger-pointing agencies.
+                </p>
+              </div>
+            </details>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- FINAL CTA SECTION -->
+      <section class="final-cta">
+        <div class="final-cta-inner" data-reveal>
+          <span class="final-cta-eyebrow">Ready to get started?</span>
+          <h2 class="final-cta-heading">Make technology work for your business</h2>
+          <p class="final-cta-body">
+            Let's discuss how the right digital infrastructure can help you get online, operate better, and grow.
+          </p>
+          <div class="final-cta-button">
+            <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+              Let's Talk on WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <section class="footer footer--minimal" id="contact">
+        <div class="footer-links">
+          <div class="footer-group">
+            <span class="footer-time">
+              <span class="footer-time-pulse"></span>
+              <span id="lagos-time">Lagos --:--:-- GMT+1</span>
+            </span>
+          </div>
+          <div class="footer-group">
+                        <div class="footer-socials">
+              <a href="https://facebook.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="footer-link footer-link--icon" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              </a>
+              <a href="https://instagram.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="footer-link footer-link--icon" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-link footer-link--icon" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+              <a href="mailto:digital@alphatnx.com" class="footer-link footer-link--icon" aria-label="Email">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </a>
+            </div>
+            <p class="copyright">© 2026 <span class="brand">AlphaTNX Digital</span> · Digital Infrastructure for Nigerian Businesses</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Solution Explainer Slide-in Drawer -->
+  <div class="case-drawer" id="solution-drawer" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="case-drawer-backdrop" id="solution-drawer-backdrop"></div>
+    <div class="case-drawer-panel">
+      <div class="case-drawer-header">
+        <span class="case-drawer-brand" id="solution-drawer-tag">Solution Breakdown</span>
+        <button class="case-drawer-close" id="solution-drawer-close" aria-label="Close solution explainer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="case-drawer-body">
+        
+        <h2 class="case-drawer-title" id="solution-drawer-title"></h2>
+
+        <div class="case-blocks">
+          <div class="case-block case-block--problem">
+            <span class="case-block-badge">🚩 Why You Need This</span>
+            <h3 class="case-block-title">Why you need this</h3>
+            <p class="case-block-text" id="solution-drawer-problem"></p>
+          </div>
+
+          <div class="case-block case-block--architecture">
+            <span class="case-block-badge">⚡ 02 · Engineered Deliverables</span>
+            <h3 class="case-block-title">What We Build For You</h3>
+            <p class="case-block-text" id="solution-drawer-deliverables"></p>
+            <div class="case-metrics-grid" id="solution-drawer-features-grid"></div>
+            <a id="solution-drawer-work-link" href="/work" class="case-work-link">See Websites We've Built for Others →</a>
+          </div>
+
+          <div class="case-block case-block--outcome">
+            <span class="case-block-badge">📈 03 · Operational Outcome</span>
+            <h3 class="case-block-title">Expected Business Impact</h3>
+            <p class="case-block-text" id="solution-drawer-outcome"></p>
+          </div>
+        </div>
+
+        <div class="case-drawer-cta">
+          <p class="case-drawer-cta-text" id="solution-drawer-cta-prompt">Ready to implement this solution for your business?</p>
+          <a id="solution-drawer-whatsapp" href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20solution." target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+            Discuss This Solution on WhatsApp →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case Study Quick-View Slide-in Drawer -->
+  <div class="case-drawer" id="case-drawer" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="case-drawer-backdrop" id="case-drawer-backdrop"></div>
+    <div class="case-drawer-panel">
+      <div class="case-drawer-header">
+        <span class="case-drawer-brand" id="case-drawer-brand">Case Study</span>
+        <button class="case-drawer-close" id="case-drawer-close" aria-label="Close case study">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="case-drawer-body">
+        <div class="case-drawer-media">
+          <img id="case-drawer-img" src="" alt="Case preview">
+        </div>
+        
+        <h2 class="case-drawer-title" id="case-drawer-title"></h2>
+
+        <div class="case-blocks">
+          <div class="case-block case-block--problem">
+            <span class="case-block-badge">🚩 01 · The Problem</span>
+            <h3 class="case-block-title">The Bottleneck & Constraints</h3>
+            <p class="case-block-text" id="case-drawer-problem"></p>
+          </div>
+
+          <div class="case-block case-block--architecture">
+            <span class="case-block-badge">⚡ 02 · The Architecture</span>
+            <h3 class="case-block-title">The Engineered Solution</h3>
+            <p class="case-block-text" id="case-drawer-architecture"></p>
+          </div>
+
+          <div class="case-block case-block--outcome">
+            <span class="case-block-badge">📈 03 · The Outcome</span>
+            <h3 class="case-block-title">Measurable Business ROI</h3>
+            <p class="case-block-text" id="case-drawer-outcome"></p>
+            <div class="case-metrics-grid" id="case-drawer-metrics"></div>
+          </div>
+        </div>
+
+        <div class="case-drawer-cta">
+          <p class="case-drawer-cta-text" id="case-drawer-cta-text">Want a high-converting digital system engineered for your business?</p>
+          <a id="case-drawer-whatsapp" href="https://wa.me/2349064316439?text=Hi%20Michael,%20I'd%20like%20to%20discuss%20a%20project%20similar%20to%20your%20case%20studies." target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+            Discuss a Similar Build →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/globe.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

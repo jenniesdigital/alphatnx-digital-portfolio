@@ -1,0 +1,53 @@
+{
+  "brand_name": "AlphaTNX Digital",
+  "version": "1.0.0",
+  "palette": {
+    "obsidian_base": {
+      "hex": "#050F2C",
+      "rgb": "rgb(5, 15, 44)",
+      "cmyk": "cmyk(88%, 77%, 49%, 67%)",
+      "pantone": "PMS 2767 C",
+      "role": "Primary Base Canvas / High Contrast Dark"
+    },
+    "midnight_structure": {
+      "hex": "#0A1B5C",
+      "rgb": "rgb(10, 27, 92)",
+      "cmyk": "cmyk(98%, 86%, 32%, 24%)",
+      "pantone": "PMS 280 C",
+      "role": "Cards, Structural Containers & Dark Accents"
+    },
+    "electric_accent": {
+      "hex": "#1948EB",
+      "rgb": "rgb(25, 72, 235)",
+      "cmyk": "cmyk(89%, 72%, 0%, 0%)",
+      "pantone": "PMS 2728 C",
+      "role": "Primary Brand Action / CTA / Vibrant Energy"
+    },
+    "bright_sky": {
+      "hex": "#3266FF",
+      "rgb": "rgb(50, 102, 255)",
+      "cmyk": "cmyk(74%, 52%, 0%, 0%)",
+      "pantone": "PMS 2727 C",
+      "role": "Digital Highlights, Active States & Glowing Effects"
+    },
+    "ice_white": {
+      "hex": "#F7F9FF",
+      "rgb": "rgb(247, 249, 255)",
+      "cmyk": "cmyk(3%, 2%, 0%, 0%)",
+      "pantone": "PMS Cool Gray 1",
+      "role": "Light Surface Canvas / Clean Background"
+    },
+    "crisp_white": {
+      "hex": "#FFFFFF",
+      "rgb": "rgb(255, 255, 255)",
+      "cmyk": "cmyk(0%, 0%, 0%, 0%)",
+      "pantone": "Opaque White",
+      "role": "High-Contrast Typography & Reversed Mark"
+    }
+  },
+  "hierarchy_ratios": {
+    "dominant_canvas": "60%",
+    "structural_depth": "30%",
+    "vibrant_action": "10%"
+  }
+}

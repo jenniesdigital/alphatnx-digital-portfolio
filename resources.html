@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources & Insights · AlphaTNX Digital</title>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Resources & Insights · AlphaTNX Digital">
+  <meta property="og:description" content="Practical guides, benchmarks, and insights on building digital infrastructure, automating operations, and scaling Nigerian businesses.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Resources & Insights · AlphaTNX Digital">
+  <meta name="twitter:description" content="Practical guides and insights on digital infrastructure for Nigerian businesses.">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/04_Favicons_and_App_Icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" href="assets/brand/02_Logo_Marks_Monogram/Transparent_PNG_HighRes/AlphaTNX_Mark_BrandColor_512px.png">
+  <link rel="apple-touch-icon" href="assets/brand/04_Favicons_and_App_Icons/apple-touch-icon-180x180.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-away-title="Have a wonderful day ♥">
+
+  <!-- Minimalist Aesthetic Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-content">
+      <span class="preloader-brand">AlphaTNX Digital</span>
+      <div class="preloader-bar-wrap">
+        <div class="preloader-bar" id="preloader-bar"></div>
+      </div>
+      <div class="preloader-meta">
+        <span class="preloader-status">Loading insights</span>
+        <span class="preloader-count" id="preloader-count">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header header--default" id="site-header">
+    <nav class="nav">
+      <!-- Left: Official AlphaTNX Digital Brand Logo (Dark & Light) -->
+      <a href="/" class="nav-brand-wrap" aria-label="AlphaTNX Digital Home">
+        <img src="assets/brand/01_Logos_Full_Lockup/Transparent_PNG_HighRes/AlphaTNX_FullLogo_White_1080p.png" alt="AlphaTNX Digital" class="nav-brand-img nav-brand-img--dark">
+        <img src="assets/brand/01_Logos_Full_Lockup/Transparent_PNG_HighRes/AlphaTNX_FullLogo_BrandColor_1080p.png" alt="AlphaTNX Digital" class="nav-brand-img nav-brand-img--light">
+      </a>
+
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about" class="nav-link">About</a>
+        <a href="/solutions" class="nav-link">Solutions</a>
+        <a href="/work" class="nav-link">Work</a>
+        <a href="/resources" class="nav-link" aria-current="page">Resources</a>
+      </div>
+
+      <div class="nav-right">
+        <button class="theme-switch-icon" id="theme-switch" aria-label="Toggle light/dark theme">
+          <svg class="theme-svg theme-svg--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-svg theme-svg--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="nav-scroll-cta">Let’s Talk</a>
+      </div>
+
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile Navigation Modal -->
+  <div class="nav-modal" id="nav-modal" role="dialog" aria-label="Main menu" aria-hidden="true">
+    <div class="nav-modal-body">
+      <div class="nav-modal-group">
+        <a href="/" class="nav-modal-link">Home</a>
+        <a href="/about" class="nav-modal-link">About</a>
+        <a href="/solutions" class="nav-modal-link">Solutions</a>
+        <a href="/work" class="nav-modal-link">Work</a>
+        <a href="/resources" class="nav-modal-link" aria-current="page">Resources</a>
+      </div>
+    </div>
+    <div class="nav-modal-footer">
+      <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="nav-modal-cta">Let’s Talk</a>
+    </div>
+        <div class="nav-modal-contact">
+      <a href="https://facebook.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+      </a>
+      <a href="https://instagram.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+      </a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+      </a>
+      <a href="mailto:digital@alphatnx.com" class="nav-modal-contact-link" aria-label="Email">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="page-content" id="main-content">
+    <main>
+
+      <!-- Resources Page Head -->
+      <section class="resources-head">
+        <span class="sol-detail-tag" data-reveal>KNOWLEDGE BASE & GUIDES</span>
+        <h1 class="solutions-heading" data-reveal style="font-size: clamp(2.3rem, 5vw, 3.8rem); line-height: 1.1; margin: 0;">
+          Practical guides for Nigerian business leaders.
+        </h1>
+        <p class="growth-body" data-reveal style="--reveal-delay: 0.1s; margin: 0; max-width: 800px;">
+          Actionable frameworks, engineering case breakdowns, and tactical advice on how to build, automate, and operate your company’s digital infrastructure.
+        </p>
+      </section>
+
+      <!-- Categories Filter -->
+      <div class="resources-filters" data-reveal style="--reveal-delay: 0.15s">
+        <button type="button" class="res-filter-btn is-active" data-filter="all">All Topics</button>
+        <button type="button" class="res-filter-btn" data-filter="ecommerce">E-Commerce & Payments</button>
+        <button type="button" class="res-filter-btn" data-filter="operations">Operations & Dashboards</button>
+        <button type="button" class="res-filter-btn" data-filter="automation">Automation</button>
+        <button type="button" class="res-filter-btn" data-filter="engineering">Web & Engineering</button>
+      </div>
+
+      <!-- Articles Grid -->
+      <section class="resources-grid">
+
+        <!-- Article 1 -->
+        <a href="/blog-whatsapp-dropoff" class="resource-card" data-category="ecommerce" data-reveal>
+          <div class="resource-media">
+            <img src="https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=800&q=80" alt="E-Commerce Checkout" loading="lazy">
+          </div>
+          <div class="resource-body">
+            <div class="resource-meta">
+              <span class="resource-tag">E-Commerce</span>
+              <span>5 min read</span>
+            </div>
+            <h2 class="resource-title">How Nigerian Retailers Are Slashing WhatsApp Order Drop-Off by 60%</h2>
+            <p class="resource-excerpt">
+              Why manual "DM for price" conversations leak high-intent revenue, and how automated checkout funnels convert impulse buyers instantly while keeping customer relationships on WhatsApp.
+            </p>
+            <div class="resource-cta">
+              Read guide →
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 2 -->
+        <a href="/blog-spreadsheet-trap" class="resource-card" data-category="operations" data-reveal>
+          <div class="resource-media">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Spreadsheets and Operations" loading="lazy">
+          </div>
+          <div class="resource-body">
+            <div class="resource-meta">
+              <span class="resource-tag">Operations</span>
+              <span>4 min read</span>
+            </div>
+            <h2 class="resource-title">The Spreadsheet Trap: When Excel is Costing Your Business Real Revenue</h2>
+            <p class="resource-excerpt">
+              Five clear indicators that your business has outgrown fragmented Excel spreadsheets, and how simple custom internal dashboards prevent phantom inventory and missed customer orders.
+            </p>
+            <div class="resource-cta">
+              Read guide →
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 3 -->
+        <a href="/blog-payment-gateways" class="resource-card" data-category="ecommerce" data-reveal>
+          <div class="resource-media">
+            <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80" alt="Payment Gateways" loading="lazy">
+          </div>
+          <div class="resource-body">
+            <div class="resource-meta">
+              <span class="resource-tag">E-Commerce</span>
+              <span>6 min read</span>
+            </div>
+            <h2 class="resource-title">Paystack vs Flutterwave vs Direct Transfer: Designing the Optimal Checkout Stack</h2>
+            <p class="resource-excerpt">
+              A comprehensive technical and commercial review of payment routing in Nigeria, handling USSD fallbacks, and preventing transaction drop-offs on mobile browsers.
+            </p>
+            <div class="resource-cta">
+              Read guide →
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 4 -->
+        <a href="/blog-lead-automation" class="resource-card" data-category="automation" data-reveal>
+          <div class="resource-media">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Automation Workflows" loading="lazy">
+          </div>
+          <div class="resource-body">
+            <div class="resource-meta">
+              <span class="resource-tag">Automation</span>
+              <span>5 min read</span>
+            </div>
+            <h2 class="resource-title">Automating Lead-to-Fulfillment Workflows With Zero Manual Delay in 2026</h2>
+            <p class="resource-excerpt">
+              How modern webhooks and API connectors automatically route online inquiries to sales reps, generate branded PDF receipts, and alert dispatch couriers without human intervention.
+            </p>
+            <div class="resource-cta">
+              Read guide →
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 5 -->
+        <a href="/blog-mobile-performance" class="resource-card" data-category="engineering" data-reveal>
+          <div class="resource-media">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="Mobile Web Performance" loading="lazy">
+          </div>
+          <div class="resource-body">
+            <div class="resource-meta">
+              <span class="resource-tag">Engineering</span>
+              <span>7 min read</span>
+            </div>
+            <h2 class="resource-title">Sub-Second Web Performance on 3G/4G African Mobile Networks</h2>
+            <p class="resource-excerpt">
+              Every 100ms delay costs 7% in conversions. How Next.js static asset optimization, edge CDN caching in Lagos, and responsive image compression guarantee sub-second load times.
+            </p>
+            <div class="resource-cta">
+              Read guide →
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 6 -->
+        <a href="/blog-custom-saas-vs-portal" class="resource-card" data-category="engineering" data-reveal>
+          <div class="resource-media">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Custom Portals" loading="lazy">
+          </div>
+          <div class="resource-body">
+            <div class="resource-meta">
+              <span class="resource-tag">Engineering</span>
+              <span>6 min read</span>
+            </div>
+            <h2 class="resource-title">Building Custom Internal Portals: When Off-The-Shelf SaaS Fails Your Team</h2>
+            <p class="resource-excerpt">
+              Why generic foreign SaaS tools with dollar billing often fail African operational realities, and how bespoke internal web apps deliver better speed, data security, and long-term cost savings.
+            </p>
+            <div class="resource-cta">
+              Read guide →
+            </div>
+          </div>
+        </a>
+
+      </section>
+
+      <!-- Final CTA -->
+      <section class="final-cta final-cta--page">
+        <div class="final-cta-inner" data-reveal>
+          <span class="final-cta-eyebrow">Ready to upgrade your infrastructure?</span>
+          <h2 class="final-cta-heading">Let's build systems that grow your business</h2>
+          <p class="final-cta-body">
+            Schedule a conversation with us to review your current tech stack and find high-leverage growth opportunities.
+          </p>
+          <div class="final-cta-button">
+            <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+              Let's Talk on WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <section class="footer footer--minimal" id="contact">
+        <div class="footer-links">
+          <div class="footer-group">
+            <span class="footer-time">
+              <span class="footer-time-pulse"></span>
+              <span id="lagos-time">Lagos --:--:-- GMT+1</span>
+            </span>
+          </div>
+          <div class="footer-group">
+            <div class="footer-socials">
+              <a href="https://facebook.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="footer-link footer-link--icon" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              </a>
+              <a href="https://instagram.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="footer-link footer-link--icon" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-link footer-link--icon" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+              <a href="mailto:digital@alphatnx.com" class="footer-link footer-link--icon" aria-label="Email">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </a>
+            </div>
+            <p class="copyright">© 2026 <span class="brand">AlphaTNX Digital</span> · Digital Infrastructure for Nigerian Businesses</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Resource Article Reader Modal Drawer -->
+  <div class="case-drawer" id="resource-drawer" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="case-drawer-backdrop" id="resource-drawer-backdrop"></div>
+    <div class="case-drawer-panel">
+      <div class="case-drawer-header">
+        <span class="case-drawer-brand" id="resource-drawer-tag">Article Guide</span>
+        <button class="case-drawer-close" id="resource-drawer-close" aria-label="Close article">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="case-drawer-body">
+        <div class="case-drawer-media">
+          <img id="resource-drawer-img" src="" alt="Article cover">
+        </div>
+        
+        <h2 class="case-drawer-title" id="resource-drawer-title"></h2>
+
+        <div class="case-blocks">
+          <div class="case-block case-block--problem">
+            <span class="case-block-badge">📖 The Core Insight</span>
+            <p class="case-block-text" id="resource-drawer-insight" style="font-size: 16px; line-height: 1.7;"></p>
+          </div>
+
+          <div class="case-block case-block--architecture">
+            <span class="case-block-badge">⚙️ Actionable Blueprint</span>
+            <p class="case-block-text" id="resource-drawer-blueprint" style="font-size: 16px; line-height: 1.7;"></p>
+          </div>
+
+          <div class="case-block case-block--outcome">
+            <span class="case-block-badge">💡 Implementation Summary</span>
+            <p class="case-block-text" id="resource-drawer-summary" style="font-size: 16px; line-height: 1.7;"></p>
+          </div>
+        </div>
+
+        <div class="case-drawer-cta">
+          <p class="case-drawer-cta-text">Want AlphaTNX Digital to implement this architecture for your company?</p>
+          <a id="resource-drawer-whatsapp" href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20an%20article%20guide." target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+            Discuss Implementation on WhatsApp →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Simple filter interaction for resources page
+    document.querySelectorAll('.res-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.res-filter-btn').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.resource-card').forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Resource drawer data & interactive trigger
+    const articlesData = {
+      "whatsapp-dropoff": {
+        tag: "E-Commerce Architecture",
+        title: "How Nigerian Retailers Are Slashing WhatsApp Order Drop-Off by 60%",
+        image: "https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=1200&q=80",
+        categories: ["E-Commerce", "WhatsApp API", "Conversion Rate"],
+        insight: "Direct messaging has become the default shopping mall of African social commerce. However, making customers ask 'How much?' and wait 3 hours for bank details results in over 60% cart abandonment.",
+        blueprint: "By connecting single-page product catalogs with instant payment gateways and auto-generating structured WhatsApp order summaries, buyers can pay in under 20 seconds. The merchant receives verified payments directly without manually verifying screenshots.",
+        summary: "Keep the conversational charm of WhatsApp while eliminating the manual friction of price negotiations and bank confirmations."
+      },
+      "spreadsheet-trap": {
+        tag: "Operations & Tools",
+        title: "The Spreadsheet Trap: When Excel is Costing Your Business Real Revenue",
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+        categories: ["Operations", "Custom CRM", "Inventory"],
+        insight: "Spreadsheets are great for day-one accounting, but become dangerous liabilities as soon as multiple team members begin editing orders, inventory counts, and client addresses simultaneously.",
+        blueprint: "Replacing shared Excel sheets with a lightweight, cloud-backed internal web portal provides real-time concurrency, prevents accidental overwrites, and enforces role-based permissions for staff.",
+        summary: "Clear visibility into daily sales and stock levels prevents lost items and saves hours of end-of-month manual reconciliation."
+      },
+      "payment-gateways": {
+        tag: "Fintech & Checkout",
+        title: "Paystack vs Flutterwave vs Direct Transfer: Designing the Optimal Checkout Stack",
+        image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&q=80",
+        categories: ["Payments", "Paystack", "Checkout UX"],
+        insight: "African payment reliability fluctuates across banks and telecommunication networks. Offering only one payment gateway often leads to false transaction declines and lost revenue.",
+        blueprint: "A multi-rail checkout architecture automatically offers 1-click Paystack checkout, instant virtual account bank transfers with sub-5-second verification, and biometric Apple/Google Pay for international clients.",
+        summary: "Ensure zero buyer drop-off at checkout by giving every shopper their preferred and most reliable payment method."
+      },
+      "lead-automation": {
+        tag: "Workflow Automation",
+        title: "Automating Lead-to-Fulfillment Workflows With Zero Manual Delay in 2026",
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+        categories: ["Automation", "Webhooks", "CRM Pipeline"],
+        insight: "The probability of closing an inbound B2B lead drops by 8x if you wait more than 5 minutes to follow up. Manual email forwarding and copy-pasting is a silent sales killer.",
+        blueprint: "Using webhooks, form submissions immediately dispatch instant WhatsApp confirmations to the prospect, create a prioritized deal record in your CRM, and send a Slack/SMS alert to the on-duty sales representative.",
+        summary: "Turn raw web traffic into instant sales conversations without hiring additional administrative headcount."
+      },
+      "mobile-performance": {
+        tag: "Web Infrastructure",
+        title: "Sub-Second Web Performance on 3G/4G African Mobile Networks",
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
+        categories: ["Web Performance", "Edge CDN", "Next.js"],
+        insight: "Over 85% of African web traffic originates from mid-range mobile devices on variable 3G/4G connections. Bloated multi-megabyte websites cause users to bounce before the hero image even loads.",
+        blueprint: "We use modern static site generation, intelligent code splitting, edge servers located close to African exchanges, and next-gen image formats (AVIF/WebP) to achieve sub-second render times.",
+        summary: "High speed directly translates to higher Google search rankings, lower bounce rates, and significantly higher sales conversions."
+      },
+      "custom-saas-vs-portal": {
+        tag: "Custom Software",
+        title: "Building Custom Internal Portals: When Off-The-Shelf SaaS Fails Your Team",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+        categories: ["Custom Portals", "Software Architecture", "Cost Efficiency"],
+        insight: "Global SaaS platforms charge high per-seat dollar rates while failing to accommodate local business workflows, resulting in staff bypassing the software completely.",
+        blueprint: "A bespoke internal portal built with modern web technologies is tailored 100% to your company's operational hierarchy, runs fast on any browser, and comes with zero per-user monthly license fees.",
+        summary: "Own your technology infrastructure, protect proprietary operational data, and give your team tools they actually enjoy using."
+      }
+    };
+
+    const resDrawer = document.getElementById("resource-drawer");
+    const resBackdrop = document.getElementById("resource-drawer-backdrop");
+    const resCloseBtn = document.getElementById("resource-drawer-close");
+
+    const resTag = document.getElementById("resource-drawer-tag");
+    const resImg = document.getElementById("resource-drawer-img");
+    const resTags = document.getElementById("resource-drawer-tags");
+    const resTitle = document.getElementById("resource-drawer-title");
+    const resInsight = document.getElementById("resource-drawer-insight");
+    const resBlueprint = document.getElementById("resource-drawer-blueprint");
+    const resSummary = document.getElementById("resource-drawer-summary");
+    const resWhatsApp = document.getElementById("resource-drawer-whatsapp");
+
+    function openResourceDrawer(key) {
+      const data = articlesData[key];
+      if (!data || !resDrawer) return;
+
+      if (resTag) resTag.textContent = data.tag;
+      if (resImg) { resImg.src = data.image; resImg.alt = data.title; }
+      if (resTitle) resTitle.textContent = data.title;
+      if (resInsight) resInsight.textContent = data.insight;
+      if (resBlueprint) resBlueprint.textContent = data.blueprint;
+      if (resSummary) resSummary.textContent = data.summary;
+
+      if (resTags) {
+        resTags.innerHTML = data.categories.map(c => `<span class="case-tag">${c}</span>`).join("");
+      }
+
+      if (resWhatsApp) {
+        const msg = encodeURIComponent(`Hi Michael, I read your AlphaTNX guide on "${data.title}" and want to discuss implementing this.`);
+        resWhatsApp.href = `https://wa.me/2349064316439?text=${msg}`;
+      }
+
+      resDrawer.classList.add("is-open");
+      resDrawer.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      if (resCloseBtn) resCloseBtn.focus();
+    }
+
+    function closeResourceDrawer() {
+      if (!resDrawer || !resDrawer.classList.contains("is-open")) return;
+      resDrawer.classList.remove("is-open");
+      resDrawer.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    if (resBackdrop) resBackdrop.addEventListener("click", closeResourceDrawer);
+    if (resCloseBtn) resCloseBtn.addEventListener("click", closeResourceDrawer);
+
+    document.querySelectorAll(".resource-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const artKey = card.dataset.article;
+        if (artKey && articlesData[artKey]) {
+          openResourceDrawer(artKey);
+        }
+      });
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && resDrawer && resDrawer.classList.contains("is-open")) {
+        closeResourceDrawer();
+      }
+    });
+  </script>
+</body>
+</html>

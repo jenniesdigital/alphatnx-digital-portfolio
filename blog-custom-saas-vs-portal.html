@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building Custom Internal Portals: When Off-The-Shelf SaaS Fails Your Team · AlphaTNX Digital</title>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Building Custom Internal Portals: When Off-The-Shelf SaaS Fails Your Team">
+  <meta property="og:description" content="Why generic foreign SaaS tools with dollar billing often fail African operational realities, and how bespoke internal web apps deliver speed, security, and long-term cost savings.">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/04_Favicons_and_App_Icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" href="assets/brand/02_Logo_Marks_Monogram/Transparent_PNG_HighRes/AlphaTNX_Mark_BrandColor_512px.png">
+  <link rel="apple-touch-icon" href="assets/brand/04_Favicons_and_App_Icons/apple-touch-icon-180x180.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-away-title="Have a wonderful day ♥">
+
+  <!-- Minimalist Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-content">
+      <span class="preloader-brand">AlphaTNX Digital</span>
+      <div class="preloader-bar-wrap">
+        <div class="preloader-bar" id="preloader-bar"></div>
+      </div>
+      <div class="preloader-meta">
+        <span class="preloader-status">Loading guide</span>
+        <span class="preloader-count" id="preloader-count">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header header--default" id="site-header">
+    <nav class="nav">
+      <a href="/" class="nav-brand-wrap" aria-label="AlphaTNX Digital Home">
+        <img src="assets/brand/01_Logos_Full_Lockup/Transparent_PNG_HighRes/AlphaTNX_FullLogo_White_1080p.png" alt="AlphaTNX Digital" class="nav-brand-img nav-brand-img--dark">
+        <img src="assets/brand/01_Logos_Full_Lockup/Transparent_PNG_HighRes/AlphaTNX_FullLogo_BrandColor_1080p.png" alt="AlphaTNX Digital" class="nav-brand-img nav-brand-img--light">
+      </a>
+
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about" class="nav-link">About</a>
+        <a href="/solutions" class="nav-link">Solutions</a>
+        <a href="/work" class="nav-link">Work</a>
+        <a href="/resources" class="nav-link" aria-current="page">Resources</a>
+      </div>
+
+      <div class="nav-right">
+        <button class="theme-switch-icon" id="theme-switch" aria-label="Toggle light/dark theme">
+          <svg class="theme-svg theme-svg--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="theme-svg theme-svg--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="nav-scroll-cta">Let’s Talk</a>
+      </div>
+
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile Navigation Modal -->
+  <div class="nav-modal" id="nav-modal" role="dialog" aria-label="Main menu" aria-hidden="true">
+    <div class="nav-modal-body">
+      <div class="nav-modal-group">
+        <a href="/" class="nav-modal-link">Home</a>
+        <a href="/about" class="nav-modal-link">About</a>
+        <a href="/solutions" class="nav-modal-link">Solutions</a>
+        <a href="/work" class="nav-modal-link">Work</a>
+        <a href="/resources" class="nav-modal-link" aria-current="page">Resources</a>
+      </div>
+    </div>
+    <div class="nav-modal-footer">
+      <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="nav-modal-cta">Let’s Talk</a>
+    </div>
+        <div class="nav-modal-contact">
+      <a href="https://facebook.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+      </a>
+      <a href="https://instagram.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+      </a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+      </a>
+      <a href="mailto:digital@alphatnx.com" class="nav-modal-contact-link" aria-label="Email">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="page-content" id="main-content">
+    <main class="blog-article-main">
+
+      <!-- Breadcrumbs -->
+      <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/resources">Resources</a>
+        <span>/</span>
+        <span>Custom Software Guide</span>
+      </nav>
+
+      <!-- Article Header -->
+      <header>
+        <span class="blog-hero-tag">Custom Software & Tools</span>
+        <h1 class="blog-hero-title">Building Custom Internal Portals: When Off-The-Shelf SaaS Fails Your Team</h1>
+        <div class="blog-hero-meta">
+          <span>By Michael, Founder & CEO</span>
+          <span>•</span>
+          <span>6 min read</span>
+          <span>•</span>
+          <span>Updated Q1 2026</span>
+        </div>
+      </header>
+
+      <!-- Hero Image -->
+      <div class="blog-hero-image-wrap">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Custom Internal Portals" class="blog-hero-image">
+      </div>
+
+      <!-- Article Body -->
+      <article class="blog-body">
+        <p>
+          As Nigerian enterprises expand from 5 to 50 team members, founders naturally reach for popular off-the-shelf SaaS solutions: Salesforce, HubSpot, Monday.com, or foreign ERP platforms.
+        </p>
+
+        <p>
+          Twelve months later, the common reality sets in: <strong>the business is paying thousands of dollars every quarter for software that only 20% of the team actively uses</strong>, while crucial field operations still happen over scattered WhatsApp groups and local spreadsheets.
+        </p>
+
+        <div class="blog-quote-box">
+          “Off-the-shelf SaaS forces your business to adapt its real-world workflow to the software. Custom internal portals adapt the software to how your business actually makes money.”
+        </div>
+
+        <h2>The 3 Inherent Flaws of Foreign SaaS for African Companies</h2>
+        <p>
+          Generic SaaS tools are designed around Western corporate workflows. When applied locally, three friction points emerge:
+        </p>
+        <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+          <li><strong>1. Volatile Per-Seat FX Billing:</strong> Paying $50/user/month in USD exposes operational expenses to rapid foreign exchange swings that balloon overhead costs unpredictably.</li>
+          <li><strong>2. Bloated UI & High Data Overhead:</strong> Western SaaS web apps download 15MB+ of JavaScript libraries, crashing or slowing down heavily on standard mobile connections and mid-range devices.</li>
+          <li><strong>3. Incompatible Field Workflows:</strong> Off-the-shelf tools lack native accommodations for split cash/bank transfer reconciliations, state-specific logistics dispatch, or role tiers tailored to local staff responsibilities.</li>
+        </ul>
+
+        <h2>The Case for Bespoke Internal Web Applications</h2>
+        <p>
+          A custom web portal built on a modern, lightweight stack (like Next.js or FastAPI with Postgres) is engineered specifically for your company's operational blueprint:
+        </p>
+
+        <div class="blog-callout-box">
+          <h3 class="blog-callout-title">The Advantages of Custom Software:</h3>
+          <p>
+            1. <strong>Zero Per-User Recurring Licensing:</strong> You own the application outright. Add 50 or 500 team members without seeing your monthly software bill increase by a single naira.<br><br>
+            2. <strong>Streamlined, Task-Specific UIs:</strong> Staff only see the 3 buttons and 2 input fields they need for their specific job, drastically reducing human error and eliminating onboarding training time.<br><br>
+            3. <strong>Deep Local Integrations:</strong> Seamless connections to Nigerian payment gateways, SMS/WhatsApp notification APIs, and local delivery dispatch partners.
+          </p>
+        </div>
+
+        <h2>When Should You Build Custom?</h2>
+        <p>
+          If a workflow is core to your competitive advantage or represents how your business delivers its unique value proposition, buying generic software limits your ceiling. Building custom gives your company an enduring operational moat.
+        </p>
+
+        <!-- CTA Box -->
+        <div class="blog-cta-box">
+          <h3 class="blog-cta-title">Need a custom portal or internal software for your team?</h3>
+          <p class="blog-cta-desc">
+            AlphaTNX Digital engineers lightning-fast, bespoke internal tools, client portals, and workflow dashboards built around how your company operates.
+          </p>
+          <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20building%20a%20custom%20internal%20portal%20for%20our%20team." target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+            Discuss Your Custom Portal on WhatsApp →
+          </a>
+        </div>
+      </article>
+
+      <!-- Footer -->
+      <section class="footer footer--minimal" style="margin-top: var(--space-5xl);">
+        <div class="footer-links">
+          <div class="footer-group">
+            <span class="footer-time">
+              <span class="footer-time-pulse"></span>
+              <span id="lagos-time">Lagos --:--:-- GMT+1</span>
+            </span>
+          </div>
+          <div class="footer-group">
+            <div class="footer-socials">
+              <a href="https://facebook.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="footer-link footer-link--icon" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              </a>
+              <a href="https://instagram.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="footer-link footer-link--icon" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-link footer-link--icon" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+              <a href="mailto:digital@alphatnx.com" class="footer-link footer-link--icon" aria-label="Email">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </a>
+            </div>
+            <p class="copyright">© 2026 <span class="brand">AlphaTNX Digital</span> · Digital Infrastructure for Nigerian Businesses</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
