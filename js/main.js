@@ -1256,8 +1256,8 @@
     document.body.style.overflow = "";
   };
 
-  document.querySelectorAll("[data-tool-target]").forEach((card) => {
-    const targetId = card.dataset.toolTarget;
+  document.querySelectorAll("[data-tool-target], [data-lib-target]").forEach((card) => {
+    const targetId = card.dataset.toolTarget || card.dataset.libTarget;
     card.addEventListener("click", () => openToolModal(targetId));
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {

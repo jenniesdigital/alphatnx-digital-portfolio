@@ -139,7 +139,7 @@
           Templates, checklists, guides and playbooks to make running a business easier.
         </h1>
         <p class="growth-body" data-reveal style="--reveal-delay: 0.1s; margin: 0; max-width: 800px;">
-          Tested operating procedures, checklists, and automation templates developed to help Nigerian companies systematize and grow.
+          Tested operating procedures, checklists, and automation templates developed to help Nigerian companies systematize and grow. Click any card to preview and download.
         </p>
       </section>
 
@@ -148,7 +148,7 @@
         <div class="lib-3col-grid">
 
           <!-- Card 1 -->
-          <div class="lib-item-card" data-reveal>
+          <div class="lib-item-card" data-lib-target="sop-modal" data-reveal tabindex="0" role="button" aria-label="View WhatsApp Sales & Order SOP Playbook">
             <div class="lib-item-header">
               <span class="lib-tag">PLAYBOOK</span>
               <span class="lib-format-badge">SOP GUIDE</span>
@@ -162,15 +162,13 @@
               <li>Order handoff to dispatch rider flow</li>
               <li>Multi-staff chat assignment rules</li>
             </ul>
-            <div class="lib-item-footer">
-              <button type="button" class="btn btn--primary lib-download-btn" data-doc="WhatsApp Sales Playbook">
-                Download Template ↓
-              </button>
+            <div class="lib-item-action">
+              <span class="lib-card-action-link">View Template Details →</span>
             </div>
           </div>
 
           <!-- Card 2 -->
-          <div class="lib-item-card" data-reveal style="--reveal-delay: 0.1s;">
+          <div class="lib-item-card" data-lib-target="checkout-modal" data-reveal style="--reveal-delay: 0.1s;" tabindex="0" role="button" aria-label="View E-Commerce Checkout & Payment Audit">
             <div class="lib-item-header">
               <span class="lib-tag">CHECKLIST</span>
               <span class="lib-format-badge">CHECKLIST</span>
@@ -184,15 +182,13 @@
               <li>Mobile load speed validation</li>
               <li>Abandoned checkout recovery triggers</li>
             </ul>
-            <div class="lib-item-footer">
-              <button type="button" class="btn btn--primary lib-download-btn" data-doc="Checkout Audit Checklist">
-                Download Template ↓
-              </button>
+            <div class="lib-item-action">
+              <span class="lib-card-action-link">View Template Details →</span>
             </div>
           </div>
 
           <!-- Card 3 -->
-          <div class="lib-item-card" data-reveal style="--reveal-delay: 0.2s;">
+          <div class="lib-item-card" data-lib-target="inventory-modal" data-reveal style="--reveal-delay: 0.2s;" tabindex="0" role="button" aria-label="View Multi-Location Inventory Reconciliation">
             <div class="lib-item-header">
               <span class="lib-tag">TEMPLATE</span>
               <span class="lib-format-badge">SPREADSHEET</span>
@@ -206,15 +202,13 @@
               <li>Role-based branch manager permissions</li>
               <li>Daily sales reconciliation sheet</li>
             </ul>
-            <div class="lib-item-footer">
-              <button type="button" class="btn btn--primary lib-download-btn" data-doc="Inventory Reconciliation Template">
-                Download Template ↓
-              </button>
+            <div class="lib-item-action">
+              <span class="lib-card-action-link">View Template Details →</span>
             </div>
           </div>
 
           <!-- Card 4 -->
-          <div class="lib-item-card" data-reveal style="--reveal-delay: 0.25s;">
+          <div class="lib-item-card" data-lib-target="scope-modal" data-reveal style="--reveal-delay: 0.25s;" tabindex="0" role="button" aria-label="View Custom Software Scope & Requirements">
             <div class="lib-item-header">
               <span class="lib-tag">BLUEPRINT</span>
               <span class="lib-format-badge">SPEC DOC</span>
@@ -228,15 +222,13 @@
               <li>Security and authentication matrix</li>
               <li>Timeline and milestone cost framework</li>
             </ul>
-            <div class="lib-item-footer">
-              <button type="button" class="btn btn--primary lib-download-btn" data-doc="Software Scope Blueprint">
-                Download Template ↓
-              </button>
+            <div class="lib-item-action">
+              <span class="lib-card-action-link">View Template Details →</span>
             </div>
           </div>
 
           <!-- Card 5 -->
-          <div class="lib-item-card" data-reveal style="--reveal-delay: 0.3s;">
+          <div class="lib-item-card" data-lib-target="gateway-guide-modal" data-reveal style="--reveal-delay: 0.3s;" tabindex="0" role="button" aria-label="View Nigerian Payment Gateway Integration Guide">
             <div class="lib-item-header">
               <span class="lib-tag">GUIDE</span>
               <span class="lib-format-badge">PDF GUIDE</span>
@@ -250,15 +242,13 @@
               <li>Dynamic transfer account generation</li>
               <li>Automated customer email & SMS receipts</li>
             </ul>
-            <div class="lib-item-footer">
-              <button type="button" class="btn btn--primary lib-download-btn" data-doc="Payment Integration Guide">
-                Download Template ↓
-              </button>
+            <div class="lib-item-action">
+              <span class="lib-card-action-link">View Template Details →</span>
             </div>
           </div>
 
           <!-- Card 6 -->
-          <div class="lib-item-card" data-reveal style="--reveal-delay: 0.35s;">
+          <div class="lib-item-card" data-lib-target="escalation-modal" data-reveal style="--reveal-delay: 0.35s;" tabindex="0" role="button" aria-label="View Customer Service Escalation & SLA Playbook">
             <div class="lib-item-header">
               <span class="lib-tag">PLAYBOOK</span>
               <span class="lib-format-badge">SYSTEMS</span>
@@ -272,15 +262,275 @@
               <li>Refund verification checklist</li>
               <li>Customer satisfaction follow-up script</li>
             </ul>
-            <div class="lib-item-footer">
-              <button type="button" class="btn btn--primary lib-download-btn" data-doc="Customer Service Playbook">
-                Download Template ↓
-              </button>
+            <div class="lib-item-action">
+              <span class="lib-card-action-link">View Template Details →</span>
             </div>
           </div>
 
         </div>
       </section>
+
+      <!-- =========================================================================
+           BUSINESS LIBRARY ON-SITE OVERLAY MODALS
+           ========================================================================= -->
+
+      <!-- Modal 1: WhatsApp SOP -->
+      <div class="tool-overlay-modal" id="sop-modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="tool-overlay-backdrop"></div>
+        <div class="tool-overlay-panel">
+          <div class="tool-overlay-head">
+            <div class="tool-badge">📖 PLAYBOOK &amp; SOP</div>
+            <button class="tool-overlay-close" aria-label="Close modal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <h2 class="tool-title" style="margin-top: 10px;">WhatsApp Sales & Order SOP Playbook</h2>
+          <p class="tool-desc">
+            A battle-tested standard operating playbook for sales and support reps managing commercial WhatsApp chats, quick responses, payment confirmation, and dispatch logistics.
+          </p>
+
+          <div class="lib-modal-details">
+            <h3 class="lib-modal-subtitle">What's Inside This Playbook:</h3>
+            <ul class="lib-modal-list">
+              <li><strong>8 Objection-Handling Scripts:</strong> Pre-crafted message responses for price resistance, trust verification, and payment hesitation.</li>
+              <li><strong>Fulfillment & Dispatch Workflow:</strong> Step-by-step checklist to hand off confirmed orders to internal dispatch or 3rd party couriers.</li>
+              <li><strong>Shift Handoff Protocols:</strong> Clear guidelines for assigning unread chats between team members without dropped leads.</li>
+            </ul>
+
+            <div class="lib-modal-meta-box">
+              <div class="lib-meta-item">
+                <span class="lib-meta-label">Format</span>
+                <span class="lib-meta-val">PDF + Notion SOP Template</span>
+              </div>
+              <div class="lib-meta-item">
+                <span class="lib-meta-label">License</span>
+                <span class="lib-meta-val">Free for Commercial Use</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 24px;">
+              <button type="button" class="btn btn--primary lib-download-btn" data-doc="WhatsApp Sales Playbook">
+                Download Template ↓
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal 2: Checkout Checklist -->
+      <div class="tool-overlay-modal" id="checkout-modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="tool-overlay-backdrop"></div>
+        <div class="tool-overlay-panel">
+          <div class="tool-overlay-head">
+            <div class="tool-badge">📋 DIAGNOSTIC CHECKLIST</div>
+            <button class="tool-overlay-close" aria-label="Close modal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <h2 class="tool-title" style="margin-top: 10px;">E-Commerce Checkout & Payment Audit</h2>
+          <p class="tool-desc">
+            A comprehensive 22-point quality assurance checklist to stress-test your online checkout flow, card decline error messaging, and payment confirmation automation.
+          </p>
+
+          <div class="lib-modal-details">
+            <h3 class="lib-modal-subtitle">What's Inside This Checklist:</h3>
+            <ul class="lib-modal-list">
+              <li><strong>Fallback Routing Checklist:</strong> Testing procedures for USSD, bank transfer, and card payment alternatives during bank downtime.</li>
+              <li><strong>Mobile Speed & Layout Checks:</strong> Ensuring frictionless keyboard inputs, numeric keypads on phone fields, and 1-tap checkout.</li>
+              <li><strong>Receipt Automation Verification:</strong> Ensuring customer confirmation emails and invoices trigger within 2 seconds of payment.</li>
+            </ul>
+
+            <div class="lib-modal-meta-box">
+              <div class="lib-meta-item">
+                <span class="lib-meta-label">Format</span>
+                <span class="lib-meta-val">Interactive PDF + Google Docs</span>
+              </div>
+              <div class="lib-meta-item">
+                <span class="lib-meta-label">License</span>
+                <span class="lib-meta-val">Free for Commercial Use</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 24px;">
+              <button type="button" class="btn btn--primary lib-download-btn" data-doc="Checkout Audit Checklist">
+                Download Template ↓
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal 3: Inventory Template -->
+      <div class="tool-overlay-modal" id="inventory-modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="tool-overlay-backdrop"></div>
+        <div class="tool-overlay-panel">
+          <div class="tool-overlay-head">
+            <div class="tool-badge">📊 SPREADSHEET TEMPLATE</div>
+            <button class="tool-overlay-close" aria-label="Close modal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <h2 class="tool-title" style="margin-top: 10px;">Multi-Location Inventory Reconciliation</h2>
+          <p class="tool-desc">
+            A ready-to-use Google Sheets / Excel workbook configured with formulas to track daily transfers, reorder triggers, and sales reconciliations across branch locations.
+          </p>
+
+          <div class="lib-modal-details">
+            <h3 class="lib-modal-subtitle">What's Inside This Workbook:</h3>
+            <ul class="lib-modal-list">
+              <li><strong>Automated Stock Depletion:</strong> Automatically updates current physical inventory counts upon recording sales entries.</li>
+              <li><strong>Low Stock Visual Alerts:</strong> Conditional formatting warns warehouse managers before high-demand items run out.</li>
+              <li><strong>Discrepancy Log:</strong> Tracks missing items, damaged stock, and discrepancy variance percentages by location.</li>
+            </ul>
+
+            <div class="lib-modal-meta-box">
+              <div class="lib-meta-item">
+                <span class="lib-meta-label">Format</span>
+                <span class="lib-meta-val">Google Sheets &amp; .xlsx</span>
+              </div>
+              <div class="lib-meta-item">
+                <span class="lib-meta-label">License</span>
+                <span class="lib-meta-val">Free for Commercial Use</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 24px;">
+              <button type="button" class="btn btn--primary lib-download-btn" data-doc="Inventory Reconciliation Template">
+                Download Template ↓
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal 4: Scope Blueprint -->
+      <div class="tool-overlay-modal" id="scope-modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="tool-overlay-backdrop"></div>
+        <div class="tool-overlay-panel">
+          <div class="tool-overlay-head">
+            <div class="tool-badge">📐 SPECIFICATION BLUEPRINT</div>
+            <button class="tool-overlay-close" aria-label="Close modal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <h2 class="tool-title" style="margin-top: 10px;">Custom Software Scope & Requirements</h2>
+          <p class="tool-desc">
+            The exact scoping framework we use to define product requirements, data schemas, user permissions, and milestone roadmaps for bespoke software projects.
+          </p>
+
+          <div class="lib-modal-details">
+            <h3 class="lib-modal-subtitle">What's Inside This Blueprint:</h3>
+            <ul class="lib-modal-list">
+              <li><strong>Feature Prioritization Matrix:</strong> Helps business owners differentiate essential Phase 1 MVP features from Phase 2 enhancements.</li>
+              <li><strong>Role-Based Access Schema:</strong> Blueprint template for defining Super Admin, Staff, and Client permissions.</li>
+              <li><strong>Milestone & Acceptance Criteria:</strong> Clear definitions of done to ensure on-time and on-budget delivery.</li>
+            </ul>
+
+            <div class="lib-modal-meta-box">
+              <div class="lib-meta-item">
+                <span class="lib-meta-label">Format</span>
+                <span class="lib-meta-val">Markdown + Notion Doc</span>
+              </div>
+              <div class="lib-meta-item">
+                <span class="lib-meta-label">License</span>
+                <span class="lib-meta-val">Free for Commercial Use</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 24px;">
+              <button type="button" class="btn btn--primary lib-download-btn" data-doc="Software Scope Blueprint">
+                Download Template ↓
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal 5: Gateway Integration Guide -->
+      <div class="tool-overlay-modal" id="gateway-guide-modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="tool-overlay-backdrop"></div>
+        <div class="tool-overlay-panel">
+          <div class="tool-overlay-head">
+            <div class="tool-badge">🔒 INTEGRATION GUIDE</div>
+            <button class="tool-overlay-close" aria-label="Close modal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <h2 class="tool-title" style="margin-top: 10px;">Nigerian Payment Gateway Integration Guide</h2>
+          <p class="tool-desc">
+            A developer and founder guide explaining how to implement reliable payment webhooks, signature verification, and automated transaction reconciliation.
+          </p>
+
+          <div class="lib-modal-details">
+            <h3 class="lib-modal-subtitle">What's Inside This Guide:</h3>
+            <ul class="lib-modal-list">
+              <li><strong>Webhook Security:</strong> HMAC SHA512 signature verification samples in JavaScript / Node.js and Python.</li>
+              <li><strong>Duplicate Transaction Prevention:</strong> Idempotency key handling to prevent double billing and duplicate order fulfillment.</li>
+              <li><strong>Settlement & Fee Auditing:</strong> How to reconcile gross payments against net payouts after fee deductions.</li>
+            </ul>
+
+            <div class="lib-modal-meta-box">
+              <div class="lib-meta-item">
+                <span class="lib-meta-label">Format</span>
+                <span class="lib-meta-val">PDF + Code Examples</span>
+              </div>
+              <div class="lib-meta-item">
+                <span class="lib-meta-label">License</span>
+                <span class="lib-meta-val">Free for Commercial Use</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 24px;">
+              <button type="button" class="btn btn--primary lib-download-btn" data-doc="Payment Integration Guide">
+                Download Template ↓
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal 6: Escalation Playbook -->
+      <div class="tool-overlay-modal" id="escalation-modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="tool-overlay-backdrop"></div>
+        <div class="tool-overlay-panel">
+          <div class="tool-overlay-head">
+            <div class="tool-badge">🛡️ SUPPORT PLAYBOOK</div>
+            <button class="tool-overlay-close" aria-label="Close modal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <h2 class="tool-title" style="margin-top: 10px;">Customer Service Escalation & SLA Playbook</h2>
+          <p class="tool-desc">
+            Clear standards and communication templates for tier-1 support agents, dispute handlers, and refund approval workflows.
+          </p>
+
+          <div class="lib-modal-details">
+            <h3 class="lib-modal-subtitle">What's Inside This Playbook:</h3>
+            <ul class="lib-modal-list">
+              <li><strong>Response Time SLAs:</strong> Maximum response and resolution windows for general queries vs critical delivery issues.</li>
+              <li><strong>Refund & Return Decision Tree:</strong> Step-by-step flowchart to approve or decline refund requests systematically.</li>
+              <li><strong>De-escalation Communication Templates:</strong> Empathetic, de-escalating customer replies for delayed orders.</li>
+            </ul>
+
+            <div class="lib-modal-meta-box">
+              <div class="lib-meta-item">
+                <span class="lib-meta-label">Format</span>
+                <span class="lib-meta-val">PDF + Notion SOP Template</span>
+              </div>
+              <div class="lib-meta-item">
+                <span class="lib-meta-label">License</span>
+                <span class="lib-meta-val">Free for Commercial Use</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 24px;">
+              <button type="button" class="btn btn--primary lib-download-btn" data-doc="Customer Service Playbook">
+                Download Template ↓
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Footer -->
       <section class="footer footer--minimal" id="contact">
