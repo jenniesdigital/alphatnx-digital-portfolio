@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Business, Better by AlphaTNX · Newsletter</title>
+  <title>Payment Gateway Fee Breakdown · Free Business Tools · AlphaTNX Digital</title>
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Business, Better by AlphaTNX · Newsletter">
-  <meta property="og:description" content="Build a better business with a simple newsletter every two weeks.">
+  <meta property="og:title" content="Payment Gateway Fee Breakdown · AlphaTNX Digital">
+  <meta property="og:description" content="Compare estimated gateway fees and net settlement margins based on your monthly transaction volume and ticket size.">
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/04_Favicons_and_App_Icons/favicon-32x32.png">
   <link rel="icon" type="image/png" href="assets/brand/02_Logo_Marks_Monogram/Transparent_PNG_HighRes/AlphaTNX_Mark_BrandColor_512px.png">
@@ -19,7 +19,7 @@
     <div class="preloader-content">
       <span class="preloader-brand">AlphaTNX Digital</span>
       <div class="preloader-bar-wrap"><div class="preloader-bar" id="preloader-bar"></div></div>
-      <div class="preloader-meta"><span class="preloader-status">Loading dispatch</span><span class="preloader-count" id="preloader-count">0%</span></div>
+      <div class="preloader-meta"><span class="preloader-status">Loading tool</span><span class="preloader-count" id="preloader-count">0%</span></div>
     </div>
   </div>
 
@@ -45,11 +45,11 @@
           <div class="nav-dropdown-menu" role="menu">
             <a href="/blog" class="nav-dropdown-item" role="menuitem">Blog</a>
             <div class="nav-dropdown-divider"></div>
-            <a href="/tools" class="nav-dropdown-item" role="menuitem">Tools</a>
+            <a href="/tools" class="nav-dropdown-item is-active" role="menuitem">Tools</a>
             <div class="nav-dropdown-divider"></div>
             <a href="/business-library" class="nav-dropdown-item" role="menuitem">Business Library</a>
             <div class="nav-dropdown-divider"></div>
-            <a href="/newsletter" class="nav-dropdown-item is-active" role="menuitem">Newsletter</a>
+            <a href="/newsletter" class="nav-dropdown-item" role="menuitem">Newsletter</a>
           </div>
         </div>
       </div>
@@ -81,9 +81,9 @@
           <span class="nav-modal-label">Resources</span>
           <div class="nav-modal-sublinks">
             <a href="/blog" class="nav-modal-sublink">Blog</a>
-            <a href="/tools" class="nav-modal-sublink">Tools</a>
+            <a href="/tools" class="nav-modal-sublink is-active">Tools</a>
             <a href="/business-library" class="nav-modal-sublink">Business Library</a>
-            <a href="/newsletter" class="nav-modal-sublink is-active">Newsletter</a>
+            <a href="/newsletter" class="nav-modal-sublink">Newsletter</a>
           </div>
         </div>
       </div>
@@ -108,91 +108,78 @@
   </div>
 
   <div class="page-content" id="main-content">
-    <main>
+    <main class="blog-article-main">
 
-      <section class="nl-split-section">
-        <div class="nl-split-container">
-          
-          <!-- LEFT COLUMN: COPY SIDE (NO LOGO MARK, MAIN TEXT AS REQUESTED) -->
-          <div class="nl-copy-side" data-reveal>
-            <span class="sol-detail-tag" style="margin-bottom: 12px;">Business, Better by AlphaTNX</span>
-            <h1 class="nl-heading">
-              Build a better business with a simple newsletter every two weeks.
-            </h1>
-            <p class="nl-lead">
-              Sign up for our bi-weekly newsletter.
-            </p>
-            <p class="nl-desc">
-              Actionable digital strategies, automation blueprints, and tech breakdowns tailored specifically for Nigerian businesses and ambitious founders.
-            </p>
+      <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/tools">Tools</a>
+        <span>/</span>
+        <span>Payment Gateway Fee Breakdown</span>
+      </nav>
 
-            <div class="nl-checks-list">
-              <div class="nl-check-item">
-                <span class="nl-check-icon">✓</span>
-                <div class="nl-check-text">
-                  <strong>Practical Business Systems</strong> — Zero fluff or theory. Real-world workflows, payment solutions, and operational playbooks you can apply immediately.
-                </div>
-              </div>
-              <div class="nl-check-item">
-                <span class="nl-check-icon">✓</span>
-                <div class="nl-check-text">
-                  <strong>Sent Every Two Weeks</strong> — Delivered straight to your inbox every alternate Tuesday. Concise, tactical, and readable in under 4 minutes.
-                </div>
-              </div>
-              <div class="nl-check-item">
-                <span class="nl-check-icon">✓</span>
-                <div class="nl-check-text">
-                  <strong>100% Free &amp; No Spam</strong> — Unsubscribe anytime with a single click. Your contact details remain completely private.
-                </div>
-              </div>
+      <header>
+        <span class="blog-hero-tag">FREE DIAGNOSTIC TOOL</span>
+        <h1 class="blog-hero-title">Payment Gateway Fee Breakdown</h1>
+        <p class="growth-body" style="margin: 12px 0 0; max-width: 780px;">
+          Compare estimated transaction fees and net settlement margins for Paystack, Flutterwave, and bank transfers based on your monthly volume and average ticket size.
+        </p>
+      </header>
+
+      <div class="tool-standalone-card" style="margin-top: 32px; background: var(--background-card); border: 1px solid var(--border-default); border-radius: 20px; padding: clamp(24px, 4vw, 36px);">
+        <div class="calc-grid">
+          <div class="calc-inputs">
+            <div class="calc-group">
+              <label for="calc-ticket" class="form-label">Average Order Value (₦)</label>
+              <input type="number" id="calc-ticket" class="form-input" value="25000" step="1000">
+            </div>
+            <div class="calc-group">
+              <label for="calc-volume" class="form-label">Monthly Transaction Volume (₦)</label>
+              <input type="number" id="calc-volume" class="form-input" value="5000000" step="500000">
             </div>
           </div>
 
-          <!-- RIGHT COLUMN: RECTANGULAR STATIC BORDER FORM (NO SHADOW, MATCHING PAGE) -->
-          <div class="nl-form-side" data-reveal style="--reveal-delay: 0.15s;">
-            <div class="nl-form-card">
-              <div class="nl-form-card-head">
-                <span class="nl-form-badge">JOIN THE DISPATCH</span>
-                <h2 class="nl-form-title">Join Business, Better</h2>
-                <p class="nl-form-sub">Enter your details to receive the next edition.</p>
-              </div>
-
-              <form id="newsletter-form" class="nl-form-body">
-                <div class="form-group">
-                  <label for="nl-name" class="form-label">Name</label>
-                  <input type="text" id="nl-name" class="form-input" placeholder="Your full name" required autocomplete="name">
-                </div>
-
-                <div class="form-group">
-                  <label for="nl-email" class="form-label">Email address</label>
-                  <input type="email" id="nl-email" class="form-input" placeholder="you@company.com" required autocomplete="email">
-                </div>
-
-                <div class="form-checkbox-group">
-                  <input type="checkbox" id="nl-consent" class="form-checkbox" required>
-                  <label for="nl-consent" class="form-checkbox-label">
-                    I agree to receive the Business, Better bi-weekly newsletter and occasional updates from AlphaTNX Digital.
-                  </label>
-                </div>
-
-                <button type="submit" class="btn btn--primary nl-submit-btn">
-                  Subscribe to Business, Better →
-                </button>
-              </form>
-
-              <div class="newsletter-success" id="newsletter-success" style="display: none;">
-                <div class="success-icon-box">✓</div>
-                <h3 class="success-title">You're on the list!</h3>
-                <p class="success-desc">
-                  Thank you for subscribing to <strong>Business, Better by AlphaTNX</strong>. Please check your inbox for a quick confirmation email.
-                </p>
-              </div>
+          <div class="calc-results-box">
+            <div class="result-item">
+              <span class="result-lbl">Estimated Gateway Fees (1.5% capped at ₦2k)</span>
+              <span class="result-val" id="gateway-fees-val">₦75,000 / mo</span>
             </div>
+            <div class="result-item">
+              <span class="result-lbl">Effective Settlement Margin</span>
+              <span class="result-val text-accent" id="margin-val">98.5% Net Payout</span>
+            </div>
+            <p class="result-note">
+              Configuring multi-channel fallbacks ensures that if one gateway experiences temporary bank downtime, payments switch seamlessly to another.
+            </p>
           </div>
-
         </div>
-      </section>
+      </div>
 
+      <article class="blog-body" style="margin-top: 48px;">
+        <h2>Standard Payment Fee Structures in Nigeria</h2>
+        <p>
+          Major Nigerian gateways charge standard local card and transfer processing fees:
+        </p>
+        <ul>
+          <li><strong>Paystack / Flutterwave Local:</strong> 1.5% + ₦100 per transaction (the ₦100 fee is waived for transactions below ₦2,500), capped at ₦2,000 per transaction.</li>
+          <li><strong>International Cards:</strong> 3.9% + ₦100 per transaction with settlement in USD or Naira equivalents.</li>
+          <li><strong>Direct Virtual Accounts:</strong> Fixed ₦50 – ₦100 fee per transfer confirmation depending on provider SLA.</li>
+        </ul>
+
+        <h2>Why Multi-Gateway Routing Matters</h2>
+        <div class="blog-callout-box">
+          <p>
+            Relying on a single payment processor risks catastrophic cart abandonment during peak sale campaigns when bank switches experience temporary network throttling. Smart checkout engines automatically fail over to secondary routes within 300ms.
+          </p>
+        </div>
+      </article>
+
+      <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+        <a href="/tools" class="nav-modal-contact-link">← Back to All Tools</a>
+        <a href="/tool-speed-revenue" class="nav-modal-contact-link">Previous Tool: Speed Estimator →</a>
+      </div>
+
+    </main>
       <!-- Footer -->
       <section class="footer footer--minimal" id="contact">
         <div class="footer-links">
@@ -221,7 +208,6 @@
           </div>
         </div>
       </section>
-    </main>
   </div>
 
   <script src="js/main.js"></script>
