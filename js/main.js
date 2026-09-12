@@ -1419,4 +1419,19 @@
     });
   }
 
+
+  // Mobile Nav Modal Dropdown Trigger (Retractable Resources dropdown)
+  document.querySelectorAll(".nav-modal-dropdown-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const parent = btn.closest(".nav-modal-dropdown");
+      if (!parent) return;
+      const isOpen = parent.classList.contains("is-open");
+      parent.classList.toggle("is-open", !isOpen);
+      btn.setAttribute("aria-expanded", !isOpen ? "true" : "false");
+      const submenu = parent.querySelector(".nav-modal-submenu");
+      if (submenu) submenu.setAttribute("aria-hidden", !isOpen ? "false" : "true");
+    });
+  });
+
 })();
