@@ -1231,9 +1231,96 @@
   });
 
   // ==========================================================================
-  // BUSINESS TOOLS CALCULATORS & INTERACTIVITY
+  // BUSINESS TOOLS CALCULATORS & INTERACTIVITY & MODAL OVERLAYS
   // ==========================================================================
   const formatNaira = (num) => "₦" + Math.round(num).toLocaleString();
+
+  // Tool Overlay Modal Controller (for tools.html on-site interactive overlays)
+  const openToolModal = (modalId) => {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    const closeBtn = modal.querySelector(".tool-overlay-close");
+    if (closeBtn) closeBtn.focus();
+  };
+
+  const closeToolModal = (modal) => {
+    if (!modal) {
+      document.querySelectorAll(".tool-overlay-modal.is-open").forEach(m => closeToolModal(m));
+      return;
+    }
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+
+  document.querySelectorAll("[data-tool-target]").forEach((card) => {
+    const targetId = card.dataset.toolTarget;
+    card.addEventListener("click", () => openToolModal(targetId));
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openToolModal(targetId);
+      }
+    });
+  });
+
+  document.querySelectorAll(".tool-overlay-modal").forEach((modal) => {
+    const backdrop = modal.querySelector(".tool-overlay-backdrop");
+    const closeBtn = modal.querySelector(".tool-overlay-close");
+
+    if (backdrop) backdrop.addEventListener("click", () => closeToolModal(modal));
+    if (closeBtn) closeBtn.addEventListener("click", () => closeToolModal(modal));
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const openModal = document.querySelector(".tool-overlay-modal.is-open");
+      if (openModal) closeToolModal(openModal);
+    }
+  });
+
+  // Resources Nav Dropdown Click Toggle for accessibility and touch devices
+  document.querySelectorAll(".nav-dropdown").forEach((dropdown) => {
+    const btn = dropdown.querySelector(".nav-dropdown-btn");
+    if (!btn) return;
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.contains("is-open");
+      dropdown.classList.toggle("is-open", !isOpen);
+      btn.setAttribute("aria-expanded", !isOpen ? "true" : "false");
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    document.querySelectorAll(".nav-dropdown.is-open").forEach((dropdown) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("is-open");
+        const btn = dropdown.querySelector(".nav-dropdown-btn");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+
+  // Business Library Download Button Feedback
+  document.querySelectorAll(".lib-download-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const docName = btn.dataset.doc || "Template";
+      const origText = btn.innerHTML;
+      btn.innerHTML = "Preparing download...";
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerHTML = "Downloaded ✓";
+        setTimeout(() => {
+          btn.innerHTML = origText;
+          btn.disabled = false;
+        }, 2200);
+      }, 700);
+    });
+  });
 
   // 1. Speed & Revenue Lost Calculator
   const calcRev = document.getElementById("calc-rev");
