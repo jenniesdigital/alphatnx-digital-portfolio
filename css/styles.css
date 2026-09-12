@@ -4852,31 +4852,45 @@ button {
 }
 
 
+
 /* ==========================================================================
-   REWORKED NEWSLETTER PAGE (TOP GRADIENT, MAIN TEXT, CHECKLIST & DIRECT FORM)
+   REWORKED NEWSLETTER PAGE (PIGMENTED GRADIENT, CENTERED HERO, TOP HEADING & SPACIOUS FORM)
    ========================================================================== */
 .nl-hero-gradient-section {
   position: relative;
-  background: linear-gradient(180deg, rgba(25, 72, 235, 0.22) 0%, rgba(18, 52, 166, 0.08) 50%, rgba(0, 0, 0, 0) 100%);
-  padding: clamp(140px, 18vh, 190px) var(--page-gutter) clamp(40px, 6vh, 60px);
+  background: radial-gradient(ellipse 90% 60% at 50% 0%, rgba(25, 72, 235, 0.45) 0%, rgba(18, 52, 166, 0.22) 42%, rgba(0, 0, 0, 0) 100%),
+              linear-gradient(180deg, rgba(25, 72, 235, 0.35) 0%, rgba(18, 52, 166, 0.12) 50%, rgba(0, 0, 0, 0) 100%);
+  padding: clamp(140px, 18vh, 200px) var(--page-gutter) clamp(50px, 8vh, 80px);
+  text-align: center;
 }
 
 [data-theme="light"] .nl-hero-gradient-section {
-  background: linear-gradient(180deg, rgba(210, 228, 255, 0.75) 0%, rgba(235, 242, 255, 0.35) 50%, rgba(255, 255, 255, 0) 100%);
+  background: radial-gradient(ellipse 90% 60% at 50% 0%, rgba(180, 210, 255, 0.95) 0%, rgba(215, 232, 255, 0.55) 45%, rgba(255, 255, 255, 0) 100%),
+              linear-gradient(180deg, rgba(195, 220, 255, 0.85) 0%, rgba(230, 240, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
 }
 
 .nl-hero-content {
-  max-width: 1000px;
+  max-width: 980px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.nl-hero-badge-wrap {
+  margin-bottom: 18px;
 }
 
 .nl-hero-main-title {
-  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
   line-height: 1.1;
   font-weight: 600;
   color: var(--foreground-strong);
   letter-spacing: -0.035em;
-  margin: 0 0 18px;
+  margin: 0 auto 20px;
+  max-width: 900px;
+  text-align: center;
 }
 
 .nl-hero-lead {
@@ -4884,59 +4898,45 @@ button {
   font-weight: 400;
   color: var(--foreground-muted);
   line-height: 1.55;
-  margin: 0 0 36px;
-  max-width: 780px;
+  margin: 0 auto 40px;
+  max-width: 760px;
+  text-align: center;
 }
 
 .nl-checklist-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-2xl);
-  margin-top: 24px;
+  width: 100%;
+  text-align: left;
 }
 
+/* Signup section with top title */
 .nl-signup-section {
-  max-width: 1200px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: clamp(40px, 6vh, 60px) var(--page-gutter) var(--space-5xl);
+}
+
+.nl-section-header {
+  text-align: center;
+  margin-bottom: clamp(32px, 5vh, 48px);
+}
+
+.nl-join-heading {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 600;
+  color: var(--foreground-strong);
+  letter-spacing: -0.025em;
+  margin: 0;
+  line-height: 1.2;
 }
 
 .nl-signup-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(40px, 6vw, 80px);
+  gap: clamp(40px, 6vw, 70px);
   align-items: center;
-}
-
-.nl-form-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.nl-form-intro {
-  margin-bottom: 24px;
-}
-
-.nl-join-heading {
-  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-  font-weight: 600;
-  color: var(--foreground-strong);
-  letter-spacing: -0.025em;
-  margin: 0 0 6px;
-  line-height: 1.2;
-}
-
-.nl-join-sub {
-  font-size: 15px;
-  color: var(--foreground-muted);
-  margin: 0;
-}
-
-.nl-page-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
 }
 
 .nl-image-column {
@@ -4949,51 +4949,112 @@ button {
   overflow: hidden;
   border: 1px solid var(--border-default);
   background: var(--background-surface);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
 }
 
 .nl-owners-img {
   width: 100%;
-  height: 440px;
+  height: 460px;
   object-fit: cover;
   display: block;
-  filter: brightness(0.95);
 }
 
-.nl-owners-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20px 24px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(5, 10, 25, 0.88) 100%);
+.nl-form-column {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  width: 100%;
 }
 
-.nl-owners-badge {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--accent-sky);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.nl-page-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
 }
 
-.nl-owners-text {
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.45;
-  margin: 0;
+.nl-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nl-input-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--foreground-strong);
+  letter-spacing: -0.01em;
+}
+
+.nl-input-field {
+  width: 100%;
+  height: 58px;
+  padding: 0 20px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--foreground-strong);
+  background: var(--background-card);
+  border: 1.5px solid var(--border-default);
+  border-radius: 12px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.nl-input-field::placeholder {
+  color: var(--foreground-subtle);
+  font-size: 15px;
+}
+
+.nl-input-field:focus {
+  border-color: var(--accent-sky);
+  background: var(--background-surface);
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.16);
+}
+
+.nl-checkbox-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 2px;
+}
+
+.nl-checkbox {
+  width: 19px;
+  height: 19px;
+  margin-top: 3px;
+  accent-color: var(--accent-blue);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.nl-checkbox-label {
+  font-size: 14px;
+  color: var(--foreground-muted);
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.nl-submit-btn {
+  width: 100%;
+  height: 58px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 900px) {
   .nl-checklist-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 18px;
   }
   .nl-signup-container {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 36px;
   }
   .nl-owners-img {
     height: 320px;

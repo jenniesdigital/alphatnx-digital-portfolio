@@ -6,7 +6,7 @@
   <title>Build a better business with a simple newsletter · Business, Better by AlphaTNX</title>
   <meta property="og:type" content="website">
   <meta property="og:title" content="Build a better business with a simple newsletter · AlphaTNX Digital">
-  <meta property="og:description" content="Sign up for our bi-weekly newsletter. Build a better business with a simple newsletter every two weeks.">
+  <meta property="og:description" content="Build a better business with a simple newsletter. Practical digital strategies, automation blueprints, and tech breakdowns.">
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/04_Favicons_and_App_Icons/favicon-32x32.png">
   <link rel="icon" type="image/png" href="assets/brand/02_Logo_Marks_Monogram/Transparent_PNG_HighRes/AlphaTNX_Mark_BrandColor_512px.png">
@@ -110,10 +110,12 @@
   <div class="page-content" id="main-content">
     <main>
 
-      <!-- TOP SECTION WITH GRADIENT PHASING OUT DOWNWARDS -->
+      <!-- TOP HERO SECTION (PIGMENTED GRADIENT, CENTERED HEADLINE & SUBS, CHECKLIST) -->
       <section class="nl-hero-gradient-section">
         <div class="nl-hero-content" data-reveal>
-          <span class="sol-detail-tag" style="margin-bottom: 16px;">BUSINESS, BETTER BY ALPHATNX</span>
+          <div class="nl-hero-badge-wrap">
+            <span class="sol-detail-tag">BUSINESS, BETTER BY ALPHATNX</span>
+          </div>
           <h1 class="nl-hero-main-title">
             Build a better business with a simple newsletter
           </h1>
@@ -144,32 +146,39 @@
         </div>
       </section>
 
-      <!-- JOIN SECTION: FORM DIRECTLY ON PAGE + PHOTO OF EVERYDAY NIGERIAN MAN & WOMAN BUSINESS OWNERS -->
+      <!-- JOIN SECTION: TITLE ON TOP, LEFT IMAGE (NO CAPTION), RIGHT DIRECT INPUT FIELDS -->
       <section class="nl-signup-section">
+        
+        <!-- SECTION TITLE ON TOP OF BOTH IMAGE & INPUT FIELDS -->
+        <div class="nl-section-header" data-reveal>
+          <h2 class="nl-join-heading">Join Business, Better</h2>
+        </div>
+
         <div class="nl-signup-container">
           
-          <!-- LEFT COLUMN: FORM DIRECTLY ON PAGE (NO CARD, NO SHADOW, CLEAN FORM) -->
-          <div class="nl-form-column" data-reveal>
-            <div class="nl-form-intro">
-              <span class="sol-detail-tag" style="margin-bottom: 8px;">GET THE NEXT DISPATCH</span>
-              <h2 class="nl-join-heading">Join Business, Better</h2>
-              <p class="nl-join-sub">Sign up for our bi-weekly dispatch delivered straight to your inbox.</p>
+          <!-- LEFT COLUMN: PHOTO OF NIGERIAN BUSINESS OWNERS (NO OVERLAY CAPTIONS) -->
+          <div class="nl-image-column" data-reveal>
+            <div class="nl-owners-frame">
+              <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80" alt="Nigerian business owners collaborating" class="nl-owners-img">
             </div>
+          </div>
 
+          <!-- RIGHT COLUMN: SPACIOUS, PREMIUM DIRECT-ON-PAGE FORM -->
+          <div class="nl-form-column" data-reveal style="--reveal-delay: 0.15s;">
             <form id="newsletter-form" class="nl-page-form">
-              <div class="form-group">
-                <label for="nl-name" class="form-label">First name</label>
-                <input type="text" id="nl-name" class="form-input" placeholder="Your first name" required autocomplete="given-name">
+              <div class="nl-input-group">
+                <label for="nl-name" class="nl-input-label">First name</label>
+                <input type="text" id="nl-name" class="nl-input-field" placeholder="Enter your first name" required autocomplete="given-name">
               </div>
 
-              <div class="form-group">
-                <label for="nl-email" class="form-label">Email address</label>
-                <input type="email" id="nl-email" class="form-input" placeholder="you@company.com" required autocomplete="email">
+              <div class="nl-input-group">
+                <label for="nl-email" class="nl-input-label">Email address</label>
+                <input type="email" id="nl-email" class="nl-input-field" placeholder="name@company.com" required autocomplete="email">
               </div>
 
-              <div class="form-checkbox-group">
-                <input type="checkbox" id="nl-consent" class="form-checkbox" required>
-                <label for="nl-consent" class="form-checkbox-label">
+              <div class="nl-checkbox-wrapper">
+                <input type="checkbox" id="nl-consent" class="nl-checkbox" required>
+                <label for="nl-consent" class="nl-checkbox-label">
                   I agree to receive the Business, Better bi-weekly newsletter and occasional updates from AlphaTNX Digital.
                 </label>
               </div>
@@ -179,23 +188,12 @@
               </button>
             </form>
 
-            <div class="newsletter-success" id="newsletter-success" style="display: none; margin-top: 20px;">
+            <div class="newsletter-success" id="newsletter-success" style="display: none; margin-top: 24px;">
               <div class="success-icon-box">✓</div>
               <h3 class="success-title">You're on the list!</h3>
               <p class="success-desc">
                 Thank you for subscribing to <strong>Business, Better by AlphaTNX</strong>. Please check your inbox for a quick confirmation email.
               </p>
-            </div>
-          </div>
-
-          <!-- RIGHT COLUMN: PHOTO OF EVERYDAY NIGERIAN BUSINESS OWNERS -->
-          <div class="nl-image-column" data-reveal style="--reveal-delay: 0.15s;">
-            <div class="nl-owners-frame">
-              <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80" alt="Nigerian business owners collaborating" class="nl-owners-img">
-              <div class="nl-owners-caption">
-                <span class="nl-owners-badge">BUSINESS, BETTER COMMUNITY</span>
-                <p class="nl-owners-text">Built for the ambitious Nigerian entrepreneurs building the real economy every day.</p>
-              </div>
             </div>
           </div>
 
