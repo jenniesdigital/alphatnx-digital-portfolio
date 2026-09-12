@@ -1229,4 +1229,107 @@
       setTimeout(() => openSolutionDrawer(hash), 400);
     }
   });
+
+  // ==========================================================================
+  // BUSINESS TOOLS CALCULATORS & INTERACTIVITY
+  // ==========================================================================
+  const formatNaira = (num) => "₦" + Math.round(num).toLocaleString();
+
+  // 1. Speed & Revenue Lost Calculator
+  const calcRev = document.getElementById("calc-rev");
+  const calcSpeed = document.getElementById("calc-speed");
+  const speedVal = document.getElementById("speed-val");
+  const lostRevVal = document.getElementById("lost-rev-val");
+  const annualRevVal = document.getElementById("annual-rev-val");
+
+  const updateSpeedCalc = () => {
+    if (!calcRev || !calcSpeed) return;
+    const rev = parseFloat(calcRev.value) || 0;
+    const speed = parseFloat(calcSpeed.value) || 1;
+    if (speedVal) speedVal.textContent = speed.toFixed(1);
+
+    // Baseline is 1.0s. Each second above 1.0s costs ~6% in bounce & abandonment
+    const delay = Math.max(0, speed - 1.0);
+    const lostPct = Math.min(0.65, delay * 0.055);
+    const lostMonthly = rev * lostPct;
+    const lostAnnual = lostMonthly * 12;
+
+    if (lostRevVal) lostRevVal.textContent = formatNaira(lostMonthly);
+    if (annualRevVal) annualRevVal.textContent = formatNaira(lostAnnual);
+  };
+
+  if (calcRev) calcRev.addEventListener("input", updateSpeedCalc);
+  if (calcSpeed) calcSpeed.addEventListener("input", updateSpeedCalc);
+
+  // 2. Operations & Automation Savings Calculator
+  const calcOrders = document.getElementById("calc-orders");
+  const calcStaff = document.getElementById("calc-staff");
+  const hoursLostVal = document.getElementById("hours-lost-val");
+  const annualHoursVal = document.getElementById("annual-hours-val");
+
+  const updateAutomationCalc = () => {
+    if (!calcOrders || !calcStaff) return;
+    const orders = parseFloat(calcOrders.value) || 0;
+    const staff = parseFloat(calcStaff.value) || 1;
+
+    // ~8 minutes of manual messaging/reconciliation per order
+    const weeklyHours = (orders * 8) / 60 + (staff * 2.5);
+    const annualHours = weeklyHours * 52;
+
+    if (hoursLostVal) hoursLostVal.textContent = weeklyHours.toFixed(1) + " hrs / week";
+    if (annualHoursVal) annualHoursVal.textContent = Math.round(annualHours).toLocaleString() + " hrs / year";
+  };
+
+  if (calcOrders) calcOrders.addEventListener("input", updateAutomationCalc);
+  if (calcStaff) calcStaff.addEventListener("input", updateAutomationCalc);
+
+  // 3. Payment Gateway Fee Calculator
+  const calcTicket = document.getElementById("calc-ticket");
+  const calcVolume = document.getElementById("calc-volume");
+  const gatewayFeesVal = document.getElementById("gateway-fees-val");
+  const marginVal = document.getElementById("margin-val");
+
+  const updateGatewayCalc = () => {
+    if (!calcTicket || !calcVolume) return;
+    const ticket = parseFloat(calcTicket.value) || 1;
+    const volume = parseFloat(calcVolume.value) || 0;
+
+    const numOrders = volume / ticket;
+    // Paystack/Flutterwave standard: 1.5% capped at 2000 Naira per transaction + ₦100 on >2500
+    const feePerOrder = Math.min(2000, ticket * 0.015 + (ticket >= 2500 ? 100 : 0));
+    const totalFees = numOrders * feePerOrder;
+    const effectivePct = volume > 0 ? ((volume - totalFees) / volume) * 100 : 100;
+
+    if (gatewayFeesVal) gatewayFeesVal.textContent = formatNaira(totalFees) + " / mo";
+    if (marginVal) marginVal.textContent = effectivePct.toFixed(1) + "% Net Payout";
+  };
+
+  if (calcTicket) calcTicket.addEventListener("input", updateGatewayCalc);
+  if (calcVolume) calcVolume.addEventListener("input", updateGatewayCalc);
+
+  // ==========================================================================
+  // NEWSLETTER FORM SUBMISSION
+  // ==========================================================================
+  const nlForm = document.getElementById("newsletter-form");
+  const nlSuccess = document.getElementById("newsletter-success");
+  if (nlForm) {
+    nlForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const nameInput = document.getElementById("nl-name");
+      const emailInput = document.getElementById("nl-email");
+
+      if (!emailInput || !emailInput.value.includes("@")) {
+        emailInput.focus();
+        return;
+      }
+
+      // Show immediate success state with smooth transition
+      nlForm.style.display = "none";
+      if (nlSuccess) {
+        nlSuccess.style.display = "block";
+        nlSuccess.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    });
+  }
+
 })();
