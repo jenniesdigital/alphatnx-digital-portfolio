@@ -4850,3 +4850,152 @@ button {
     padding-top: 40px;
   }
 }
+
+
+/* ==========================================================================
+   REWORKED NEWSLETTER PAGE (TOP GRADIENT, MAIN TEXT, CHECKLIST & DIRECT FORM)
+   ========================================================================== */
+.nl-hero-gradient-section {
+  position: relative;
+  background: linear-gradient(180deg, rgba(25, 72, 235, 0.22) 0%, rgba(18, 52, 166, 0.08) 50%, rgba(0, 0, 0, 0) 100%);
+  padding: clamp(140px, 18vh, 190px) var(--page-gutter) clamp(40px, 6vh, 60px);
+}
+
+[data-theme="light"] .nl-hero-gradient-section {
+  background: linear-gradient(180deg, rgba(210, 228, 255, 0.75) 0%, rgba(235, 242, 255, 0.35) 50%, rgba(255, 255, 255, 0) 100%);
+}
+
+.nl-hero-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.nl-hero-main-title {
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  line-height: 1.1;
+  font-weight: 600;
+  color: var(--foreground-strong);
+  letter-spacing: -0.035em;
+  margin: 0 0 18px;
+}
+
+.nl-hero-lead {
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  font-weight: 400;
+  color: var(--foreground-muted);
+  line-height: 1.55;
+  margin: 0 0 36px;
+  max-width: 780px;
+}
+
+.nl-checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2xl);
+  margin-top: 24px;
+}
+
+.nl-signup-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(40px, 6vh, 60px) var(--page-gutter) var(--space-5xl);
+}
+
+.nl-signup-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+}
+
+.nl-form-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.nl-form-intro {
+  margin-bottom: 24px;
+}
+
+.nl-join-heading {
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 600;
+  color: var(--foreground-strong);
+  letter-spacing: -0.025em;
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+
+.nl-join-sub {
+  font-size: 15px;
+  color: var(--foreground-muted);
+  margin: 0;
+}
+
+.nl-page-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.nl-image-column {
+  width: 100%;
+}
+
+.nl-owners-frame {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-default);
+  background: var(--background-surface);
+}
+
+.nl-owners-img {
+  width: 100%;
+  height: 440px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.95);
+}
+
+.nl-owners-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 24px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(5, 10, 25, 0.88) 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nl-owners-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-sky);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nl-owners-text {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.45;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .nl-checklist-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .nl-signup-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .nl-owners-img {
+    height: 320px;
+  }
+}
