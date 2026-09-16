@@ -3216,12 +3216,15 @@ button {
 }
 
 .about-team-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-xl);
 }
 
 .team-card {
+  width: calc((100% - 2 * var(--space-xl)) / 3);
+  min-width: 280px;
   height: 480px;
   background: var(--background-card);
   border: 1px solid var(--border-subtle);
@@ -3323,14 +3326,16 @@ button {
 }
 
 @media (max-width: 1024px) {
-  .about-team-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .team-card {
+    width: calc((100% - var(--space-xl)) / 2);
+    min-width: 260px;
   }
 }
 
 @media (max-width: 640px) {
-  .about-team-grid {
-    grid-template-columns: 1fr;
+  .team-card {
+    width: 100%;
+    min-width: unset;
   }
 }
 
