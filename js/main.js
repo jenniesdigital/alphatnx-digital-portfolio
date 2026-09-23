@@ -1021,14 +1021,14 @@
     }
   });
 
-  // Attach click listeners to all elements with [data-solution]
+  // Route all elements with [data-solution] directly to their dedicated landing pages
   document.querySelectorAll("[data-solution]").forEach((el) => {
     el.addEventListener("click", (e) => {
       if (el.parentElement && el.parentElement.classList.contains("sol-dragging")) return;
       const solKey = el.dataset.solution;
-      if (solKey && solutionsData[solKey]) {
+      if (solKey) {
         e.preventDefault();
-        openSolutionDrawer(solKey);
+        window.location.href = `/solution-${solKey}`;
       }
     });
   });
