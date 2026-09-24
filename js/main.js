@@ -878,43 +878,25 @@
       whatsappMsg: "Hi AlphaTNX Digital, I want to discuss setting up an e-commerce / online sales system for my business."
     },
     "operations": {
-      tag: "03 · Run Your Business Better",
-      title: "Systemize Your Business",
-      category: ["Custom Dashboards", "Inventory Tracking", "Custom CRM", "Multi-Location Sync"],
-      problem: "Managing orders, inventory, and customer records across messy WhatsApp chats and fragmented Excel spreadsheets leads to lost stock, missed follow-ups, and operational blindspots.",
-      deliverables: "We develop dedicated internal tools, real-time inventory trackers, customer relationship managers (CRM), and executive dashboards tailored exactly to how your team operates.",
+      tag: "03 · Systemize & Automate",
+      title: "Systemize and Automate Your Business",
+      category: ["Custom Dashboards", "Inventory Tracking", "Workflow Automations", "CRM & Reports"],
+      problem: "Managing orders, inventory, and customer follow-ups across messy WhatsApp chats, manual screenshots, and fragmented spreadsheets drains hours and causes costly errors.",
+      deliverables: "We develop dedicated internal tools, real-time inventory trackers, customer relationship managers (CRM), automated WhatsApp receipts, and live executive dashboards.",
       features: [
         { val: "Zero", lbl: "Spreadsheet Chaos" },
         { val: "Real-Time", lbl: "Inventory & Sales Sync" },
-        { val: "Role-Based", lbl: "Staff Access Control" },
+        { val: "15+ hrs", lbl: "Weekly Time Saved" },
         { val: "Live", lbl: "Revenue Analytics" }
       ],
-      outcome: "Complete operational clarity across all branches or departments, automated stock deduction, and actionable daily revenue tracking from any device.",
+      outcome: "Complete operational clarity across all branches, automated order and payment routing, and real-time revenue tracking without repetitive manual busywork.",
       workLinkText: "See Internal Tools & Dashboards We've Built for Others →",
       workLinkHref: "/work",
-      ctaPrompt: "Ready to streamline your business operations and eliminate manual spreadsheets?",
-      whatsappMsg: "Hi AlphaTNX Digital, I need a custom operations dashboard and internal management tool for my business."
-    },
-    "automation": {
-      tag: "04 · Work Smarter",
-      title: "Work Smarter in Your Business",
-      category: ["Zapier / Make / Webhooks", "WhatsApp API", "Automated Receipts", "CRM Pipeline"],
-      problem: "Staff spending 15+ hours each week typing duplicate data, sending manual payment receipts, copy-pasting order details, and manually nudging unfulfilled leads.",
-      deliverables: "We connect your website, payment processors, WhatsApp Business API, CRM, and accounting software to execute repetitive tasks automatically without human delay or error.",
-      features: [
-        { val: "15+ hrs", lbl: "Weekly Time Saved" },
-        { val: "Instant", lbl: "SMS / WhatsApp Triggers" },
-        { val: "Auto-Sync", lbl: "Payment to Fulfillment" },
-        { val: "0%", lbl: "Human Data Entry Error" }
-      ],
-      outcome: "Instant order confirmations to customers, automated lead assignment to sales reps, and scheduled operational digest reports sent straight to your phone.",
-      workLinkText: "See Automations We've Built for Others →",
-      workLinkHref: "/work",
-      ctaPrompt: "Ready to automate repetitive manual work in your business?",
-      whatsappMsg: "Hi AlphaTNX Digital, I want to automate our sales and operational workflows."
+      ctaPrompt: "Ready to systemize and automate your business operations?",
+      whatsappMsg: "Hi AlphaTNX Digital, I'd like to systemize and automate our business operations and workflows."
     },
     "custom-software": {
-      tag: "05 · Build Something New",
+      tag: "04 · Build Something New",
       title: "Custom Solutions for Your Business",
       category: ["Web Applications", "Client Portals", "Booking Systems", "API Architectures"],
       problem: "Off-the-shelf software doesn't fit unique business models, charges exorbitant recurring licensing fees, or locks your customer data into rigid walled gardens.",
@@ -932,7 +914,7 @@
       whatsappMsg: "Hi AlphaTNX Digital, I'd like to discuss engineering a custom web application or software platform."
     },
     "maintenance": {
-      tag: "06 · Keep It Running",
+      tag: "05 · Keep It Running",
       title: "Tech Maintenance",
       category: ["24/7 Monitoring", "Speed Optimization", "Security & Backups", "Continuous Upgrades"],
       problem: "Unmonitored websites break after plugin updates, suffer sluggish load times, run vulnerable outdated dependencies, or go offline during critical sales spikes.",

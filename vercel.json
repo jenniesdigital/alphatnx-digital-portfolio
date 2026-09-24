@@ -11,6 +11,16 @@
       "source": "/solution-get-online",
       "destination": "/get-online",
       "permanent": true
+    },
+    {
+      "source": "/solution-automation",
+      "destination": "/solution-operations",
+      "permanent": true
+    },
+    {
+      "source": "/systemize-automate",
+      "destination": "/solution-operations",
+      "permanent": true
     }
   ]
 }
