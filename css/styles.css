@@ -7412,8 +7412,9 @@ button {
 }
 
 .feature-pill-card {
+  position: relative;
   background: var(--background-card);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(229, 169, 60, 0.35);
   border-radius: 16px;
   padding: var(--space-xl);
   text-align: left;
@@ -7422,7 +7423,7 @@ button {
 }
 
 .feature-pill-card:hover {
-  border-color: var(--border-default);
+  border-color: #E5A93C;
   transform: none !important;
 }
 
@@ -7440,9 +7441,9 @@ button {
 }
 
 .feature-card-title {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
-  color: var(--foreground-strong);
+  color: #E5A93C;
   margin: 0 0 var(--space-xs);
 }
 
