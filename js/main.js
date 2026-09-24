@@ -1030,6 +1030,8 @@
         e.preventDefault();
         if (solKey === "sell-online") {
           window.location.href = "/sell-online";
+        } else if (solKey === "get-online") {
+          window.location.href = "/get-online";
         } else {
           window.location.href = `/solution-${solKey}`;
         }

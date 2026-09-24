@@ -6,6 +6,11 @@
       "source": "/solution-sell-online",
       "destination": "/sell-online",
       "permanent": true
+    },
+    {
+      "source": "/solution-get-online",
+      "destination": "/get-online",
+      "permanent": true
     }
   ]
 }
