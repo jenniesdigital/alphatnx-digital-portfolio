@@ -21,6 +21,16 @@
       "source": "/systemize-automate",
       "destination": "/solution-operations",
       "permanent": true
+    },
+    {
+      "source": "/custom-solutions",
+      "destination": "/solution-custom-software",
+      "permanent": true
+    },
+    {
+      "source": "/tech-maintenance",
+      "destination": "/solution-maintenance",
+      "permanent": true
     }
   ]
 }
