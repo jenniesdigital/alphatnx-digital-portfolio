@@ -1028,7 +1028,11 @@
       const solKey = el.dataset.solution;
       if (solKey) {
         e.preventDefault();
-        window.location.href = `/solution-${solKey}`;
+        if (solKey === "sell-online") {
+          window.location.href = "/sell-online";
+        } else {
+          window.location.href = `/solution-${solKey}`;
+        }
       }
     });
   });
