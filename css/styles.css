@@ -2975,28 +2975,49 @@ button {
   font-size: 14px;
 }
 
-.sol-detail-bottom-right {
+.sol-detail-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  height: 100%;
+  justify-content: space-between;
+}
+
+.sol-card-footer-right {
   display: flex;
   justify-content: flex-end;
-  margin-top: auto;
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--space-xs);
 }
 
 .sol-learn-more-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13.5px;
-  font-weight: 600;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
   color: #E5A93C;
   text-decoration: none;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  background: rgba(229, 169, 60, 0.1);
+  border: 1px solid rgba(229, 169, 60, 0.3);
   transition: all 0.2s ease;
 }
 
+.sol-learn-more-link svg {
+  transition: transform 0.2s ease;
+  color: #E5A93C;
+}
+
 .sol-learn-more-link:hover {
+  background: rgba(229, 169, 60, 0.18);
+  border-color: rgba(229, 169, 60, 0.5);
   color: #f59e0b;
-  transform: translateX(4px);
+  transform: translateY(-2px);
+}
+
+.sol-learn-more-link:hover svg {
+  transform: translate(2px, -2px);
 }
 
 /* ==========================================================================
@@ -7094,37 +7115,10 @@ button {
   padding: 0 var(--page-gutter);
 }
 
-.landing-top-bar {
-  padding: var(--space-xl) 0 var(--space-sm);
-  display: flex;
-  justify-content: flex-start;
-}
-
-.landing-back-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
-  border-radius: var(--radius-full);
-  background: var(--background-card);
-  border: 1px solid var(--border-subtle);
-  color: var(--foreground-muted);
-  font-size: 13px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.landing-back-pill:hover {
-  border-color: var(--border-default);
-  color: var(--foreground-strong);
-  transform: translateX(-3px);
-}
-
-/* Hero Section */
+/* Hero Section (Generous top padding so H1 is not cramped against navbar) */
 .landing-hero-section {
   position: relative;
-  padding: var(--space-4xl) 0 var(--space-5xl);
+  padding: calc(var(--space-5xl) + 24px) 0 var(--space-5xl);
   text-align: center;
   overflow: hidden;
 }
@@ -7145,39 +7139,8 @@ button {
 .landing-hero-content {
   position: relative;
   z-index: 1;
-  max-width: 920px;
+  max-width: 940px;
   margin: 0 auto;
-}
-
-.landing-pill-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 18px;
-  border-radius: var(--radius-full);
-  background: rgba(229, 169, 60, 0.1);
-  border: 1px solid rgba(229, 169, 60, 0.3);
-  color: #E5A93C;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: var(--space-xl);
-}
-
-.pulse-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #E5A93C;
-  box-shadow: 0 0 10px #E5A93C;
-  animation: pulseGlow 2s infinite;
-}
-
-@keyframes pulseGlow {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(229, 169, 60, 0.7); }
-  70% { transform: scale(1.2); box-shadow: 0 0 0 8px rgba(229, 169, 60, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(229, 169, 60, 0); }
 }
 
 .landing-h1-main {
@@ -7254,11 +7217,11 @@ button {
   object-fit: cover;
 }
 
-/* Sections Common */
+/* Sections Common (NO VISIBLE DIVIDER LINES) */
 .landing-section {
   padding: var(--space-5xl) 0;
   position: relative;
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: none !important;
 }
 
 .landing-section-head {
@@ -7291,6 +7254,7 @@ button {
   grid-template-columns: 1fr 1fr;
   gap: var(--space-2xl);
   margin-top: var(--space-2xl);
+  align-items: stretch;
 }
 
 .compare-col {
@@ -7302,6 +7266,7 @@ button {
   border: 1px solid var(--border-subtle);
   background: var(--background-card);
   position: relative;
+  transform: none !important;
 }
 
 .compare-col--chaos {
@@ -7431,7 +7396,7 @@ button {
   text-align: center;
 }
 
-/* Feature Cards (Static 3 on top, 2 centered below) */
+/* Feature Cards (Static, NO expansion/jump on hover) */
 .launch-features-top {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -7452,6 +7417,13 @@ button {
   border-radius: 16px;
   padding: var(--space-xl);
   text-align: left;
+  transform: none !important;
+  transition: border-color 0.2s ease;
+}
+
+.feature-pill-card:hover {
+  border-color: var(--border-default);
+  transform: none !important;
 }
 
 .feature-icon-badge {
@@ -7481,7 +7453,7 @@ button {
   margin: 0;
 }
 
-/* Free Extras (3 Static Cards) */
+/* Free Extras (3 Static Cards with Starburst Badges & Icons) */
 .launch-extras-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -7490,11 +7462,34 @@ button {
 }
 
 .extra-pill-card {
-  background: linear-gradient(180deg, rgba(229, 169, 60, 0.06) 0%, var(--background-card) 100%);
-  border: 1px solid rgba(229, 169, 60, 0.3);
+  position: relative;
+  background: var(--background-card);
+  border: 1px solid rgba(229, 169, 60, 0.35);
   border-radius: 16px;
   padding: var(--space-xl);
   text-align: left;
+  transform: none !important;
+  transition: border-color 0.2s ease;
+}
+
+.extra-pill-card:hover {
+  border-color: #E5A93C;
+  transform: none !important;
+}
+
+.free-starburst-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #E5A93C;
+  color: #070808;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  box-shadow: 0 0 12px rgba(229, 169, 60, 0.4);
 }
 
 .extra-pill-card h4 {
@@ -7525,6 +7520,7 @@ button {
   border-radius: 14px;
   padding: var(--space-lg) var(--space-md);
   text-align: center;
+  transform: none !important;
 }
 
 .step-card--final {
@@ -7588,13 +7584,13 @@ button {
   margin: 0;
 }
 
-/* Pricing Section (Contained, Responsive, Static) */
+/* Pricing Section (Equal Widths, Static, Text Links with Upward Arrow) */
 .landing-pricing-3col {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
+  gap: var(--space-xl);
   align-items: stretch;
-  max-width: 1140px;
+  max-width: 1160px;
   margin: var(--space-3xl) auto 0;
   width: 100%;
 }
@@ -7602,18 +7598,30 @@ button {
 .price-box {
   background: var(--background-card);
   border: 1px solid var(--border-subtle);
-  border-radius: 16px;
-  padding: var(--space-xl);
+  border-radius: 18px;
+  padding: var(--space-2xl);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  transform: none !important;
+  transition: border-color 0.2s ease;
+  height: 100%;
+}
+
+.price-box:hover {
+  border-color: var(--border-default);
+  transform: none !important;
 }
 
 .price-box--featured {
   border: 2px solid #E5A93C;
-  background: var(--background-elevated);
-  box-shadow: 0 16px 48px rgba(229, 169, 60, 0.12);
+  background: var(--background-card);
+}
+
+.price-box--featured:hover {
+  border-color: #E5A93C;
+  transform: none !important;
 }
 
 .price-badge-top {
@@ -7642,22 +7650,22 @@ button {
 }
 
 .price-amount {
-  font-size: clamp(2rem, 3vw, 2.6rem);
+  font-size: clamp(2.2rem, 3.2vw, 2.7rem);
   font-weight: 800;
   color: var(--foreground-strong);
   letter-spacing: -0.02em;
 }
 
 .price-amount-strike {
-  font-size: 16px;
+  font-size: 17px;
   color: var(--foreground-subtle);
   text-decoration: line-through;
-  margin-left: 6px;
+  margin-left: 8px;
 }
 
 .price-summary {
-  font-size: 13.5px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.55;
   color: var(--foreground-default);
   margin: 12px 0 16px;
 }
@@ -7689,7 +7697,44 @@ button {
   flex-shrink: 0;
 }
 
-/* FAQ Accordion / Dropdowns */
+.pricing-cta-wrap {
+  margin-top: auto;
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: flex-start;
+}
+
+.pricing-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--foreground-strong);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.pricing-text-link svg {
+  transition: transform 0.2s ease;
+  color: #E5A93C;
+}
+
+.pricing-text-link:hover {
+  color: #E5A93C;
+}
+
+.pricing-text-link:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.pricing-text-link--featured {
+  color: #E5A93C;
+  font-size: 16px;
+}
+
+/* FAQ Accordion / Dropdowns (Clean paragraphs) */
 .faq-dropdown-list {
   display: flex;
   flex-direction: column;
@@ -7760,7 +7805,7 @@ button {
 }
 
 .faq-dropdown-content p {
-  margin: 0 0 10px;
+  margin: 0 0 12px;
 }
 
 .landing-bold-bullets {
@@ -7788,7 +7833,7 @@ button {
   background: var(--background-card);
   border: 1px solid var(--border-subtle);
   border-radius: 10px;
-  padding: 12px;
+  padding: 14px;
   margin: 12px 0;
 }
 
@@ -7839,28 +7884,34 @@ button {
   color: #E5A93C;
 }
 
-/* Fit Section */
+/* Fit Section (EQUAL SIZES, 1fr 1fr) */
 .landing-fit-grid {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-xl);
-  max-width: 960px;
+  max-width: 1040px;
   margin: 0 auto;
+  align-items: stretch;
 }
 
 .fit-box {
-  border-radius: 16px;
+  border-radius: 18px;
   padding: var(--space-2xl);
   border: 1px solid var(--border-subtle);
   background: var(--background-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  transform: none !important;
 }
 
 .fit-box--yes {
-  border-color: rgba(229, 169, 60, 0.3);
+  border-color: rgba(229, 169, 60, 0.35);
 }
 
 .fit-box--no {
-  border-color: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.25);
 }
 
 .fit-title {
@@ -7868,6 +7919,7 @@ button {
   font-weight: 700;
   color: var(--foreground-strong);
   margin: 0 0 var(--space-lg);
+  text-align: center;
 }
 
 .fit-list {
@@ -8003,6 +8055,9 @@ button {
 }
 
 @media (max-width: 640px) {
+  .landing-hero-section {
+    padding: calc(var(--space-4xl) + 20px) 0 var(--space-3xl);
+  }
   .timeline-stepper {
     grid-template-columns: 1fr;
   }
@@ -8017,5 +8072,11 @@ button {
     flex-direction: column;
     gap: 8px;
     align-items: center;
+  }
+  .mega-btn-whatsapp {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 24px;
+    font-size: 16px;
   }
 }
