@@ -1024,13 +1024,29 @@
   // 14. Case Study Quick-View Drawer (3-Part Problem / Architecture / Outcome Framework)
   const caseStudiesData = {
     industry: {
+      name: "ThE iNdusTry",
       brand: "ThE iNdusTry · Cavanindustry.com",
-      title: "E-Commerce store with WhatsApp ordering & admin upload portal for gadgets vendor",
+      title: "Building an E-Commerce Store for ThE iNdusTry — Taking a Gadget Brand Online",
       image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80",
       tags: ["E-Commerce", "WhatsApp Orders", "Admin Product Upload", "Gadgets & Accessories"],
-      problem: "He's a gadget and accessories vendor that needed a space online to showcase inventory, receive structured orders, and update products seamlessly without manual chat chaos.",
-      architecture: "We curated an easy to use user interface, equipped with WhatsApp order integration and admin access for uploading products.",
-      outcome: "A high-converting online storefront with frictionless direct-to-WhatsApp checkout and autonomous product management for the vendor.",
+      problem: "<p>This client is a gadget and accessories vendor who previously managed sales entirely through direct messaging and social media chats. Without a structured catalog, potential buyers faced endless back-and-forth asking for available models, prices, and specifications, while the vendor suffered from manual order logging, lost conversations, and delayed response times.</p>",
+      architecture: `
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">1. Intuitive, Mobile-First User Interface</strong>
+            <p style="margin: 0;">We designed a clean, high-speed product catalog tailored for mobile shoppers. Customers can seamlessly browse categories, filter tech accessories, inspect item specs, and view high-resolution product imagery with zero friction or clutter.</p>
+          </div>
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">2. Frictionless Cart & Instant WhatsApp Order Routing</strong>
+            <p style="margin: 0;">Shoppers add items to a persistent shopping bag. When they checkout, the system automatically compiles an itemized summary—including product names, selected variants, quantities, and calculated totals—and sends it straight to the vendor’s WhatsApp in one click, eliminating manual data entry.</p>
+          </div>
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">3. Dedicated Merchant Admin Upload Portal</strong>
+            <p style="margin: 0;">Equipped the client with an autonomous, password-protected admin dashboard to easily upload new gadget inventory, update prices, adjust stock availability, and manage categories directly from any smartphone or PC without writing code.</p>
+          </div>
+        </div>
+      `,
+      outcome: "<p>A high-converting digital storefront that cuts order confirmation time to zero, eliminates product discovery friction, and gives the vendor complete independence to manage stock effortlessly.</p>",
       metrics: [
         { val: "1-Click", lbl: "WhatsApp Order" },
         { val: "100%", lbl: "Mobile Friendly" },
@@ -1040,13 +1056,33 @@
       ctaText: "Discuss an e-commerce build like ThE iNdusTry"
     },
     demomart: {
+      name: "Demo Mart",
       brand: "Demo Mart · Demomart-nine.vercel.app",
-      title: "Supermarket e-commerce website with Paystack, WhatsApp & inventory management",
+      title: "Taking Demo Mart from a Physical Supermarket to an Automated Online Store",
       image: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80",
       tags: ["Supermarket E-Commerce", "Paystack Payments", "WhatsApp Orders", "Inventory Management", "Staff Access"],
-      problem: "A supermarket retail business needing automated hands-off payment collection, multi-category cart management, staff permissions, and real-time inventory control.",
-      architecture: "A supermarket e-commerce website, complete with Paystack integrations for hands-off payments and also WhatsApp integrations, inventory management, admin access, staff access, and easy to use interface for customer facing website, cart management.",
-      outcome: "Hands-off payment processing, zero stock reconciliation headaches, and an intuitive customer-facing shopping experience across all mobile and desktop devices.",
+      problem: "<p>A physical supermarket business looking to expand into digital sales while avoiding operational bottlenecks, manual bank transfer reconciliations, and inventory mismatches across hundreds of grocery items.</p>",
+      architecture: `
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">1. Hands-Off Paystack Payment Gateway</strong>
+            <p style="margin: 0;">Integrated secure online checkout with Paystack supporting cards, bank transfers, and USSD. Payments are verified instantly and automatically, removing the risk of fake alerts and eliminating manual account confirmations.</p>
+          </div>
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">2. Real-Time Centralized Inventory Tracking</strong>
+            <p style="margin: 0;">Automated stock deduction as orders are placed, ensuring items that run out are instantly marked out-of-stock across the store to prevent overselling and customer disappointment.</p>
+          </div>
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">3. Role-Based Admin & Staff Access</strong>
+            <p style="margin: 0;">Tiered permission architecture where store staff have dedicated views to view, pick, pack, and mark customer orders as dispatched, while management retains exclusive access to revenue analytics, pricing controls, and catalog edits.</p>
+          </div>
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">4. Multi-Category Customer Shopping & Cart Management</strong>
+            <p style="margin: 0;">A lightning-fast customer interface with aisle-based category filtering, quick search across all grocery departments, and flexible checkout options via online payment or direct WhatsApp assistance.</p>
+          </div>
+        </div>
+      `,
+      outcome: "<p>A fully automated digital supermarket operating 24/7, processing hands-off payments, and giving store management total operational visibility across all inventory and orders.</p>",
       metrics: [
         { val: "Hands-Off", lbl: "Paystack Payments" },
         { val: "Live", lbl: "Inventory Tracking" },
@@ -1056,13 +1092,33 @@
       ctaText: "Discuss a supermarket e-commerce system like Demo Mart"
     },
     debbys: {
+      name: "Debby's Fragrance",
       brand: "Debby's Fragrance · Debbys-fragrance.vercel.app",
-      title: "Full e-commerce & on-brand digital storefront for feminine perfume brand",
+      title: "Building an On-Brand E-Commerce Store for Debby's Fragrance — Bringing a Luxury Perfume Boutique Online",
       image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1200&q=80",
       tags: ["Fragrance & Beauty", "On-Brand Storefront", "WhatsApp Orders", "Cart Management"],
-      problem: "A boutique feminine perfume brand needed an elegant, credible digital storefront to showcase bespoke fragrance collections and convert social media followers into direct sales without drop-offs.",
-      architecture: "Full e-commerce and on-brand store for Feminine Perfume Brand. WhatsApp order integrations, cart management, clean on-brand interface, and everything.",
-      outcome: "An elevated luxury brand presence that establishes instant credibility and submits customer orders smoothly straight into WhatsApp.",
+      problem: "<p>A boutique feminine fragrance brand relying on social media posts where potential buyers frequently dropped off due to lack of detailed scent notes, structured bottle sizing options, and an official branded checkout experience.</p>",
+      architecture: `
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">1. Clean, Luxury On-Brand Visual Interface</strong>
+            <p style="margin: 0;">Engineered a bespoke feminine aesthetic with delicate typography, high-resolution imagery, and structured product profiles detailing top/heart/base fragrance notes and bottle sizes to build immediate luxury appeal and trust.</p>
+          </div>
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">2. Smooth Cart Management & Transparent Totals</strong>
+            <p style="margin: 0;">Shoppers can browse perfume collections, add multiple bottles or gift sets to their shopping bag, adjust quantities on the fly, and view transparent itemized totals in one tap.</p>
+          </div>
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">3. 1-Click WhatsApp Concierge Order Closing</strong>
+            <p style="margin: 0;">Pre-formats customer orders with exact perfume names, sizes, delivery locations, and calculated amounts into a structured WhatsApp message, making closing sales personalized and completely frictionless.</p>
+          </div>
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">4. Mobile Speed & Conversion Optimization</strong>
+            <p style="margin: 0;">Optimized for rapid loading on mobile networks so traffic coming directly from Instagram, TikTok, and WhatsApp statuses experiences instant page loads with zero drop-off.</p>
+          </div>
+        </div>
+      `,
+      outcome: "<p>An elevated, credible online boutique that converts social media engagement into confirmed orders and establishes the brand as a premier perfume destination.</p>",
       metrics: [
         { val: "Bespoke", lbl: "On-Brand Design" },
         { val: "Direct", lbl: "WhatsApp Orders" },
@@ -1073,37 +1129,81 @@
     },
     // Aliases for backwards compatibility
     apex: {
-      brand: "ThE iNdusTry",
-      title: "E-Commerce store with WhatsApp ordering & admin upload portal for gadgets vendor",
+      name: "ThE iNdusTry",
+      brand: "ThE iNdusTry · Cavanindustry.com",
+      title: "Building an E-Commerce Store for ThE iNdusTry — Taking a Gadget Brand Online",
       image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80",
       tags: ["E-Commerce", "WhatsApp Orders", "Admin Product Upload"],
-      problem: "He's a gadget and accessories vendor that needed a space online.",
-      architecture: "We curated an easy to use user interface, equipped with whatsapp order integration and admin access for uploading products.",
-      outcome: "A high-converting online storefront with frictionless direct-to-WhatsApp checkout.",
+      problem: "<p>This client is a gadget and accessories vendor who previously managed sales entirely through direct messaging and social media chats.</p>",
+      architecture: `
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">1. Intuitive, Mobile-First User Interface</strong>
+            <p style="margin: 0;">Clean, high-speed product catalog tailored for mobile shoppers to browse gadget accessories and specs easily.</p>
+          </div>
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">2. Frictionless Cart & WhatsApp Routing</strong>
+            <p style="margin: 0;">Shoppers add items to bag and order via structured WhatsApp messages instantly.</p>
+          </div>
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">3. Dedicated Admin Portal</strong>
+            <p style="margin: 0;">Password-protected dashboard for client product uploads and price management without writing code.</p>
+          </div>
+        </div>
+      `,
+      outcome: "<p>A high-converting online storefront with frictionless direct-to-WhatsApp checkout.</p>",
       metrics: [{ val: "1-Click", lbl: "WhatsApp Order" }, { val: "100%", lbl: "Mobile Friendly" }],
       liveUrl: "https://cavanindustry.com",
       ctaText: "Discuss an e-commerce build like ThE iNdusTry"
     },
     vortex: {
-      brand: "Demo Mart",
-      title: "Supermarket e-commerce website with Paystack, WhatsApp & inventory management",
+      name: "Demo Mart",
+      brand: "Demo Mart · Demomart-nine.vercel.app",
+      title: "Taking Demo Mart from a Physical Supermarket to an Automated Online Store",
       image: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80",
       tags: ["Supermarket E-Commerce", "Paystack Payments", "WhatsApp Orders", "Inventory Management"],
-      problem: "A supermarket retail business needing automated hands-off payment collection and inventory control.",
-      architecture: "A supermarket e-commerce website, complete with paystack intergrations for hands-off payments and also whatsapp integrations, inventory management, admin access, staff access, and easy to use interface for customer facing website, cart management.",
-      outcome: "Hands-off payment processing and real-time inventory management.",
+      problem: "<p>A supermarket retail business needing automated hands-off payment collection and inventory control.</p>",
+      architecture: `
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">1. Paystack Payment Gateway</strong>
+            <p style="margin: 0;">Automated card and transfer payment processing with instant verification.</p>
+          </div>
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">2. Real-Time Inventory Control</strong>
+            <p style="margin: 0;">Live inventory tracking preventing overselling of grocery stock.</p>
+          </div>
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">3. Role-Based Permissions</strong>
+            <p style="margin: 0;">Staff packing access vs administrator catalog and financial access.</p>
+          </div>
+        </div>
+      `,
+      outcome: "<p>Hands-off payment processing and real-time inventory management.</p>",
       metrics: [{ val: "Hands-Off", lbl: "Paystack Payments" }, { val: "Live", lbl: "Inventory Tracking" }],
       liveUrl: "https://demomart-nine.vercel.app/",
       ctaText: "Discuss a supermarket store like Demo Mart"
     },
     novak: {
-      brand: "Debby's Fragrance",
-      title: "Full e-commerce & on-brand digital storefront for feminine perfume brand",
+      name: "Debby's Fragrance",
+      brand: "Debby's Fragrance · Debbys-fragrance.vercel.app",
+      title: "Building an On-Brand E-Commerce Store for Debby's Fragrance — Bringing a Luxury Perfume Boutique Online",
       image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1200&q=80",
       tags: ["Fragrance & Beauty", "On-Brand Storefront", "WhatsApp Orders"],
-      problem: "A boutique feminine perfume brand needed an elegant on-brand digital presence.",
-      architecture: "Full e-commerce and on brand store for Feminine Perfume Brand. Whatsapp order intergartions, cart management, clean on brand interface, and everything.",
-      outcome: "An elevated luxury brand presence driving direct sales.",
+      problem: "<p>A boutique feminine perfume brand needed an elegant on-brand digital presence to convert social traffic.</p>",
+      architecture: `
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">1. Luxury Visual Interface</strong>
+            <p style="margin: 0;">Custom-crafted aesthetics with perfume notes, bottle sizes, and elegance.</p>
+          </div>
+          <div>
+            <strong style="color: var(--foreground-strong); display: block; margin-bottom: 0.25rem;">2. WhatsApp Order Dispatch</strong>
+            <p style="margin: 0;">Structured WhatsApp ordering for seamless personalized concierge closing.</p>
+          </div>
+        </div>
+      `,
+      outcome: "<p>An elevated luxury brand presence driving direct sales.</p>",
       metrics: [{ val: "Bespoke", lbl: "On-Brand Design" }, { val: "Direct", lbl: "WhatsApp Orders" }],
       liveUrl: "https://debbys-fragrance.vercel.app/",
       ctaText: "Discuss an e-commerce store like Debby's Fragrance"
@@ -1140,9 +1240,9 @@
       drawerImg.alt = data.brand;
     }
     if (drawerTitle) drawerTitle.textContent = data.title;
-    if (drawerProblem) drawerProblem.textContent = data.problem;
-    if (drawerArchitecture) drawerArchitecture.textContent = data.architecture;
-    if (drawerOutcome) drawerOutcome.textContent = data.outcome;
+    if (drawerProblem) drawerProblem.innerHTML = data.problem;
+    if (drawerArchitecture) drawerArchitecture.innerHTML = data.architecture;
+    if (drawerOutcome) drawerOutcome.innerHTML = data.outcome;
 
     if (drawerTags) { drawerTags.innerHTML = ""; }
 
@@ -1164,9 +1264,10 @@
       }
     }
 
-    if (drawerCtaText) drawerCtaText.textContent = `Want a digital system engineered like ${data.brand}?`;
+    const cleanBrandName = data.name || data.brand.split(" · ")[0];
+    if (drawerCtaText) drawerCtaText.textContent = `Want a digital system engineered like ${cleanBrandName}?`;
     if (drawerWhatsApp) {
-      const msg = encodeURIComponent(`Hi AlphaTNX Digital, I saw the ${data.brand} case study and want to discuss a similar project for my business.`);
+      const msg = encodeURIComponent(`Hi AlphaTNX Digital, I saw the ${cleanBrandName} case study and want to discuss a similar project for my business.`);
       drawerWhatsApp.href = `https://wa.me/2349064316439?text=${msg}`;
     }
 
