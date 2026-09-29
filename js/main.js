@@ -1023,96 +1023,90 @@
 
   // 14. Case Study Quick-View Drawer (3-Part Problem / Architecture / Outcome Framework)
   const caseStudiesData = {
-    apex: {
-      brand: "Apex Commerce",
-      title: "A 960% usage lift on Apex Commerce's digital storefront",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
-      tags: ["E-Commerce", "Next.js", "Sub-Second Checkout", "Dynamic AI Bundles"],
-      problem: "Cart abandonment escalated to 68% due to bloated multi-page checkout flows, slow 4.2-second mobile load times, and poor product bundle discovery.",
-      architecture: "Engineered a headless Next.js frontend with sub-second edge caching, 1-click Stripe Elements integration, and dynamic AI-powered smart bundles.",
-      outcome: "Generated over $185,000 in incremental revenue in Q1 alone, slashed mobile load times to 0.7s, and decreased cart abandonment by 44%.",
+    industry: {
+      brand: "ThE iNdusTry · Cavanindustry.com",
+      title: "E-Commerce store with WhatsApp ordering & admin upload portal for gadgets vendor",
+      image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80",
+      tags: ["E-Commerce", "WhatsApp Orders", "Admin Product Upload", "Gadgets & Accessories"],
+      problem: "He's a gadget and accessories vendor that needed a space online to showcase inventory, receive structured orders, and update products seamlessly without manual chat chaos.",
+      architecture: "We curated an easy to use user interface, equipped with WhatsApp order integration and admin access for uploading products.",
+      outcome: "A high-converting online storefront with frictionless direct-to-WhatsApp checkout and autonomous product management for the vendor.",
       metrics: [
-        { val: "+960%", lbl: "Usage Lift" },
-        { val: "0.7s", lbl: "Load Time" },
-        { val: "-44%", lbl: "Cart Dropoff" },
-        { val: "$185k+", lbl: "Q1 Revenue" }
+        { val: "1-Click", lbl: "WhatsApp Order" },
+        { val: "100%", lbl: "Mobile Friendly" },
+        { val: "Instant", lbl: "Admin Product Upload" }
       ],
-      ctaText: "Discuss an e-commerce build like Apex Commerce"
+      liveUrl: "https://cavanindustry.com",
+      ctaText: "Discuss an e-commerce build like ThE iNdusTry"
+    },
+    demomart: {
+      brand: "Demo Mart · Demomart-nine.vercel.app",
+      title: "Supermarket e-commerce website with Paystack, WhatsApp & inventory management",
+      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80",
+      tags: ["Supermarket E-Commerce", "Paystack Payments", "WhatsApp Orders", "Inventory Management", "Staff Access"],
+      problem: "A supermarket retail business needing automated hands-off payment collection, multi-category cart management, staff permissions, and real-time inventory control.",
+      architecture: "A supermarket e-commerce website, complete with Paystack integrations for hands-off payments and also WhatsApp integrations, inventory management, admin access, staff access, and easy to use interface for customer facing website, cart management.",
+      outcome: "Hands-off payment processing, zero stock reconciliation headaches, and an intuitive customer-facing shopping experience across all mobile and desktop devices.",
+      metrics: [
+        { val: "Hands-Off", lbl: "Paystack Payments" },
+        { val: "Live", lbl: "Inventory Tracking" },
+        { val: "Role-Based", lbl: "Admin & Staff Access" }
+      ],
+      liveUrl: "https://demomart-nine.vercel.app/",
+      ctaText: "Discuss a supermarket e-commerce system like Demo Mart"
+    },
+    debbys: {
+      brand: "Debby's Fragrance · Debbys-fragrance.vercel.app",
+      title: "Full e-commerce & on-brand digital storefront for feminine perfume brand",
+      image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1200&q=80",
+      tags: ["Fragrance & Beauty", "On-Brand Storefront", "WhatsApp Orders", "Cart Management"],
+      problem: "A boutique feminine perfume brand needed an elegant, credible digital storefront to showcase bespoke fragrance collections and convert social media followers into direct sales without drop-offs.",
+      architecture: "Full e-commerce and on-brand store for Feminine Perfume Brand. WhatsApp order integrations, cart management, clean on-brand interface, and everything.",
+      outcome: "An elevated luxury brand presence that establishes instant credibility and submits customer orders smoothly straight into WhatsApp.",
+      metrics: [
+        { val: "Bespoke", lbl: "On-Brand Design" },
+        { val: "Direct", lbl: "WhatsApp Orders" },
+        { val: "Smooth", lbl: "Cart Management" }
+      ],
+      liveUrl: "https://debbys-fragrance.vercel.app/",
+      ctaText: "Discuss an e-commerce store like Debby's Fragrance"
+    },
+    // Aliases for backwards compatibility
+    apex: {
+      brand: "ThE iNdusTry",
+      title: "E-Commerce store with WhatsApp ordering & admin upload portal for gadgets vendor",
+      image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80",
+      tags: ["E-Commerce", "WhatsApp Orders", "Admin Product Upload"],
+      problem: "He's a gadget and accessories vendor that needed a space online.",
+      architecture: "We curated an easy to use user interface, equipped with whatsapp order integration and admin access for uploading products.",
+      outcome: "A high-converting online storefront with frictionless direct-to-WhatsApp checkout.",
+      metrics: [{ val: "1-Click", lbl: "WhatsApp Order" }, { val: "100%", lbl: "Mobile Friendly" }],
+      liveUrl: "https://cavanindustry.com",
+      ctaText: "Discuss an e-commerce build like ThE iNdusTry"
     },
     vortex: {
-      brand: "Vortex AI",
-      title: "How design strategy took Vortex from NPS -4 to +19",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
-      tags: ["SaaS Growth", "Onboarding Funnel", "Automated Billing", "Figma Design System"],
-      problem: "High early churn during trial signups, confusing tier feature comparisons, and a tedious 9-step account setup process dragged user satisfaction down to NPS -4.",
-      architecture: "Streamlined the self-serve onboarding engine into a 3-step interactive setup with live workspace previews and automated Stripe tier billing.",
-      outcome: "NPS skyrocketed from -4 to +19, trial-to-paid subscriber conversion jumped 3.1x, and churn dropped by 38% in the first 60 days post-launch.",
-      metrics: [
-        { val: "+23 pts", lbl: "NPS Lift" },
-        { val: "3.1x", lbl: "Paid Conversion" },
-        { val: "-38%", lbl: "Trial Churn" }
-      ],
-      ctaText: "Discuss a SaaS onboarding funnel like Vortex AI"
+      brand: "Demo Mart",
+      title: "Supermarket e-commerce website with Paystack, WhatsApp & inventory management",
+      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80",
+      tags: ["Supermarket E-Commerce", "Paystack Payments", "WhatsApp Orders", "Inventory Management"],
+      problem: "A supermarket retail business needing automated hands-off payment collection and inventory control.",
+      architecture: "A supermarket e-commerce website, complete with paystack intergrations for hands-off payments and also whatsapp integrations, inventory management, admin access, staff access, and easy to use interface for customer facing website, cart management.",
+      outcome: "Hands-off payment processing and real-time inventory management.",
+      metrics: [{ val: "Hands-Off", lbl: "Paystack Payments" }, { val: "Live", lbl: "Inventory Tracking" }],
+      liveUrl: "https://demomart-nine.vercel.app/",
+      ctaText: "Discuss a supermarket store like Demo Mart"
     },
     novak: {
-      brand: "Novak Logistics",
-      title: "Automated instant quotation engine & high-ticket intake system",
-      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
-      tags: ["Enterprise Intake", "Real-Time Pricing", "Automation", "Custom Forms"],
-      problem: "Manual email quoting took 24–48 hours per inquiry, causing 52% of high-value freight leads to book with faster-responding competitors.",
-      architecture: "Built an instant quotation web calculator with dynamic weight/distance algorithms, automated CRM lead capture, and instantaneous contract generation.",
-      outcome: "Lead response time collapsed from 24 hours to instant (<2s), booking conversions rose 180%, saving 35+ operational staff hours each week.",
-      metrics: [
-        { val: "< 2s", lbl: "Quote Speed" },
-        { val: "+180%", lbl: "Booking Rate" },
-        { val: "35 hrs", lbl: "Weekly Saved" }
-      ],
-      ctaText: "Discuss an automated intake engine like Novak"
-    },
-    aura: {
-      brand: "Aura Pay",
-      title: "230% conversion lift on Aura Pay checkout in three weeks",
-      image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&q=80",
-      tags: ["Fintech", "Frictionless Payments", "Apple Pay", "Conversion Rate Opt."],
-      problem: "Checkout drop-off was abnormally high on mobile due to tedious manual card input and lack of localized split-payment alternatives.",
-      architecture: "Engineered a custom Stripe Elements integration with 1-tap Apple Pay / Google Pay, biometric payment confirmation, and automated currency routing.",
-      outcome: "230% checkout conversion lift in three weeks; average transaction completion time decreased from 92 seconds to 14 seconds.",
-      metrics: [
-        { val: "+230%", lbl: "Checkout Lift" },
-        { val: "14s", lbl: "Checkout Time" },
-        { val: "99.9%", lbl: "Payment Success" }
-      ],
-      ctaText: "Discuss a payment checkout build like Aura Pay"
-    },
-    luminary: {
-      brand: "Luminary Studio",
-      title: "Complete brand architecture and high-velocity digital agency portal",
-      image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80",
-      tags: ["Agency Portal", "Editorial Design", "High-Ticket Intake", "Performance"],
-      problem: "Creative agency struggling to close 6-figure enterprise contracts due to an outdated generic portfolio that failed to convey authority.",
-      architecture: "Crafted an ultra-minimalist editorial design language, high-speed case media rendering, and an automated client qualification questionnaire.",
-      outcome: "Average closed deal size grew by 2.8x (from $15k to $42k+), and inbound client inquiry volume doubled within 45 days of launch.",
-      metrics: [
-        { val: "2.8x", lbl: "Deal Size Growth" },
-        { val: "+100%", lbl: "Inbound Pipeline" },
-        { val: "100/100", lbl: "Lighthouse Score" }
-      ],
-      ctaText: "Discuss a high-ticket agency portal like Luminary"
-    },
-    orbit: {
-      brand: "Orbit Cloud",
-      title: "Multi-step self-serve onboarding funnel and automated billing engine",
-      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
-      tags: ["Cloud Infra", "Developer UX", "Onboarding", "Stripe Billing"],
-      problem: "Complex cloud configuration steps caused 48% of developers to abandon signups before deploying their first container instance.",
-      architecture: "Constructed an interactive 1-click template deployer, streamlined OAuth authentication, and clear real-time usage cost estimation calculator.",
-      outcome: "Developer signup drop-off collapsed from 48% down to 11%, successfully deploying over 4,200 new cloud clusters in the first month.",
-      metrics: [
-        { val: "11%", lbl: "Drop-off (from 48%)" },
-        { val: "4,200+", lbl: "Clusters Active" },
-        { val: "3.8x", lbl: "Activation Rate" }
-      ],
-      ctaText: "Discuss a developer funnel like Orbit Cloud"
+      brand: "Debby's Fragrance",
+      title: "Full e-commerce & on-brand digital storefront for feminine perfume brand",
+      image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1200&q=80",
+      tags: ["Fragrance & Beauty", "On-Brand Storefront", "WhatsApp Orders"],
+      problem: "A boutique feminine perfume brand needed an elegant on-brand digital presence.",
+      architecture: "Full e-commerce and on brand store for Feminine Perfume Brand. Whatsapp order intergartions, cart management, clean on brand interface, and everything.",
+      outcome: "An elevated luxury brand presence driving direct sales.",
+      metrics: [{ val: "Bespoke", lbl: "On-Brand Design" }, { val: "Direct", lbl: "WhatsApp Orders" }],
+      liveUrl: "https://debbys-fragrance.vercel.app/",
+      ctaText: "Discuss an e-commerce store like Debby's Fragrance"
     }
   };
 
@@ -1130,6 +1124,7 @@
   const drawerMetrics = document.getElementById("case-drawer-metrics");
   const drawerCtaText = document.getElementById("case-drawer-cta-text");
   const drawerWhatsApp = document.getElementById("case-drawer-whatsapp");
+  const drawerLiveLink = document.getElementById("case-drawer-livelink");
 
   let lastFocusedEl = null;
 
@@ -1160,9 +1155,18 @@
       `).join("");
     }
 
+    if (drawerLiveLink) {
+      if (data.liveUrl) {
+        drawerLiveLink.href = data.liveUrl;
+        drawerLiveLink.style.display = "inline-flex";
+      } else {
+        drawerLiveLink.style.display = "none";
+      }
+    }
+
     if (drawerCtaText) drawerCtaText.textContent = `Want a digital system engineered like ${data.brand}?`;
     if (drawerWhatsApp) {
-      const msg = encodeURIComponent(`Hi Michael, I saw the ${data.brand} case study on AlphaTNX Digital and want to discuss a similar project.`);
+      const msg = encodeURIComponent(`Hi AlphaTNX Digital, I saw the ${data.brand} case study and want to discuss a similar project for my business.`);
       drawerWhatsApp.href = `https://wa.me/2349064316439?text=${msg}`;
     }
 
