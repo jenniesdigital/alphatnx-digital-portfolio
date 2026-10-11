@@ -1824,7 +1824,7 @@ MONTHLY PROJECTION (${volume} units):
 - Gross Profit: ${formatCurrency(profit * volume, sym)}
 
 Calculated with AlphaTNX Free Business Tools:
-https://digital.alphatnx.com/tool-profit-margin
+https://digital.alphatnx.com/tool/profit-margin-calculator
 ===========================================`;
 
         if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1852,7 +1852,7 @@ https://digital.alphatnx.com/tool-profit-margin
         if (mktInput && mktInput.value) params.set("mkt", mktInput.value);
         if (volInput && volInput.value) params.set("vol", volInput.value);
 
-        const shareUrl = `${window.location.origin}/tool-profit-margin?${params.toString()}`;
+        const shareUrl = `${window.location.origin}/tool/profit-margin-calculator?${params.toString()}`;
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(shareUrl).then(() => {
             showToast("✓ Shareable calculation link copied!");

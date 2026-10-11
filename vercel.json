@@ -68,13 +68,18 @@
       "permanent": true
     },
     {
+      "source": "/tool-profit-margin",
+      "destination": "/tool/profit-margin-calculator",
+      "permanent": true
+    },
+    {
       "source": "/tools/profit-margin",
-      "destination": "/tool-profit-margin",
+      "destination": "/tool/profit-margin-calculator",
       "permanent": true
     },
     {
       "source": "/profit-margin-calculator",
-      "destination": "/tool-profit-margin",
+      "destination": "/tool/profit-margin-calculator",
       "permanent": true
     }
   ]
