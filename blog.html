@@ -136,32 +136,41 @@
 
       <!-- Categories Filter -->
       <div class="resources-filters" data-reveal style="--reveal-delay: 0.15s">
-        <button type="button" class="res-filter-btn is-active" data-filter="all">All Topics</button>
-        <button type="button" class="res-filter-btn" data-filter="strategy">Digital Strategy</button>
+        <button type="button" class="res-filter-btn is-active" data-filter="all">All</button>
+        <button type="button" class="res-filter-btn" data-filter="get-online">Get Online</button>
+        <button type="button" class="res-filter-btn" data-filter="sell-online">Sell Online</button>
+        <button type="button" class="res-filter-btn" data-filter="business-systems">Business Systems</button>
+        <button type="button" class="res-filter-btn" data-filter="automation">Automation</button>
+        <button type="button" class="res-filter-btn" data-filter="digital-strategy">Digital Strategy</button>
       </div>
 
       <!-- Articles Grid -->
       <section class="resources-grid">
 
         <!-- Article: Website vs Social Media -->
-        <a href="/website-vs-social-media" class="resource-card" data-category="strategy" data-article="website-vs-social-media" data-reveal>
+        <a href="/blog/website-vs-social-media" class="resource-card" data-category="get-online" data-article="website-vs-social-media" data-reveal>
           <div class="resource-media">
             <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="A modern laptop showing a business website next to a smartphone displaying social media profiles" loading="lazy">
           </div>
           <div class="resource-body">
             <div class="resource-meta">
-              <span class="resource-tag">Digital Strategy</span>
+              <span class="resource-tag">Get Online</span>
               <span>9 min read</span>
             </div>
             <h2 class="resource-title">Website vs Social Media: Which Does Your Business Need?</h2>
             <p class="resource-excerpt">
-              Someone sees your post on Instagram or TikTok, loves the product, and sends you one message: "How much?" Then they wait for you... As a business owner, if that happens to you all the time, you probably don't have a visibility problem. Social media is doing its job: people are finding you. What's missing is a place where they can decide without needing you.
+              Someone sees your post on Instagram or TikTok, loves the product, and sends you one message: "How much?" Then they wait for you. Maybe you reply in ten minutes. Maybe in three hours. But by then, they've moved on to a competitor whose price was already sitting on a page.
             </p>
             <div class="resource-cta">
               Read guide →
             </div>
           </div>
         </a>
+
+        <!-- Empty state message for filters with no posts yet -->
+        <div id="blog-empty-state" style="display: none; grid-column: 1 / -1; padding: 48px 24px; text-align: center; color: var(--foreground-muted); border: 1px dashed var(--border-subtle); border-radius: 16px; font-size: 15px;">
+          No articles published in this category yet. Check back soon.
+        </div>
 
       </section>
 
@@ -262,19 +271,25 @@
 
   <script src="js/main.js"></script>
   <script>
-    // Simple filter interaction for resources page
+    // Filter interaction for blog page
     document.querySelectorAll('.res-filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.res-filter-btn').forEach(b => b.classList.remove('is-active'));
         btn.classList.add('is-active');
         const filter = btn.dataset.filter;
+        let count = 0;
         document.querySelectorAll('.resource-card').forEach(card => {
           if (filter === 'all' || card.dataset.category === filter) {
             card.style.display = 'flex';
+            count++;
           } else {
             card.style.display = 'none';
           }
         });
+        const emptyState = document.getElementById('blog-empty-state');
+        if (emptyState) {
+          emptyState.style.display = count === 0 ? 'block' : 'none';
+        }
       });
     });
 

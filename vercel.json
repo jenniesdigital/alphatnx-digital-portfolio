@@ -61,6 +61,11 @@
       "source": "/blog-custom-saas-vs-portal",
       "destination": "/blog",
       "permanent": true
+    },
+    {
+      "source": "/website-vs-social-media",
+      "destination": "/blog/website-vs-social-media",
+      "permanent": true
     }
   ]
 }
