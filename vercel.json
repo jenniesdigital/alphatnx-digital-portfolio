@@ -31,6 +31,36 @@
       "source": "/tech-maintenance",
       "destination": "/solution-maintenance",
       "permanent": true
+    },
+    {
+      "source": "/blog-whatsapp-dropoff",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog-spreadsheet-trap",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog-payment-gateways",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog-lead-automation",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog-mobile-performance",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog-custom-saas-vs-portal",
+      "destination": "/blog",
+      "permanent": true
     }
   ]
 }
