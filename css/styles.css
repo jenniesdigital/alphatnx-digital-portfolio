@@ -4246,7 +4246,7 @@ button {
 
 .tools-3col-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-2xl);
 }
 
@@ -8217,5 +8217,452 @@ button {
     justify-content: center;
     padding: 16px 24px;
     font-size: 16px;
+  }
+}
+
+/* ==========================================================================
+   PROFIT MARGIN CALCULATOR & BUSINESS TOOLS ENHANCEMENTS
+   ========================================================================== */
+.form-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--foreground-strong);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.form-input {
+  background: var(--background-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 15px;
+  color: var(--foreground-strong);
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(25, 72, 235, 0.2);
+}
+
+.form-input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .form-input-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.margin-calc-card {
+  background: var(--background-card);
+  border: 1px solid var(--border-default);
+  border-radius: 20px;
+  padding: clamp(22px, 4vw, 36px);
+  box-sizing: border-box;
+  margin-top: 24px;
+}
+
+.margin-calc-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1.1fr;
+  gap: clamp(20px, 3.5vw, 36px);
+  align-items: start;
+}
+
+.margin-calc-header-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.margin-currency-select {
+  background: var(--background-surface);
+  color: var(--foreground-strong);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+.margin-currency-select:focus {
+  border-color: var(--accent-blue);
+}
+
+.margin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.margin-stat-pill {
+  background: var(--background-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.margin-stat-label {
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--foreground-muted);
+  font-weight: 600;
+}
+
+.margin-stat-val {
+  font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+  font-weight: 700;
+  color: var(--foreground-strong);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+}
+
+.margin-health-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  line-height: 1.35;
+}
+
+.margin-health-badge.is-healthy {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.margin-health-badge.is-strong {
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--accent-sky);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+}
+
+.margin-health-badge.is-low {
+  background: rgba(239, 68, 68, 0.15);
+  color: #EF4444;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.margin-health-badge.is-warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: #F59E0B;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.margin-bar-wrapper {
+  margin: 14px 0 18px;
+}
+
+.margin-bar-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--foreground-muted);
+  margin-bottom: 6px;
+}
+
+.margin-bar {
+  display: flex;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--background-surface);
+  border: 1px solid var(--border-subtle);
+}
+
+.margin-bar-seg-cogs {
+  background: #EF4444;
+  transition: width 0.25s ease;
+}
+
+.margin-bar-seg-extras {
+  background: #F59E0B;
+  transition: width 0.25s ease;
+}
+
+.margin-bar-seg-profit {
+  background: #10B981;
+  transition: width 0.25s ease;
+}
+
+.margin-bar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--foreground-muted);
+}
+
+.margin-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.margin-legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.margin-breakdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  margin-top: 10px;
+}
+
+.margin-breakdown-table th,
+.margin-breakdown-table td {
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: left;
+}
+
+.margin-breakdown-table th:last-child,
+.margin-breakdown-table td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.margin-breakdown-table tr.total-row td {
+  font-weight: 700;
+  border-top: 1px solid var(--border-default);
+  border-bottom: none;
+  color: var(--foreground-strong);
+  font-size: 14px;
+}
+
+.calc-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.calc-btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--background-surface);
+  border: 1px solid var(--border-default);
+  color: var(--foreground-strong);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.calc-btn-action:hover {
+  background: var(--background-card-hover);
+  border-color: var(--accent-blue);
+  color: var(--accent-sky);
+}
+
+.calc-btn-action svg {
+  flex-shrink: 0;
+}
+
+/* Privacy & Auto-wipe Box */
+.calc-privacy-banner {
+  margin-top: 22px;
+  background: rgba(25, 72, 235, 0.06);
+  border: 1px dashed rgba(25, 72, 235, 0.3);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--foreground-default);
+}
+
+.calc-privacy-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 280px;
+}
+
+.calc-privacy-wipe-btn {
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--foreground-muted);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.calc-privacy-wipe-btn:hover {
+  color: #EF4444;
+  border-color: #EF4444;
+}
+
+/* Margin Checklist */
+.margin-checklist-box {
+  margin-top: 32px;
+  background: var(--background-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  padding: 22px 24px;
+}
+
+.margin-checklist-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--foreground-strong);
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.margin-checklist-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.margin-checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--foreground-default);
+  cursor: pointer;
+}
+
+.margin-checklist-item input[type="checkbox"] {
+  margin-top: 3px;
+  cursor: pointer;
+  accent-color: var(--accent-blue);
+  width: 16px;
+  height: 16px;
+}
+
+.margin-checklist-item.is-checked span {
+  text-decoration: line-through;
+  color: var(--foreground-subtle);
+}
+
+/* Toast Notification */
+.margin-toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: #10B981;
+  color: #FFFFFF;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  z-index: 99999;
+  transform: translateY(80px);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.margin-toast.is-active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .margin-calc-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+@media (max-width: 640px) {
+  .margin-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .calc-actions-row {
+    flex-direction: column;
+  }
+  .calc-btn-action {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Print Styles for Download Report */
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #111827 !important;
+  }
+  .header, .footer, .preloader, .skip-link, .nav-modal, .calc-actions-row, .calc-privacy-banner, .calc-currency-select, .calc-privacy-wipe-btn, #theme-switch, .blog-breadcrumb {
+    display: none !important;
+  }
+  .page-content, .blog-article-main, main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+  .margin-calc-card {
+    border: 1px solid #E5E7EB !important;
+    background: #FFFFFF !important;
+    box-shadow: none !important;
+    color: #111827 !important;
+    page-break-inside: avoid;
+  }
+  .margin-stat-pill {
+    background: #F9FAFB !important;
+    border: 1px solid #E5E7EB !important;
+    color: #111827 !important;
+  }
+  .margin-stat-val, .result-val, h1, h2, h3 {
+    color: #111827 !important;
+  }
+  .text-danger { color: #DC2626 !important; }
+  .text-warning { color: #D97706 !important; }
+  .text-accent { color: #2563EB !important; }
+  .margin-health-badge {
+    border: 1px solid #9CA3AF !important;
+    color: #111827 !important;
   }
 }

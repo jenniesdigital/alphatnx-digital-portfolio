@@ -66,6 +66,16 @@
       "source": "/website-vs-social-media",
       "destination": "/blog/website-vs-social-media",
       "permanent": true
+    },
+    {
+      "source": "/tools/profit-margin",
+      "destination": "/tool-profit-margin",
+      "permanent": true
+    },
+    {
+      "source": "/profit-margin-calculator",
+      "destination": "/tool-profit-margin",
+      "permanent": true
     }
   ]
 }

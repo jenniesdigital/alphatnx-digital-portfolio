@@ -119,15 +119,291 @@
           Free tools for running a better business.
         </h1>
         <p class="growth-body" data-reveal style="--reveal-delay: 0.1s; margin: 0; max-width: 800px;">
-          Interactive on-site diagnostic calculators to estimate revenue leaks, calculate automation hours saved, and compare payment gateway fee margins. Click any tool below to open its dedicated page.
+          Interactive on-site diagnostic calculators to calculate unit profit margins, estimate mobile speed revenue loss, calculate automation hours saved, and compare payment gateway fee margins. Calculate immediately with zero email gating.
         </p>
       </section>
 
-      <section class="tools-3col-section">
+      <!-- FEATURED INTERACTIVE PROFIT MARGIN CALCULATOR -->
+      <section class="profit-margin-calc-module" id="featured-profit-calc" style="max-width: var(--container-width); margin: 0 auto; padding: 0 var(--space-lg);">
+        <div class="margin-calc-card">
+
+          <!-- Top Controls Bar -->
+          <div class="margin-calc-header-controls">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="tool-preview-badge" style="margin: 0;">FEATURED TOOL</span>
+              <label for="margin-curr-select-tools" style="font-size: 13px; font-weight: 600; color: var(--foreground-muted);">Currency:</label>
+              <select id="margin-curr-select-tools" class="calc-currency margin-currency-select" aria-label="Currency Selector">
+                <option value="₦" selected>₦ Nigerian Naira (NGN)</option>
+                <option value="$">$ US Dollar (USD)</option>
+                <option value="£">£ British Pound (GBP)</option>
+                <option value="€">€ Euro (EUR)</option>
+              </select>
+            </div>
+
+            <div style="font-size: 12.5px; color: var(--foreground-muted); display: flex; align-items: center; gap: 6px;">
+              <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>
+              <span>Live instant calculation · Zero email gating</span>
+            </div>
+          </div>
+
+          <!-- Inputs & Results Grid -->
+          <div class="margin-calc-grid">
+            
+            <!-- Left Column: Inputs -->
+            <div class="calc-inputs">
+              <div class="calc-group">
+                <label for="pm-product-name-tools" class="form-label">Product / SKU Name (Optional)</label>
+                <input type="text" id="pm-product-name-tools" class="calc-product-name form-input" placeholder="e.g. Designer Perfume 100ml / Sneakers" value="Sample Product">
+              </div>
+
+              <div class="form-input-row">
+                <div class="calc-group">
+                  <label for="pm-price-tools" class="form-label">Selling Price Per Unit *</label>
+                  <input type="number" id="pm-price-tools" class="calc-price form-input" value="25000" min="0" step="500" placeholder="25000" required>
+                </div>
+
+                <div class="calc-group">
+                  <label for="pm-cogs-tools" class="form-label">Product Cost (COGS) *</label>
+                  <input type="number" id="pm-cogs-tools" class="calc-cogs form-input" value="14000" min="0" step="500" placeholder="14000" required>
+                </div>
+              </div>
+
+              <!-- Direct Cost Breakdown -->
+              <div style="border-top: 1px solid var(--border-subtle); padding-top: 14px; margin-top: 6px;">
+                <span style="font-size: 13px; font-weight: 600; color: var(--foreground-strong); display: block; margin-bottom: 10px;">
+                  Additional Direct Unit Costs (Fulfillment & Transaction Fees)
+                </span>
+
+                <div class="form-input-row">
+                  <div class="calc-group">
+                    <label for="pm-shipping-tools" class="form-label">Packaging & Waybill / Shipping</label>
+                    <input type="number" id="pm-shipping-tools" class="calc-shipping form-input" value="2000" min="0" step="200" placeholder="2000">
+                  </div>
+
+                  <div class="calc-group">
+                    <label for="pm-fee-tools" class="form-label">Payment Gateway Fee (Paystack/Card)</label>
+                    <input type="number" id="pm-fee-tools" class="calc-fee form-input" value="375" min="0" step="25" placeholder="375">
+                  </div>
+                </div>
+
+                <div class="calc-group" style="margin-top: 12px;">
+                  <label for="pm-marketing-tools" class="form-label">Marketing / Ad Spend Per Unit (CAC Estimate)</label>
+                  <input type="number" id="pm-marketing-tools" class="calc-marketing form-input" value="1500" min="0" step="250" placeholder="1500">
+                </div>
+              </div>
+
+              <!-- Monthly Sales Volume Slider -->
+              <div class="calc-group" style="border-top: 1px solid var(--border-subtle); padding-top: 14px; margin-top: 6px;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                  <label for="pm-volume-tools" class="form-label">Estimated Monthly Sales Volume</label>
+                  <span class="calc-volume-display" style="font-size: 13px; font-weight: 700; color: var(--accent-sky);">50 units</span>
+                </div>
+                <input type="range" id="pm-volume-tools" class="calc-volume-units calc-range" min="1" max="500" step="1" value="50">
+              </div>
+
+            </div>
+
+            <!-- Right Column: Instant Outputs & Visuals -->
+            <div class="calc-results-box" style="padding: 24px; border-radius: 18px;">
+              
+              <!-- 3 Key Metric Cards -->
+              <div class="margin-stats-grid">
+                <div class="margin-stat-pill">
+                  <span class="margin-stat-label">Profit Per Unit</span>
+                  <span class="res-profit-val margin-stat-val text-accent">₦7,125</span>
+                </div>
+                <div class="margin-stat-pill">
+                  <span class="margin-stat-label">Gross Margin</span>
+                  <span class="res-margin-val margin-stat-val text-accent">28.5%</span>
+                </div>
+                <div class="margin-stat-pill">
+                  <span class="margin-stat-label">Markup</span>
+                  <span class="res-markup-val margin-stat-val">39.9%</span>
+                </div>
+              </div>
+
+              <!-- Health Status Badge -->
+              <div class="res-health-badge margin-health-badge is-healthy">
+                <span>✓ Healthy Retail Margin (28.5%) — Sustainable for e-commerce</span>
+              </div>
+              <p class="res-health-desc result-note" style="margin-bottom: 12px;">
+                A 15%–35% margin is a proven, healthy benchmark for high-velocity physical retail, groceries, and fast-moving consumer goods.
+              </p>
+
+              <!-- Proportional Visual Bar -->
+              <div class="margin-bar-wrapper">
+                <div class="margin-bar-label-row">
+                  <span>Unit Cost Breakdown Ratio</span>
+                  <span>100% of Selling Price</span>
+                </div>
+                <div class="margin-bar">
+                  <div class="margin-bar-seg-cogs" style="width: 56%;" title="Product Cost (COGS)"></div>
+                  <div class="margin-bar-seg-extras" style="width: 15.5%;" title="Fulfillment & Fees"></div>
+                  <div class="margin-bar-seg-profit" style="width: 28.5%;" title="Gross Profit"></div>
+                </div>
+                <div class="margin-bar-legend">
+                  <div class="margin-legend-item">
+                    <span class="margin-legend-dot" style="background: #EF4444;"></span>
+                    <span>Product Cost</span>
+                  </div>
+                  <div class="margin-legend-item">
+                    <span class="margin-legend-dot" style="background: #F59E0B;"></span>
+                    <span>Shipping, Fees & Ads</span>
+                  </div>
+                  <div class="margin-legend-item">
+                    <span class="margin-legend-dot" style="background: #10B981;"></span>
+                    <span>Gross Profit</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Detailed Financial Breakdown Table -->
+              <table class="margin-breakdown-table" aria-label="Financial Breakdown per unit">
+                <tbody>
+                  <tr>
+                    <td>Selling Price</td>
+                    <td class="res-tbl-price">₦25,000</td>
+                  </tr>
+                  <tr>
+                    <td>Direct Product Cost (COGS)</td>
+                    <td class="res-tbl-cogs" style="color: #EF4444;">-₦14,000</td>
+                  </tr>
+                  <tr>
+                    <td>Shipping, Gateway Fee & Ad Cost</td>
+                    <td class="res-tbl-extras" style="color: #F59E0B;">-₦3,875</td>
+                  </tr>
+                  <tr>
+                    <td>Total Direct Cost Per Unit</td>
+                    <td class="res-tbl-total-cost">-₦17,875</td>
+                  </tr>
+                  <tr class="total-row">
+                    <td>Net Gross Profit Per Unit</td>
+                    <td class="res-tbl-gross-profit text-accent">₦7,125</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Monthly Projection -->
+              <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--border-subtle); display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div>
+                  <span class="result-lbl">Monthly Projected Revenue</span>
+                  <span class="res-proj-rev result-val" style="display: block; font-size: 16px; margin-top: 4px;">₦1,250,000</span>
+                </div>
+                <div>
+                  <span class="result-lbl">Monthly Gross Profit</span>
+                  <span class="res-proj-profit result-val text-accent" style="display: block; font-size: 16px; margin-top: 4px;">₦356,250</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Actions Suite: Share, Download, Copy, Wipe -->
+          <div class="calc-actions-row">
+            <button type="button" class="btn-copy-calc calc-btn-action" title="Copy clean formatted report to clipboard">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy Results Summary</span>
+            </button>
+
+            <button type="button" class="btn-share-calc calc-btn-action" title="Generate and copy pre-filled link to this calculation">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+              <span>Share Calculation Link</span>
+            </button>
+
+            <button type="button" class="btn-download-calc calc-btn-action" title="Download or print a clean financial report sheet">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Download / Print Report</span>
+            </button>
+
+            <a href="/tool-profit-margin" class="calc-btn-action" style="margin-left: auto;" title="Open dedicated standalone calculator page">
+              <span>Open Dedicated Page →</span>
+            </a>
+          </div>
+
+          <!-- Privacy Guarantee & 30-Minute Auto-Wipe Banner -->
+          <div class="calc-privacy-banner">
+            <div class="calc-privacy-info">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-sky)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span>
+                <strong>Confidential & Private:</strong> We do not capture or save your figures on our servers. Active browser session data will automatically wipe from system memory in: <strong class="session-timer-display" style="color: var(--accent-sky);">30:00</strong>.
+              </span>
+            </div>
+            <button type="button" class="btn-wipe-data calc-privacy-wipe-btn" title="Purge all active calculation inputs immediately">
+              Wipe Data Now
+            </button>
+          </div>
+
+          <!-- Interactive Pricing Checklist -->
+          <div class="margin-checklist-box">
+            <div class="margin-checklist-title">
+              <span>Pricing & Margin Protection Checklist for Nigerian Businesses</span>
+              <button type="button" class="btn-save-checklist calc-btn-action" style="padding: 6px 12px; font-size: 12px;">
+                Save / Copy Checklist
+              </button>
+            </div>
+            <ul class="margin-checklist-list">
+              <li class="margin-checklist-item">
+                <input type="checkbox" id="pm-chk-tools-1">
+                <span><strong>Buffer For Failed Deliveries & Returns (RTO):</strong> In Nigeria, return and exchange rates average 5%–12%. Ensure gross profit per delivered unit covers unrecoverable waybill dispatch fees.</span>
+              </li>
+              <li class="margin-checklist-item">
+                <input type="checkbox" id="pm-chk-tools-2">
+                <span><strong>Account For Payment Processor Fees:</strong> Factor in the 1.5% (+ ₦100) transaction fee charged by Paystack, Moniepoint, or card switches before setting retail prices.</span>
+              </li>
+              <li class="margin-checklist-item">
+                <input type="checkbox" id="pm-chk-tools-3">
+                <span><strong>Use Replacement Cost When Restocking:</strong> If your inventory is imported or pegged to foreign exchange, price based on what it will cost to restock tomorrow, not what you paid last month.</span>
+              </li>
+              <li class="margin-checklist-item">
+                <input type="checkbox" id="pm-chk-tools-4">
+                <span><strong>Ensure Margin Exceeds Customer Acquisition Cost (CAC):</strong> Your profit per unit must comfortably absorb the Instagram, TikTok, or Google ad spend required to win that customer.</span>
+              </li>
+              <li class="margin-checklist-item">
+                <input type="checkbox" id="pm-chk-tools-5">
+                <span><strong>Bundle Products to Increase Basket Size:</strong> Combine lower-margin essential items with high-margin accessories to raise overall order margin without increasing delivery friction.</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="tools-3col-section" style="margin-top: var(--space-4xl);">
+        <div style="max-width: var(--container-width); margin: 0 auto 24px; padding: 0 var(--space-lg);">
+          <span class="sol-detail-tag">EXPLORE ALL DIAGNOSTICS</span>
+          <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin: 6px 0 0; color: var(--foreground-strong);">Browse Dedicated Business Tools</h2>
+        </div>
+
         <div class="tools-3col-grid">
           
-          <!-- Tool Card 1 -->
-          <a href="/tool-speed-revenue" class="tool-preview-card" data-reveal style="text-decoration: none; color: inherit;" aria-label="Open Speed & Lost Revenue Estimator">
+          <!-- Tool Card 1: Profit Margin & Markup Calculator -->
+          <a href="/tool-profit-margin" class="tool-preview-card" data-reveal style="text-decoration: none; color: inherit;" aria-label="Open Profit Margin & Markup Calculator">
+            <div class="tool-preview-art">
+              <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="120" rx="14" fill="var(--background-surface)"/>
+                <rect x="40" y="32" width="120" height="56" rx="8" stroke="var(--accent-sky)" stroke-width="2"/>
+                <line x1="40" y1="48" x2="160" y2="48" stroke="var(--border-default)" stroke-width="1.5"/>
+                <rect x="52" y="60" width="22" height="16" rx="3" fill="var(--accent-blue)"/>
+                <rect x="80" y="60" width="22" height="16" rx="3" fill="rgba(16, 185, 129, 0.35)"/>
+                <rect x="108" y="60" width="40" height="16" rx="3" fill="var(--border-subtle)"/>
+                <circle cx="145" cy="40" r="3" fill="#10B981"/>
+              </svg>
+            </div>
+            <div class="tool-preview-content">
+              <span class="tool-preview-badge">CALCULATOR</span>
+              <h2 class="tool-preview-title">Profit Margin & Markup Calculator</h2>
+              <p class="tool-preview-desc">
+                Calculate profit per unit, gross margin percentage, markup, and cost breakdowns immediately with zero email gating.
+              </p>
+            </div>
+            <div class="tool-preview-action">
+              <span class="lib-card-action-link">Open Dedicated Page →</span>
+            </div>
+          </a>
+
+          <!-- Tool Card 2: Speed & Lost Revenue -->
+          <a href="/tool-speed-revenue" class="tool-preview-card" data-reveal style="--reveal-delay: 0.1s; text-decoration: none; color: inherit;" aria-label="Open Speed & Lost Revenue Estimator">
             <div class="tool-preview-art">
               <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="200" height="120" rx="14" fill="var(--background-surface)"/>
@@ -229,6 +505,9 @@
       </section>
     </main>
   </div>
+
+  <!-- Floating Toast Notification -->
+  <div class="margin-toast" id="margin-toast" role="status" aria-live="polite">✓ Copied to clipboard!</div>
 
   <script src="js/main.js"></script>
 </body>

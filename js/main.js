@@ -1488,6 +1488,442 @@
   if (calcVolume) calcVolume.addEventListener("input", updateGatewayCalc);
 
   // ==========================================================================
+  // 4. PROFIT MARGIN CALCULATOR (IMMEDIATE, ZERO-EMAIL, SHAREABLE & 30-MIN WIPE)
+  // ==========================================================================
+  const profitMarginWrappers = document.querySelectorAll(".profit-margin-calc-module");
+
+  profitMarginWrappers.forEach((wrapper) => {
+    const currSelect = wrapper.querySelector(".calc-currency");
+    const nameInput = wrapper.querySelector(".calc-product-name");
+    const priceInput = wrapper.querySelector(".calc-price");
+    const cogsInput = wrapper.querySelector(".calc-cogs");
+    const shipInput = wrapper.querySelector(".calc-shipping");
+    const feeInput = wrapper.querySelector(".calc-fee");
+    const mktInput = wrapper.querySelector(".calc-marketing");
+    const volInput = wrapper.querySelector(".calc-volume-units");
+    const volDisplay = wrapper.querySelector(".calc-volume-display");
+
+    // Output elements
+    const profitVal = wrapper.querySelector(".res-profit-val");
+    const marginVal = wrapper.querySelector(".res-margin-val");
+    const markupVal = wrapper.querySelector(".res-markup-val");
+    const healthBadge = wrapper.querySelector(".res-health-badge");
+    const healthDesc = wrapper.querySelector(".res-health-desc");
+
+    // Visual bar
+    const barCogs = wrapper.querySelector(".margin-bar-seg-cogs");
+    const barExtras = wrapper.querySelector(".margin-bar-seg-extras");
+    const barProfit = wrapper.querySelector(".margin-bar-seg-profit");
+
+    // Table elements
+    const tblPrice = wrapper.querySelector(".res-tbl-price");
+    const tblCogs = wrapper.querySelector(".res-tbl-cogs");
+    const tblExtras = wrapper.querySelector(".res-tbl-extras");
+    const tblTotalCost = wrapper.querySelector(".res-tbl-total-cost");
+    const tblGrossProfit = wrapper.querySelector(".res-tbl-gross-profit");
+
+    // Monthly volume projection
+    const projRev = wrapper.querySelector(".res-proj-rev");
+    const projProfit = wrapper.querySelector(".res-proj-profit");
+
+    // Action buttons
+    const copyBtn = wrapper.querySelector(".btn-copy-calc");
+    const shareBtn = wrapper.querySelector(".btn-share-calc");
+    const downloadBtn = wrapper.querySelector(".btn-download-calc");
+    const wipeBtn = wrapper.querySelector(".btn-wipe-data");
+    const toast = document.querySelector(".margin-toast") || wrapper.querySelector(".margin-toast");
+    const timerDisplay = wrapper.querySelector(".session-timer-display");
+
+    const STORAGE_KEY = "alphatnx_margin_session";
+    const SESSION_DURATION = 30 * 60 * 1000; // 30 minutes in ms
+
+    const showToast = (msg) => {
+      const targetToast = document.querySelector(".margin-toast") || toast;
+      if (!targetToast) return;
+      targetToast.textContent = msg;
+      targetToast.classList.add("is-active");
+      setTimeout(() => {
+        targetToast.classList.remove("is-active");
+      }, 3000);
+    };
+
+    const getCurrencySymbol = () => {
+      return currSelect ? currSelect.value : "₦";
+    };
+
+    const formatCurrency = (val, symbol) => {
+      const sym = symbol !== undefined ? symbol : getCurrencySymbol();
+      const num = Math.round(val);
+      const isNegative = num < 0;
+      const formatted = Math.abs(num).toLocaleString();
+      return isNegative ? `-${sym}${formatted}` : `${sym}${formatted}`;
+    };
+
+    // Calculate in real-time
+    const runCalculation = (saveToStorage = true) => {
+      if (!priceInput || !cogsInput) return;
+
+      const sym = getCurrencySymbol();
+      const price = parseFloat(priceInput.value) || 0;
+      const cogs = parseFloat(cogsInput.value) || 0;
+      const shipping = shipInput ? parseFloat(shipInput.value) || 0 : 0;
+      const fee = feeInput ? parseFloat(feeInput.value) || 0 : 0;
+      const marketing = mktInput ? parseFloat(mktInput.value) || 0 : 0;
+      const volume = volInput ? parseInt(volInput.value, 10) || 1 : 1;
+
+      if (volDisplay) volDisplay.textContent = volume.toLocaleString() + " units";
+
+      const extras = shipping + fee + marketing;
+      const totalCost = cogs + extras;
+      const grossProfit = price - totalCost;
+
+      const grossMarginPct = price > 0 ? (grossProfit / price) * 100 : 0;
+      const markupPct = totalCost > 0 ? (grossProfit / totalCost) * 100 : 0;
+
+      // Update primary metric pills
+      if (profitVal) {
+        profitVal.textContent = formatCurrency(grossProfit, sym);
+        profitVal.className = "margin-stat-val " + (grossProfit < 0 ? "text-danger" : (grossProfit === 0 ? "" : "text-accent"));
+      }
+      if (marginVal) {
+        marginVal.textContent = (grossMarginPct).toFixed(1) + "%";
+        marginVal.className = "margin-stat-val " + (grossMarginPct < 15 ? "text-danger" : (grossMarginPct < 30 ? "text-warning" : "text-accent"));
+      }
+      if (markupVal) {
+        markupVal.textContent = (markupPct).toFixed(1) + "%";
+      }
+
+      // Update Health Assessment
+      if (healthBadge) {
+        if (price === 0) {
+          healthBadge.className = "margin-health-badge is-warning";
+          healthBadge.innerHTML = "<span>Enter your selling price to calculate margin</span>";
+        } else if (grossProfit < 0) {
+          healthBadge.className = "margin-health-badge is-low";
+          healthBadge.innerHTML = "<span>⚠️ Operating at a Loss (" + grossMarginPct.toFixed(1) + "%)</span>";
+        } else if (grossMarginPct < 15) {
+          healthBadge.className = "margin-health-badge is-low";
+          healthBadge.innerHTML = "<span>⚠️ Thin Margin (" + grossMarginPct.toFixed(1) + "%) — High risk to supply or delivery shocks</span>";
+        } else if (grossMarginPct < 35) {
+          healthBadge.className = "margin-health-badge is-healthy";
+          healthBadge.innerHTML = "<span>✓ Healthy Retail Margin (" + grossMarginPct.toFixed(1) + "%) — Sustainable for e-commerce</span>";
+        } else if (grossMarginPct < 60) {
+          healthBadge.className = "margin-health-badge is-strong";
+          healthBadge.innerHTML = "<span>⚡ Strong Margin (" + grossMarginPct.toFixed(1) + "%) — Excellent headroom for marketing</span>";
+        } else {
+          healthBadge.className = "margin-health-badge is-strong";
+          healthBadge.innerHTML = "<span>💎 Premium Margin (" + grossMarginPct.toFixed(1) + "%) — Exceptional brand pricing power</span>";
+        }
+      }
+
+      if (healthDesc) {
+        if (grossProfit < 0) {
+          healthDesc.textContent = "Your direct cost of goods and delivery exceeds your selling price. Every unit sold loses money. Review supplier prices, renegotiate terms, or raise base prices immediately.";
+        } else if (grossMarginPct < 15) {
+          healthDesc.textContent = "A margin under 15% leaves little buffer for exchange rate volatility, delivery failures, or return costs. Consider product bundles, raising order minimums, or improving supplier deals.";
+        } else if (grossMarginPct < 35) {
+          healthDesc.textContent = "A 15%–35% margin is a proven, healthy benchmark for high-velocity physical retail, groceries, and fast-moving consumer goods. Focus on repeat sales and streamlined operations.";
+        } else if (grossMarginPct < 60) {
+          healthDesc.textContent = "Margins between 35%–60% give your business substantial profit margins to invest aggressively into paid ads, customer acquisition, and professional systems.";
+        } else {
+          healthDesc.textContent = "Margins above 60% indicate superior product differentiation or premium luxury positioning. Maintain brand value and automate fulfillment workflows.";
+        }
+      }
+
+      // Update Visual Bar
+      if (barCogs && barExtras && barProfit) {
+        if (price > 0 && totalCost <= price) {
+          const cogsPct = Math.max(0, (cogs / price) * 100);
+          const extrasPct = Math.max(0, (extras / price) * 100);
+          const profitPct = Math.max(0, grossMarginPct);
+          barCogs.style.width = cogsPct + "%";
+          barExtras.style.width = extrasPct + "%";
+          barProfit.style.width = profitPct + "%";
+        } else if (price > 0) {
+          barCogs.style.width = "75%";
+          barExtras.style.width = "25%";
+          barProfit.style.width = "0%";
+        } else {
+          barCogs.style.width = "50%";
+          barExtras.style.width = "20%";
+          barProfit.style.width = "30%";
+        }
+      }
+
+      // Update Financial Table
+      if (tblPrice) tblPrice.textContent = formatCurrency(price, sym);
+      if (tblCogs) tblCogs.textContent = formatCurrency(cogs, sym);
+      if (tblExtras) tblExtras.textContent = formatCurrency(extras, sym);
+      if (tblTotalCost) tblTotalCost.textContent = formatCurrency(totalCost, sym);
+      if (tblGrossProfit) {
+        tblGrossProfit.textContent = formatCurrency(grossProfit, sym);
+        tblGrossProfit.className = grossProfit < 0 ? "text-danger" : "text-accent";
+      }
+
+      // Update Monthly Projections
+      if (projRev) projRev.textContent = formatCurrency(price * volume, sym);
+      if (projProfit) {
+        projProfit.textContent = formatCurrency(grossProfit * volume, sym);
+        projProfit.className = "result-val " + (grossProfit < 0 ? "text-danger" : "text-accent");
+      }
+
+      // Save to localStorage with 30-minute expiry
+      if (saveToStorage) {
+        const sessionPayload = {
+          expiresAt: Date.now() + SESSION_DURATION,
+          data: {
+            curr: sym,
+            name: nameInput ? nameInput.value : "",
+            price: price,
+            cogs: cogs,
+            ship: shipping,
+            fee: fee,
+            mkt: marketing,
+            vol: volume
+          }
+        };
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(sessionPayload));
+        } catch (e) {}
+      }
+    };
+
+    // Auto-wipe session countdown & cleaner
+    const updateCountdown = () => {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) {
+          if (timerDisplay) timerDisplay.textContent = "30:00";
+          return;
+        }
+        const session = JSON.parse(stored);
+        const remaining = session.expiresAt - Date.now();
+        if (remaining <= 0) {
+          wipeData(false);
+          if (timerDisplay) timerDisplay.textContent = "Wiped";
+          return;
+        }
+        const mins = Math.floor(remaining / 60000);
+        const secs = Math.floor((remaining % 60000) / 1000);
+        if (timerDisplay) {
+          timerDisplay.textContent = `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+        }
+      } catch (e) {}
+    };
+
+    const wipeData = (triggerToast = true) => {
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (e) {}
+      if (priceInput) priceInput.value = "";
+      if (cogsInput) cogsInput.value = "";
+      if (shipInput) shipInput.value = "";
+      if (feeInput) feeInput.value = "";
+      if (mktInput) mktInput.value = "";
+      if (nameInput) nameInput.value = "";
+      if (volInput) volInput.value = "50";
+      runCalculation(false);
+      if (timerDisplay) timerDisplay.textContent = "30:00";
+      if (triggerToast) showToast("✓ Session data wiped from system");
+    };
+
+    // Load from URL query parameters OR storage
+    const loadInitialData = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has("price") || urlParams.has("cogs")) {
+        if (currSelect && urlParams.has("curr")) currSelect.value = urlParams.get("curr");
+        if (nameInput && urlParams.has("name")) nameInput.value = urlParams.get("name");
+        if (priceInput && urlParams.has("price")) priceInput.value = urlParams.get("price");
+        if (cogsInput && urlParams.has("cogs")) cogsInput.value = urlParams.get("cogs");
+        if (shipInput && urlParams.has("ship")) shipInput.value = urlParams.get("ship");
+        if (feeInput && urlParams.has("fee")) feeInput.value = urlParams.get("fee");
+        if (mktInput && urlParams.has("mkt")) mktInput.value = urlParams.get("mkt");
+        if (volInput && urlParams.has("vol")) volInput.value = urlParams.get("vol");
+        runCalculation(true);
+        return;
+      }
+
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          const session = JSON.parse(stored);
+          if (Date.now() < session.expiresAt && session.data) {
+            const d = session.data;
+            if (currSelect && d.curr) currSelect.value = d.curr;
+            if (nameInput && d.name) nameInput.value = d.name;
+            if (priceInput && d.price !== undefined) priceInput.value = d.price;
+            if (cogsInput && d.cogs !== undefined) cogsInput.value = d.cogs;
+            if (shipInput && d.ship !== undefined) shipInput.value = d.ship;
+            if (feeInput && d.fee !== undefined) feeInput.value = d.fee;
+            if (mktInput && d.mkt !== undefined) mktInput.value = d.mkt;
+            if (volInput && d.vol !== undefined) volInput.value = d.vol;
+            runCalculation(false);
+            return;
+          } else {
+            localStorage.removeItem(STORAGE_KEY);
+          }
+        }
+      } catch (e) {}
+
+      // Default calculation if blank
+      runCalculation(false);
+    };
+
+    // Listeners for live typing
+    [priceInput, cogsInput, shipInput, feeInput, mktInput, nameInput].forEach((inp) => {
+      if (inp) {
+        inp.addEventListener("input", () => runCalculation(true));
+      }
+    });
+
+    if (currSelect) {
+      currSelect.addEventListener("change", () => runCalculation(true));
+    }
+
+    if (volInput) {
+      volInput.addEventListener("input", () => runCalculation(true));
+    }
+
+    // Copy Summary Action
+    if (copyBtn) {
+      copyBtn.addEventListener("click", () => {
+        const sym = getCurrencySymbol();
+        const pName = nameInput && nameInput.value.trim() ? nameInput.value.trim() : "Product / SKU";
+        const price = parseFloat(priceInput ? priceInput.value : 0) || 0;
+        const cogs = parseFloat(cogsInput ? cogsInput.value : 0) || 0;
+        const shipping = shipInput ? parseFloat(shipInput.value) || 0 : 0;
+        const fee = feeInput ? parseFloat(feeInput.value) || 0 : 0;
+        const marketing = mktInput ? parseFloat(mktInput.value) || 0 : 0;
+        const volume = volInput ? parseInt(volInput.value, 10) || 1 : 1;
+
+        const totalCost = cogs + shipping + fee + marketing;
+        const profit = price - totalCost;
+        const marginPct = price > 0 ? ((profit / price) * 100).toFixed(1) : "0.0";
+        const markupPct = totalCost > 0 ? ((profit / totalCost) * 100).toFixed(1) : "0.0";
+
+        const text = `===========================================
+AlphaTNX Digital · Profit Margin Calculation
+===========================================
+Product: ${pName}
+Selling Price: ${formatCurrency(price, sym)}
+
+DIRECT COSTS:
+- Product / COGS: ${formatCurrency(cogs, sym)}
+- Shipping & Packaging: ${formatCurrency(shipping, sym)}
+- Gateway & Transaction Fee: ${formatCurrency(fee, sym)}
+- Marketing & Ad CAC: ${formatCurrency(marketing, sym)}
+Total Direct Cost: ${formatCurrency(totalCost, sym)}
+
+RESULTS:
+Gross Profit Per Unit: ${formatCurrency(profit, sym)}
+Gross Margin: ${marginPct}%
+Markup: ${markupPct}%
+
+MONTHLY PROJECTION (${volume} units):
+- Revenue: ${formatCurrency(price * volume, sym)}
+- Gross Profit: ${formatCurrency(profit * volume, sym)}
+
+Calculated with AlphaTNX Free Business Tools:
+https://digital.alphatnx.com/tool-profit-margin
+===========================================`;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            showToast("✓ Results copied to clipboard!");
+          }).catch(() => {
+            showToast("✓ Results copied!");
+          });
+        } else {
+          showToast("✓ Results copied!");
+        }
+      });
+    }
+
+    // Share Link Action
+    if (shareBtn) {
+      shareBtn.addEventListener("click", () => {
+        const params = new URLSearchParams();
+        if (currSelect) params.set("curr", currSelect.value);
+        if (nameInput && nameInput.value) params.set("name", nameInput.value);
+        if (priceInput && priceInput.value) params.set("price", priceInput.value);
+        if (cogsInput && cogsInput.value) params.set("cogs", cogsInput.value);
+        if (shipInput && shipInput.value) params.set("ship", shipInput.value);
+        if (feeInput && feeInput.value) params.set("fee", feeInput.value);
+        if (mktInput && mktInput.value) params.set("mkt", mktInput.value);
+        if (volInput && volInput.value) params.set("vol", volInput.value);
+
+        const shareUrl = `${window.location.origin}/tool-profit-margin?${params.toString()}`;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(shareUrl).then(() => {
+            showToast("✓ Shareable calculation link copied!");
+          });
+        } else {
+          showToast("✓ Link copied!");
+        }
+      });
+    }
+
+    // Download Report / Print
+    if (downloadBtn) {
+      downloadBtn.addEventListener("click", () => {
+        window.print();
+      });
+    }
+
+    // Wipe Data Action
+    if (wipeBtn) {
+      wipeBtn.addEventListener("click", () => {
+        wipeData(true);
+      });
+    }
+
+    // Checkbox checklist persistence
+    const checklistItems = wrapper.querySelectorAll(".margin-checklist-item input[type='checkbox']");
+    checklistItems.forEach((chk, idx) => {
+      const chkKey = `alphatnx_chk_${idx}`;
+      try {
+        if (sessionStorage.getItem(chkKey) === "1") {
+          chk.checked = true;
+          chk.closest(".margin-checklist-item")?.classList.add("is-checked");
+        }
+      } catch (e) {}
+
+      chk.addEventListener("change", () => {
+        const parent = chk.closest(".margin-checklist-item");
+        if (parent) parent.classList.toggle("is-checked", chk.checked);
+        try {
+          sessionStorage.setItem(chkKey, chk.checked ? "1" : "0");
+        } catch (e) {}
+      });
+    });
+
+    // Save Checklist / Export button
+    const saveChecklistBtn = wrapper.querySelector(".btn-save-checklist");
+    if (saveChecklistBtn) {
+      saveChecklistBtn.addEventListener("click", () => {
+        let listText = "AlphaTNX Digital · Pricing & Margin Protection Checklist\n\n";
+        checklistItems.forEach((chk) => {
+          const label = chk.closest(".margin-checklist-item")?.querySelector("span")?.textContent || "";
+          listText += `${chk.checked ? "[x]" : "[ ]"} ${label}\n`;
+        });
+        listText += "\nSaved from: https://digital.alphatnx.com/tool-profit-margin";
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(listText).then(() => {
+            showToast("✓ Checklist copied to clipboard!");
+          });
+        } else {
+          showToast("✓ Checklist saved!");
+        }
+      });
+    }
+
+    // Initialize
+    loadInitialData();
+    setInterval(updateCountdown, 1000);
+  });
+
+  // ==========================================================================
   // NEWSLETTER FORM SUBMISSION
   // ==========================================================================
   const nlForm = document.getElementById("newsletter-form");
