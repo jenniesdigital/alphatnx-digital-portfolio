@@ -1571,11 +1571,50 @@
       const marketing = mktInput ? parseFloat(mktInput.value) || 0 : 0;
       const volume = volInput ? parseInt(volInput.value, 10) || 1 : 1;
 
-      if (volDisplay) volDisplay.textContent = volume.toLocaleString() + " units";
+      if (volDisplay) volDisplay.textContent = volume.toLocaleString() + (volume === 1 ? " unit" : " units");
 
       const extras = shipping + fee + marketing;
       const totalCost = cogs + extras;
       const grossProfit = price - totalCost;
+
+      // Handle zero state cleanly
+      if (price === 0 && totalCost === 0) {
+        if (profitVal) {
+          profitVal.textContent = formatCurrency(0, sym);
+          profitVal.className = "margin-stat-val text-accent";
+        }
+        if (marginVal) {
+          marginVal.textContent = "0.0%";
+          marginVal.className = "margin-stat-val text-accent";
+        }
+        if (markupVal) markupVal.textContent = "0.0%";
+        if (healthBadge) {
+          healthBadge.className = "margin-health-badge is-warning";
+          healthBadge.innerHTML = "<span>Enter selling price and product cost to calculate margin</span>";
+        }
+        if (healthDesc) {
+          healthDesc.textContent = "Enter your selling price and direct product costs above to see your net profit per unit, margin percentage, and markup.";
+        }
+        if (barCogs && barExtras && barProfit) {
+          barCogs.style.width = "0%";
+          barExtras.style.width = "0%";
+          barProfit.style.width = "0%";
+        }
+        if (tblPrice) tblPrice.textContent = formatCurrency(0, sym);
+        if (tblCogs) tblCogs.textContent = formatCurrency(0, sym);
+        if (tblExtras) tblExtras.textContent = formatCurrency(0, sym);
+        if (tblTotalCost) tblTotalCost.textContent = formatCurrency(0, sym);
+        if (tblGrossProfit) {
+          tblGrossProfit.textContent = formatCurrency(0, sym);
+          tblGrossProfit.className = "text-accent";
+        }
+        if (projRev) projRev.textContent = formatCurrency(0, sym);
+        if (projProfit) {
+          projProfit.textContent = formatCurrency(0, sym);
+          projProfit.className = "result-val text-accent";
+        }
+        return;
+      }
 
       const grossMarginPct = price > 0 ? (grossProfit / price) * 100 : 0;
       const markupPct = totalCost > 0 ? (grossProfit / totalCost) * 100 : 0;
@@ -1644,17 +1683,17 @@
           barExtras.style.width = "25%";
           barProfit.style.width = "0%";
         } else {
-          barCogs.style.width = "50%";
-          barExtras.style.width = "20%";
-          barProfit.style.width = "30%";
+          barCogs.style.width = "0%";
+          barExtras.style.width = "0%";
+          barProfit.style.width = "0%";
         }
       }
 
       // Update Financial Table
       if (tblPrice) tblPrice.textContent = formatCurrency(price, sym);
-      if (tblCogs) tblCogs.textContent = formatCurrency(cogs, sym);
-      if (tblExtras) tblExtras.textContent = formatCurrency(extras, sym);
-      if (tblTotalCost) tblTotalCost.textContent = formatCurrency(totalCost, sym);
+      if (tblCogs) tblCogs.textContent = (cogs > 0 ? "-" : "") + formatCurrency(cogs, sym);
+      if (tblExtras) tblExtras.textContent = (extras > 0 ? "-" : "") + formatCurrency(extras, sym);
+      if (tblTotalCost) tblTotalCost.textContent = (totalCost > 0 ? "-" : "") + formatCurrency(totalCost, sym);
       if (tblGrossProfit) {
         tblGrossProfit.textContent = formatCurrency(grossProfit, sym);
         tblGrossProfit.className = grossProfit < 0 ? "text-danger" : "text-accent";
@@ -1668,7 +1707,7 @@
       }
 
       // Save to localStorage with 30-minute expiry
-      if (saveToStorage) {
+      if (saveToStorage && (price > 0 || cogs > 0)) {
         const sessionPayload = {
           expiresAt: Date.now() + SESSION_DURATION,
           data: {
@@ -1721,7 +1760,7 @@
       if (feeInput) feeInput.value = "";
       if (mktInput) mktInput.value = "";
       if (nameInput) nameInput.value = "";
-      if (volInput) volInput.value = "50";
+      if (volInput) volInput.value = "1";
       runCalculation(false);
       if (timerDisplay) timerDisplay.textContent = "30:00";
       if (triggerToast) showToast("✓ Session data wiped from system");
@@ -1751,12 +1790,12 @@
             const d = session.data;
             if (currSelect && d.curr) currSelect.value = d.curr;
             if (nameInput && d.name) nameInput.value = d.name;
-            if (priceInput && d.price !== undefined) priceInput.value = d.price;
-            if (cogsInput && d.cogs !== undefined) cogsInput.value = d.cogs;
-            if (shipInput && d.ship !== undefined) shipInput.value = d.ship;
-            if (feeInput && d.fee !== undefined) feeInput.value = d.fee;
-            if (mktInput && d.mkt !== undefined) mktInput.value = d.mkt;
-            if (volInput && d.vol !== undefined) volInput.value = d.vol;
+            if (priceInput && d.price !== undefined) priceInput.value = d.price ? d.price : "";
+            if (cogsInput && d.cogs !== undefined) cogsInput.value = d.cogs ? d.cogs : "";
+            if (shipInput && d.ship !== undefined) shipInput.value = d.ship ? d.ship : "";
+            if (feeInput && d.fee !== undefined) feeInput.value = d.fee ? d.fee : "";
+            if (mktInput && d.mkt !== undefined) mktInput.value = d.mkt ? d.mkt : "";
+            if (volInput && d.vol !== undefined) volInput.value = d.vol ? d.vol : "1";
             runCalculation(false);
             return;
           } else {
@@ -1765,7 +1804,7 @@
         }
       } catch (e) {}
 
-      // Default calculation if blank
+      // Default calculation: start at zero!
       runCalculation(false);
     };
 
@@ -1863,9 +1902,63 @@ https://digital.alphatnx.com/tool/profit-margin-calculator
       });
     }
 
-    // Download Report / Print
+    // Download / Print Strictly Results
     if (downloadBtn) {
       downloadBtn.addEventListener("click", () => {
+        const sym = getCurrencySymbol();
+        const pName = nameInput && nameInput.value.trim() ? nameInput.value.trim() : "Custom Product";
+        const price = parseFloat(priceInput ? priceInput.value : 0) || 0;
+        const cogs = parseFloat(cogsInput ? cogsInput.value : 0) || 0;
+        const shipping = shipInput ? parseFloat(shipInput.value) || 0 : 0;
+        const fee = feeInput ? parseFloat(feeInput.value) || 0 : 0;
+        const marketing = mktInput ? parseFloat(mktInput.value) || 0 : 0;
+        const volume = volInput ? parseInt(volInput.value, 10) || 1 : 1;
+        const totalCost = cogs + shipping + fee + marketing;
+        const grossProfit = price - totalCost;
+        const grossMarginPct = price > 0 ? (grossProfit / price) * 100 : 0;
+        const markupPct = totalCost > 0 ? (grossProfit / totalCost) * 100 : 0;
+
+        // Populate dedicated print sheet elements
+        const printSheet = document.getElementById("print-results-sheet");
+        if (printSheet) {
+          const elProd = document.getElementById("print-product-name");
+          const elDate = document.getElementById("print-date");
+          const elProfit = document.getElementById("print-profit-val");
+          const elMargin = document.getElementById("print-margin-val");
+          const elMarkup = document.getElementById("print-markup-val");
+          const elHealth = document.getElementById("print-health-status");
+          const elPrice = document.getElementById("print-tbl-price");
+          const elCogs = document.getElementById("print-tbl-cogs");
+          const elExtras = document.getElementById("print-tbl-extras");
+          const elTotalCost = document.getElementById("print-tbl-total-cost");
+          const elGrossProfit = document.getElementById("print-tbl-gross-profit");
+          const elProjRev = document.getElementById("print-proj-rev");
+          const elProjProfit = document.getElementById("print-proj-profit");
+
+          if (elProd) elProd.textContent = "Product: " + pName;
+          if (elDate) {
+            const now = new Date();
+            elDate.textContent = "Date: " + now.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+          }
+          if (elProfit) elProfit.textContent = formatCurrency(grossProfit, sym);
+          if (elMargin) elMargin.textContent = grossMarginPct.toFixed(1) + "%";
+          if (elMarkup) elMarkup.textContent = markupPct.toFixed(1) + "%";
+          if (elHealth) {
+            if (price === 0) elHealth.textContent = "Not calculated (Values at 0)";
+            else if (grossProfit < 0) elHealth.textContent = "Operating at a Loss (" + grossMarginPct.toFixed(1) + "%)";
+            else if (grossMarginPct < 15) elHealth.textContent = "Thin Margin (" + grossMarginPct.toFixed(1) + "%)";
+            else if (grossMarginPct < 35) elHealth.textContent = "Healthy Retail Margin (" + grossMarginPct.toFixed(1) + "%)";
+            else elHealth.textContent = "Strong Margin (" + grossMarginPct.toFixed(1) + "%)";
+          }
+          if (elPrice) elPrice.textContent = formatCurrency(price, sym);
+          if (elCogs) elCogs.textContent = "-" + formatCurrency(cogs, sym);
+          if (elExtras) elExtras.textContent = "-" + formatCurrency(shipping + fee + marketing, sym);
+          if (elTotalCost) elTotalCost.textContent = "-" + formatCurrency(totalCost, sym);
+          if (elGrossProfit) elGrossProfit.textContent = formatCurrency(grossProfit, sym);
+          if (elProjRev) elProjRev.textContent = formatCurrency(price * volume, sym);
+          if (elProjProfit) elProjProfit.textContent = formatCurrency(grossProfit * volume, sym);
+        }
+
         window.print();
       });
     }

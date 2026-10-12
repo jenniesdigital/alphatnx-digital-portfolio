@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="/">
   <title>Profit Margin Calculator · Free Business Tools · AlphaTNX Digital</title>
-  <meta name="description" content="Calculate gross profit per unit, gross margin percentage, and markup immediately. Free, instant results with zero email signup, shareable reports, and 30-minute privacy auto-wipe.">
+  <meta name="description" content="Calculate your true profit per unit, gross margin percentage, and product markup immediately. Built for Nigerian businesses with zero email gating and 30-minute privacy.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Profit Margin Calculator · AlphaTNX Digital">
-  <meta property="og:description" content="Calculate gross profit per unit, gross margin percentage, and markup immediately. Instant results, shareable links, downloadable reports, and zero email gating.">
+  <meta property="og:description" content="Calculate your true profit per unit, gross margin percentage, and markup immediately. Built for Nigerian business owners.">
 
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/04_Favicons_and_App_Icons/favicon-32x32.png">
   <link rel="icon" type="image/png" href="/assets/brand/02_Logo_Marks_Monogram/Transparent_PNG_HighRes/AlphaTNX_Mark_BrandColor_512px.png">
@@ -116,24 +116,28 @@
   <div class="page-content" id="main-content">
     <main class="tool-app-main">
 
-      <!-- Centered Header Section -->
+      <!-- Centered Header Section (Proper navbar clearance) -->
       <div class="tool-hero-center">
-        <span class="sol-detail-tag">FREE BUSINESS TOOL</span>
+        <div class="tool-top-breadcrumb">
+          <a href="/tools" class="tool-breadcrumb-link">Tools</a>
+          <span class="tool-breadcrumb-sep">/</span>
+          <span class="tool-breadcrumb-curr">Profit Margin Calculator</span>
+        </div>
         <h1 class="tool-page-title">Profit Margin Calculator</h1>
         <p class="tool-page-subtitle">
-          Calculate profit per unit, gross margin percentage, and markup immediately. Zero email walls, shareable results, downloadable reports, and automatic 30-minute session privacy.
+          Before you set prices, run ads, or ship orders, know your exact profit per product. Enter what you sell for and what each unit truly costs you—including supply, packaging, delivery dispatch, and payment gateway fees—so you never confuse high sales with actual profit.
         </p>
       </div>
 
-      <!-- WIDE STANDALONE TOOL WORKSPACE -->
+      <!-- FOCUSED TOOL WORKSPACE (920px max-width, elevated shadow) -->
       <div class="tool-workspace-wide">
         <section class="profit-margin-calc-module" id="margin-tool">
           <div class="margin-calc-card">
 
-            <!-- Top Controls Bar -->
-            <div class="margin-calc-header-controls">
+            <!-- Top Controls Bar (Clean currency toggle only) -->
+            <div class="margin-calc-header-controls" style="margin-bottom: 18px; padding-bottom: 14px;">
               <div style="display: flex; align-items: center; gap: 10px;">
-                <label for="margin-curr-select" style="font-size: 13px; font-weight: 600; color: var(--foreground-muted);">Currency:</label>
+                <label for="margin-curr-select" style="font-size: 13.5px; font-weight: 600; color: var(--foreground-muted);">Currency:</label>
                 <select id="margin-curr-select" class="calc-currency margin-currency-select" aria-label="Currency Selector">
                   <option value="₦" selected>₦ Nigerian Naira (NGN)</option>
                   <option value="$">$ US Dollar (USD)</option>
@@ -141,37 +145,32 @@
                   <option value="€">€ Euro (EUR)</option>
                 </select>
               </div>
-
-              <div style="font-size: 12.5px; color: var(--foreground-muted); display: flex; align-items: center; gap: 6px;">
-                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>
-                <span>Immediate live calculation · No email required</span>
-              </div>
             </div>
 
             <!-- Inputs & Results Grid -->
             <div class="margin-calc-grid">
               
-              <!-- Left Column: Inputs -->
+              <!-- Left Column: Inputs (Starts at zero) -->
               <div class="calc-inputs">
                 <div class="calc-group">
                   <label for="pm-product-name" class="form-label">Product / SKU Name (Optional)</label>
-                  <input type="text" id="pm-product-name" class="calc-product-name form-input" placeholder="e.g. Designer Perfume 100ml / Sneakers" value="Sample Product">
+                  <input type="text" id="pm-product-name" class="calc-product-name form-input" placeholder="e.g. Designer Perfume 100ml / Sneakers" value="">
                 </div>
 
                 <div class="form-input-row">
                   <div class="calc-group">
                     <label for="pm-price" class="form-label">Selling Price Per Unit *</label>
-                    <input type="number" id="pm-price" class="calc-price form-input" value="25000" min="0" step="500" placeholder="25000" required>
+                    <input type="number" id="pm-price" class="calc-price form-input" value="" min="0" step="100" placeholder="0" required>
                   </div>
 
                   <div class="calc-group">
                     <label for="pm-cogs" class="form-label">Product Cost (COGS) *</label>
-                    <input type="number" id="pm-cogs" class="calc-cogs form-input" value="14000" min="0" step="500" placeholder="14000" required>
+                    <input type="number" id="pm-cogs" class="calc-cogs form-input" value="" min="0" step="100" placeholder="0" required>
                   </div>
                 </div>
 
                 <!-- Direct Cost Breakdown -->
-                <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px; margin-top: 8px;">
+                <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px; margin-top: 6px;">
                   <span style="font-size: 13px; font-weight: 600; color: var(--foreground-strong); display: block; margin-bottom: 12px;">
                     Additional Direct Unit Costs (Fulfillment & Sales Fees)
                   </span>
@@ -179,28 +178,28 @@
                   <div class="form-input-row">
                     <div class="calc-group">
                       <label for="pm-shipping" class="form-label">Packaging & Waybill / Shipping</label>
-                      <input type="number" id="pm-shipping" class="calc-shipping form-input" value="2000" min="0" step="200" placeholder="2000">
+                      <input type="number" id="pm-shipping" class="calc-shipping form-input" value="" min="0" step="100" placeholder="0">
                     </div>
 
                     <div class="calc-group">
                       <label for="pm-fee" class="form-label">Payment Gateway Fee (Paystack/Card)</label>
-                      <input type="number" id="pm-fee" class="calc-fee form-input" value="375" min="0" step="25" placeholder="375">
+                      <input type="number" id="pm-fee" class="calc-fee form-input" value="" min="0" step="25" placeholder="0">
                     </div>
                   </div>
 
                   <div class="calc-group" style="margin-top: 12px;">
                     <label for="pm-marketing" class="form-label">Marketing / Ad Spend Per Unit (CAC Estimate)</label>
-                    <input type="number" id="pm-marketing" class="calc-marketing form-input" value="1500" min="0" step="250" placeholder="1500">
+                    <input type="number" id="pm-marketing" class="calc-marketing form-input" value="" min="0" step="100" placeholder="0">
                   </div>
                 </div>
 
                 <!-- Monthly Sales Volume Slider -->
-                <div class="calc-group" style="border-top: 1px solid var(--border-subtle); padding-top: 16px; margin-top: 8px;">
+                <div class="calc-group" style="border-top: 1px solid var(--border-subtle); padding-top: 16px; margin-top: 6px;">
                   <div style="display: flex; justify-content: space-between; align-items: baseline;">
                     <label for="pm-volume" class="form-label">Estimated Monthly Sales Volume</label>
-                    <span class="calc-volume-display" style="font-size: 13.5px; font-weight: 700; color: var(--accent-sky);">50 units</span>
+                    <span class="calc-volume-display" style="font-size: 13.5px; font-weight: 700; color: var(--accent-sky);">1 unit</span>
                   </div>
-                  <input type="range" id="pm-volume" class="calc-volume-units calc-range" min="1" max="500" step="1" value="50">
+                  <input type="range" id="pm-volume" class="calc-volume-units calc-range" min="1" max="500" step="1" value="1">
                 </div>
 
               </div>
@@ -212,24 +211,24 @@
                 <div class="margin-stats-grid">
                   <div class="margin-stat-pill">
                     <span class="margin-stat-label">Profit Per Unit</span>
-                    <span class="res-profit-val margin-stat-val text-accent">₦7,125</span>
+                    <span class="res-profit-val margin-stat-val text-accent">₦0</span>
                   </div>
                   <div class="margin-stat-pill">
                     <span class="margin-stat-label">Gross Margin</span>
-                    <span class="res-margin-val margin-stat-val text-accent">28.5%</span>
+                    <span class="res-margin-val margin-stat-val text-accent">0.0%</span>
                   </div>
                   <div class="margin-stat-pill">
                     <span class="margin-stat-label">Markup</span>
-                    <span class="res-markup-val margin-stat-val">39.9%</span>
+                    <span class="res-markup-val margin-stat-val">0.0%</span>
                   </div>
                 </div>
 
                 <!-- Health Status Badge -->
-                <div class="res-health-badge margin-health-badge is-healthy">
-                  <span>✓ Healthy Retail Margin (28.5%) — Sustainable for e-commerce</span>
+                <div class="res-health-badge margin-health-badge is-warning">
+                  <span>Enter selling price and product cost to calculate margin</span>
                 </div>
                 <p class="res-health-desc result-note" style="margin-bottom: 12px;">
-                  A 15%–35% margin is a proven, healthy benchmark for high-velocity physical retail, groceries, and fast-moving consumer goods. Focus on repeat sales and streamlined operations.
+                  Enter your selling price and direct product costs above to see your net profit per unit, margin percentage, and markup.
                 </p>
 
                 <!-- Proportional Visual Bar -->
@@ -239,9 +238,9 @@
                     <span>100% of Selling Price</span>
                   </div>
                   <div class="margin-bar">
-                    <div class="margin-bar-seg-cogs" style="width: 56%;" title="Product Cost (COGS)"></div>
-                    <div class="margin-bar-seg-extras" style="width: 15.5%;" title="Fulfillment & Fees"></div>
-                    <div class="margin-bar-seg-profit" style="width: 28.5%;" title="Gross Profit"></div>
+                    <div class="margin-bar-seg-cogs" style="width: 0%;" title="Product Cost (COGS)"></div>
+                    <div class="margin-bar-seg-extras" style="width: 0%;" title="Fulfillment & Fees"></div>
+                    <div class="margin-bar-seg-profit" style="width: 0%;" title="Gross Profit"></div>
                   </div>
                   <div class="margin-bar-legend">
                     <div class="margin-legend-item">
@@ -264,23 +263,23 @@
                   <tbody>
                     <tr>
                       <td>Selling Price</td>
-                      <td class="res-tbl-price">₦25,000</td>
+                      <td class="res-tbl-price">₦0</td>
                     </tr>
                     <tr>
                       <td>Direct Product Cost (COGS)</td>
-                      <td class="res-tbl-cogs" style="color: #EF4444;">-₦14,000</td>
+                      <td class="res-tbl-cogs" style="color: #EF4444;">-₦0</td>
                     </tr>
                     <tr>
                       <td>Shipping, Gateway Fee & Ad Cost</td>
-                      <td class="res-tbl-extras" style="color: #F59E0B;">-₦3,875</td>
+                      <td class="res-tbl-extras" style="color: #F59E0B;">-₦0</td>
                     </tr>
                     <tr>
                       <td>Total Direct Cost Per Unit</td>
-                      <td class="res-tbl-total-cost">-₦17,875</td>
+                      <td class="res-tbl-total-cost">-₦0</td>
                     </tr>
                     <tr class="total-row">
                       <td>Net Gross Profit Per Unit</td>
-                      <td class="res-tbl-gross-profit text-accent">₦7,125</td>
+                      <td class="res-tbl-gross-profit text-accent">₦0</td>
                     </tr>
                   </tbody>
                 </table>
@@ -289,11 +288,11 @@
                 <div style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--border-subtle); display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                   <div>
                     <span class="result-lbl">Monthly Projected Revenue</span>
-                    <span class="res-proj-rev result-val" style="display: block; font-size: 16px; margin-top: 4px;">₦1,250,000</span>
+                    <span class="res-proj-rev result-val" style="display: block; font-size: 16px; margin-top: 4px;">₦0</span>
                   </div>
                   <div>
                     <span class="result-lbl">Monthly Gross Profit</span>
-                    <span class="res-proj-profit result-val text-accent" style="display: block; font-size: 16px; margin-top: 4px;">₦356,250</span>
+                    <span class="res-proj-profit result-val text-accent" style="display: block; font-size: 16px; margin-top: 4px;">₦0</span>
                   </div>
                 </div>
 
@@ -301,7 +300,7 @@
 
             </div>
 
-            <!-- Actions Suite: Share, Download, Copy -->
+            <!-- Actions Suite: Share, Download Results, Copy -->
             <div class="calc-actions-row">
               <button type="button" class="btn-copy-calc calc-btn-action" title="Copy clean formatted report to clipboard">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
@@ -313,9 +312,9 @@
                 <span>Share Calculation Link</span>
               </button>
 
-              <button type="button" class="btn-download-calc calc-btn-action" title="Download or print a clean financial report sheet">
+              <button type="button" class="btn-download-calc calc-btn-action" title="Download or print strictly your calculation results sheet">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                <span>Download / Print Report</span>
+                <span>Download / Print Results</span>
               </button>
             </div>
 
@@ -336,68 +335,159 @@
         </section>
       </div>
 
-      <!-- READABLE EDUCATIONAL EXPLANATION AT BOTTOM -->
+      <!-- EXCLUSIVE PRINT/DOWNLOAD RESULTS SHEET (Strictly results only, no page articles) -->
+      <div id="print-results-sheet" class="print-results-sheet" aria-hidden="true">
+        <div style="border-bottom: 2px solid #0F172A; padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: baseline;">
+          <div>
+            <h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #0F172A;">AlphaTNX Digital · Unit Profit Margin Report</h2>
+            <p id="print-product-name" style="margin: 4px 0 0; font-size: 13.5px; color: #475569; font-weight: 600;">Product: —</p>
+          </div>
+          <div style="text-align: right; font-size: 12px; color: #64748B;">
+            <span id="print-date">Date: —</span>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px;">
+          <div style="border: 1px solid #CBD5E1; border-radius: 8px; padding: 12px; background: #F8FAFC;">
+            <span style="font-size: 11px; text-transform: uppercase; color: #64748B; font-weight: 600; display: block;">Profit Per Unit</span>
+            <span id="print-profit-val" style="font-size: 18px; font-weight: 700; color: #0F172A; display: block; margin-top: 4px;">₦0</span>
+          </div>
+          <div style="border: 1px solid #CBD5E1; border-radius: 8px; padding: 12px; background: #F8FAFC;">
+            <span style="font-size: 11px; text-transform: uppercase; color: #64748B; font-weight: 600; display: block;">Gross Margin</span>
+            <span id="print-margin-val" style="font-size: 18px; font-weight: 700; color: #0F172A; display: block; margin-top: 4px;">0.0%</span>
+          </div>
+          <div style="border: 1px solid #CBD5E1; border-radius: 8px; padding: 12px; background: #F8FAFC;">
+            <span style="font-size: 11px; text-transform: uppercase; color: #64748B; font-weight: 600; display: block;">Markup</span>
+            <span id="print-markup-val" style="font-size: 18px; font-weight: 700; color: #0F172A; display: block; margin-top: 4px;">0.0%</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <span style="font-size: 13px; font-weight: 600; color: #0F172A;">Margin Health Assessment: </span>
+          <span id="print-health-status" style="font-size: 13px; font-weight: 700;">—</span>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 20px;">
+          <thead>
+            <tr style="border-bottom: 1px solid #CBD5E1; text-align: left;">
+              <th style="padding: 8px 4px; color: #475569;">Financial Metric</th>
+              <th style="padding: 8px 4px; text-align: right; color: #475569;">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid #E2E8F0;">
+              <td style="padding: 8px 4px;">Selling Price</td>
+              <td id="print-tbl-price" style="padding: 8px 4px; text-align: right; font-weight: 600;">₦0</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #E2E8F0;">
+              <td style="padding: 8px 4px;">Direct Product Cost (COGS)</td>
+              <td id="print-tbl-cogs" style="padding: 8px 4px; text-align: right;">-₦0</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #E2E8F0;">
+              <td style="padding: 8px 4px;">Shipping, Gateway Fee & Ad Cost</td>
+              <td id="print-tbl-extras" style="padding: 8px 4px; text-align: right;">-₦0</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #CBD5E1;">
+              <td style="padding: 8px 4px; font-weight: 600;">Total Direct Unit Cost</td>
+              <td id="print-tbl-total-cost" style="padding: 8px 4px; text-align: right; font-weight: 600;">-₦0</td>
+            </tr>
+            <tr style="border-bottom: 2px solid #0F172A;">
+              <td style="padding: 10px 4px; font-size: 14px; font-weight: 700;">Net Gross Profit Per Unit</td>
+              <td id="print-tbl-gross-profit" style="padding: 10px 4px; text-align: right; font-size: 14px; font-weight: 700; color: #0F172A;">₦0</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="border-top: 1px dashed #CBD5E1; padding-top: 12px; display: flex; justify-content: space-between; font-size: 13px;">
+          <div>
+            <span style="color: #64748B;">Monthly Projected Revenue: </span>
+            <strong id="print-proj-rev">₦0</strong>
+          </div>
+          <div>
+            <span style="color: #64748B;">Monthly Gross Profit: </span>
+            <strong id="print-proj-profit">₦0</strong>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; padding-top: 12px; border-top: 1px solid #E2E8F0; text-align: center; font-size: 11px; color: #94A3B8;">
+          AlphaTNX Digital · Digital Infrastructure for Nigerian Businesses · digital.alphatnx.com/tool/profit-margin-calculator
+        </div>
+      </div>
+
+      <!-- READABLE EDUCATIONAL EXPLANATION AT BOTTOM (Starts with 'What is a profit margin') -->
       <div class="tool-reading-content">
         <article class="blog-body">
-          <h2>The Difference Between Gross Margin and Markup</h2>
+          <h2>What is a Profit Margin?</h2>
           <p>
-            One of the most frequent pricing mistakes made by growing retail and e-commerce businesses is confusing <strong>Markup</strong> with <strong>Gross Margin</strong>. While both express profitability, they use completely different denominators:
+            In plain terms, your <strong>profit margin</strong> is the portion of every Naira your customer pays you that actually remains as profit after all direct expenses are settled.
+          </p>
+          <p>
+            For example, if you sell an item for <strong>₦25,000</strong>, but you spent <strong>₦14,000</strong> to buy it from your supplier, <strong>₦2,000</strong> on packaging and dispatch waybill, and <strong>₦375</strong> on payment gateway charges, your total direct cost is <strong>₦16,375</strong>.
+          </p>
+          <p>
+            Your actual gross profit is <strong>₦8,625</strong> per unit. That gives you a <strong>gross profit margin of 34.5%</strong> (₦8,625 ÷ ₦25,000 × 100). That 34.5% is the money that actually sustains your business, pays your rent, finances salaries, and covers emergency restocking.
+          </p>
+
+          <h2>Why Sales Turnover Can Lie to You</h2>
+          <p>
+            It is very easy to make ₦5 million in gross sales in Nigeria and still end up broke at the end of the month. When business owners focus only on top-line revenue without watching unit margins, hidden expenses bleed them dry:
+          </p>
+          <ul>
+            <li><strong>Delivery Dispatch & Waybill Cancellations:</strong> If a dispatch rider goes to deliver an order and the customer fails to pick up or cancels on delivery, you absorb two-way transit fees out of your own pocket.</li>
+            <li><strong>Payment Gateway & Banking Deductions:</strong> Transaction fees (such as Paystack, Flutterwave, or bank transfer switches) take 1.5% or more off every transaction before it lands in your account.</li>
+            <li><strong>Foreign Exchange Replacement Costs:</strong> Selling imported inventory at old pricing when replacing the same stock tomorrow will cost 25% more due to currency shifts creates a phantom profit trap.</li>
+            <li><strong>Customer Acquisition Ad Spend (CAC):</strong> If you spend ₦4,000 on Instagram and TikTok ads to make a sale that only nets you ₦3,000 in gross margin, you are actively paying money to lose customers.</li>
+          </ul>
+
+          <h2>Gross Margin vs. Markup: Understanding the Difference</h2>
+          <p>
+            One of the most expensive mistakes Nigerian retailers make is treating markup as profit margin. While both measure profit, they divide by completely different numbers:
           </p>
 
           <div class="blog-callout-box">
             <p>
-              <strong>Gross Margin:</strong> The percentage of selling price that remains as profit after subtracting the cost to deliver the product.<br>
-              <code>Gross Margin = (Selling Price - Cost) ÷ Selling Price × 100</code>
+              <strong>Gross Profit Margin:</strong> The percentage of the <em>selling price</em> that is pure profit.<br>
+              <code>Gross Margin = (Selling Price - Total Cost) ÷ Selling Price × 100</code>
             </p>
             <p style="margin-top: 10px;">
-              <strong>Markup:</strong> The percentage added onto the cost price to arrive at the selling price.<br>
-              <code>Markup = (Selling Price - Cost) ÷ Cost × 100</code>
+              <strong>Markup:</strong> The percentage added onto your <em>cost price</em> to set the selling price.<br>
+              <code>Markup = (Selling Price - Total Cost) ÷ Total Cost × 100</code>
             </p>
           </div>
 
           <p>
-            If you buy an item for ₦10,000 and sell it for ₦15,000, your markup is <strong>50%</strong> (₦5,000 ÷ ₦10,000). But your gross margin is only <strong>33.3%</strong> (₦5,000 ÷ ₦15,000). If you offer a 40% discount during a sale because you thought your markup was 50%, you will actually sell at a net cash loss.
+            If you buy a product for ₦10,000 and sell it for ₦15,000, your markup is <strong>50%</strong> (₦5,000 ÷ ₦10,000). But your gross margin is only <strong>33.3%</strong> (₦5,000 ÷ ₦15,000). If you run a "40% off clearance sale" thinking you have a 50% buffer, you will sell at a net cash loss on every single item.
           </p>
 
-          <h2>Where Nigerian Businesses Secretly Bleed Margins</h2>
-          <p>
-            In a high-friction retail environment, direct cost of goods is rarely where businesses fail. Profit leaks happen in the unmeasured unit costs:
-          </p>
-          <ul>
-            <li><strong>Interstate Logistics & Rider Costs:</strong> When a customer in Abuja or Port Harcourt cancels a delivery upon arrival, the vendor absorbs two-way transit fees.</li>
-            <li><strong>Foreign Exchange Replacement Gaps:</strong> Selling inventory at ₦20,000 when restocking will cost ₦22,000 next week due to currency shifts creates a phantom profit trap.</li>
-            <li><strong>Manual Order Handling Overhead:</strong> Spending 15 minutes of staff time verifying a single bank transfer receipt eats into unit margin just as much as an ad click.</li>
-          </ul>
-
-          <h2>Recommended Gross Margin Benchmarks</h2>
+          <h2>Target Profit Margin Benchmarks for Nigerian Businesses</h2>
           <table class="margin-breakdown-table" style="margin: 20px 0;">
             <thead>
               <tr>
-                <th>Business Category</th>
-                <th>Target Gross Margin</th>
-                <th>Key Focus</th>
+                <th>Industry / Sector</th>
+                <th>Typical Gross Margin</th>
+                <th>Key Operating Focus</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>Supermarkets, Groceries & FMCG</td>
                 <td>12% – 25%</td>
-                <td>Fast inventory turnover and supplier payment terms</td>
+                <td>Fast stock turnover and bulk supplier discounts</td>
               </tr>
               <tr>
-                <td>Fashion, Apparel & Shoes</td>
+                <td>Fashion, Shoes & Apparel</td>
                 <td>35% – 55%</td>
-                <td>Protecting against seasonal dead stock & sizing exchanges</td>
+                <td>Buffer against size exchanges, returns & clearance discounts</td>
               </tr>
               <tr>
                 <td>Beauty, Skincare & Fragrance</td>
                 <td>50% – 75%</td>
-                <td>High perceived brand value and repeat subscription orders</td>
+                <td>Brand loyalty, bundling, and repeat customer retention</td>
               </tr>
               <tr>
-                <td>Consumer Electronics & Gadgets</td>
+                <td>Phones, Gadgets & Electronics</td>
                 <td>15% – 30%</td>
-                <td>Rapid turnover, accessory bundling, and warranty protection</td>
+                <td>Quick inventory velocity, warranty control & accessory upsells</td>
               </tr>
             </tbody>
           </table>
@@ -405,21 +495,21 @@
           <h2>Frequently Asked Questions</h2>
           <div class="blog-faq-list">
             <div class="blog-faq-item">
-              <h3 class="blog-faq-q">Why does this tool give the results immediately without asking for my email?</h3>
+              <h3 class="blog-faq-q">What is considered a "good" profit margin in Nigeria?</h3>
               <p class="blog-faq-a">
-                At AlphaTNX Digital, we believe professional tools should be genuinely useful first. You don't need to hand over your personal data or enter an email marketing funnel just to calculate your unit economics.
+                For physical retail and e-commerce in Nigeria, a healthy gross profit margin typically ranges between <strong>25% and 45%</strong>. A margin below 15% leaves very little room to survive waybill delivery delays, customer returns, or sudden currency changes.
               </p>
             </div>
             <div class="blog-faq-item">
-              <h3 class="blog-faq-q">How does the 30-minute privacy wipe work?</h3>
+              <h3 class="blog-faq-q">How do I download only my calculation results?</h3>
               <p class="blog-faq-a">
-                All calculations run 100% client-side in your web browser. Nothing is ever sent to or stored in our database. Any temporary calculation values cached in your browser are automatically wiped clean after 30 minutes of inactivity, or immediately when you click the "Wipe Data Now" button.
+                Click the <strong>Download / Print Results</strong> button below the calculator. Our system formats a clean, dedicated 1-page summary slip containing only your figures, margins, and breakdown—without printing any of the guides or website navigation.
               </p>
             </div>
             <div class="blog-faq-item">
-              <h3 class="blog-faq-q">Can I share a calculation with my business partner?</h3>
+              <h3 class="blog-faq-q">How does the 30-minute privacy auto-wipe work?</h3>
               <p class="blog-faq-a">
-                Yes. Clicking "Share Calculation Link" generates a secure, pre-filled link that encodes your figures into the web address. When your partner clicks it, the exact numbers, margin percentages, and breakdown will open right away.
+                Your financial numbers never leave your phone or computer. The calculations run entirely in your browser without sending anything to our servers. Any temporary session figures in your browser memory are automatically wiped clean after 30 minutes of inactivity, or right away if you tap "Wipe Data Now".
               </p>
             </div>
           </div>
