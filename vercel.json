@@ -111,6 +111,26 @@
       "source": "/quotation-generator",
       "destination": "/tool/quotation-generator",
       "permanent": true
+    },
+    {
+      "source": "/tool/business-name-brainstormer",
+      "destination": "/tool/business-name-and-slogan-brainstormer",
+      "permanent": true
+    },
+    {
+      "source": "/tools/business-name-and-slogan-brainstormer",
+      "destination": "/tool/business-name-and-slogan-brainstormer",
+      "permanent": true
+    },
+    {
+      "source": "/business-name-and-slogan-brainstormer",
+      "destination": "/tool/business-name-and-slogan-brainstormer",
+      "permanent": true
+    },
+    {
+      "source": "/business-name-brainstormer",
+      "destination": "/tool/business-name-and-slogan-brainstormer",
+      "permanent": true
     }
   ]
 }

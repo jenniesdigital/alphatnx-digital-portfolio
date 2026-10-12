@@ -9539,3 +9539,245 @@ button {
   }
 }
 
+/* ==========================================================================
+   BUSINESS NAME & SLOGAN BRAINSTORMER TOOL STYLES
+   ========================================================================== */
+.bns-inputs-panel {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 22px;
+}
+
+.bns-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  align-items: end;
+}
+
+.bns-col-span-2 {
+  grid-column: span 2;
+}
+
+.bns-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.bns-tabs {
+  display: inline-flex;
+  background: var(--background-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.bns-tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--foreground-muted);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bns-tab-btn:hover {
+  color: var(--foreground-strong);
+}
+
+.bns-tab-btn.is-active {
+  background: var(--accent-blue);
+  color: #FFFFFF;
+}
+
+.bns-refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: var(--accent-sky);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bns-refresh-btn:hover {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: var(--accent-sky);
+}
+
+.bns-results-container {
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bns-empty-state {
+  flex: 1;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 36px 20px;
+  background: var(--background-surface);
+  border: 1px dashed var(--border-default);
+  border-radius: 14px;
+}
+
+.bns-empty-title {
+  font-size: 15.5px;
+  color: var(--foreground-strong);
+  margin: 0 0 6px;
+}
+
+.bns-empty-sub {
+  font-size: 13.5px;
+  color: var(--foreground-muted);
+  max-width: 460px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.bns-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.bns-idea-card {
+  background: var(--background-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.bns-idea-card:hover {
+  border-color: rgba(59, 130, 246, 0.45);
+}
+
+.bns-idea-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.bns-idea-tag {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-sky);
+  background: rgba(59, 130, 246, 0.12);
+  padding: 3px 8px;
+  border-radius: 5px;
+}
+
+.bns-domain-pill {
+  font-size: 11.5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: var(--foreground-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+[data-theme="light"] .bns-domain-pill {
+  background: rgba(15, 23, 42, 0.04);
+}
+
+.bns-idea-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--foreground-strong);
+  margin: 2px 0 4px;
+  line-height: 1.25;
+}
+
+.bns-idea-slogan {
+  font-size: 13.5px;
+  color: var(--foreground-default);
+  margin: 0;
+  line-height: 1.45;
+  font-style: italic;
+}
+
+.bns-idea-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.bns-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--foreground-default);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.bns-card-btn:hover {
+  border-color: var(--accent-sky);
+  color: var(--foreground-strong);
+}
+
+.bns-card-btn.is-saved {
+  background: rgba(16, 185, 129, 0.14);
+  border-color: #10B981;
+  color: #10B981;
+}
+
+@media (max-width: 768px) {
+  .bns-form-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .bns-col-span-2 {
+    grid-column: span 1;
+  }
+  .bns-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .bns-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .bns-tabs {
+    justify-content: center;
+  }
+  .bns-refresh-btn {
+    justify-content: center;
+  }
+}
+
+

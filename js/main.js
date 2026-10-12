@@ -3276,6 +3276,630 @@ Generated via AlphaTNX Digital: https://digital.alphatnx.com/tool/quotation-gene
   });
 
   // ==========================================================================
+  // 7. BUSINESS NAME & SLOGAN BRAINSTORMER (KEYWORDS, SLOGANS, SHORTLIST, PDF & WIPE)
+  // ==========================================================================
+  const bnsWrappers = document.querySelectorAll(".bns-brainstormer-module");
+
+  bnsWrappers.forEach((wrapper) => {
+    const keywordsInput = wrapper.querySelector("#bns-keywords");
+    const industrySelect = wrapper.querySelector("#bns-industry");
+    const styleSelect = wrapper.querySelector("#bns-style");
+    const audienceInput = wrapper.querySelector("#bns-audience");
+
+    const generateBtn = wrapper.querySelector("#bns-generate-btn");
+    const regenerateBtn = wrapper.querySelector("#bns-regenerate-btn");
+
+    const tabAllBtn = wrapper.querySelector("#bns-tab-all");
+    const tabSavedBtn = wrapper.querySelector("#bns-tab-saved");
+    const allCountSpan = wrapper.querySelector("#bns-all-count");
+    const savedCountSpan = wrapper.querySelector("#bns-saved-count");
+
+    const emptyState = wrapper.querySelector("#bns-empty-state");
+    const cardsGrid = wrapper.querySelector("#bns-cards-grid");
+
+    const downloadPdfBtn = wrapper.querySelector("#bns-download-pdf-btn");
+    const copyAllBtn = wrapper.querySelector("#bns-copy-all-btn");
+    const resetBtn = wrapper.querySelector("#bns-reset-btn");
+    const wipeBtn = wrapper.querySelector("#bns-wipe-data-btn");
+    const timerDisplay = wrapper.querySelector(".session-timer-display");
+
+    const STORAGE_KEY = "alphatnx_bns_session";
+    const SESSION_DURATION = 30 * 60 * 1000; // 30 minutes
+
+    let generatedList = [];
+    let savedList = [];
+    let activeTab = "all"; // "all" | "saved"
+    let generationSeed = 0;
+
+    const showToast = (msg) => {
+      const targetToast = document.querySelector(".margin-toast");
+      if (!targetToast) return;
+      targetToast.textContent = msg;
+      targetToast.classList.add("is-active");
+      setTimeout(() => {
+        targetToast.classList.remove("is-active");
+      }, 3000);
+    };
+
+    const industryVocab = {
+      general: {
+        seeds: ["Prime", "Vertex", "Core", "Crest"],
+        nouns: ["Solutions", "Ventures", "Hub", "Works", "Group", "Collective"],
+        benefits: ["Everyday Excellence", "Smart Execution", "Trusted Quality", "Seamless Service"]
+      },
+      ecommerce: {
+        seeds: ["Cart", "Market", "Shop", "Trend"],
+        nouns: ["Mart", "Store", "Bazaar", "Boutique", "Vault", "Exchange"],
+        benefits: ["Authentic Quality Delivered", "Everyday Style & Value", "Seamless Shopping", "Curated Picks"]
+      },
+      tech: {
+        seeds: ["Nexa", "Pay", "Cloud", "Byte"],
+        nouns: ["Labs", "Systems", "Tech", "Digital", "Stack", "Logic", "Pulse"],
+        benefits: ["Intelligent Automation", "Digital Speed & Scale", "Frictionless Innovation", "Future-Ready Systems"]
+      },
+      food: {
+        seeds: ["Fresh", "Spice", "Bite", "Crave"],
+        nouns: ["Kitchen", "Bistro", "Pantry", "Table", "Bakehouse", "Foods", "Grill"],
+        benefits: ["Freshly Crafted Daily", "Authentic Taste in Every Bite", "Wholesome & Delicious", "Made with Passion"]
+      },
+      logistics: {
+        seeds: ["Swift", "Route", "Cargo", "Fleet"],
+        nouns: ["Express", "Logistics", "Dispatch", "Transit", "Haulage", "Direct", "Links"],
+        benefits: ["On-Time Every Mile", "Fast & Trackable Delivery", "Safe Transit Guaranteed", "Moving Your Business Forward"]
+      },
+      realestate: {
+        seeds: ["Haven", "Crest", "Brick", "Urban"],
+        nouns: ["Properties", "Realty", "Estates", "Homes", "Spaces", "Developments", "Court"],
+        benefits: ["Spaces Built for Living", "Trusted Property Investment", "Modern Comfort & Security", "Building Lasting Value"]
+      },
+      agro: {
+        seeds: ["Green", "Harvest", "Terra", "Seed"],
+        nouns: ["Agro", "Farms", "Produce", "Fields", "Commodities", "Organics", "Nutri"],
+        benefits: ["From Farm to Market", "Pure & Sustainable Harvest", "Nourishing Communities", "Quality Agricultural Supply"]
+      },
+      beauty: {
+        seeds: ["Glow", "Aura", "Silk", "Pure"],
+        nouns: ["Beauty", "Botanics", "Studio", "Skincare", "Aesthetics", "Luxe", "Wellness"],
+        benefits: ["Confidence in Your Skin", "Pure Radiance Everyday", "Crafted for Natural Beauty", "Timeless Self-Care"]
+      },
+      consulting: {
+        seeds: ["Sterling", "Vanguard", "Bridge", "Axis"],
+        nouns: ["Advisory", "Partners", "Consulting", "Capital", "Associates", "Strategy"],
+        benefits: ["Clarity for Growth", "Strategic Results That Matter", "Trusted Corporate Guidance", "Precision & Integrity"]
+      },
+      education: {
+        seeds: ["Bright", "Skill", "Scholar", "Learn"],
+        nouns: ["Academy", "Institute", "Learning", "Campus", "Mentors", "Prep", "Forge"],
+        benefits: ["Skills for the Real World", "Unlocking Human Potential", "Learn Faster, Lead Further", "Empowering Future Leaders"]
+      },
+      health: {
+        seeds: ["Vita", "Care", "Med", "Pulse"],
+        nouns: ["Health", "Diagnostics", "Medics", "Pharmacy", "Wellness", "Clinic", "Life"],
+        benefits: ["Compassionate Care Always", "Your Health, Our Priority", "Trusted Medical Excellence", "Accessible Wellness"]
+      }
+    };
+
+    const capitalize = (str) => {
+      if (!str) return "";
+      return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    };
+
+    const makeDomain = (name) => {
+      const clean = name.toLowerCase().replace(/[^a-z0-9]/g, "");
+      return `${clean.slice(0, 18)}.com.ng`;
+    };
+
+    const generateIdeas = () => {
+      generationSeed++;
+      const rawKw = keywordsInput ? keywordsInput.value.trim() : "";
+      const industryKey = industrySelect ? industrySelect.value : "general";
+      const styleKey = styleSelect ? styleSelect.value : "all";
+      const audienceRaw = audienceInput ? audienceInput.value.trim() : "";
+
+      const ind = industryVocab[industryKey] || industryVocab.general;
+
+      // Extract user keywords or fall back to industry seeds
+      let userWords = rawKw
+        .split(/[\s,;/-]+/)
+        .map((w) => w.replace(/[^a-zA-Z0-9]/g, ""))
+        .filter((w) => w.length >= 2)
+        .map(capitalize);
+
+      if (userWords.length === 0) {
+        userWords = [...ind.seeds];
+      }
+
+      const kw1 = userWords[0];
+      const kw2 = userWords[1] || ind.seeds[generationSeed % ind.seeds.length];
+      const kw3 = userWords[2] || ind.seeds[(generationSeed + 1) % ind.seeds.length];
+
+      const audSuffix = audienceRaw ? ` for ${audienceRaw}` : " Across Nigeria";
+      const audFocus = audienceRaw ? audienceRaw : "Modern Businesses";
+
+      const modernPrefixes = ["Nexa", "Vero", "Zeno", "Kora", "Nova", "Opti", "Lumina", "Prio"];
+      const modernSuffixes = ["ly", "ify", "Flow", "Sphere", "Base", "Grid", "Mint", "Wave", "Sync", "Box"];
+      const corporatePrefixes = ["Sterling", "Apex", "Vanguard", "Crest", "Meridian", "FirstBridge", "Prime", "Summit"];
+      const nigerianRoots = ["Eko", "Naija", "Aso", "Kobo", "Oga", "Arewa", "Obodo", "Wazo", "Zobo", "Lagos"];
+      const luxuryWords = ["Maison", "Atelier", "Aura", "Velvet", "Sovereign", "Opulent", "Privé", "Crown"];
+      const actionWords = ["Swift", "Bolt", "Turbo", "Insta", "Rapid", "Flash", "Go", "Velocity"];
+
+      const pick = (arr, offset = 0) => arr[(generationSeed + offset) % arr.length];
+
+      const pool = [];
+
+      // 1. Modern & Catchy
+      pool.push(
+        {
+          style: "modern",
+          tag: "Modern Brand",
+          name: `${pick(modernPrefixes, 0)}${kw1}`,
+          slogan: `${ind.benefits[0]} — Redefining ${kw1}${audSuffix}.`
+        },
+        {
+          style: "modern",
+          tag: "Startup Compound",
+          name: `${kw1}${pick(modernSuffixes, 1)}`,
+          slogan: `The Smarter, Simpler Way to Experience ${kw1}.`
+        },
+        {
+          style: "modern",
+          tag: "Modern Brand",
+          name: `${kw1}${kw2}`,
+          slogan: `Built for ${ind.benefits[1]} and Everyday Growth.`
+        },
+        {
+          style: "modern",
+          tag: "Tech-Forward",
+          name: `${pick(modernPrefixes, 2)}${kw2} ${pick(ind.nouns, 0)}`,
+          slogan: `Powering ${audFocus} with ${ind.benefits[2]}.`
+        }
+      );
+
+      // 2. Corporate & CAC-Ready
+      pool.push(
+        {
+          style: "corporate",
+          tag: "CAC Corporate",
+          name: `${pick(corporatePrefixes, 0)} ${kw1} ${pick(ind.nouns, 1)}`,
+          slogan: `Your Trusted Partner in ${kw1} & ${ind.benefits[2]}.`
+        },
+        {
+          style: "corporate",
+          tag: "CAC Corporate",
+          name: `${kw1} & ${kw2} ${pick(ind.nouns, 2)}`,
+          slogan: `Delivering ${ind.benefits[0]}${audSuffix}.`
+        },
+        {
+          style: "corporate",
+          tag: "Enterprise Brand",
+          name: `${pick(corporatePrefixes, 3)} ${kw2} Integrated`,
+          slogan: `Setting the Standard for ${ind.benefits[3]}.`
+        },
+        {
+          style: "corporate",
+          tag: "CAC Corporate",
+          name: `${kw1} ${pick(corporatePrefixes, 1)} ${pick(ind.nouns, 3)}`,
+          slogan: `Professional ${kw1} Solutions Built on Integrity.`
+        }
+      );
+
+      // 3. Nigerian & Local Fusion
+      pool.push(
+        {
+          style: "nigerian",
+          tag: "Nigerian Fusion",
+          name: `${pick(nigerianRoots, 0)}${kw1}`,
+          slogan: `Proudly Nigerian. Built for ${ind.benefits[0]}.`
+        },
+        {
+          style: "nigerian",
+          tag: "Local Heritage",
+          name: `${kw1} ${pick(nigerianRoots, 1)} ${pick(ind.nouns, 0)}`,
+          slogan: `Bringing ${ind.benefits[1]} Closer to ${audFocus}.`
+        },
+        {
+          style: "nigerian",
+          tag: "Nigerian Fusion",
+          name: `${pick(nigerianRoots, 2)}${kw2} Co.`,
+          slogan: `Authentic ${kw1} Excellence${audSuffix}.`
+        }
+      );
+
+      // 4. Premium & Boutique
+      pool.push(
+        {
+          style: "luxury",
+          tag: "Premium Boutique",
+          name: `${pick(luxuryWords, 0)} ${kw1}`,
+          slogan: `Where ${kw1} Meets Uncompromising Luxury.`
+        },
+        {
+          style: "luxury",
+          tag: "Upscale Identity",
+          name: `${kw1} ${pick(luxuryWords, 1)}`,
+          slogan: `Curated ${ind.benefits[0]} for Discerning Clients.`
+        },
+        {
+          style: "luxury",
+          tag: "Signature Brand",
+          name: `${pick(luxuryWords, 2)} & ${kw2}`,
+          slogan: `Crafted for Distinction. Designed for ${audFocus}.`
+        }
+      );
+
+      // 5. Speed & Action-Oriented
+      pool.push(
+        {
+          style: "action",
+          tag: "Action & Speed",
+          name: `${pick(actionWords, 0)}${kw1}`,
+          slogan: `Fast, Reliable ${kw1} When It Matters Most.`
+        },
+        {
+          style: "action",
+          tag: "Dynamic Brand",
+          name: `${kw1} ${pick(actionWords, 1)} ${pick(ind.nouns, 4)}`,
+          slogan: `Zero Delays. 100% ${ind.benefits[1]}.`
+        },
+        {
+          style: "action",
+          tag: "Direct Action",
+          name: `${pick(actionWords, 2)}${kw2} Direct`,
+          slogan: `Accelerating ${kw1}${audSuffix}.`
+        }
+      );
+
+      // Filter by selected style or return 12 balanced items
+      let filtered = styleKey === "all"
+        ? pool
+        : pool.filter((item) => item.style === styleKey);
+
+      // If filtered has fewer than 12, pad with more variations using the selected style
+      const extraModifiers = ["Pro", "Plus", "One", "Prime", "Point", "Edge", "Core", "Craft", "Link", "Nest"];
+      let idx = 0;
+      while (filtered.length < 12) {
+        const mod = extraModifiers[(generationSeed + idx) % extraModifiers.length];
+        const baseWord = userWords[idx % userWords.length];
+        const noun = ind.nouns[(generationSeed + idx) % ind.nouns.length];
+        const benefit = ind.benefits[(generationSeed + idx) % ind.benefits.length];
+        filtered.push({
+          style: styleKey,
+          tag: styleKey === "all" ? "Brand Concept" : `${capitalize(styleKey)} Brand`,
+          name: idx % 2 === 0 ? `${baseWord}${mod} ${noun}` : `${mod}${baseWord} ${noun}`,
+          slogan: `${benefit} — Tailored for ${audFocus}.`
+        });
+        idx++;
+      }
+
+      generatedList = filtered.slice(0, 12).map((item, i) => ({
+        id: `${Date.now()}_${i}`,
+        name: item.name,
+        slogan: item.slogan,
+        tag: item.tag,
+        domain: makeDomain(item.name)
+      }));
+
+      activeTab = "all";
+      updateTabUI();
+      renderCards();
+      saveSession();
+    };
+
+    const isSaved = (item) => {
+      return savedList.some((s) => s.name === item.name && s.slogan === item.slogan);
+    };
+
+    const toggleSave = (item) => {
+      const idx = savedList.findIndex((s) => s.name === item.name && s.slogan === item.slogan);
+      if (idx >= 0) {
+        savedList.splice(idx, 1);
+        showToast("Removed from Saved Shortlist");
+      } else {
+        savedList.push(item);
+        showToast("★ Added to Saved Shortlist!");
+      }
+      renderCards();
+      saveSession();
+    };
+
+    const updateTabUI = () => {
+      if (tabAllBtn) {
+        tabAllBtn.classList.toggle("is-active", activeTab === "all");
+        tabAllBtn.setAttribute("aria-selected", activeTab === "all" ? "true" : "false");
+      }
+      if (tabSavedBtn) {
+        tabSavedBtn.classList.toggle("is-active", activeTab === "saved");
+        tabSavedBtn.setAttribute("aria-selected", activeTab === "saved" ? "true" : "false");
+      }
+      if (allCountSpan) allCountSpan.textContent = generatedList.length;
+      if (savedCountSpan) savedCountSpan.textContent = savedList.length;
+    };
+
+    const renderCards = () => {
+      updateTabUI();
+      const source = activeTab === "saved" ? savedList : generatedList;
+
+      if (!source || source.length === 0) {
+        if (emptyState) {
+          emptyState.style.display = "flex";
+          const titleEl = emptyState.querySelector(".bns-empty-title");
+          const subEl = emptyState.querySelector(".bns-empty-sub");
+          if (activeTab === "saved") {
+            if (titleEl) titleEl.innerHTML = "Your <strong>Saved Shortlist</strong> is currently empty";
+            if (subEl) subEl.textContent = "Click the '★ Save' button on any generated business name to bookmark your top contenders here.";
+          } else {
+            if (titleEl) titleEl.innerHTML = "Enter your business keywords above and click <strong>Generate Names & Slogans</strong>";
+            if (subEl) subEl.textContent = "We will generate 12 brandable business names paired with tailored slogans and domain previews.";
+          }
+        }
+        if (cardsGrid) cardsGrid.style.display = "none";
+        return;
+      }
+
+      if (emptyState) emptyState.style.display = "none";
+      if (!cardsGrid) return;
+      cardsGrid.style.display = "grid";
+      cardsGrid.innerHTML = "";
+
+      source.forEach((item) => {
+        const saved = isSaved(item);
+        const card = document.createElement("div");
+        card.className = "bns-idea-card";
+        card.innerHTML = `
+          <div>
+            <div class="bns-idea-top">
+              <span class="bns-idea-tag">${item.tag}</span>
+              <span class="bns-domain-pill">${item.domain}</span>
+            </div>
+            <h3 class="bns-idea-name">${item.name}</h3>
+            <p class="bns-idea-slogan">“${item.slogan}”</p>
+          </div>
+          <div class="bns-idea-actions">
+            <button type="button" class="bns-card-btn bns-save-btn ${saved ? "is-saved" : ""}">
+              <span>${saved ? "★ Saved" : "☆ Save"}</span>
+            </button>
+            <button type="button" class="bns-card-btn bns-copy-btn">
+              <span>Copy</span>
+            </button>
+          </div>
+        `;
+
+        const saveBtn = card.querySelector(".bns-save-btn");
+        const copyBtn = card.querySelector(".bns-copy-btn");
+
+        if (saveBtn) {
+          saveBtn.addEventListener("click", () => toggleSave(item));
+        }
+
+        if (copyBtn) {
+          copyBtn.addEventListener("click", () => {
+            const text = `${item.name} — "${item.slogan}" (${item.domain})`;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(text).then(() => {
+                showToast(`✓ Copied "${item.name}"!`);
+              });
+            } else {
+              showToast(`✓ Copied "${item.name}"!`);
+            }
+          });
+        }
+
+        cardsGrid.appendChild(card);
+      });
+    };
+
+    const saveSession = () => {
+      const payload = {
+        timestamp: Date.now(),
+        keywords: keywordsInput ? keywordsInput.value : "",
+        industry: industrySelect ? industrySelect.value : "general",
+        style: styleSelect ? styleSelect.value : "all",
+        audience: audienceInput ? audienceInput.value : "",
+        generated: generatedList,
+        saved: savedList
+      };
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      } catch (e) {}
+    };
+
+    const loadSession = () => {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          renderCards();
+          return;
+        }
+        const data = JSON.parse(raw);
+        if (Date.now() - (data.timestamp || 0) > SESSION_DURATION) {
+          wipeSession(false);
+          return;
+        }
+        if (keywordsInput && data.keywords) keywordsInput.value = data.keywords;
+        if (industrySelect && data.industry) industrySelect.value = data.industry;
+        if (styleSelect && data.style) styleSelect.value = data.style;
+        if (audienceInput && data.audience) audienceInput.value = data.audience;
+        generatedList = Array.isArray(data.generated) ? data.generated : [];
+        savedList = Array.isArray(data.saved) ? data.saved : [];
+        renderCards();
+      } catch (e) {
+        renderCards();
+      }
+    };
+
+    const wipeSession = (notify = true) => {
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (e) {}
+      if (keywordsInput) keywordsInput.value = "";
+      if (industrySelect) industrySelect.value = "general";
+      if (styleSelect) styleSelect.value = "all";
+      if (audienceInput) audienceInput.value = "";
+      generatedList = [];
+      savedList = [];
+      activeTab = "all";
+      renderCards();
+      if (notify) showToast("✓ All brainstormer data wiped clean!");
+    };
+
+    const updateCountdown = () => {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          if (timerDisplay) timerDisplay.textContent = "30:00";
+          return;
+        }
+        const data = JSON.parse(raw);
+        const remaining = Math.max(0, SESSION_DURATION - (Date.now() - (data.timestamp || 0)));
+        if (remaining <= 0) {
+          wipeSession(false);
+          if (timerDisplay) timerDisplay.textContent = "00:00";
+          return;
+        }
+        const mins = Math.floor(remaining / 60000);
+        const secs = Math.floor((remaining % 60000) / 1000);
+        if (timerDisplay) {
+          timerDisplay.textContent = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+        }
+      } catch (e) {
+        if (timerDisplay) timerDisplay.textContent = "30:00";
+      }
+    };
+
+    if (generateBtn) {
+      generateBtn.addEventListener("click", () => {
+        generateIdeas();
+      });
+    }
+
+    if (regenerateBtn) {
+      regenerateBtn.addEventListener("click", () => {
+        generateIdeas();
+        showToast("✓ Generated 12 fresh name & slogan ideas!");
+      });
+    }
+
+    if (keywordsInput) {
+      keywordsInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          generateIdeas();
+        }
+      });
+    }
+
+    if (tabAllBtn) {
+      tabAllBtn.addEventListener("click", () => {
+        activeTab = "all";
+        renderCards();
+      });
+    }
+
+    if (tabSavedBtn) {
+      tabSavedBtn.addEventListener("click", () => {
+        activeTab = "saved";
+        renderCards();
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        wipeSession(true);
+      });
+    }
+
+    if (wipeBtn) {
+      wipeBtn.addEventListener("click", () => {
+        wipeSession(true);
+      });
+    }
+
+    if (copyAllBtn) {
+      copyAllBtn.addEventListener("click", () => {
+        const listToCopy = savedList.length > 0 ? savedList : generatedList;
+        if (!listToCopy.length) {
+          showToast("Generate names first before copying!");
+          return;
+        }
+        let text = `===========================================\nBUSINESS NAME & SLOGAN SHORTLIST\n===========================================\n`;
+        listToCopy.forEach((item, idx) => {
+          text += `${idx + 1}. ${item.name}\n   Slogan: "${item.slogan}"\n   Domain: ${item.domain} [${item.tag}]\n\n`;
+        });
+        text += `Generated via AlphaTNX Digital: https://digital.alphatnx.com/tool/business-name-and-slogan-brainstormer`;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            showToast("✓ Brand shortlist copied to clipboard!");
+          });
+        } else {
+          showToast("✓ Brand shortlist copied!");
+        }
+      });
+    }
+
+    if (downloadPdfBtn) {
+      downloadPdfBtn.addEventListener("click", () => {
+        if (generatedList.length === 0 && savedList.length === 0) {
+          generateIdeas();
+        }
+        const listToPrint = savedList.length > 0 ? savedList : generatedList;
+        const printBody = document.getElementById("print-bns-items-body");
+        const printMeta = document.getElementById("print-bns-meta");
+        const printKw = document.getElementById("print-bns-keywords");
+        const printAud = document.getElementById("print-bns-audience");
+
+        const indText = industrySelect && industrySelect.options[industrySelect.selectedIndex]
+          ? industrySelect.options[industrySelect.selectedIndex].text
+          : "General Business";
+        const styleText = styleSelect && styleSelect.options[styleSelect.selectedIndex]
+          ? styleSelect.options[styleSelect.selectedIndex].text
+          : "Balanced Mix";
+
+        if (printMeta) {
+          printMeta.textContent = `Industry: ${indText} · Tone: ${styleText}`;
+        }
+        if (printKw) {
+          printKw.textContent = (keywordsInput && keywordsInput.value.trim()) ? keywordsInput.value.trim() : "Brand Seed";
+        }
+        if (printAud) {
+          printAud.textContent = (audienceInput && audienceInput.value.trim()) ? audienceInput.value.trim() : "Nigeria / General";
+        }
+
+        if (printBody) {
+          printBody.innerHTML = "";
+          listToPrint.forEach((item, idx) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${idx + 1}</td>
+              <td><strong>${item.name}</strong><br><span style="font-size: 10.5px; color: #64748B;">${item.tag}</span></td>
+              <td style="font-style: italic;">“${item.slogan}”</td>
+              <td style="font-family: monospace; font-size: 12px;">${item.domain}</td>
+            `;
+            printBody.appendChild(tr);
+          });
+        }
+
+        const originalDocTitle = document.title;
+        const kwTitle = (keywordsInput && keywordsInput.value.trim())
+          ? `${keywordsInput.value.trim().replace(/[/\\?%*:|"<>]/g, "")} - Brand Name Shortlist`
+          : "Brand Name and Slogan Shortlist";
+        document.title = kwTitle;
+
+        window.print();
+
+        const restoreTitle = () => {
+          document.title = originalDocTitle;
+          window.removeEventListener("afterprint", restoreTitle);
+        };
+        window.addEventListener("afterprint", restoreTitle);
+        setTimeout(() => { document.title = originalDocTitle; }, 3000);
+      });
+    }
+
+    loadSession();
+    setInterval(updateCountdown, 1000);
+  });
+
+  // ==========================================================================
   // NEWSLETTER FORM SUBMISSION
   // ==========================================================================
   const nlForm = document.getElementById("newsletter-form");
