@@ -2546,7 +2546,20 @@ https://digital.alphatnx.com/tool/profit-margin-calculator
           }
         }
 
+        // Set dynamic PDF filename via document.title
+        const originalDocTitle = document.title;
+        const safeDocTitle = docTitle.replace(/[/\\?%*:|"<>]/g, "").trim() || "Invoice";
+        const safeDocNum = invNum.replace(/[/\\?%*:|"<>]/g, "").trim();
+        document.title = safeDocNum ? `${safeDocTitle}_${safeDocNum}` : safeDocTitle;
+
         window.print();
+
+        const restoreTitle = () => {
+          document.title = originalDocTitle;
+          window.removeEventListener("afterprint", restoreTitle);
+        };
+        window.addEventListener("afterprint", restoreTitle);
+        setTimeout(() => { document.title = originalDocTitle; }, 3000);
       });
     }
 
@@ -2612,6 +2625,649 @@ Generated via AlphaTNX Digital: https://digital.alphatnx.com/tool/invoice-genera
           });
         } else {
           showToast("✓ Invoice summary copied!");
+        }
+      });
+    }
+
+    // Initialize
+    loadSession();
+    setInterval(updateCountdown, 1000);
+  });
+
+  // ==========================================================================
+  // 6. QUOTATION GENERATOR (SERVICES, RATES, LOGO, VALIDITY, PRINT/PDF & 30-MIN WIPE)
+  // ==========================================================================
+  const quotationWrappers = document.querySelectorAll(".quotation-gen-module");
+
+  quotationWrappers.forEach((wrapper) => {
+    const currSelect = wrapper.querySelector("#quote-curr-select");
+    const docTitleInput = wrapper.querySelector("#quote-doc-title");
+    const quoteNumInput = wrapper.querySelector("#quote-number");
+    const quoteDateInput = wrapper.querySelector("#quote-date");
+    const quoteValidityInput = wrapper.querySelector("#quote-validity");
+
+    const logoInput = wrapper.querySelector("#quote-logo-input");
+    const logoImg = wrapper.querySelector("#quote-logo-img");
+    const logoPlaceholder = wrapper.querySelector("#quote-logo-placeholder");
+    const logoPreviewWrap = wrapper.querySelector("#quote-logo-preview-wrap");
+    const logoRemoveBtn = wrapper.querySelector("#quote-logo-remove-btn");
+
+    const bizNameInput = wrapper.querySelector("#quote-biz-name");
+    const bizEmailInput = wrapper.querySelector("#quote-biz-email");
+    const bizPhoneInput = wrapper.querySelector("#quote-biz-phone");
+    const bizAddrInput = wrapper.querySelector("#quote-biz-address");
+
+    const clientNameInput = wrapper.querySelector("#quote-client-name");
+    const clientPersonInput = wrapper.querySelector("#quote-client-person");
+    const clientPhoneInput = wrapper.querySelector("#quote-client-phone");
+    const clientEmailInput = wrapper.querySelector("#quote-client-email");
+    const clientAddrInput = wrapper.querySelector("#quote-client-address");
+
+    const itemsBody = wrapper.querySelector("#quote-items-body");
+    const addItemBtn = wrapper.querySelector("#quote-add-item-btn");
+
+    const timelineInput = wrapper.querySelector("#quote-timeline");
+    const milestonesInput = wrapper.querySelector("#quote-milestones");
+    const termsInput = wrapper.querySelector("#quote-terms");
+
+    const discountInput = wrapper.querySelector("#quote-discount-input");
+    const discountTypeSelect = wrapper.querySelector("#quote-discount-type");
+    const taxInput = wrapper.querySelector("#quote-tax-input");
+
+    const subtotalDisplay = wrapper.querySelector("#quote-subtotal-val");
+    const discountDisplay = wrapper.querySelector("#quote-discount-val");
+    const taxDisplay = wrapper.querySelector("#quote-tax-val");
+    const totalDueDisplay = wrapper.querySelector("#quote-total-due-val");
+
+    const downloadPdfBtn = wrapper.querySelector("#quote-download-pdf-btn");
+    const copySummaryBtn = wrapper.querySelector("#quote-copy-summary-btn");
+    const resetBtn = wrapper.querySelector("#quote-reset-btn");
+    const wipeBtn = wrapper.querySelector("#quote-wipe-data-btn");
+    const timerDisplay = wrapper.querySelector(".session-timer-display");
+
+    const STORAGE_KEY = "alphatnx_quotation_session";
+    const SESSION_DURATION = 30 * 60 * 1000; // 30 minutes
+
+    let activeLogoDataUrl = "";
+
+    const getSymbol = () => (currSelect ? currSelect.value : "₦");
+
+    const formatMoney = (val, sym = getSymbol()) => {
+      const num = Math.round(val);
+      const isNegative = num < 0;
+      return `${isNegative ? "-" : ""}${sym}${Math.abs(num).toLocaleString()}`;
+    };
+
+    const showToast = (msg) => {
+      const targetToast = document.querySelector(".margin-toast");
+      if (!targetToast) return;
+      targetToast.textContent = msg;
+      targetToast.classList.add("is-active");
+      setTimeout(() => {
+        targetToast.classList.remove("is-active");
+      }, 3000);
+    };
+
+    // Date defaults
+    const today = new Date();
+    if (quoteDateInput && !quoteDateInput.value) {
+      quoteDateInput.value = today.toISOString().split("T")[0];
+    }
+
+    // Logo Upload Handling
+    if (logoInput) {
+      logoInput.addEventListener("change", (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        if (!file.type.startsWith("image/")) {
+          showToast("Please upload a valid image file");
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          activeLogoDataUrl = evt.target.result;
+          if (logoImg) logoImg.src = activeLogoDataUrl;
+          if (logoPlaceholder) logoPlaceholder.style.display = "none";
+          if (logoPreviewWrap) logoPreviewWrap.style.display = "flex";
+          saveSession();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    if (logoRemoveBtn) {
+      logoRemoveBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        activeLogoDataUrl = "";
+        if (logoInput) logoInput.value = "";
+        if (logoImg) logoImg.src = "";
+        if (logoPlaceholder) logoPlaceholder.style.display = "flex";
+        if (logoPreviewWrap) logoPreviewWrap.style.display = "none";
+        saveSession();
+      });
+    }
+
+    // Add Line Item Row
+    const addLineItemRow = (desc = "", qty = 1, rate = 0) => {
+      if (!itemsBody) return;
+      const tr = document.createElement("tr");
+      tr.className = "inv-item-row";
+      tr.innerHTML = `
+        <td>
+          <input type="text" class="inv-cell-input inv-item-desc" placeholder="e.g. Frontend UI & Dashboard Design" value="${desc}">
+        </td>
+        <td style="text-align: center;">
+          <input type="number" class="inv-cell-input inv-item-qty" value="${qty}" min="1" step="1" style="text-align: center;">
+        </td>
+        <td style="text-align: right;">
+          <input type="number" class="inv-cell-input inv-item-rate" placeholder="0" value="${rate > 0 ? rate : ''}" min="0" step="100" style="text-align: right;">
+        </td>
+        <td style="text-align: right;">
+          <span class="inv-item-total">${formatMoney(qty * rate)}</span>
+        </td>
+        <td style="text-align: center;">
+          <button type="button" class="inv-btn-del-row" title="Delete row" aria-label="Delete line item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+          </button>
+        </td>
+      `;
+
+      // Row inputs
+      const descInp = tr.querySelector(".inv-item-desc");
+      const qtyInp = tr.querySelector(".inv-item-qty");
+      const rateInp = tr.querySelector(".inv-item-rate");
+      const delBtn = tr.querySelector(".inv-btn-del-row");
+
+      [descInp, qtyInp, rateInp].forEach((inp) => {
+        if (inp) inp.addEventListener("input", () => calculateQuotation(true));
+      });
+
+      if (delBtn) {
+        delBtn.addEventListener("click", () => {
+          const allRows = itemsBody.querySelectorAll("tr.inv-item-row");
+          if (allRows.length <= 1) {
+            showToast("Quotation must have at least one line item");
+            return;
+          }
+          tr.remove();
+          calculateQuotation(true);
+        });
+      }
+
+      itemsBody.appendChild(tr);
+    };
+
+    if (addItemBtn) {
+      addItemBtn.addEventListener("click", () => {
+        addLineItemRow("", 1, 0);
+        calculateQuotation(true);
+      });
+    }
+
+    // Calculation Function
+    const calculateQuotation = (save = true) => {
+      const sym = getSymbol();
+      let subtotal = 0;
+
+      const rows = itemsBody ? itemsBody.querySelectorAll("tr.inv-item-row") : [];
+      rows.forEach((row) => {
+        const qty = parseFloat(row.querySelector(".inv-item-qty")?.value) || 0;
+        const rate = parseFloat(row.querySelector(".inv-item-rate")?.value) || 0;
+        const lineTotal = qty * rate;
+        subtotal += lineTotal;
+        const totalSpan = row.querySelector(".inv-item-total");
+        if (totalSpan) totalSpan.textContent = formatMoney(lineTotal, sym);
+      });
+
+      // Discount
+      const discRaw = parseFloat(discountInput ? discountInput.value : 0) || 0;
+      const isPct = discountTypeSelect && discountTypeSelect.value === "pct";
+      const discountAmount = isPct ? (subtotal * (discRaw / 100)) : discRaw;
+      const discountedSubtotal = Math.max(0, subtotal - discountAmount);
+
+      // Tax / VAT
+      const taxRate = parseFloat(taxInput ? taxInput.value : 0) || 0;
+      const taxAmount = discountedSubtotal * (taxRate / 100);
+
+      // Total
+      const totalDue = discountedSubtotal + taxAmount;
+
+      if (subtotalDisplay) subtotalDisplay.textContent = formatMoney(subtotal, sym);
+      if (discountDisplay) discountDisplay.textContent = `-${formatMoney(discountAmount, sym)}`;
+      if (taxDisplay) taxDisplay.textContent = `+${formatMoney(taxAmount, sym)}`;
+      if (totalDueDisplay) totalDueDisplay.textContent = formatMoney(totalDue, sym);
+
+      if (save) saveSession();
+    };
+
+    // Save Session to LocalStorage
+    const saveSession = () => {
+      const rows = [];
+      if (itemsBody) {
+        itemsBody.querySelectorAll("tr.inv-item-row").forEach((r) => {
+          rows.push({
+            desc: r.querySelector(".inv-item-desc")?.value || "",
+            qty: r.querySelector(".inv-item-qty")?.value || 1,
+            rate: r.querySelector(".inv-item-rate")?.value || ""
+          });
+        });
+      }
+
+      const payload = {
+        timestamp: Date.now(),
+        curr: currSelect ? currSelect.value : "₦",
+        docTitle: docTitleInput ? docTitleInput.value : "PRICE QUOTATION",
+        quoteNum: quoteNumInput ? quoteNumInput.value : "QT-0001",
+        quoteDate: quoteDateInput ? quoteDateInput.value : "",
+        validity: quoteValidityInput ? quoteValidityInput.value : "Valid for 14 Days",
+        logo: activeLogoDataUrl,
+        bizName: bizNameInput ? bizNameInput.value : "",
+        bizEmail: bizEmailInput ? bizEmailInput.value : "",
+        bizPhone: bizPhoneInput ? bizPhoneInput.value : "",
+        bizAddr: bizAddrInput ? bizAddrInput.value : "",
+        clientName: clientNameInput ? clientNameInput.value : "",
+        clientPerson: clientPersonInput ? clientPersonInput.value : "",
+        clientPhone: clientPhoneInput ? clientPhoneInput.value : "",
+        clientEmail: clientEmailInput ? clientEmailInput.value : "",
+        clientAddr: clientAddrInput ? clientAddrInput.value : "",
+        timeline: timelineInput ? timelineInput.value : "",
+        milestones: milestonesInput ? milestonesInput.value : "",
+        terms: termsInput ? termsInput.value : "",
+        discount: discountInput ? discountInput.value : "",
+        discountType: discountTypeSelect ? discountTypeSelect.value : "flat",
+        tax: taxInput ? taxInput.value : "",
+        items: rows
+      };
+
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      } catch (e) {
+        console.warn("Storage quota exceeded or disabled", e);
+      }
+    };
+
+    // Load Session
+    const loadSession = () => {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          addLineItemRow("", 1, 0);
+          calculateQuotation(false);
+          return;
+        }
+
+        const data = JSON.parse(raw);
+        const age = Date.now() - (data.timestamp || 0);
+
+        if (age > SESSION_DURATION) {
+          wipeSession();
+          return;
+        }
+
+        if (currSelect && data.curr) currSelect.value = data.curr;
+        if (docTitleInput && data.docTitle) docTitleInput.value = data.docTitle;
+        if (quoteNumInput && data.quoteNum) quoteNumInput.value = data.quoteNum;
+        if (quoteDateInput && data.quoteDate) quoteDateInput.value = data.quoteDate;
+        if (quoteValidityInput && data.validity) quoteValidityInput.value = data.validity;
+
+        if (data.logo) {
+          activeLogoDataUrl = data.logo;
+          if (logoImg) logoImg.src = activeLogoDataUrl;
+          if (logoPlaceholder) logoPlaceholder.style.display = "none";
+          if (logoPreviewWrap) logoPreviewWrap.style.display = "flex";
+        }
+
+        if (bizNameInput && data.bizName) bizNameInput.value = data.bizName;
+        if (bizEmailInput && data.bizEmail) bizEmailInput.value = data.bizEmail;
+        if (bizPhoneInput && data.bizPhone) bizPhoneInput.value = data.bizPhone;
+        if (bizAddrInput && data.bizAddr) bizAddrInput.value = data.bizAddr;
+
+        if (clientNameInput && data.clientName) clientNameInput.value = data.clientName;
+        if (clientPersonInput && data.clientPerson) clientPersonInput.value = data.clientPerson;
+        if (clientPhoneInput && data.clientPhone) clientPhoneInput.value = data.clientPhone;
+        if (clientEmailInput && data.clientEmail) clientEmailInput.value = data.clientEmail;
+        if (clientAddrInput && data.clientAddr) clientAddrInput.value = data.clientAddr;
+
+        if (timelineInput && data.timeline) timelineInput.value = data.timeline;
+        if (milestonesInput && data.milestones) milestonesInput.value = data.milestones;
+        if (termsInput && data.terms) termsInput.value = data.terms;
+
+        if (discountInput && data.discount) discountInput.value = data.discount;
+        if (discountTypeSelect && data.discountType) discountTypeSelect.value = data.discountType;
+        if (taxInput && data.tax) taxInput.value = data.tax;
+
+        if (itemsBody) {
+          itemsBody.innerHTML = "";
+          if (data.items && data.items.length) {
+            data.items.forEach((item) => {
+              addLineItemRow(item.desc || "", parseFloat(item.qty) || 1, parseFloat(item.rate) || 0);
+            });
+          } else {
+            addLineItemRow("", 1, 0);
+          }
+        }
+
+        calculateQuotation(false);
+      } catch (e) {
+        console.error("Failed loading quotation session:", e);
+        addLineItemRow("", 1, 0);
+        calculateQuotation(false);
+      }
+    };
+
+    // Wipe Session
+    const wipeSession = () => {
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (e) {}
+
+      activeLogoDataUrl = "";
+      if (logoInput) logoInput.value = "";
+      if (logoImg) logoImg.src = "";
+      if (logoPlaceholder) logoPlaceholder.style.display = "flex";
+      if (logoPreviewWrap) logoPreviewWrap.style.display = "none";
+
+      if (bizNameInput) bizNameInput.value = "";
+      if (bizEmailInput) bizEmailInput.value = "";
+      if (bizPhoneInput) bizPhoneInput.value = "";
+      if (bizAddrInput) bizAddrInput.value = "";
+
+      if (clientNameInput) clientNameInput.value = "";
+      if (clientPersonInput) clientPersonInput.value = "";
+      if (clientPhoneInput) clientPhoneInput.value = "";
+      if (clientEmailInput) clientEmailInput.value = "";
+      if (clientAddrInput) clientAddrInput.value = "";
+
+      if (timelineInput) timelineInput.value = "";
+      if (milestonesInput) milestonesInput.value = "";
+      if (termsInput) termsInput.value = "";
+
+      if (discountInput) discountInput.value = "";
+      if (taxInput) taxInput.value = "";
+
+      if (itemsBody) {
+        itemsBody.innerHTML = "";
+        addLineItemRow("", 1, 0);
+      }
+
+      calculateQuotation(false);
+      showToast("✓ All quotation data wiped clean!");
+    };
+
+    // Countdown Timer Update
+    const updateCountdown = () => {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          if (timerDisplay) timerDisplay.textContent = "30:00";
+          return;
+        }
+        const data = JSON.parse(raw);
+        const age = Date.now() - (data.timestamp || 0);
+        const remaining = Math.max(0, SESSION_DURATION - age);
+
+        if (remaining <= 0) {
+          wipeSession();
+          if (timerDisplay) timerDisplay.textContent = "00:00";
+          return;
+        }
+
+        const mins = Math.floor(remaining / 60000);
+        const secs = Math.floor((remaining % 60000) / 1000);
+        if (timerDisplay) {
+          timerDisplay.textContent = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+        }
+      } catch (e) {
+        if (timerDisplay) timerDisplay.textContent = "30:00";
+      }
+    };
+
+    // Inputs event listeners for live recalculation
+    [
+      docTitleInput, quoteNumInput, quoteDateInput, quoteValidityInput,
+      bizNameInput, bizEmailInput, bizPhoneInput, bizAddrInput,
+      clientNameInput, clientPersonInput, clientPhoneInput, clientEmailInput, clientAddrInput,
+      timelineInput, milestonesInput, termsInput,
+      discountInput, discountTypeSelect, taxInput, currSelect
+    ].forEach((el) => {
+      if (el) {
+        el.addEventListener("input", () => calculateQuotation(true));
+        el.addEventListener("change", () => calculateQuotation(true));
+      }
+    });
+
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        if (confirm("Reset all fields on this quotation?")) {
+          wipeSession();
+        }
+      });
+    }
+
+    if (wipeBtn) {
+      wipeBtn.addEventListener("click", () => {
+        wipeSession();
+      });
+    }
+
+    // Download PDF / Print Handler
+    if (downloadPdfBtn) {
+      downloadPdfBtn.addEventListener("click", () => {
+        const sym = getSymbol();
+        const docTitle = docTitleInput && docTitleInput.value.trim() ? docTitleInput.value.trim() : "PRICE QUOTATION";
+        const quoteNum = quoteNumInput && quoteNumInput.value.trim() ? quoteNumInput.value.trim() : "QT-0001";
+        const quoteDate = quoteDateInput && quoteDateInput.value ? quoteDateInput.value : "—";
+        const validity = quoteValidityInput && quoteValidityInput.value.trim() ? quoteValidityInput.value.trim() : "Valid for 14 Days";
+
+        const bizName = bizNameInput && bizNameInput.value.trim() ? bizNameInput.value.trim() : "Business / Company Name";
+        const bizEmail = bizEmailInput ? bizEmailInput.value.trim() : "";
+        const bizPhone = bizPhoneInput ? bizPhoneInput.value.trim() : "";
+        const bizAddr = bizAddrInput ? bizAddrInput.value.trim() : "";
+
+        const clientName = clientNameInput && clientNameInput.value.trim() ? clientNameInput.value.trim() : "Client Organization";
+        const clientPerson = clientPersonInput ? clientPersonInput.value.trim() : "";
+        const clientPhone = clientPhoneInput ? clientPhoneInput.value.trim() : "";
+        const clientEmail = clientEmailInput ? clientEmailInput.value.trim() : "";
+        const clientAddr = clientAddrInput ? clientAddrInput.value.trim() : "";
+
+        const timeline = timelineInput ? timelineInput.value.trim() : "—";
+        const milestones = milestonesInput ? milestonesInput.value.trim() : "—";
+        const terms = termsInput ? termsInput.value.trim() : "";
+
+        // Populate #print-quotation-sheet
+        const printSheet = document.getElementById("print-quotation-sheet");
+        if (!printSheet) return;
+
+        // Logo
+        const printLogoContainer = document.getElementById("print-quote-logo-container");
+        const printLogoImg = document.getElementById("print-quote-logo-img");
+        if (activeLogoDataUrl && printLogoImg && printLogoContainer) {
+          printLogoImg.src = activeLogoDataUrl;
+          printLogoContainer.style.display = "block";
+        } else if (printLogoContainer) {
+          printLogoContainer.style.display = "none";
+        }
+
+        // Header & Meta
+        const elPrintDocTitle = document.getElementById("print-quote-doc-title");
+        const elPrintBizName = document.getElementById("print-quote-biz-name");
+        const elPrintBizMeta = document.getElementById("print-quote-biz-meta");
+        const elPrintQuoteNum = document.getElementById("print-quote-num");
+        const elPrintQuoteDate = document.getElementById("print-quote-date");
+        const elPrintQuoteValidity = document.getElementById("print-quote-validity");
+
+        if (elPrintDocTitle) elPrintDocTitle.textContent = docTitle;
+        if (elPrintBizName) elPrintBizName.textContent = bizName;
+        if (elPrintBizMeta) {
+          const parts = [bizAddr, bizPhone, bizEmail].filter(Boolean);
+          elPrintBizMeta.innerHTML = parts.join("<br>");
+        }
+        if (elPrintQuoteNum) elPrintQuoteNum.textContent = quoteNum;
+        if (elPrintQuoteDate) elPrintQuoteDate.textContent = quoteDate;
+        if (elPrintQuoteValidity) elPrintQuoteValidity.textContent = validity;
+
+        // Client
+        const elPrintClientName = document.getElementById("print-quote-client-name");
+        const elPrintClientMeta = document.getElementById("print-quote-client-meta");
+        if (elPrintClientName) elPrintClientName.textContent = clientName;
+        if (elPrintClientMeta) {
+          const cParts = [
+            clientPerson ? `Attn: ${clientPerson}` : "",
+            clientAddr,
+            clientPhone,
+            clientEmail
+          ].filter(Boolean);
+          elPrintClientMeta.innerHTML = cParts.join("<br>");
+        }
+
+        // Table Rows
+        const printItemsBody = document.getElementById("print-quote-items-body");
+        let subtotal = 0;
+        if (printItemsBody) {
+          printItemsBody.innerHTML = "";
+          const rows = itemsBody ? itemsBody.querySelectorAll("tr.inv-item-row") : [];
+          rows.forEach((row) => {
+            const desc = row.querySelector(".inv-item-desc")?.value.trim() || "Service / Scope Item";
+            const qty = parseFloat(row.querySelector(".inv-item-qty")?.value) || 0;
+            const rate = parseFloat(row.querySelector(".inv-item-rate")?.value) || 0;
+            const lineTotal = qty * rate;
+            subtotal += lineTotal;
+
+            const printTr = document.createElement("tr");
+            printTr.innerHTML = `
+              <td>${desc}</td>
+              <td style="text-align: center;">${qty}</td>
+              <td style="text-align: right;">${formatMoney(rate, sym)}</td>
+              <td style="text-align: right; font-weight: 600;">${formatMoney(lineTotal, sym)}</td>
+            `;
+            printItemsBody.appendChild(printTr);
+          });
+        }
+
+        // Calculations
+        const discRaw = parseFloat(discountInput ? discountInput.value : 0) || 0;
+        const isPct = discountTypeSelect && discountTypeSelect.value === "pct";
+        const discountAmount = isPct ? (subtotal * (discRaw / 100)) : discRaw;
+        const discountedSubtotal = Math.max(0, subtotal - discountAmount);
+        const taxRate = parseFloat(taxInput ? taxInput.value : 0) || 0;
+        const taxAmount = discountedSubtotal * (taxRate / 100);
+        const totalDue = discountedSubtotal + taxAmount;
+
+        const elSub = document.getElementById("print-quote-subtotal-val");
+        const elDiscRow = document.getElementById("print-quote-discount-row");
+        const elDiscVal = document.getElementById("print-quote-discount-val");
+        const elTaxRow = document.getElementById("print-quote-tax-row");
+        const elTaxVal = document.getElementById("print-quote-tax-val");
+        const elTaxLabel = document.getElementById("print-quote-tax-label");
+        const elTotalDue = document.getElementById("print-quote-total-due-val");
+
+        if (elSub) elSub.textContent = formatMoney(subtotal, sym);
+        if (elDiscRow) {
+          elDiscRow.style.display = discountAmount > 0 ? "flex" : "none";
+          if (elDiscVal) elDiscVal.textContent = `-${formatMoney(discountAmount, sym)}`;
+        }
+        if (elTaxRow) {
+          elTaxRow.style.display = taxAmount > 0 ? "flex" : "none";
+          if (elTaxLabel) elTaxLabel.textContent = `Tax / VAT (${taxRate}%):`;
+          if (elTaxVal) elTaxVal.textContent = `+${formatMoney(taxAmount, sym)}`;
+        }
+        if (elTotalDue) elTotalDue.textContent = formatMoney(totalDue, sym);
+
+        // Timeline & Terms
+        const elTimeline = document.getElementById("print-quote-timeline");
+        const elMilestones = document.getElementById("print-quote-milestones");
+        const elTermsWrap = document.getElementById("print-quote-terms-wrap");
+        const elTermsText = document.getElementById("print-quote-terms-text");
+
+        if (elTimeline) elTimeline.textContent = timeline;
+        if (elMilestones) elMilestones.textContent = milestones;
+
+        if (elTermsWrap && elTermsText) {
+          if (terms) {
+            elTermsWrap.style.display = "block";
+            elTermsText.textContent = terms;
+          } else {
+            elTermsWrap.style.display = "none";
+          }
+        }
+
+        // Set dynamic PDF filename via document.title
+        const originalDocTitle = document.title;
+        const safeDocTitle = docTitle.replace(/[/\\?%*:|"<>]/g, "").trim() || "Quotation";
+        const safeQuoteNum = quoteNum.replace(/[/\\?%*:|"<>]/g, "").trim();
+        document.title = safeQuoteNum ? `${safeDocTitle}_${safeQuoteNum}` : safeDocTitle;
+
+        window.print();
+
+        const restoreTitle = () => {
+          document.title = originalDocTitle;
+          window.removeEventListener("afterprint", restoreTitle);
+        };
+        window.addEventListener("afterprint", restoreTitle);
+        setTimeout(() => { document.title = originalDocTitle; }, 3000);
+      });
+    }
+
+    // Copy Plain Text Quotation
+    if (copySummaryBtn) {
+      copySummaryBtn.addEventListener("click", () => {
+        const sym = getSymbol();
+        const docTitle = docTitleInput && docTitleInput.value.trim() ? docTitleInput.value.trim() : "PRICE QUOTATION";
+        const quoteNum = quoteNumInput ? quoteNumInput.value.trim() : "QT-0001";
+        const bizName = bizNameInput ? bizNameInput.value.trim() : "Business";
+        const clientName = clientNameInput ? clientNameInput.value.trim() : "Client";
+
+        let lines = `===========================================
+${docTitle.toUpperCase()} #${quoteNum}
+===========================================
+PREPARED BY: ${bizName}
+PREPARED FOR: ${clientName}
+${clientPersonInput && clientPersonInput.value.trim() ? `ATTENTION: ${clientPersonInput.value.trim()}\n` : ""}DATE: ${quoteDateInput ? quoteDateInput.value : "—"}
+VALIDITY: ${quoteValidityInput ? quoteValidityInput.value : "Valid for 14 Days"}
+-------------------------------------------
+SERVICES & SCOPE OF WORK:\n`;
+
+        let subtotal = 0;
+        const rows = itemsBody ? itemsBody.querySelectorAll("tr.inv-item-row") : [];
+        rows.forEach((row, idx) => {
+          const desc = row.querySelector(".inv-item-desc")?.value.trim() || `Service ${idx + 1}`;
+          const qty = parseFloat(row.querySelector(".inv-item-qty")?.value) || 0;
+          const rate = parseFloat(row.querySelector(".inv-item-rate")?.value) || 0;
+          const total = qty * rate;
+          subtotal += total;
+          lines += `${idx + 1}. ${desc} (${qty} x ${formatMoney(rate, sym)}) = ${formatMoney(total, sym)}\n`;
+        });
+
+        const discRaw = parseFloat(discountInput ? discountInput.value : 0) || 0;
+        const isPct = discountTypeSelect && discountTypeSelect.value === "pct";
+        const discountAmount = isPct ? (subtotal * (discRaw / 100)) : discRaw;
+        const discountedSubtotal = Math.max(0, subtotal - discountAmount);
+        const taxRate = parseFloat(taxInput ? taxInput.value : 0) || 0;
+        const taxAmount = discountedSubtotal * (taxRate / 100);
+        const totalDue = discountedSubtotal + taxAmount;
+
+        lines += `-------------------------------------------
+Subtotal: ${formatMoney(subtotal, sym)}
+`;
+        if (discountAmount > 0) lines += `Discount: -${formatMoney(discountAmount, sym)}\n`;
+        if (taxAmount > 0) lines += `Tax/VAT (${taxRate}%): +${formatMoney(taxAmount, sym)}\n`;
+        lines += `TOTAL ESTIMATE: ${formatMoney(totalDue, sym)}
+-------------------------------------------
+TIMELINE: ${timelineInput ? timelineInput.value.trim() : "—"}
+PAYMENT SCHEDULE: ${milestonesInput ? milestonesInput.value.trim() : "—"}
+`;
+        if (termsInput && termsInput.value.trim()) {
+          lines += `\nTerms & Conditions: ${termsInput.value.trim()}\n`;
+        }
+        lines += `===========================================
+Generated via AlphaTNX Digital: https://digital.alphatnx.com/tool/quotation-generator`;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(lines).then(() => {
+            showToast("✓ Quotation summary copied to clipboard!");
+          });
+        } else {
+          showToast("✓ Quotation summary copied!");
         }
       });
     }

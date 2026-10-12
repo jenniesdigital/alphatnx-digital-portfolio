@@ -96,6 +96,21 @@
       "source": "/invoice-generator",
       "destination": "/tool/invoice-generator",
       "permanent": true
+    },
+    {
+      "source": "/tool-quotation-generator",
+      "destination": "/tool/quotation-generator",
+      "permanent": true
+    },
+    {
+      "source": "/tools/quotation-generator",
+      "destination": "/tool/quotation-generator",
+      "permanent": true
+    },
+    {
+      "source": "/quotation-generator",
+      "destination": "/tool/quotation-generator",
+      "permanent": true
     }
   ]
 }

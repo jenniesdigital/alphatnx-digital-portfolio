@@ -8978,6 +8978,10 @@ button {
 
 /* Print strictly results */
 @media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 14mm 14mm 14mm;
+  }
   body {
     background: #FFFFFF !important;
     color: #0F172A !important;
@@ -9365,12 +9369,18 @@ button {
 /* ==========================================================================
    PRINT INVOICE SHEET (@media print)
    ========================================================================== */
-.print-invoice-sheet {
+.print-invoice-sheet,
+.print-quotation-sheet {
   display: none;
 }
 
 @media print {
-  .print-invoice-sheet {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 14mm 14mm 14mm;
+  }
+  .print-invoice-sheet,
+  .print-quotation-sheet {
     display: block !important;
     visibility: visible !important;
     position: static !important;
