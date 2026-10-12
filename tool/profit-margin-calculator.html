@@ -125,7 +125,7 @@
         </div>
         <h1 class="tool-page-title">Profit Margin Calculator</h1>
         <p class="tool-page-subtitle">
-          Before you set prices, run ads, or ship orders, know your exact profit per product. Enter what you sell for and what each unit truly costs you—including supply, packaging, delivery dispatch, and payment gateway fees—so you never confuse high sales with actual profit.
+          Enter your selling price and costs to calculate your gross profit per unit, gross margin percentage, and markup instantly.
         </p>
       </div>
 
@@ -169,37 +169,29 @@
                   </div>
                 </div>
 
-                <!-- Direct Cost Breakdown -->
-                <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px; margin-top: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: var(--foreground-strong); display: block; margin-bottom: 12px;">
-                    Additional Direct Unit Costs (Fulfillment & Sales Fees)
-                  </span>
-
-                  <div class="form-input-row">
-                    <div class="calc-group">
-                      <label for="pm-shipping" class="form-label">Packaging & Waybill / Shipping</label>
-                      <input type="number" id="pm-shipping" class="calc-shipping form-input" value="" min="0" step="100" placeholder="0">
-                    </div>
-
-                    <div class="calc-group">
-                      <label for="pm-fee" class="form-label">Payment Gateway Fee (Paystack/Card)</label>
-                      <input type="number" id="pm-fee" class="calc-fee form-input" value="" min="0" step="25" placeholder="0">
-                    </div>
+                <div class="form-input-row">
+                  <div class="calc-group">
+                    <label for="pm-shipping" class="form-label">Packaging & Shipping (Optional)</label>
+                    <input type="number" id="pm-shipping" class="calc-shipping form-input" value="" min="0" step="100" placeholder="0">
                   </div>
 
-                  <div class="calc-group" style="margin-top: 12px;">
-                    <label for="pm-marketing" class="form-label">Marketing / Ad Spend Per Unit (CAC Estimate)</label>
-                    <input type="number" id="pm-marketing" class="calc-marketing form-input" value="" min="0" step="100" placeholder="0">
+                  <div class="calc-group">
+                    <label for="pm-marketing" class="form-label">Total Marketing / Ad Spend (Optional)</label>
+                    <input type="number" id="pm-marketing" class="calc-marketing form-input" value="" min="0" step="500" placeholder="0">
                   </div>
                 </div>
 
-                <!-- Monthly Sales Volume Slider -->
-                <div class="calc-group" style="border-top: 1px solid var(--border-subtle); padding-top: 16px; margin-top: 6px;">
-                  <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                    <label for="pm-volume" class="form-label">Estimated Monthly Sales Volume</label>
-                    <span class="calc-volume-display" style="font-size: 13.5px; font-weight: 700; color: var(--accent-sky);">1 unit</span>
+                <!-- Monthly Sales Volume Slider + Counter -->
+                <div class="calc-group" style="margin-top: 4px;">
+                  <div class="calc-vol-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <label for="pm-volume" class="form-label" style="margin-bottom: 0;">Estimated Monthly Sales Volume</label>
+                    <div class="calc-counter-wrap">
+                      <button type="button" class="calc-counter-btn btn-vol-minus" aria-label="Decrease volume">−</button>
+                      <input type="number" id="pm-volume-count" class="calc-volume-counter" min="1" max="50000" value="1" aria-label="Monthly sales volume count">
+                      <button type="button" class="calc-counter-btn btn-vol-plus" aria-label="Increase volume">+</button>
+                    </div>
                   </div>
-                  <input type="range" id="pm-volume" class="calc-volume-units calc-range" min="1" max="500" step="1" value="1">
+                  <input type="range" id="pm-volume" class="calc-volume-units calc-range" min="1" max="500" step="1" value="1" aria-label="Monthly sales volume slider">
                 </div>
 
               </div>
@@ -223,14 +215,6 @@
                   </div>
                 </div>
 
-                <!-- Health Status Badge -->
-                <div class="res-health-badge margin-health-badge is-warning">
-                  <span>Enter selling price and product cost to calculate margin</span>
-                </div>
-                <p class="res-health-desc result-note" style="margin-bottom: 12px;">
-                  Enter your selling price and direct product costs above to see your net profit per unit, margin percentage, and markup.
-                </p>
-
                 <!-- Proportional Visual Bar -->
                 <div class="margin-bar-wrapper">
                   <div class="margin-bar-label-row">
@@ -239,7 +223,7 @@
                   </div>
                   <div class="margin-bar">
                     <div class="margin-bar-seg-cogs" style="width: 0%;" title="Product Cost (COGS)"></div>
-                    <div class="margin-bar-seg-extras" style="width: 0%;" title="Fulfillment & Fees"></div>
+                    <div class="margin-bar-seg-extras" style="width: 0%;" title="Shipping & Marketing"></div>
                     <div class="margin-bar-seg-profit" style="width: 0%;" title="Gross Profit"></div>
                   </div>
                   <div class="margin-bar-legend">
@@ -249,7 +233,7 @@
                     </div>
                     <div class="margin-legend-item">
                       <span class="margin-legend-dot" style="background: #F59E0B;"></span>
-                      <span>Shipping, Fees & Ads</span>
+                      <span>Shipping & Marketing</span>
                     </div>
                     <div class="margin-legend-item">
                       <span class="margin-legend-dot" style="background: #10B981;"></span>
@@ -270,11 +254,15 @@
                       <td class="res-tbl-cogs" style="color: #EF4444;">-₦0</td>
                     </tr>
                     <tr>
-                      <td>Shipping, Gateway Fee & Ad Cost</td>
-                      <td class="res-tbl-extras" style="color: #F59E0B;">-₦0</td>
+                      <td>Packaging & Shipping</td>
+                      <td class="res-tbl-shipping" style="color: #F59E0B;">-₦0</td>
                     </tr>
                     <tr>
-                      <td>Total Direct Cost Per Unit</td>
+                      <td>Marketing Spend Per Unit</td>
+                      <td class="res-tbl-marketing" style="color: #F59E0B;">-₦0</td>
+                    </tr>
+                    <tr>
+                      <td>Total Cost Per Unit</td>
                       <td class="res-tbl-total-cost">-₦0</td>
                     </tr>
                     <tr class="total-row">
@@ -384,8 +372,12 @@
               <td id="print-tbl-cogs" style="padding: 8px 4px; text-align: right;">-₦0</td>
             </tr>
             <tr style="border-bottom: 1px solid #E2E8F0;">
-              <td style="padding: 8px 4px;">Shipping, Gateway Fee & Ad Cost</td>
-              <td id="print-tbl-extras" style="padding: 8px 4px; text-align: right;">-₦0</td>
+              <td style="padding: 8px 4px;">Packaging & Shipping</td>
+              <td id="print-tbl-shipping" style="padding: 8px 4px; text-align: right;">-₦0</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #E2E8F0;">
+              <td style="padding: 8px 4px;">Marketing Spend Per Unit</td>
+              <td id="print-tbl-marketing" style="padding: 8px 4px; text-align: right;">-₦0</td>
             </tr>
             <tr style="border-bottom: 1px solid #CBD5E1;">
               <td style="padding: 8px 4px; font-weight: 600;">Total Direct Unit Cost</td>

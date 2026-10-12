@@ -8273,9 +8273,28 @@ button {
 
 .margin-calc-grid {
   display: grid;
-  grid-template-columns: 1.05fr 1.1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(20px, 3.5vw, 36px);
-  align-items: start;
+  align-items: stretch;
+}
+
+.calc-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.calc-results-box {
+  background: var(--background-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .margin-calc-header-controls {
@@ -8307,9 +8326,9 @@ button {
 
 .margin-stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .margin-stat-pill {
@@ -8319,7 +8338,10 @@ button {
   padding: 12px 14px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 4px;
+  min-height: 74px;
+  box-sizing: border-box;
 }
 
 .margin-stat-label {
@@ -8328,6 +8350,7 @@ button {
   letter-spacing: 0.05em;
   color: var(--foreground-muted);
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .margin-stat-val {
@@ -8336,6 +8359,72 @@ button {
   color: var(--foreground-strong);
   font-variant-numeric: tabular-nums;
   line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Volume Stepper Counter */
+.calc-counter-wrap {
+  display: inline-flex;
+  align-items: center;
+  background: var(--background-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  overflow: hidden;
+  height: 32px;
+  box-sizing: border-box;
+}
+
+.calc-counter-btn {
+  background: transparent;
+  border: none;
+  color: var(--foreground-strong);
+  width: 30px;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s ease, color 0.15s ease;
+  user-select: none;
+  line-height: 1;
+}
+
+.calc-counter-btn:hover {
+  background: var(--background-card-hover);
+  color: var(--accent-sky);
+}
+
+.calc-counter-btn:active {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.calc-volume-counter {
+  width: 60px;
+  height: 100%;
+  background: transparent;
+  border: none;
+  border-left: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+  text-align: center;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--foreground-strong);
+  font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield;
+  outline: none;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+
+.calc-volume-counter::-webkit-outer-spin-button,
+.calc-volume-counter::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .margin-health-badge {
@@ -8434,6 +8523,7 @@ button {
 
 .margin-breakdown-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   font-size: 13.5px;
   margin-top: 10px;
@@ -8446,10 +8536,19 @@ button {
   text-align: left;
 }
 
+.margin-breakdown-table td:first-child {
+  width: 65%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .margin-breakdown-table th:last-child,
 .margin-breakdown-table td:last-child {
+  width: 35%;
   text-align: right;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .margin-breakdown-table tr.total-row td {

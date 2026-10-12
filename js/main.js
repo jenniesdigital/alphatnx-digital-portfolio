@@ -1498,17 +1498,16 @@
     const priceInput = wrapper.querySelector(".calc-price");
     const cogsInput = wrapper.querySelector(".calc-cogs");
     const shipInput = wrapper.querySelector(".calc-shipping");
-    const feeInput = wrapper.querySelector(".calc-fee");
     const mktInput = wrapper.querySelector(".calc-marketing");
     const volInput = wrapper.querySelector(".calc-volume-units");
-    const volDisplay = wrapper.querySelector(".calc-volume-display");
+    const volCountInput = wrapper.querySelector(".calc-volume-counter");
+    const volMinusBtn = wrapper.querySelector(".btn-vol-minus");
+    const volPlusBtn = wrapper.querySelector(".btn-vol-plus");
 
     // Output elements
     const profitVal = wrapper.querySelector(".res-profit-val");
     const marginVal = wrapper.querySelector(".res-margin-val");
     const markupVal = wrapper.querySelector(".res-markup-val");
-    const healthBadge = wrapper.querySelector(".res-health-badge");
-    const healthDesc = wrapper.querySelector(".res-health-desc");
 
     // Visual bar
     const barCogs = wrapper.querySelector(".margin-bar-seg-cogs");
@@ -1518,7 +1517,8 @@
     // Table elements
     const tblPrice = wrapper.querySelector(".res-tbl-price");
     const tblCogs = wrapper.querySelector(".res-tbl-cogs");
-    const tblExtras = wrapper.querySelector(".res-tbl-extras");
+    const tblShipping = wrapper.querySelector(".res-tbl-shipping");
+    const tblMarketing = wrapper.querySelector(".res-tbl-marketing");
     const tblTotalCost = wrapper.querySelector(".res-tbl-total-cost");
     const tblGrossProfit = wrapper.querySelector(".res-tbl-gross-profit");
 
@@ -1567,13 +1567,12 @@
       const price = parseFloat(priceInput.value) || 0;
       const cogs = parseFloat(cogsInput.value) || 0;
       const shipping = shipInput ? parseFloat(shipInput.value) || 0 : 0;
-      const fee = feeInput ? parseFloat(feeInput.value) || 0 : 0;
-      const marketing = mktInput ? parseFloat(mktInput.value) || 0 : 0;
-      const volume = volInput ? parseInt(volInput.value, 10) || 1 : 1;
+      const totalMarketing = mktInput ? parseFloat(mktInput.value) || 0 : 0;
+      const volume = volCountInput ? (parseInt(volCountInput.value, 10) || 1) : (volInput ? parseInt(volInput.value, 10) || 1 : 1);
 
-      if (volDisplay) volDisplay.textContent = volume.toLocaleString() + (volume === 1 ? " unit" : " units");
-
-      const extras = shipping + fee + marketing;
+      // Marketing CAC per unit derived from total spend divided by volume
+      const marketingPerUnit = volume > 0 ? (totalMarketing / volume) : 0;
+      const extras = shipping + marketingPerUnit;
       const totalCost = cogs + extras;
       const grossProfit = price - totalCost;
 
@@ -1588,13 +1587,6 @@
           marginVal.className = "margin-stat-val text-accent";
         }
         if (markupVal) markupVal.textContent = "0.0%";
-        if (healthBadge) {
-          healthBadge.className = "margin-health-badge is-warning";
-          healthBadge.innerHTML = "<span>Enter selling price and product cost to calculate margin</span>";
-        }
-        if (healthDesc) {
-          healthDesc.textContent = "Enter your selling price and direct product costs above to see your net profit per unit, margin percentage, and markup.";
-        }
         if (barCogs && barExtras && barProfit) {
           barCogs.style.width = "0%";
           barExtras.style.width = "0%";
@@ -1602,7 +1594,8 @@
         }
         if (tblPrice) tblPrice.textContent = formatCurrency(0, sym);
         if (tblCogs) tblCogs.textContent = formatCurrency(0, sym);
-        if (tblExtras) tblExtras.textContent = formatCurrency(0, sym);
+        if (tblShipping) tblShipping.textContent = formatCurrency(0, sym);
+        if (tblMarketing) tblMarketing.textContent = formatCurrency(0, sym);
         if (tblTotalCost) tblTotalCost.textContent = formatCurrency(0, sym);
         if (tblGrossProfit) {
           tblGrossProfit.textContent = formatCurrency(0, sym);
@@ -1632,43 +1625,6 @@
         markupVal.textContent = (markupPct).toFixed(1) + "%";
       }
 
-      // Update Health Assessment
-      if (healthBadge) {
-        if (price === 0) {
-          healthBadge.className = "margin-health-badge is-warning";
-          healthBadge.innerHTML = "<span>Enter your selling price to calculate margin</span>";
-        } else if (grossProfit < 0) {
-          healthBadge.className = "margin-health-badge is-low";
-          healthBadge.innerHTML = "<span>⚠️ Operating at a Loss (" + grossMarginPct.toFixed(1) + "%)</span>";
-        } else if (grossMarginPct < 15) {
-          healthBadge.className = "margin-health-badge is-low";
-          healthBadge.innerHTML = "<span>⚠️ Thin Margin (" + grossMarginPct.toFixed(1) + "%) — High risk to supply or delivery shocks</span>";
-        } else if (grossMarginPct < 35) {
-          healthBadge.className = "margin-health-badge is-healthy";
-          healthBadge.innerHTML = "<span>✓ Healthy Retail Margin (" + grossMarginPct.toFixed(1) + "%) — Sustainable for e-commerce</span>";
-        } else if (grossMarginPct < 60) {
-          healthBadge.className = "margin-health-badge is-strong";
-          healthBadge.innerHTML = "<span>⚡ Strong Margin (" + grossMarginPct.toFixed(1) + "%) — Excellent headroom for marketing</span>";
-        } else {
-          healthBadge.className = "margin-health-badge is-strong";
-          healthBadge.innerHTML = "<span>💎 Premium Margin (" + grossMarginPct.toFixed(1) + "%) — Exceptional brand pricing power</span>";
-        }
-      }
-
-      if (healthDesc) {
-        if (grossProfit < 0) {
-          healthDesc.textContent = "Your direct cost of goods and delivery exceeds your selling price. Every unit sold loses money. Review supplier prices, renegotiate terms, or raise base prices immediately.";
-        } else if (grossMarginPct < 15) {
-          healthDesc.textContent = "A margin under 15% leaves little buffer for exchange rate volatility, delivery failures, or return costs. Consider product bundles, raising order minimums, or improving supplier deals.";
-        } else if (grossMarginPct < 35) {
-          healthDesc.textContent = "A 15%–35% margin is a proven, healthy benchmark for high-velocity physical retail, groceries, and fast-moving consumer goods. Focus on repeat sales and streamlined operations.";
-        } else if (grossMarginPct < 60) {
-          healthDesc.textContent = "Margins between 35%–60% give your business substantial profit margins to invest aggressively into paid ads, customer acquisition, and professional systems.";
-        } else {
-          healthDesc.textContent = "Margins above 60% indicate superior product differentiation or premium luxury positioning. Maintain brand value and automate fulfillment workflows.";
-        }
-      }
-
       // Update Visual Bar
       if (barCogs && barExtras && barProfit) {
         if (price > 0 && totalCost <= price) {
@@ -1692,7 +1648,8 @@
       // Update Financial Table
       if (tblPrice) tblPrice.textContent = formatCurrency(price, sym);
       if (tblCogs) tblCogs.textContent = (cogs > 0 ? "-" : "") + formatCurrency(cogs, sym);
-      if (tblExtras) tblExtras.textContent = (extras > 0 ? "-" : "") + formatCurrency(extras, sym);
+      if (tblShipping) tblShipping.textContent = (shipping > 0 ? "-" : "") + formatCurrency(shipping, sym);
+      if (tblMarketing) tblMarketing.textContent = (marketingPerUnit > 0 ? "-" : "") + formatCurrency(marketingPerUnit, sym);
       if (tblTotalCost) tblTotalCost.textContent = (totalCost > 0 ? "-" : "") + formatCurrency(totalCost, sym);
       if (tblGrossProfit) {
         tblGrossProfit.textContent = formatCurrency(grossProfit, sym);
@@ -1716,8 +1673,7 @@
             price: price,
             cogs: cogs,
             ship: shipping,
-            fee: fee,
-            mkt: marketing,
+            mkt: totalMarketing,
             vol: volume
           }
         };
@@ -1757,10 +1713,10 @@
       if (priceInput) priceInput.value = "";
       if (cogsInput) cogsInput.value = "";
       if (shipInput) shipInput.value = "";
-      if (feeInput) feeInput.value = "";
       if (mktInput) mktInput.value = "";
       if (nameInput) nameInput.value = "";
       if (volInput) volInput.value = "1";
+      if (volCountInput) volCountInput.value = "1";
       runCalculation(false);
       if (timerDisplay) timerDisplay.textContent = "30:00";
       if (triggerToast) showToast("✓ Session data wiped from system");
@@ -1775,9 +1731,12 @@
         if (priceInput && urlParams.has("price")) priceInput.value = urlParams.get("price");
         if (cogsInput && urlParams.has("cogs")) cogsInput.value = urlParams.get("cogs");
         if (shipInput && urlParams.has("ship")) shipInput.value = urlParams.get("ship");
-        if (feeInput && urlParams.has("fee")) feeInput.value = urlParams.get("fee");
         if (mktInput && urlParams.has("mkt")) mktInput.value = urlParams.get("mkt");
-        if (volInput && urlParams.has("vol")) volInput.value = urlParams.get("vol");
+        if (urlParams.has("vol")) {
+          const v = urlParams.get("vol");
+          if (volInput) volInput.value = Math.min(parseInt(v, 10) || 1, 500);
+          if (volCountInput) volCountInput.value = v;
+        }
         runCalculation(true);
         return;
       }
@@ -1793,9 +1752,12 @@
             if (priceInput && d.price !== undefined) priceInput.value = d.price ? d.price : "";
             if (cogsInput && d.cogs !== undefined) cogsInput.value = d.cogs ? d.cogs : "";
             if (shipInput && d.ship !== undefined) shipInput.value = d.ship ? d.ship : "";
-            if (feeInput && d.fee !== undefined) feeInput.value = d.fee ? d.fee : "";
             if (mktInput && d.mkt !== undefined) mktInput.value = d.mkt ? d.mkt : "";
-            if (volInput && d.vol !== undefined) volInput.value = d.vol ? d.vol : "1";
+            if (d.vol !== undefined) {
+              const v = d.vol ? d.vol : "1";
+              if (volInput) volInput.value = Math.min(parseInt(v, 10) || 1, 500);
+              if (volCountInput) volCountInput.value = v;
+            }
             runCalculation(false);
             return;
           } else {
@@ -1809,7 +1771,7 @@
     };
 
     // Listeners for live typing
-    [priceInput, cogsInput, shipInput, feeInput, mktInput, nameInput].forEach((inp) => {
+    [priceInput, cogsInput, shipInput, mktInput, nameInput].forEach((inp) => {
       if (inp) {
         inp.addEventListener("input", () => runCalculation(true));
       }
@@ -1819,8 +1781,43 @@
       currSelect.addEventListener("change", () => runCalculation(true));
     }
 
+    // Synchronize Volume Slider & Counter
+    const syncVolume = (newVal) => {
+      let val = parseInt(newVal, 10);
+      if (isNaN(val) || val < 1) val = 1;
+      if (volCountInput) volCountInput.value = val;
+      if (volInput) volInput.value = Math.min(val, 500);
+      runCalculation(true);
+    };
+
     if (volInput) {
-      volInput.addEventListener("input", () => runCalculation(true));
+      volInput.addEventListener("input", () => {
+        const v = parseInt(volInput.value, 10) || 1;
+        if (volCountInput) volCountInput.value = v;
+        runCalculation(true);
+      });
+    }
+
+    if (volCountInput) {
+      volCountInput.addEventListener("input", () => {
+        const v = parseInt(volCountInput.value, 10) || 1;
+        if (volInput) volInput.value = Math.min(v, 500);
+        runCalculation(true);
+      });
+    }
+
+    if (volMinusBtn) {
+      volMinusBtn.addEventListener("click", () => {
+        const current = parseInt(volCountInput ? volCountInput.value : (volInput ? volInput.value : 1), 10) || 1;
+        syncVolume(Math.max(1, current - 1));
+      });
+    }
+
+    if (volPlusBtn) {
+      volPlusBtn.addEventListener("click", () => {
+        const current = parseInt(volCountInput ? volCountInput.value : (volInput ? volInput.value : 1), 10) || 1;
+        syncVolume(current + 1);
+      });
     }
 
     // Copy Summary Action
@@ -1831,11 +1828,11 @@
         const price = parseFloat(priceInput ? priceInput.value : 0) || 0;
         const cogs = parseFloat(cogsInput ? cogsInput.value : 0) || 0;
         const shipping = shipInput ? parseFloat(shipInput.value) || 0 : 0;
-        const fee = feeInput ? parseFloat(feeInput.value) || 0 : 0;
-        const marketing = mktInput ? parseFloat(mktInput.value) || 0 : 0;
-        const volume = volInput ? parseInt(volInput.value, 10) || 1 : 1;
+        const totalMarketing = mktInput ? parseFloat(mktInput.value) || 0 : 0;
+        const volume = volCountInput ? (parseInt(volCountInput.value, 10) || 1) : (volInput ? parseInt(volInput.value, 10) || 1 : 1);
 
-        const totalCost = cogs + shipping + fee + marketing;
+        const marketingPerUnit = volume > 0 ? (totalMarketing / volume) : 0;
+        const totalCost = cogs + shipping + marketingPerUnit;
         const profit = price - totalCost;
         const marginPct = price > 0 ? ((profit / price) * 100).toFixed(1) : "0.0";
         const markupPct = totalCost > 0 ? ((profit / totalCost) * 100).toFixed(1) : "0.0";
@@ -1848,10 +1845,9 @@ Selling Price: ${formatCurrency(price, sym)}
 
 DIRECT COSTS:
 - Product / COGS: ${formatCurrency(cogs, sym)}
-- Shipping & Packaging: ${formatCurrency(shipping, sym)}
-- Gateway & Transaction Fee: ${formatCurrency(fee, sym)}
-- Marketing & Ad CAC: ${formatCurrency(marketing, sym)}
-Total Direct Cost: ${formatCurrency(totalCost, sym)}
+- Packaging & Shipping: ${formatCurrency(shipping, sym)}
+- Marketing Spend Per Unit: ${formatCurrency(marketingPerUnit, sym)}${totalMarketing > 0 ? ` (Total Budget: ${formatCurrency(totalMarketing, sym)} ÷ ${volume} units)` : ""}
+Total Direct Cost Per Unit: ${formatCurrency(totalCost, sym)}
 
 RESULTS:
 Gross Profit Per Unit: ${formatCurrency(profit, sym)}
@@ -1859,8 +1855,8 @@ Gross Margin: ${marginPct}%
 Markup: ${markupPct}%
 
 MONTHLY PROJECTION (${volume} units):
-- Revenue: ${formatCurrency(price * volume, sym)}
-- Gross Profit: ${formatCurrency(profit * volume, sym)}
+- Projected Revenue: ${formatCurrency(price * volume, sym)}
+- Projected Gross Profit: ${formatCurrency(profit * volume, sym)}
 
 Calculated with AlphaTNX Free Business Tools:
 https://digital.alphatnx.com/tool/profit-margin-calculator
@@ -1887,9 +1883,9 @@ https://digital.alphatnx.com/tool/profit-margin-calculator
         if (priceInput && priceInput.value) params.set("price", priceInput.value);
         if (cogsInput && cogsInput.value) params.set("cogs", cogsInput.value);
         if (shipInput && shipInput.value) params.set("ship", shipInput.value);
-        if (feeInput && feeInput.value) params.set("fee", feeInput.value);
         if (mktInput && mktInput.value) params.set("mkt", mktInput.value);
-        if (volInput && volInput.value) params.set("vol", volInput.value);
+        const v = volCountInput ? volCountInput.value : (volInput ? volInput.value : "1");
+        params.set("vol", v);
 
         const shareUrl = `${window.location.origin}/tool/profit-margin-calculator?${params.toString()}`;
         if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1910,10 +1906,10 @@ https://digital.alphatnx.com/tool/profit-margin-calculator
         const price = parseFloat(priceInput ? priceInput.value : 0) || 0;
         const cogs = parseFloat(cogsInput ? cogsInput.value : 0) || 0;
         const shipping = shipInput ? parseFloat(shipInput.value) || 0 : 0;
-        const fee = feeInput ? parseFloat(feeInput.value) || 0 : 0;
-        const marketing = mktInput ? parseFloat(mktInput.value) || 0 : 0;
-        const volume = volInput ? parseInt(volInput.value, 10) || 1 : 1;
-        const totalCost = cogs + shipping + fee + marketing;
+        const totalMarketing = mktInput ? parseFloat(mktInput.value) || 0 : 0;
+        const volume = volCountInput ? (parseInt(volCountInput.value, 10) || 1) : (volInput ? parseInt(volInput.value, 10) || 1 : 1);
+        const marketingPerUnit = volume > 0 ? (totalMarketing / volume) : 0;
+        const totalCost = cogs + shipping + marketingPerUnit;
         const grossProfit = price - totalCost;
         const grossMarginPct = price > 0 ? (grossProfit / price) * 100 : 0;
         const markupPct = totalCost > 0 ? (grossProfit / totalCost) * 100 : 0;
@@ -1929,7 +1925,8 @@ https://digital.alphatnx.com/tool/profit-margin-calculator
           const elHealth = document.getElementById("print-health-status");
           const elPrice = document.getElementById("print-tbl-price");
           const elCogs = document.getElementById("print-tbl-cogs");
-          const elExtras = document.getElementById("print-tbl-extras");
+          const elShipping = document.getElementById("print-tbl-shipping");
+          const elMarketing = document.getElementById("print-tbl-marketing");
           const elTotalCost = document.getElementById("print-tbl-total-cost");
           const elGrossProfit = document.getElementById("print-tbl-gross-profit");
           const elProjRev = document.getElementById("print-proj-rev");
@@ -1951,9 +1948,10 @@ https://digital.alphatnx.com/tool/profit-margin-calculator
             else elHealth.textContent = "Strong Margin (" + grossMarginPct.toFixed(1) + "%)";
           }
           if (elPrice) elPrice.textContent = formatCurrency(price, sym);
-          if (elCogs) elCogs.textContent = "-" + formatCurrency(cogs, sym);
-          if (elExtras) elExtras.textContent = "-" + formatCurrency(shipping + fee + marketing, sym);
-          if (elTotalCost) elTotalCost.textContent = "-" + formatCurrency(totalCost, sym);
+          if (elCogs) elCogs.textContent = (cogs > 0 ? "-" : "") + formatCurrency(cogs, sym);
+          if (elShipping) elShipping.textContent = (shipping > 0 ? "-" : "") + formatCurrency(shipping, sym);
+          if (elMarketing) elMarketing.textContent = (marketingPerUnit > 0 ? "-" : "") + formatCurrency(marketingPerUnit, sym);
+          if (elTotalCost) elTotalCost.textContent = (totalCost > 0 ? "-" : "") + formatCurrency(totalCost, sym);
           if (elGrossProfit) elGrossProfit.textContent = formatCurrency(grossProfit, sym);
           if (elProjRev) elProjRev.textContent = formatCurrency(price * volume, sym);
           if (elProjProfit) elProjProfit.textContent = formatCurrency(grossProfit * volume, sym);
