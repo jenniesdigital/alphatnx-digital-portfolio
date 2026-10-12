@@ -68,6 +68,16 @@
       "permanent": true
     },
     {
+      "source": "/how-to-start-an-online-store-in-nigeria",
+      "destination": "/blog/how-to-start-an-online-store-in-nigeria",
+      "permanent": true
+    },
+    {
+      "source": "/blog-how-to-start-an-online-store-in-nigeria",
+      "destination": "/blog/how-to-start-an-online-store-in-nigeria",
+      "permanent": true
+    },
+    {
       "source": "/tool-profit-margin",
       "destination": "/tool/profit-margin-calculator",
       "permanent": true
