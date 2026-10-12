@@ -2549,8 +2549,7 @@ https://digital.alphatnx.com/tool/profit-margin-calculator
         // Set dynamic PDF filename via document.title
         const originalDocTitle = document.title;
         const safeDocTitle = docTitle.replace(/[/\\?%*:|"<>]/g, "").trim() || "Invoice";
-        const safeDocNum = invNum.replace(/[/\\?%*:|"<>]/g, "").trim();
-        document.title = safeDocNum ? `${safeDocTitle}_${safeDocNum}` : safeDocTitle;
+        document.title = safeDocTitle;
 
         window.print();
 
@@ -3194,8 +3193,7 @@ Generated via AlphaTNX Digital: https://digital.alphatnx.com/tool/invoice-genera
         // Set dynamic PDF filename via document.title
         const originalDocTitle = document.title;
         const safeDocTitle = docTitle.replace(/[/\\?%*:|"<>]/g, "").trim() || "Quotation";
-        const safeQuoteNum = quoteNum.replace(/[/\\?%*:|"<>]/g, "").trim();
-        document.title = safeQuoteNum ? `${safeDocTitle}_${safeQuoteNum}` : safeDocTitle;
+        document.title = safeDocTitle;
 
         window.print();
 

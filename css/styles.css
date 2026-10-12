@@ -8977,12 +8977,19 @@ button {
 }
 
 /* Print strictly results */
+@page {
+  size: A4 portrait;
+  margin: 0mm !important;
+}
+
 @media print {
   @page {
     size: A4 portrait;
-    margin: 10mm 14mm 14mm 14mm;
+    margin: 0mm !important;
   }
-  body {
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
     background: #FFFFFF !important;
     color: #0F172A !important;
   }
@@ -8994,14 +9001,14 @@ button {
     visibility: visible !important;
     position: static !important;
     width: 100% !important;
-    max-width: 680px !important;
+    max-width: 100% !important;
     margin: 0 auto !important;
-    padding: 24px !important;
+    padding: 15mm 16mm !important;
+    box-sizing: border-box !important;
     background: #FFFFFF !important;
     color: #0F172A !important;
     box-shadow: none !important;
-    border: 1px solid #E2E8F0 !important;
-    border-radius: 10px !important;
+    border: none !important;
   }
 }
 
@@ -9377,17 +9384,18 @@ button {
 @media print {
   @page {
     size: A4 portrait;
-    margin: 10mm 14mm 14mm 14mm;
+    margin: 0mm !important;
   }
   .print-invoice-sheet,
   .print-quotation-sheet {
     display: block !important;
     visibility: visible !important;
-    position: static !important;
+    position: relative !important;
     width: 100% !important;
-    max-width: 760px !important;
-    margin: 0 auto !important;
-    padding: 24px !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 15mm 16mm 22mm 16mm !important;
+    box-sizing: border-box !important;
     background: #FFFFFF !important;
     color: #0F172A !important;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
@@ -9518,11 +9526,16 @@ button {
     color: #0F172A;
   }
   .print-inv-footer {
-    border-top: 1px solid #E2E8F0;
-    padding-top: 12px;
-    text-align: center;
-    font-size: 10.5px;
-    color: #94A3B8;
+    position: fixed !important;
+    bottom: 8mm !important;
+    left: 16mm !important;
+    right: 16mm !important;
+    border-top: 1px solid #E2E8F0 !important;
+    padding-top: 10px !important;
+    text-align: center !important;
+    font-size: 10.5px !important;
+    color: #94A3B8 !important;
+    background: #FFFFFF !important;
   }
 }
 
