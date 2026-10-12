@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="/">
+  <title>Invoice Generator · Free Business Tools · AlphaTNX Digital</title>
+  <meta name="description" content="Create professional invoices with business name, logo, client details, line items, discounts, taxes and payment instructions. Download as PDF or print instantly.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Invoice Generator · AlphaTNX Digital">
+  <meta property="og:description" content="Create professional invoices with business name, logo, line items, discounts, taxes and payment instructions. Download as PDF or print.">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/04_Favicons_and_App_Icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" href="/assets/brand/02_Logo_Marks_Monogram/Transparent_PNG_HighRes/AlphaTNX_Mark_BrandColor_512px.png">
+  <link rel="apple-touch-icon" href="/assets/brand/04_Favicons_and_App_Icons/apple-touch-icon-180x180.png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-away-title="Have a wonderful day ♥">
+
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-content">
+      <span class="preloader-brand">AlphaTNX Digital</span>
+      <div class="preloader-bar-wrap"><div class="preloader-bar" id="preloader-bar"></div></div>
+      <div class="preloader-meta"><span class="preloader-status">Loading tool</span><span class="preloader-count" id="preloader-count">0%</span></div>
+    </div>
+  </div>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header header--default" id="site-header">
+    <nav class="nav">
+      <a href="/" class="nav-brand-wrap" aria-label="AlphaTNX Digital Home">
+        <img src="/assets/brand/01_Logos_Full_Lockup/Transparent_PNG_HighRes/AlphaTNX_FullLogo_White_1080p.png" alt="AlphaTNX Digital" class="nav-brand-img nav-brand-img--dark">
+        <img src="/assets/brand/01_Logos_Full_Lockup/Transparent_PNG_HighRes/AlphaTNX_FullLogo_BrandColor_1080p.png" alt="AlphaTNX Digital" class="nav-brand-img nav-brand-img--light">
+      </a>
+
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about" class="nav-link">About</a>
+        <a href="/solutions" class="nav-link">Solutions</a>
+        <a href="/work" class="nav-link">Work</a>
+        <div class="nav-dropdown">
+          <button type="button" class="nav-link nav-dropdown-btn" aria-haspopup="true" aria-expanded="false" aria-label="Open Resources menu">
+            <span>Resources</span>
+            <svg class="dropdown-chevron" viewBox="0 0 10 6" width="9" height="6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="/blog" class="nav-dropdown-item" role="menuitem">Blog</a>
+            <div class="nav-dropdown-divider"></div>
+            <a href="/tools" class="nav-dropdown-item is-active" role="menuitem">Tools</a>
+            <div class="nav-dropdown-divider"></div>
+            <a href="/business-library" class="nav-dropdown-item" role="menuitem">Business Library</a>
+            <div class="nav-dropdown-divider"></div>
+            <a href="/newsletter" class="nav-dropdown-item" role="menuitem">Newsletter</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <button class="theme-switch-icon" id="theme-switch" aria-label="Toggle light/dark theme">
+          <svg class="theme-svg theme-svg--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="theme-svg theme-svg--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="nav-scroll-cta">Let’s Talk</a>
+      </div>
+
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile Navigation Modal -->
+  <div class="nav-modal" id="nav-modal" role="dialog" aria-label="Main menu" aria-hidden="true">
+    <div class="nav-modal-body">
+      <div class="nav-modal-group">
+        <a href="/" class="nav-modal-link">Home</a>
+        <a href="/about" class="nav-modal-link">About</a>
+        <a href="/solutions" class="nav-modal-link">Solutions</a>
+        <a href="/work" class="nav-modal-link">Work</a>
+        <div class="nav-modal-dropdown">
+          <button type="button" class="nav-modal-link nav-modal-dropdown-btn" aria-expanded="false" aria-label="Toggle Resources menu">
+            <span>Resources</span>
+            <svg class="nav-modal-chevron" viewBox="0 0 12 8" width="16" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.5l5 5 5-5"/></svg>
+          </button>
+          <div class="nav-modal-submenu" aria-hidden="true">
+            <a href="/blog" class="nav-modal-link nav-modal-subitem">Blog</a>
+            <a href="/tools" class="nav-modal-link nav-modal-subitem is-active">Tools</a>
+            <a href="/business-library" class="nav-modal-link nav-modal-subitem">Business Library</a>
+            <a href="/newsletter" class="nav-modal-link nav-modal-subitem">Newsletter</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-modal-footer">
+        <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="nav-modal-cta">Let’s Talk</a>
+      </div>
+      <div class="nav-modal-contact">
+        <a href="https://www.facebook.com/share/1BvpZRwrZ5/" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://www.instagram.com/alphatnxdigital" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/alphatnx-digital" target="_blank" rel="noopener noreferrer" class="nav-modal-contact-link" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        </a>
+        <a href="mailto:hello@digital.alphatnx.com" class="nav-modal-contact-link" aria-label="Email">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content" id="main-content">
+    <main class="tool-app-main">
+
+      <!-- Centered Header Section (Proper navbar clearance) -->
+      <div class="tool-hero-center">
+        <div class="tool-top-breadcrumb">
+          <a href="/tools" class="tool-breadcrumb-link">Tools</a>
+          <span class="tool-breadcrumb-sep">/</span>
+          <span class="tool-breadcrumb-curr">Invoice Generator</span>
+        </div>
+        <h1 class="tool-page-title">Invoice Generator</h1>
+        <p class="tool-page-subtitle">
+          Create professional invoices with a business name, logo, client details, line items, discounts, taxes and payment instructions. Download as PDF or print.
+        </p>
+      </div>
+
+      <!-- FOCUSED TOOL WORKSPACE (920px max-width, elevated shadow) -->
+      <div class="tool-workspace-wide">
+        <section class="invoice-gen-module" id="invoice-tool">
+          <div class="margin-calc-card invoice-card-wrap">
+
+            <!-- Controls Header: Document Title, Currency & Metadata -->
+            <div class="inv-header-controls">
+              <div class="inv-header-left">
+                <input type="text" id="inv-doc-title" class="inv-title-input form-input" value="INVOICE" placeholder="INVOICE" aria-label="Document Title">
+              </div>
+              <div class="inv-header-right">
+                <div class="inv-control-item">
+                  <label for="inv-curr-select" class="inv-control-label">Currency:</label>
+                  <select id="inv-curr-select" class="calc-currency inv-currency-select" aria-label="Currency Selector">
+                    <option value="₦" selected>₦ Nigerian Naira (NGN)</option>
+                    <option value="$">$ US Dollar (USD)</option>
+                    <option value="£">£ British Pound (GBP)</option>
+                    <option value="€">€ Euro (EUR)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Grid: Metadata Numbers & Dates -->
+            <div class="inv-meta-grid">
+              <div class="calc-group">
+                <label for="inv-number" class="form-label">Invoice Number</label>
+                <input type="text" id="inv-number" class="form-input" placeholder="INV-0001" value="INV-0001">
+              </div>
+              <div class="calc-group">
+                <label for="inv-date" class="form-label">Invoice Date</label>
+                <input type="date" id="inv-date" class="form-input">
+              </div>
+              <div class="calc-group">
+                <label for="inv-due-date" class="form-label">Payment Due Date</label>
+                <input type="date" id="inv-due-date" class="form-input">
+              </div>
+            </div>
+
+            <!-- Party Details: From (Business) & Bill To (Client) -->
+            <div class="inv-parties-grid">
+              
+              <!-- Left Column: Business (From) -->
+              <div class="inv-party-col">
+                <span class="inv-section-title">Your Business Details (From)</span>
+                
+                <!-- Logo Uploader Box -->
+                <div class="inv-logo-zone" id="inv-logo-zone">
+                  <input type="file" id="inv-logo-input" accept="image/*" class="inv-logo-file" aria-label="Upload Business Logo">
+                  <div class="inv-logo-placeholder" id="inv-logo-placeholder">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                    <span>Click to add Business Logo (Optional)</span>
+                  </div>
+                  <div class="inv-logo-preview-wrap" id="inv-logo-preview-wrap" style="display: none;">
+                    <img id="inv-logo-img" src="" alt="Business Logo" class="inv-logo-img">
+                    <button type="button" id="inv-logo-remove-btn" class="inv-logo-remove" title="Remove Logo">✕ Remove</button>
+                  </div>
+                </div>
+
+                <div class="calc-group">
+                  <label for="inv-biz-name" class="form-label">Business / Company Name *</label>
+                  <input type="text" id="inv-biz-name" class="form-input" placeholder="e.g. Acme Studio Ltd" required>
+                </div>
+                <div class="form-input-row">
+                  <div class="calc-group">
+                    <label for="inv-biz-email" class="form-label">Email Address</label>
+                    <input type="email" id="inv-biz-email" class="form-input" placeholder="hello@acme.com">
+                  </div>
+                  <div class="calc-group">
+                    <label for="inv-biz-phone" class="form-label">Phone / WhatsApp</label>
+                    <input type="text" id="inv-biz-phone" class="form-input" placeholder="+234 800 000 0000">
+                  </div>
+                </div>
+                <div class="calc-group">
+                  <label for="inv-biz-address" class="form-label">Business Address</label>
+                  <input type="text" id="inv-biz-address" class="form-input" placeholder="12 Marina Boulevard, Lagos">
+                </div>
+              </div>
+
+              <!-- Right Column: Client (Bill To) -->
+              <div class="inv-party-col">
+                <span class="inv-section-title">Client Details (Bill To)</span>
+                <div class="calc-group">
+                  <label for="inv-client-name" class="form-label">Client / Customer Name *</label>
+                  <input type="text" id="inv-client-name" class="form-input" placeholder="e.g. John Doe / Global Tech Ltd" required>
+                </div>
+                <div class="form-input-row">
+                  <div class="calc-group">
+                    <label for="inv-client-email" class="form-label">Client Email</label>
+                    <input type="email" id="inv-client-email" class="form-input" placeholder="client@company.com">
+                  </div>
+                  <div class="calc-group">
+                    <label for="inv-client-phone" class="form-label">Client Phone</label>
+                    <input type="text" id="inv-client-phone" class="form-input" placeholder="+234 811 000 0000">
+                  </div>
+                </div>
+                <div class="calc-group">
+                  <label for="inv-client-address" class="form-label">Client Address / Location</label>
+                  <input type="text" id="inv-client-address" class="form-input" placeholder="Abuja, Nigeria">
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Dynamic Line Items Section -->
+            <div class="inv-items-section">
+              <span class="inv-section-title">Itemized Products & Services</span>
+              
+              <div class="inv-items-table-wrap">
+                <table class="inv-items-table" id="inv-items-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 48%;">Description</th>
+                      <th style="width: 14%; text-align: center;">Qty</th>
+                      <th style="width: 20%; text-align: right;">Unit Price</th>
+                      <th style="width: 20%; text-align: right;">Total</th>
+                      <th style="width: 8%; text-align: center;"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="inv-items-body">
+                    <!-- Dynamic rows inserted here -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="inv-add-row-bar">
+                <button type="button" id="inv-add-item-btn" class="inv-add-item-btn">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  <span>Add Line Item</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Bottom Section: Payment Instructions + Financial Totals -->
+            <div class="inv-bottom-grid">
+              
+              <!-- Payment Instructions & Terms -->
+              <div class="inv-bottom-col">
+                <span class="inv-section-title">Bank Payment Instructions</span>
+                <div class="form-input-row">
+                  <div class="calc-group">
+                    <label for="inv-bank-name" class="form-label">Bank Name</label>
+                    <input type="text" id="inv-bank-name" class="form-input" placeholder="e.g. Access Bank / GTBank">
+                  </div>
+                  <div class="calc-group">
+                    <label for="inv-account-num" class="form-label">Account Number</label>
+                    <input type="text" id="inv-account-num" class="form-input" placeholder="0123456789">
+                  </div>
+                </div>
+                <div class="calc-group">
+                  <label for="inv-account-name" class="form-label">Account Name</label>
+                  <input type="text" id="inv-account-name" class="form-input" placeholder="e.g. Acme Studio Limited">
+                </div>
+                <div class="calc-group">
+                  <label for="inv-notes" class="form-label">Payment Terms & Notes</label>
+                  <textarea id="inv-notes" class="form-input inv-notes-textarea" rows="2" placeholder="Payment is due within 7 days. Thank you for your business!"></textarea>
+                </div>
+              </div>
+
+              <!-- Summary Totals Calculation -->
+              <div class="inv-bottom-col">
+                <div class="inv-totals-box">
+                  <div class="inv-total-row">
+                    <span>Subtotal</span>
+                    <strong id="inv-subtotal-val">₦0</strong>
+                  </div>
+                  <div class="inv-total-row">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span>Discount</span>
+                      <input type="number" id="inv-discount-input" class="inv-mini-input form-input" min="0" placeholder="0" style="width: 70px; padding: 4px 8px; font-size: 13px;">
+                      <select id="inv-discount-type" class="inv-mini-select" aria-label="Discount Type">
+                        <option value="flat">₦</option>
+                        <option value="pct">%</option>
+                      </select>
+                    </div>
+                    <span id="inv-discount-val">-₦0</span>
+                  </div>
+                  <div class="inv-total-row">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span>Tax / VAT (%)</span>
+                      <input type="number" id="inv-tax-input" class="inv-mini-input form-input" min="0" max="100" step="0.5" placeholder="0" style="width: 70px; padding: 4px 8px; font-size: 13px;">
+                      <span style="font-size: 12px; color: var(--foreground-muted);">%</span>
+                    </div>
+                    <span id="inv-tax-val">+₦0</span>
+                  </div>
+                  <div class="inv-grand-total-row">
+                    <span>Total Due</span>
+                    <strong id="inv-total-due-val" class="text-accent">₦0</strong>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Action Buttons Suite -->
+            <div class="calc-actions-row" style="margin-top: 24px;">
+              <button type="button" id="inv-download-pdf-btn" class="calc-btn-action is-primary-action" title="Download clean PDF or print invoice">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span>Download as PDF / Print</span>
+              </button>
+
+              <button type="button" id="inv-copy-summary-btn" class="calc-btn-action" title="Copy clean formatted invoice text to clipboard">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span>Copy Invoice Summary</span>
+              </button>
+
+              <button type="button" id="inv-reset-btn" class="calc-btn-action" title="Clear all fields and start fresh">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                <span>Reset Form</span>
+              </button>
+            </div>
+
+            <!-- Privacy Guarantee & 30-Minute Auto-Wipe Banner -->
+            <div class="calc-privacy-banner">
+              <div class="calc-privacy-info">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-sky)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <span>
+                  <strong>Confidential & Private:</strong> We do not store your client details or financial figures on any server. Active session data will automatically purge from system memory in: <strong class="session-timer-display" style="color: var(--accent-sky);">30:00</strong>.
+                </span>
+              </div>
+              <button type="button" class="btn-wipe-data calc-privacy-wipe-btn" id="inv-wipe-data-btn" title="Purge all active invoice data immediately">
+                Wipe Data Now
+              </button>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+      <!-- EXCLUSIVE PRINT/DOWNLOAD INVOICE DOCUMENT (A4 Crisp Sheet) -->
+      <div id="print-invoice-sheet" class="print-invoice-sheet" aria-hidden="true">
+        
+        <!-- Print Header -->
+        <div class="print-inv-header">
+          <div class="print-inv-brand">
+            <div id="print-logo-container" style="display: none; margin-bottom: 8px;">
+              <img id="print-inv-logo-img" src="" alt="Business Logo" style="max-height: 60px; max-width: 180px; object-fit: contain;">
+            </div>
+            <h2 id="print-biz-name" class="print-inv-biz-title">Business Name</h2>
+            <p id="print-biz-meta" class="print-inv-meta-text"></p>
+          </div>
+          <div class="print-inv-doc-meta">
+            <h1 id="print-doc-title" class="print-inv-title">INVOICE</h1>
+            <table class="print-meta-table">
+              <tr>
+                <td>Invoice #:</td>
+                <td id="print-inv-num">INV-0001</td>
+              </tr>
+              <tr>
+                <td>Issue Date:</td>
+                <td id="print-inv-date">—</td>
+              </tr>
+              <tr>
+                <td>Due Date:</td>
+                <td id="print-inv-due-date">—</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Billed To -->
+        <div class="print-inv-billto">
+          <span class="print-section-tag">BILLED TO:</span>
+          <h3 id="print-client-name" class="print-client-title">Client Name</h3>
+          <p id="print-client-meta" class="print-inv-meta-text"></p>
+        </div>
+
+        <!-- Line Items Table -->
+        <table class="print-inv-table">
+          <thead>
+            <tr>
+              <th style="width: 50%;">Description</th>
+              <th style="width: 15%; text-align: center;">Qty</th>
+              <th style="width: 17%; text-align: right;">Unit Price</th>
+              <th style="width: 18%; text-align: right;">Amount</th>
+            </tr>
+          </thead>
+          <tbody id="print-items-body">
+            <!-- Dynamic print rows inserted here -->
+          </tbody>
+        </table>
+
+        <!-- Totals & Bank Details Row -->
+        <div class="print-inv-summary-grid">
+          
+          <!-- Bank Details -->
+          <div class="print-bank-box">
+            <span class="print-section-tag">PAYMENT DETAILS</span>
+            <div id="print-bank-content" style="font-size: 13px; line-height: 1.6; color: #1E293B;">
+              <div><strong>Bank:</strong> <span id="print-bank-name">—</span></div>
+              <div><strong>Account Number:</strong> <span id="print-account-num">—</span></div>
+              <div><strong>Account Name:</strong> <span id="print-account-name">—</span></div>
+            </div>
+            <div id="print-notes-wrap" style="margin-top: 14px; padding-top: 10px; border-top: 1px dashed #CBD5E1; font-size: 12px; color: #475569;">
+              <strong>Terms & Notes:</strong>
+              <p id="print-notes-text" style="margin: 4px 0 0; line-height: 1.5;">—</p>
+            </div>
+          </div>
+
+          <!-- Financial Calculation Slip -->
+          <div class="print-totals-box">
+            <div class="print-tot-row">
+              <span>Subtotal:</span>
+              <strong id="print-subtotal-val">₦0</strong>
+            </div>
+            <div class="print-tot-row" id="print-discount-row" style="display: none;">
+              <span>Discount:</span>
+              <strong id="print-discount-val">-₦0</strong>
+            </div>
+            <div class="print-tot-row" id="print-tax-row" style="display: none;">
+              <span id="print-tax-label">Tax / VAT:</span>
+              <strong id="print-tax-val">+₦0</strong>
+            </div>
+            <div class="print-grand-row">
+              <span>Total Due:</span>
+              <strong id="print-total-due-val">₦0</strong>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="print-inv-footer">
+          Generated via AlphaTNX Digital Free Business Tools · digital.alphatnx.com/tool/invoice-generator
+        </div>
+
+      </div>
+
+      <!-- READABLE EDUCATIONAL EXPLANATION AT BOTTOM (Starts with 'What is an Invoice?') -->
+      <div class="tool-reading-content">
+        <article class="blog-body">
+          <h2>What is an Invoice?</h2>
+          <p>
+            An <strong>invoice</strong> is an official commercial document issued by a seller to a buyer that outlines products delivered or services performed, itemizes agreed prices, and formally requests payment under agreed terms.
+          </p>
+          <p>
+            Unlike a simple bank transfer screenshot or an informal WhatsApp chat message, a well-formatted invoice serves as a binding legal record of sale, establishes clear credit and delivery terms, and provides documentation for corporate tax filings, accounting audits, and dispute resolution.
+          </p>
+
+          <h2>Invoice vs. Receipt vs. Purchase Order: What's the Difference?</h2>
+          <p>
+            Many business owners in Nigeria use the terms "invoice" and "receipt" interchangeably, leading to costly record-keeping confusion:
+          </p>
+
+          <div class="blog-callout-box">
+            <p>
+              <strong>Purchase Order (PO):</strong> Sent by the <em>buyer</em> to the seller requesting goods or services at specific prices before fulfillment begins.<br>
+              <strong>Invoice:</strong> Sent by the <em>seller</em> to the buyer requesting payment once work is completed or products are ready for dispatch.<br>
+              <strong>Payment Receipt:</strong> Sent by the seller to the buyer <em>after</em> cash or bank transfer has been received, confirming full settlement.
+            </p>
+          </div>
+
+          <h2>Key Elements of a Valid Business Invoice</h2>
+          <p>
+            To ensure your invoice looks professional and gets approved quickly by corporate finance teams, always include:
+          </p>
+          <ul>
+            <li><strong>Unique Invoice Number:</strong> A chronological identifier (e.g., <code>INV-2026-001</code>) that allows both parties to reference transactions in bank statements.</li>
+            <li><strong>Complete Business Identity:</strong> Your registered business name, official email, phone number, and physical office or dispatch address.</li>
+            <li><strong>Client Details:</strong> The recipient's legal company name, contact person, and billing location.</li>
+            <li><strong>Itemized Line Breakdown:</strong> Clear descriptions of items sold, quantities, and agreed unit rates instead of vague lump-sum charges.</li>
+            <li><strong>Discounts & VAT:</strong> Clearly separated subtotal, applied promotional discounts, and statutory taxes (such as 7.5% Nigerian Value Added Tax where applicable).</li>
+            <li><strong>Bank Account Instructions:</strong> Correct Nigerian bank name, 10-digit NUBAN account number, and exact account name to prevent transfer errors.</li>
+            <li><strong>Payment Due Date:</strong> An explicit deadline (e.g. "Due on Receipt" or "Net 14 Days") rather than leaving payment timing open-ended.</li>
+          </ul>
+
+          <h2>How to Get Invoices Paid Faster in Nigeria</h2>
+          <p>
+            Late payments remain one of the biggest cash-flow killers for independent contractors and vendors. Follow these proven principles:
+          </p>
+          <ul>
+            <li><strong>Send Invoices as Clean PDFs via WhatsApp & Email:</strong> Corporate clients need a PDF for accounting files, but sending a PDF copy directly to the decision-maker's WhatsApp ensures immediate visibility.</li>
+            <li><strong>Require Upfront Deposits on Custom Work:</strong> Never deliver 100% of custom projects, manufacturing, or software development without securing an initial 50%–70% deposit invoice upfront.</li>
+            <li><strong>Clearly State Payment Deadlines:</strong> Replace "Pay at your earliest convenience" with an exact due date. Specific deadlines establish professional accountability.</li>
+          </ul>
+
+          <h2>Frequently Asked Questions</h2>
+          <div class="blog-faq-list">
+            <div class="blog-faq-item">
+              <h3 class="blog-faq-q">Can I download my invoice directly as a PDF?</h3>
+              <p class="blog-faq-a">
+                Yes. Click the <strong>Download as PDF / Print</strong> button. In your browser's print preview window, choose <strong>"Save as PDF"</strong> as the destination to download a crisp, professional A4 PDF invoice directly to your device.
+              </p>
+            </div>
+            <div class="blog-faq-item">
+              <h3 class="blog-faq-q">Is my customer or financial information stored on your servers?</h3>
+              <p class="blog-faq-a">
+                No. All invoice calculations and logo uploads run 100% locally in your web browser. Nothing is ever sent to or stored in our database. Session memory is automatically purged after 30 minutes of inactivity, or right away by tapping "Wipe Data Now".
+              </p>
+            </div>
+            <div class="blog-faq-item">
+              <h3 class="blog-faq-q">How do I add my business logo?</h3>
+              <p class="blog-faq-a">
+                Click on the "Click to add Business Logo" box under your business details. Select any PNG, JPG, or SVG image from your phone or computer. The logo will immediately appear on your invoice preview and in the final downloaded PDF.
+              </p>
+            </div>
+          </div>
+
+        </article>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer footer--minimal" id="contact">
+      <div class="footer-links">
+        <div class="footer-group">
+          <span class="footer-time">
+            <span class="footer-time-pulse"></span>
+            <span id="lagos-time">Lagos --:--:-- GMT+1</span>
+          </span>
+        </div>
+        <div class="footer-group footer-group--center">
+          <p class="footer-copy">&copy; 2026 AlphaTNX Digital Ltd. Built for Nigerian businesses.</p>
+        </div>
+        <div class="footer-group footer-group--right">
+          <a href="https://wa.me/2349064316439?text=Hi%20AlphaTNX%20Digital,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="footer-cta">Let’s Talk</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="margin-toast" role="status" aria-live="polite"></div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

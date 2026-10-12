@@ -2015,6 +2015,613 @@ https://digital.alphatnx.com/tool/profit-margin-calculator
   });
 
   // ==========================================================================
+  // 5. INVOICE GENERATOR (LINE ITEMS, LOGO, DISCOUNTS, TAX, PRINT/PDF & 30-MIN WIPE)
+  // ==========================================================================
+  const invoiceWrappers = document.querySelectorAll(".invoice-gen-module");
+
+  invoiceWrappers.forEach((wrapper) => {
+    const currSelect = wrapper.querySelector("#inv-curr-select");
+    const docTitleInput = wrapper.querySelector("#inv-doc-title");
+    const invNumInput = wrapper.querySelector("#inv-number");
+    const invDateInput = wrapper.querySelector("#inv-date");
+    const invDueDateInput = wrapper.querySelector("#inv-due-date");
+
+    const logoInput = wrapper.querySelector("#inv-logo-input");
+    const logoImg = wrapper.querySelector("#inv-logo-img");
+    const logoPlaceholder = wrapper.querySelector("#inv-logo-placeholder");
+    const logoPreviewWrap = wrapper.querySelector("#inv-logo-preview-wrap");
+    const logoRemoveBtn = wrapper.querySelector("#inv-logo-remove-btn");
+
+    const bizNameInput = wrapper.querySelector("#inv-biz-name");
+    const bizEmailInput = wrapper.querySelector("#inv-biz-email");
+    const bizPhoneInput = wrapper.querySelector("#inv-biz-phone");
+    const bizAddrInput = wrapper.querySelector("#inv-biz-address");
+
+    const clientNameInput = wrapper.querySelector("#inv-client-name");
+    const clientEmailInput = wrapper.querySelector("#inv-client-email");
+    const clientPhoneInput = wrapper.querySelector("#inv-client-phone");
+    const clientAddrInput = wrapper.querySelector("#inv-client-address");
+
+    const itemsBody = wrapper.querySelector("#inv-items-body");
+    const addItemBtn = wrapper.querySelector("#inv-add-item-btn");
+
+    const discountInput = wrapper.querySelector("#inv-discount-input");
+    const discountTypeSelect = wrapper.querySelector("#inv-discount-type");
+    const taxInput = wrapper.querySelector("#inv-tax-input");
+
+    const bankNameInput = wrapper.querySelector("#inv-bank-name");
+    const accountNumInput = wrapper.querySelector("#inv-account-num");
+    const accountNameInput = wrapper.querySelector("#inv-account-name");
+    const notesInput = wrapper.querySelector("#inv-notes");
+
+    const subtotalDisplay = wrapper.querySelector("#inv-subtotal-val");
+    const discountDisplay = wrapper.querySelector("#inv-discount-val");
+    const taxDisplay = wrapper.querySelector("#inv-tax-val");
+    const totalDueDisplay = wrapper.querySelector("#inv-total-due-val");
+
+    const downloadPdfBtn = wrapper.querySelector("#inv-download-pdf-btn");
+    const copySummaryBtn = wrapper.querySelector("#inv-copy-summary-btn");
+    const resetBtn = wrapper.querySelector("#inv-reset-btn");
+    const wipeBtn = wrapper.querySelector("#inv-wipe-data-btn");
+    const timerDisplay = wrapper.querySelector(".session-timer-display");
+
+    const STORAGE_KEY = "alphatnx_invoice_session";
+    const SESSION_DURATION = 30 * 60 * 1000; // 30 minutes
+
+    let activeLogoDataUrl = "";
+
+    const getSymbol = () => (currSelect ? currSelect.value : "₦");
+
+    const formatMoney = (val, sym = getSymbol()) => {
+      const num = Math.round(val);
+      const isNegative = num < 0;
+      return `${isNegative ? "-" : ""}${sym}${Math.abs(num).toLocaleString()}`;
+    };
+
+    const showToast = (msg) => {
+      const targetToast = document.querySelector(".margin-toast");
+      if (!targetToast) return;
+      targetToast.textContent = msg;
+      targetToast.classList.add("is-active");
+      setTimeout(() => {
+        targetToast.classList.remove("is-active");
+      }, 3000);
+    };
+
+    // Date defaults
+    const today = new Date();
+    const dueDate = new Date(Date.now() + 7 * 86400000);
+    if (invDateInput && !invDateInput.value) {
+      invDateInput.value = today.toISOString().split("T")[0];
+    }
+    if (invDueDateInput && !invDueDateInput.value) {
+      invDueDateInput.value = dueDate.toISOString().split("T")[0];
+    }
+
+    // Logo Upload Handling
+    if (logoInput) {
+      logoInput.addEventListener("change", (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        if (!file.type.startsWith("image/")) {
+          showToast("Please upload a valid image file");
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          activeLogoDataUrl = evt.target.result;
+          if (logoImg) logoImg.src = activeLogoDataUrl;
+          if (logoPlaceholder) logoPlaceholder.style.display = "none";
+          if (logoPreviewWrap) logoPreviewWrap.style.display = "flex";
+          saveSession();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    if (logoRemoveBtn) {
+      logoRemoveBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        activeLogoDataUrl = "";
+        if (logoInput) logoInput.value = "";
+        if (logoImg) logoImg.src = "";
+        if (logoPlaceholder) logoPlaceholder.style.display = "flex";
+        if (logoPreviewWrap) logoPreviewWrap.style.display = "none";
+        saveSession();
+      });
+    }
+
+    // Add Line Item Row
+    const addLineItemRow = (desc = "", qty = 1, rate = 0) => {
+      if (!itemsBody) return;
+      const tr = document.createElement("tr");
+      tr.className = "inv-item-row";
+      tr.innerHTML = `
+        <td>
+          <input type="text" class="inv-cell-input inv-item-desc" placeholder="e.g. Website Design & Development" value="${desc}">
+        </td>
+        <td style="text-align: center;">
+          <input type="number" class="inv-cell-input inv-item-qty" value="${qty}" min="1" step="1" style="text-align: center;">
+        </td>
+        <td style="text-align: right;">
+          <input type="number" class="inv-cell-input inv-item-rate" placeholder="0" value="${rate > 0 ? rate : ''}" min="0" step="100" style="text-align: right;">
+        </td>
+        <td style="text-align: right;">
+          <span class="inv-item-total">${formatMoney(qty * rate)}</span>
+        </td>
+        <td style="text-align: center;">
+          <button type="button" class="inv-btn-del-row" title="Delete row" aria-label="Delete line item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+          </button>
+        </td>
+      `;
+
+      // Event listeners on row inputs
+      const descInp = tr.querySelector(".inv-item-desc");
+      const qtyInp = tr.querySelector(".inv-item-qty");
+      const rateInp = tr.querySelector(".inv-item-rate");
+      const delBtn = tr.querySelector(".inv-btn-del-row");
+
+      [descInp, qtyInp, rateInp].forEach((inp) => {
+        if (inp) inp.addEventListener("input", () => calculateInvoice(true));
+      });
+
+      if (delBtn) {
+        delBtn.addEventListener("click", () => {
+          if (itemsBody.querySelectorAll("tr").length <= 1) {
+            showToast("Invoice must contain at least 1 line item");
+            return;
+          }
+          tr.remove();
+          calculateInvoice(true);
+        });
+      }
+
+      itemsBody.appendChild(tr);
+    };
+
+    // Calculate Totals
+    const calculateInvoice = (shouldSave = true) => {
+      const sym = getSymbol();
+      let subtotal = 0;
+
+      const rows = itemsBody ? itemsBody.querySelectorAll("tr.inv-item-row") : [];
+      rows.forEach((row) => {
+        const qty = parseFloat(row.querySelector(".inv-item-qty")?.value) || 0;
+        const rate = parseFloat(row.querySelector(".inv-item-rate")?.value) || 0;
+        const lineTotal = qty * rate;
+        subtotal += lineTotal;
+        const totalSpan = row.querySelector(".inv-item-total");
+        if (totalSpan) totalSpan.textContent = formatMoney(lineTotal, sym);
+      });
+
+      // Discount calculation
+      const discRaw = parseFloat(discountInput ? discountInput.value : 0) || 0;
+      const isPct = discountTypeSelect && discountTypeSelect.value === "pct";
+      const discountAmount = isPct ? (subtotal * (discRaw / 100)) : discRaw;
+      const discountedSubtotal = Math.max(0, subtotal - discountAmount);
+
+      // Tax / VAT
+      const taxRate = parseFloat(taxInput ? taxInput.value : 0) || 0;
+      const taxAmount = discountedSubtotal * (taxRate / 100);
+
+      const totalDue = discountedSubtotal + taxAmount;
+
+      if (subtotalDisplay) subtotalDisplay.textContent = formatMoney(subtotal, sym);
+      if (discountDisplay) discountDisplay.textContent = discountAmount > 0 ? `-${formatMoney(discountAmount, sym)}` : formatMoney(0, sym);
+      if (taxDisplay) taxDisplay.textContent = taxAmount > 0 ? `+${formatMoney(taxAmount, sym)}` : formatMoney(0, sym);
+      if (totalDueDisplay) totalDueDisplay.textContent = formatMoney(totalDue, sym);
+
+      if (shouldSave) saveSession();
+    };
+
+    // Save session to localStorage
+    const saveSession = () => {
+      const rows = [];
+      if (itemsBody) {
+        itemsBody.querySelectorAll("tr.inv-item-row").forEach((r) => {
+          rows.push({
+            desc: r.querySelector(".inv-item-desc")?.value || "",
+            qty: r.querySelector(".inv-item-qty")?.value || 1,
+            rate: r.querySelector(".inv-item-rate")?.value || ""
+          });
+        });
+      }
+
+      const payload = {
+        expiresAt: Date.now() + SESSION_DURATION,
+        data: {
+          title: docTitleInput ? docTitleInput.value : "INVOICE",
+          curr: getSymbol(),
+          invNum: invNumInput ? invNumInput.value : "",
+          invDate: invDateInput ? invDateInput.value : "",
+          invDueDate: invDueDateInput ? invDueDateInput.value : "",
+          logo: activeLogoDataUrl,
+          bizName: bizNameInput ? bizNameInput.value : "",
+          bizEmail: bizEmailInput ? bizEmailInput.value : "",
+          bizPhone: bizPhoneInput ? bizPhoneInput.value : "",
+          bizAddr: bizAddrInput ? bizAddrInput.value : "",
+          clientName: clientNameInput ? clientNameInput.value : "",
+          clientEmail: clientEmailInput ? clientEmailInput.value : "",
+          clientPhone: clientPhoneInput ? clientPhoneInput.value : "",
+          clientAddr: clientAddrInput ? clientAddrInput.value : "",
+          bankName: bankNameInput ? bankNameInput.value : "",
+          accountNum: accountNumInput ? accountNumInput.value : "",
+          accountName: accountNameInput ? accountNameInput.value : "",
+          notes: notesInput ? notesInput.value : "",
+          discount: discountInput ? discountInput.value : "",
+          discountType: discountTypeSelect ? discountTypeSelect.value : "flat",
+          tax: taxInput ? taxInput.value : "",
+          items: rows
+        }
+      };
+
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      } catch (e) {}
+    };
+
+    // Load session
+    const loadSession = () => {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          const session = JSON.parse(stored);
+          if (Date.now() < session.expiresAt && session.data) {
+            const d = session.data;
+            if (docTitleInput && d.title) docTitleInput.value = d.title;
+            if (currSelect && d.curr) currSelect.value = d.curr;
+            if (invNumInput && d.invNum) invNumInput.value = d.invNum;
+            if (invDateInput && d.invDate) invDateInput.value = d.invDate;
+            if (invDueDateInput && d.invDueDate) invDueDateInput.value = d.invDueDate;
+
+            if (d.logo) {
+              activeLogoDataUrl = d.logo;
+              if (logoImg) logoImg.src = d.logo;
+              if (logoPlaceholder) logoPlaceholder.style.display = "none";
+              if (logoPreviewWrap) logoPreviewWrap.style.display = "flex";
+            }
+
+            if (bizNameInput && d.bizName) bizNameInput.value = d.bizName;
+            if (bizEmailInput && d.bizEmail) bizEmailInput.value = d.bizEmail;
+            if (bizPhoneInput && d.bizPhone) bizPhoneInput.value = d.bizPhone;
+            if (bizAddrInput && d.bizAddr) bizAddrInput.value = d.bizAddr;
+
+            if (clientNameInput && d.clientName) clientNameInput.value = d.clientName;
+            if (clientEmailInput && d.clientEmail) clientEmailInput.value = d.clientEmail;
+            if (clientPhoneInput && d.clientPhone) clientPhoneInput.value = d.clientPhone;
+            if (clientAddrInput && d.clientAddr) clientAddrInput.value = d.clientAddr;
+
+            if (bankNameInput && d.bankName) bankNameInput.value = d.bankName;
+            if (accountNumInput && d.accountNum) accountNumInput.value = d.accountNum;
+            if (accountNameInput && d.accountName) accountNameInput.value = d.accountName;
+            if (notesInput && d.notes) notesInput.value = d.notes;
+
+            if (discountInput && d.discount) discountInput.value = d.discount;
+            if (discountTypeSelect && d.discountType) discountTypeSelect.value = d.discountType;
+            if (taxInput && d.tax) taxInput.value = d.tax;
+
+            if (itemsBody) itemsBody.innerHTML = "";
+            if (d.items && d.items.length > 0) {
+              d.items.forEach((it) => addLineItemRow(it.desc, it.qty, it.rate));
+            } else {
+              addLineItemRow();
+            }
+
+            calculateInvoice(false);
+            return;
+          } else {
+            localStorage.removeItem(STORAGE_KEY);
+          }
+        }
+      } catch (e) {}
+
+      // Default fresh state: 1 blank item row
+      if (itemsBody && itemsBody.children.length === 0) {
+        addLineItemRow();
+      }
+      calculateInvoice(false);
+    };
+
+    // Reset Form
+    const resetForm = () => {
+      activeLogoDataUrl = "";
+      if (logoInput) logoInput.value = "";
+      if (logoImg) logoImg.src = "";
+      if (logoPlaceholder) logoPlaceholder.style.display = "flex";
+      if (logoPreviewWrap) logoPreviewWrap.style.display = "none";
+
+      if (bizNameInput) bizNameInput.value = "";
+      if (bizEmailInput) bizEmailInput.value = "";
+      if (bizPhoneInput) bizPhoneInput.value = "";
+      if (bizAddrInput) bizAddrInput.value = "";
+
+      if (clientNameInput) clientNameInput.value = "";
+      if (clientEmailInput) clientEmailInput.value = "";
+      if (clientPhoneInput) clientPhoneInput.value = "";
+      if (clientAddrInput) clientAddrInput.value = "";
+
+      if (bankNameInput) bankNameInput.value = "";
+      if (accountNumInput) accountNumInput.value = "";
+      if (accountNameInput) accountNameInput.value = "";
+      if (notesInput) notesInput.value = "";
+
+      if (discountInput) discountInput.value = "";
+      if (taxInput) taxInput.value = "";
+
+      if (itemsBody) itemsBody.innerHTML = "";
+      addLineItemRow();
+      calculateInvoice(false);
+    };
+
+    const wipeData = () => {
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (e) {}
+      resetForm();
+      if (timerDisplay) timerDisplay.textContent = "30:00";
+      showToast("✓ Invoice session purged from memory");
+    };
+
+    // Countdown updater
+    const updateCountdown = () => {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) {
+          if (timerDisplay) timerDisplay.textContent = "30:00";
+          return;
+        }
+        const session = JSON.parse(stored);
+        const remaining = session.expiresAt - Date.now();
+        if (remaining <= 0) {
+          wipeData();
+          if (timerDisplay) timerDisplay.textContent = "Wiped";
+          return;
+        }
+        const mins = Math.floor(remaining / 60000);
+        const secs = Math.floor((remaining % 60000) / 1000);
+        if (timerDisplay) {
+          timerDisplay.textContent = `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+        }
+      } catch (e) {}
+    };
+
+    // Listeners for static inputs
+    [docTitleInput, invNumInput, invDateInput, invDueDateInput, bizNameInput, bizEmailInput, bizPhoneInput, bizAddrInput, clientNameInput, clientEmailInput, clientPhoneInput, clientAddrInput, bankNameInput, accountNumInput, accountNameInput, notesInput, discountInput, taxInput].forEach((inp) => {
+      if (inp) inp.addEventListener("input", () => calculateInvoice(true));
+    });
+
+    if (currSelect) currSelect.addEventListener("change", () => calculateInvoice(true));
+    if (discountTypeSelect) discountTypeSelect.addEventListener("change", () => calculateInvoice(true));
+
+    if (addItemBtn) {
+      addItemBtn.addEventListener("click", () => {
+        addLineItemRow();
+        calculateInvoice(true);
+      });
+    }
+
+    if (resetBtn) resetBtn.addEventListener("click", () => {
+      resetForm();
+      showToast("✓ Form cleared");
+    });
+
+    if (wipeBtn) wipeBtn.addEventListener("click", wipeData);
+
+    // Download PDF / Print Handler
+    if (downloadPdfBtn) {
+      downloadPdfBtn.addEventListener("click", () => {
+        const sym = getSymbol();
+        const docTitle = docTitleInput && docTitleInput.value.trim() ? docTitleInput.value.trim() : "INVOICE";
+        const invNum = invNumInput && invNumInput.value.trim() ? invNumInput.value.trim() : "INV-0001";
+        const invDate = invDateInput && invDateInput.value ? invDateInput.value : "—";
+        const invDueDate = invDueDateInput && invDueDateInput.value ? invDueDateInput.value : "—";
+
+        const bizName = bizNameInput && bizNameInput.value.trim() ? bizNameInput.value.trim() : "Business / Company Name";
+        const bizEmail = bizEmailInput ? bizEmailInput.value.trim() : "";
+        const bizPhone = bizPhoneInput ? bizPhoneInput.value.trim() : "";
+        const bizAddr = bizAddrInput ? bizAddrInput.value.trim() : "";
+
+        const clientName = clientNameInput && clientNameInput.value.trim() ? clientNameInput.value.trim() : "Client Name";
+        const clientEmail = clientEmailInput ? clientEmailInput.value.trim() : "";
+        const clientPhone = clientPhoneInput ? clientPhoneInput.value.trim() : "";
+        const clientAddr = clientAddrInput ? clientAddrInput.value.trim() : "";
+
+        const bankName = bankNameInput ? bankNameInput.value.trim() : "";
+        const accountNum = accountNumInput ? accountNumInput.value.trim() : "";
+        const accountName = accountNameInput ? accountNameInput.value.trim() : "";
+        const notes = notesInput ? notesInput.value.trim() : "";
+
+        // Populate #print-invoice-sheet
+        const printSheet = document.getElementById("print-invoice-sheet");
+        if (!printSheet) return;
+
+        // Logo
+        const printLogoContainer = document.getElementById("print-logo-container");
+        const printLogoImg = document.getElementById("print-inv-logo-img");
+        if (activeLogoDataUrl && printLogoImg && printLogoContainer) {
+          printLogoImg.src = activeLogoDataUrl;
+          printLogoContainer.style.display = "block";
+        } else if (printLogoContainer) {
+          printLogoContainer.style.display = "none";
+        }
+
+        // Header & Meta
+        const elPrintDocTitle = document.getElementById("print-doc-title");
+        const elPrintBizName = document.getElementById("print-biz-name");
+        const elPrintBizMeta = document.getElementById("print-biz-meta");
+        const elPrintInvNum = document.getElementById("print-inv-num");
+        const elPrintInvDate = document.getElementById("print-inv-date");
+        const elPrintInvDueDate = document.getElementById("print-inv-due-date");
+
+        if (elPrintDocTitle) elPrintDocTitle.textContent = docTitle;
+        if (elPrintBizName) elPrintBizName.textContent = bizName;
+        if (elPrintBizMeta) {
+          const parts = [bizAddr, bizPhone, bizEmail].filter(Boolean);
+          elPrintBizMeta.innerHTML = parts.join("<br>");
+        }
+        if (elPrintInvNum) elPrintInvNum.textContent = invNum;
+        if (elPrintInvDate) elPrintInvDate.textContent = invDate;
+        if (elPrintInvDueDate) elPrintInvDueDate.textContent = invDueDate;
+
+        // Client
+        const elPrintClientName = document.getElementById("print-client-name");
+        const elPrintClientMeta = document.getElementById("print-client-meta");
+        if (elPrintClientName) elPrintClientName.textContent = clientName;
+        if (elPrintClientMeta) {
+          const cParts = [clientAddr, clientPhone, clientEmail].filter(Boolean);
+          elPrintClientMeta.innerHTML = cParts.join("<br>");
+        }
+
+        // Table Rows
+        const printItemsBody = document.getElementById("print-items-body");
+        let subtotal = 0;
+        if (printItemsBody) {
+          printItemsBody.innerHTML = "";
+          const rows = itemsBody ? itemsBody.querySelectorAll("tr.inv-item-row") : [];
+          rows.forEach((row) => {
+            const desc = row.querySelector(".inv-item-desc")?.value.trim() || "Item / Service";
+            const qty = parseFloat(row.querySelector(".inv-item-qty")?.value) || 0;
+            const rate = parseFloat(row.querySelector(".inv-item-rate")?.value) || 0;
+            const lineTotal = qty * rate;
+            subtotal += lineTotal;
+
+            const printTr = document.createElement("tr");
+            printTr.innerHTML = `
+              <td>${desc}</td>
+              <td style="text-align: center;">${qty}</td>
+              <td style="text-align: right;">${formatMoney(rate, sym)}</td>
+              <td style="text-align: right; font-weight: 600;">${formatMoney(lineTotal, sym)}</td>
+            `;
+            printItemsBody.appendChild(printTr);
+          });
+        }
+
+        // Calculations
+        const discRaw = parseFloat(discountInput ? discountInput.value : 0) || 0;
+        const isPct = discountTypeSelect && discountTypeSelect.value === "pct";
+        const discountAmount = isPct ? (subtotal * (discRaw / 100)) : discRaw;
+        const discountedSubtotal = Math.max(0, subtotal - discountAmount);
+        const taxRate = parseFloat(taxInput ? taxInput.value : 0) || 0;
+        const taxAmount = discountedSubtotal * (taxRate / 100);
+        const totalDue = discountedSubtotal + taxAmount;
+
+        const elSub = document.getElementById("print-subtotal-val");
+        const elDiscRow = document.getElementById("print-discount-row");
+        const elDiscVal = document.getElementById("print-discount-val");
+        const elTaxRow = document.getElementById("print-tax-row");
+        const elTaxVal = document.getElementById("print-tax-val");
+        const elTaxLabel = document.getElementById("print-tax-label");
+        const elTotalDue = document.getElementById("print-total-due-val");
+
+        if (elSub) elSub.textContent = formatMoney(subtotal, sym);
+        if (elDiscRow) {
+          elDiscRow.style.display = discountAmount > 0 ? "flex" : "none";
+          if (elDiscVal) elDiscVal.textContent = `-${formatMoney(discountAmount, sym)}`;
+        }
+        if (elTaxRow) {
+          elTaxRow.style.display = taxAmount > 0 ? "flex" : "none";
+          if (elTaxLabel) elTaxLabel.textContent = `Tax / VAT (${taxRate}%):`;
+          if (elTaxVal) elTaxVal.textContent = `+${formatMoney(taxAmount, sym)}`;
+        }
+        if (elTotalDue) elTotalDue.textContent = formatMoney(totalDue, sym);
+
+        // Bank Details
+        const elBankName = document.getElementById("print-bank-name");
+        const elAccountNum = document.getElementById("print-account-num");
+        const elAccountName = document.getElementById("print-account-name");
+        const elNotesWrap = document.getElementById("print-notes-wrap");
+        const elNotesText = document.getElementById("print-notes-text");
+
+        if (elBankName) elBankName.textContent = bankName || "—";
+        if (elAccountNum) elAccountNum.textContent = accountNum || "—";
+        if (elAccountName) elAccountName.textContent = accountName || "—";
+
+        if (elNotesWrap && elNotesText) {
+          if (notes) {
+            elNotesWrap.style.display = "block";
+            elNotesText.textContent = notes;
+          } else {
+            elNotesWrap.style.display = "none";
+          }
+        }
+
+        window.print();
+      });
+    }
+
+    // Copy Plain Text Invoice
+    if (copySummaryBtn) {
+      copySummaryBtn.addEventListener("click", () => {
+        const sym = getSymbol();
+        const docTitle = docTitleInput && docTitleInput.value.trim() ? docTitleInput.value.trim() : "INVOICE";
+        const invNum = invNumInput ? invNumInput.value.trim() : "INV-0001";
+        const bizName = bizNameInput ? bizNameInput.value.trim() : "Business";
+        const clientName = clientNameInput ? clientNameInput.value.trim() : "Client";
+
+        let lines = `===========================================
+${docTitle.toUpperCase()} #${invNum}
+===========================================
+FROM: ${bizName}
+TO: ${clientName}
+DATE: ${invDateInput ? invDateInput.value : "—"}
+DUE DATE: ${invDueDateInput ? invDueDateInput.value : "—"}
+-------------------------------------------
+ITEMS:\n`;
+
+        let subtotal = 0;
+        const rows = itemsBody ? itemsBody.querySelectorAll("tr.inv-item-row") : [];
+        rows.forEach((row, idx) => {
+          const desc = row.querySelector(".inv-item-desc")?.value.trim() || `Item ${idx + 1}`;
+          const qty = parseFloat(row.querySelector(".inv-item-qty")?.value) || 0;
+          const rate = parseFloat(row.querySelector(".inv-item-rate")?.value) || 0;
+          const total = qty * rate;
+          subtotal += total;
+          lines += `${idx + 1}. ${desc} (${qty} x ${formatMoney(rate, sym)}) = ${formatMoney(total, sym)}\n`;
+        });
+
+        const discRaw = parseFloat(discountInput ? discountInput.value : 0) || 0;
+        const isPct = discountTypeSelect && discountTypeSelect.value === "pct";
+        const discountAmount = isPct ? (subtotal * (discRaw / 100)) : discRaw;
+        const discountedSubtotal = Math.max(0, subtotal - discountAmount);
+        const taxRate = parseFloat(taxInput ? taxInput.value : 0) || 0;
+        const taxAmount = discountedSubtotal * (taxRate / 100);
+        const totalDue = discountedSubtotal + taxAmount;
+
+        lines += `-------------------------------------------
+Subtotal: ${formatMoney(subtotal, sym)}
+`;
+        if (discountAmount > 0) lines += `Discount: -${formatMoney(discountAmount, sym)}\n`;
+        if (taxAmount > 0) lines += `Tax/VAT (${taxRate}%): +${formatMoney(taxAmount, sym)}\n`;
+        lines += `TOTAL DUE: ${formatMoney(totalDue, sym)}
+-------------------------------------------
+PAYMENT DETAILS:
+Bank: ${bankNameInput ? bankNameInput.value.trim() : "—"}
+Account Number: ${accountNumInput ? accountNumInput.value.trim() : "—"}
+Account Name: ${accountNameInput ? accountNameInput.value.trim() : "—"}
+`;
+        if (notesInput && notesInput.value.trim()) {
+          lines += `\nTerms & Notes: ${notesInput.value.trim()}\n`;
+        }
+        lines += `===========================================
+Generated via AlphaTNX Digital: https://digital.alphatnx.com/tool/invoice-generator`;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(lines).then(() => {
+            showToast("✓ Invoice summary copied to clipboard!");
+          });
+        } else {
+          showToast("✓ Invoice summary copied!");
+        }
+      });
+    }
+
+    // Initialize
+    loadSession();
+    setInterval(updateCountdown, 1000);
+  });
+
+  // ==========================================================================
   // NEWSLETTER FORM SUBMISSION
   // ==========================================================================
   const nlForm = document.getElementById("newsletter-form");

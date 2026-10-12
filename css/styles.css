@@ -4238,8 +4238,9 @@ button {
 /* ==========================================================================
    TOOLS 3-COLUMN DESKTOP GRID & ON-SITE OVERLAY MODALS
    ========================================================================== */
-.tools-3col-section {
-  max-width: 1200px;
+.tools-3col-section,
+.tools-2col-section {
+  max-width: 1080px;
   margin: 0 auto;
   padding: 0 var(--page-gutter) var(--space-5xl);
 }
@@ -4248,6 +4249,19 @@ button {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-2xl);
+}
+
+.tools-2col-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2xl);
+}
+
+@media (max-width: 768px) {
+  .tools-2col-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
 }
 
 .tool-preview-card {
@@ -8984,6 +8998,521 @@ button {
     box-shadow: none !important;
     border: 1px solid #E2E8F0 !important;
     border-radius: 10px !important;
+  }
+}
+
+/* ==========================================================================
+   INVOICE GENERATOR TOOL STYLES
+   ========================================================================== */
+.inv-header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.inv-title-input {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: transparent;
+  border: 1px dashed var(--border-default);
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: var(--foreground-strong);
+  max-width: 280px;
+}
+
+.inv-title-input:focus {
+  border-style: solid;
+  border-color: var(--accent-blue);
+  background: var(--background-surface);
+}
+
+.inv-control-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inv-control-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--foreground-muted);
+}
+
+.inv-currency-select {
+  background: var(--background-surface);
+  color: var(--foreground-strong);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.inv-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.inv-parties-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.inv-party-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inv-section-title {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--foreground-strong);
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Logo Uploader Zone */
+.inv-logo-zone {
+  position: relative;
+  border: 1.5px dashed var(--border-default);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  background: var(--background-surface);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.inv-logo-zone:hover {
+  border-color: var(--accent-blue);
+  background: var(--background-card-hover);
+}
+
+.inv-logo-file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.inv-logo-placeholder {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--foreground-muted);
+  pointer-events: none;
+}
+
+.inv-logo-preview-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 4px;
+}
+
+.inv-logo-img {
+  max-height: 48px;
+  max-width: 140px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.inv-logo-remove {
+  background: rgba(239, 68, 68, 0.12);
+  color: #EF4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.inv-logo-remove:hover {
+  background: #EF4444;
+  color: #FFFFFF;
+}
+
+/* Dynamic Line Items Table */
+.inv-items-section {
+  margin-bottom: 28px;
+}
+
+.inv-items-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--background-surface);
+  margin-top: 8px;
+}
+
+.inv-items-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.inv-items-table th {
+  background: var(--background-card);
+  padding: 10px 12px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--foreground-muted);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.inv-items-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: middle;
+}
+
+.inv-items-table tr:last-child td {
+  border-bottom: none;
+}
+
+.inv-cell-input {
+  width: 100%;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 13.5px;
+  color: var(--foreground-strong);
+  box-sizing: border-box;
+}
+
+.inv-cell-input:hover {
+  border-color: var(--border-subtle);
+}
+
+.inv-cell-input:focus {
+  background: var(--background-card);
+  border-color: var(--accent-blue);
+  outline: none;
+}
+
+.inv-item-total {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.inv-btn-del-row {
+  background: transparent;
+  border: none;
+  color: var(--foreground-muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, background 0.15s;
+}
+
+.inv-btn-del-row:hover {
+  color: #EF4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.inv-add-row-bar {
+  margin-top: 10px;
+}
+
+.inv-add-item-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px dashed var(--border-default);
+  color: var(--accent-sky);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.inv-add-item-btn:hover {
+  background: rgba(25, 72, 235, 0.08);
+  border-color: var(--accent-sky);
+}
+
+/* Bottom Grid: Bank Details + Totals */
+.inv-bottom-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 28px;
+  margin-top: 10px;
+  align-items: start;
+}
+
+.inv-bottom-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inv-notes-textarea {
+  resize: vertical;
+  min-height: 60px;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.inv-totals-box {
+  background: var(--background-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inv-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13.5px;
+  color: var(--foreground-default);
+}
+
+.inv-mini-select {
+  background: var(--background-card);
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  color: var(--foreground-strong);
+  font-size: 12.5px;
+  padding: 3px 6px;
+  cursor: pointer;
+}
+
+.inv-grand-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-default);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--foreground-strong);
+}
+
+.inv-grand-total-row strong {
+  font-size: 1.35rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-btn-action.is-primary-action {
+  background: var(--accent-blue);
+  color: #FFFFFF;
+  border-color: var(--accent-blue);
+}
+
+.calc-btn-action.is-primary-action:hover {
+  background: #1d4ed8;
+  color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+  .inv-meta-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .inv-parties-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .inv-bottom-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* ==========================================================================
+   PRINT INVOICE SHEET (@media print)
+   ========================================================================== */
+.print-invoice-sheet {
+  display: none;
+}
+
+@media print {
+  .print-invoice-sheet {
+    display: block !important;
+    visibility: visible !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 760px !important;
+    margin: 0 auto !important;
+    padding: 24px !important;
+    background: #FFFFFF !important;
+    color: #0F172A !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  }
+  .print-inv-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid #0F172A;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+  }
+  .print-inv-biz-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0;
+    color: #0F172A;
+  }
+  .print-inv-meta-text {
+    font-size: 12px;
+    color: #475569;
+    margin: 4px 0 0;
+    line-height: 1.5;
+  }
+  .print-inv-doc-meta {
+    text-align: right;
+  }
+  .print-inv-title {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: #0F172A;
+    margin: 0 0 6px;
+  }
+  .print-meta-table {
+    margin-left: auto;
+    font-size: 12px;
+  }
+  .print-meta-table td {
+    padding: 2px 6px;
+  }
+  .print-meta-table td:first-child {
+    color: #64748B;
+    font-weight: 600;
+    text-align: right;
+  }
+  .print-meta-table td:last-child {
+    font-weight: 700;
+    text-align: right;
+  }
+  .print-inv-billto {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+  }
+  .print-section-tag {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #64748B;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .print-client-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0F172A;
+    margin: 0;
+  }
+  .print-inv-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  .print-inv-table th {
+    background: #F1F5F9;
+    padding: 8px 10px;
+    border-top: 1px solid #CBD5E1;
+    border-bottom: 1px solid #CBD5E1;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #334155;
+    text-align: left;
+  }
+  .print-inv-table td {
+    padding: 9px 10px;
+    border-bottom: 1px solid #E2E8F0;
+    color: #1E293B;
+  }
+  .print-inv-summary-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 20px;
+    align-items: start;
+    margin-bottom: 20px;
+  }
+  .print-bank-box {
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 12px 14px;
+    background: #FAFAFA;
+  }
+  .print-totals-box {
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+    padding: 12px 14px;
+    background: #F8FAFC;
+    font-size: 13px;
+  }
+  .print-tot-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    color: #334155;
+  }
+  .print-grand-row {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 8px;
+    margin-top: 6px;
+    border-top: 2px solid #0F172A;
+    font-size: 15px;
+    font-weight: 800;
+    color: #0F172A;
+  }
+  .print-inv-footer {
+    border-top: 1px solid #E2E8F0;
+    padding-top: 12px;
+    text-align: center;
+    font-size: 10.5px;
+    color: #94A3B8;
   }
 }
 

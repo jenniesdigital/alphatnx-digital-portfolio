@@ -81,6 +81,21 @@
       "source": "/profit-margin-calculator",
       "destination": "/tool/profit-margin-calculator",
       "permanent": true
+    },
+    {
+      "source": "/tool-invoice-generator",
+      "destination": "/tool/invoice-generator",
+      "permanent": true
+    },
+    {
+      "source": "/tools/invoice-generator",
+      "destination": "/tool/invoice-generator",
+      "permanent": true
+    },
+    {
+      "source": "/invoice-generator",
+      "destination": "/tool/invoice-generator",
+      "permanent": true
     }
   ]
 }
