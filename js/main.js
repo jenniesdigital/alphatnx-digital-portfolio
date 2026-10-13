@@ -1957,7 +1957,19 @@ https://digital.alphatnx.com/tool/profit-margin-calculator
           if (elProjProfit) elProjProfit.textContent = formatCurrency(grossProfit * volume, sym);
         }
 
+        const originalDocTitle = document.title;
+        const rawInputName = nameInput && nameInput.value.trim() ? nameInput.value.trim() : "";
+        const safeDocTitle = rawInputName.replace(/[/\\?%*:|"<>]/g, "").trim() || "Unit Profit Margin Report";
+        document.title = safeDocTitle;
+
         window.print();
+
+        const restoreTitle = () => {
+          document.title = originalDocTitle;
+          window.removeEventListener("afterprint", restoreTitle);
+        };
+        window.addEventListener("afterprint", restoreTitle);
+        setTimeout(() => { document.title = originalDocTitle; }, 3000);
       });
     }
 
@@ -3303,8 +3315,9 @@ Generated via AlphaTNX Digital: https://digital.alphatnx.com/tool/quotation-gene
     const wipeBtn = wrapper.querySelector("#bns-wipe-data-btn");
     const timerDisplay = wrapper.querySelector(".session-timer-display");
 
-    const STORAGE_KEY = "alphatnx_bns_session";
+    const STORAGE_KEY = "alphatnx_bns_session_v2";
     const SESSION_DURATION = 30 * 60 * 1000; // 30 minutes
+    try { localStorage.removeItem("alphatnx_bns_session"); } catch (e) {}
 
     let generatedList = [];
     let savedList = [];
@@ -3322,62 +3335,336 @@ Generated via AlphaTNX Digital: https://digital.alphatnx.com/tool/quotation-gene
     };
 
     const industryVocab = {
+      fashion: {
+        seeds: ["Silhouette", "Thread", "Loom", "Verve", "Drape", "Muse"],
+        evocativeAdjs: ["Velvet", "Sovereign", "Aurea", "Opaline", "Sartoria", "Lumière", "Ivory", "Noir", "Solstice", "Élan", "Vellura", "Serene"],
+        evocativeNouns: ["Thread", "Loom", "Silhouette", "Drape", "Form", "Stitch", "Weave", "Canvas", "Line", "Verve", "Silk", "Muse"],
+        formats: ["Atelier", "Maison", "Design House", "Studio", "Couture", "Collective", "House", "Edit"],
+        slogans: [
+          "Where timeless design meets uncompromising craftsmanship.",
+          "Tailored luxury, defined by every detail.",
+          "From sketch to silhouette — modern luxury, made personal.",
+          "Distinctive fashion and bespoke design for the modern wardrobe.",
+          "Curated pieces shaped by craft, fabric, and form.",
+          "Quiet luxury. Unmistakable presence.",
+          "Crafted for presence. Designed to outlast every season.",
+          "Artistry in every stitch. Confidence in every piece.",
+          "Elevated design for those who dress with intention.",
+          "Bespoke craftsmanship. Contemporary silhouette.",
+          "Redefining modern style through thoughtful design.",
+          "Timeless aesthetics. Effortless sophistication.",
+          "Designed to be remembered, tailored to endure.",
+          "Modern couture crafted without compromise.",
+          "Fine fabrics, sculptural lines, and enduring elegance.",
+          "Signature pieces for moments that matter."
+        ]
+      },
       general: {
-        seeds: ["Prime", "Vertex", "Core", "Crest"],
-        nouns: ["Solutions", "Ventures", "Hub", "Works", "Group", "Collective"],
-        benefits: ["Everyday Excellence", "Smart Execution", "Trusted Quality", "Seamless Service"]
+        seeds: ["Vertex", "Meridian", "Crest", "Vanguard", "Axis", "Solis"],
+        evocativeAdjs: ["Sterling", "Prime", "Sovereign", "Vanguard", "Aurea", "Nexa", "Lumina", "Summit", "Crest", "Vero", "Apex", "Caliber"],
+        evocativeNouns: ["Works", "Ventures", "Collective", "Standard", "Point", "Craft", "Bridge", "Axis", "Forge", "Horizon", "Core", "Foundry"],
+        formats: ["Studio", "Collective", "Group", "Works", "Ventures", "House", "Partners", "Co."],
+        slogans: [
+          "Built on precision, driven by lasting value.",
+          "Thoughtful execution for businesses that refuse to settle.",
+          "Setting a higher standard in quality, craft, and reliability.",
+          "Where clear vision meets dependable execution.",
+          "Designed for durability, trusted for results.",
+          "Modern craft backed by unwavering integrity.",
+          "Elevating everyday standards through purposeful work.",
+          "Simplicity, excellence, and consistency in every detail.",
+          "Crafted to perform. Built to endure.",
+          "Trusted expertise tailored for modern ambition.",
+          "Precision-built solutions for discerning clients.",
+          "Distinctive quality, delivered without friction.",
+          "Turning bold ideas into enduring reality.",
+          "Refined execution for forward-thinking brands.",
+          "Dependable craft, measurable impact.",
+          "Built with intention. Delivered with excellence."
+        ]
       },
       ecommerce: {
-        seeds: ["Cart", "Market", "Shop", "Trend"],
-        nouns: ["Mart", "Store", "Bazaar", "Boutique", "Vault", "Exchange"],
-        benefits: ["Authentic Quality Delivered", "Everyday Style & Value", "Seamless Shopping", "Curated Picks"]
+        seeds: ["Curate", "Vault", "Cove", "Bazaar", "Loom", "Edit"],
+        evocativeAdjs: ["Velvet", "Verve", "Aurea", "Prime", "Lumina", "Kora", "Sovereign", "Vero", "Opal", "Solis", "Pure", "Nove"],
+        evocativeNouns: ["Vault", "Cove", "Edit", "Parcel", "Trove", "Loom", "Market", "Avenue", "Cart", "Bazaar", "Gallery", "Haven"],
+        formats: ["Boutique", "Store", "Atelier", "Collective", "Edit", "House", "Vault", "Market"],
+        slogans: [
+          "Curated quality, delivered straight to your doorstep.",
+          "Thoughtfully selected pieces for everyday living.",
+          "Seamless discovery, authentic products, effortless checkout.",
+          "Where discerning taste meets effortless shopping.",
+          "Crafted for quality seekers. Delivered with care.",
+          "Your curated destination for pieces worth keeping.",
+          "Elevated essentials, designed for how you live today.",
+          "Authentic craft and modern style, one tap away.",
+          "Handpicked excellence, zero compromise.",
+          "Bringing refined taste and reliable delivery together.",
+          "Designed for desire, built for convenience.",
+          "Every order packed with intention and care.",
+          "Modern retail built around trust and timeless style.",
+          "Discover better. Shop effortlessly.",
+          "Quality you can feel from unboxing to everyday use.",
+          "Distinctive finds for the modern lifestyle."
+        ]
       },
       tech: {
-        seeds: ["Nexa", "Pay", "Cloud", "Byte"],
-        nouns: ["Labs", "Systems", "Tech", "Digital", "Stack", "Logic", "Pulse"],
-        benefits: ["Intelligent Automation", "Digital Speed & Scale", "Frictionless Innovation", "Future-Ready Systems"]
+        seeds: ["Nexa", "Velo", "Kora", "Flux", "Aether", "Stack"],
+        evocativeAdjs: ["Nexa", "Vero", "Zeno", "Opti", "Lumina", "Prio", "Hyper", "Strata", "Aether", "Velo", "Vector", "Quant"],
+        evocativeNouns: ["Stack", "Pulse", "Logic", "Grid", "Flow", "Core", "Sphere", "Sync", "Layer", "Node", "Arc", "Forge"],
+        formats: ["Labs", "Systems", "Digital", "Tech", "Cloud", "Protocol", "Studio", "AI"],
+        slogans: [
+          "Intelligent infrastructure built for speed and scale.",
+          "Engineering simpler, faster ways to run modern business.",
+          "Zero friction. High velocity. Built for scale.",
+          "Turning complex workflows into effortless software.",
+          "Precision-engineered systems that grow with your ambition.",
+          "Where clean architecture meets real-world reliability.",
+          "Powering the next generation of digital commerce.",
+          "Smart automation designed for teams that move fast.",
+          "Built for uptime, engineered for clarity.",
+          "Modern digital tools without the enterprise bloat.",
+          "Seamless payments, smarter data, faster growth.",
+          "Technology that works quietly and reliably in the background.",
+          "From complexity to clarity in a single platform.",
+          "Future-ready infrastructure for ambitious operators.",
+          "Fast by default. Secure by design.",
+          "Connecting data, payments, and people effortlessly."
+        ]
       },
       food: {
-        seeds: ["Fresh", "Spice", "Bite", "Crave"],
-        nouns: ["Kitchen", "Bistro", "Pantry", "Table", "Bakehouse", "Foods", "Grill"],
-        benefits: ["Freshly Crafted Daily", "Authentic Taste in Every Bite", "Wholesome & Delicious", "Made with Passion"]
+        seeds: ["Crumb", "Hearth", "Saffron", "Zest", "Harvest", "Ember"],
+        evocativeAdjs: ["Golden", "Warm", "Fresh", "Artisan", "Savory", "Velvet", "Crisp", "Rustic", "Pure", "Sweet", "Amber", "Rich"],
+        evocativeNouns: ["Hearth", "Crumb", "Table", "Pantry", "Ember", "Grain", "Spice", "Platter", "Oven", "Leaf", "Spoon", "Harvest"],
+        formats: ["Bakehouse", "Kitchen", "Bistro", "Table", "Pantry", "Atelier", "Roastery", "Co."],
+        slogans: [
+          "Handcrafted from scratch with honest, fresh ingredients.",
+          "Bold flavours and warm hospitality at every table.",
+          "Made fresh daily — because real taste never takes shortcuts.",
+          "Where culinary craft meets unforgettable flavour.",
+          "Wholesome ingredients, slow-crafted perfection.",
+          "From our kitchen to your table, made with intention.",
+          "Artisanal recipes crafted for moments worth sharing.",
+          "Pure ingredients. Honest cooking. Unforgettable taste.",
+          "Every bite crafted with warmth, spice, and soul.",
+          "Freshly baked, thoughtfully prepared, always comforting.",
+          "Elevating everyday dining into a celebration of flavour.",
+          "Small-batch craft, big-hearted flavour.",
+          "Rooted in tradition, plated for today.",
+          "Crafted for cravings that deserve the real thing.",
+          "Honest food made by people who care.",
+          "Savour the craft in every single bite."
+        ]
       },
       logistics: {
-        seeds: ["Swift", "Route", "Cargo", "Fleet"],
-        nouns: ["Express", "Logistics", "Dispatch", "Transit", "Haulage", "Direct", "Links"],
-        benefits: ["On-Time Every Mile", "Fast & Trackable Delivery", "Safe Transit Guaranteed", "Moving Your Business Forward"]
+        seeds: ["Swift", "Route", "Transit", "Fleet", "Vector", "Mile"],
+        evocativeAdjs: ["Swift", "Rapid", "Prime", "Vanguard", "Direct", "Aero", "Velocity", "Apex", "True", "Iron", "Clear", "Meridian"],
+        evocativeNouns: ["Route", "Mile", "Transit", "Cargo", "Fleet", "Relay", "Bridge", "Corridor", "Haul", "Link", "Axis", "Track"],
+        formats: ["Logistics", "Express", "Dispatch", "Transit", "Haulage", "Freight", "Links", "Direct"],
+        slogans: [
+          "On-time delivery across every mile, with real-time clarity.",
+          "Moving cargo safely, swiftly, and without excuses.",
+          "Dependable dispatch and haulage built for growing businesses.",
+          "Precision routing. Predictable arrival. Complete peace of mind.",
+          "Your supply chain in motion — tracked, insured, and on schedule.",
+          "Bridging distances with speed and operational discipline.",
+          "Every parcel handled with urgency and accountability.",
+          "Built to keep commerce moving without interruption.",
+          "Fast dispatch, transparent tracking, zero guesswork.",
+          "From warehouse to doorstep, engineered for reliability.",
+          "Reliable fleet infrastructure for high-volume fulfilment.",
+          "When timing matters, we deliver.",
+          "Seamless last-mile and interstate transit you can count on.",
+          "Speed meets certainty on every route.",
+          "Connecting merchants to customers, one on-time delivery at a time.",
+          "Engineered for velocity. Trusted for safety."
+        ]
       },
       realestate: {
-        seeds: ["Haven", "Crest", "Brick", "Urban"],
-        nouns: ["Properties", "Realty", "Estates", "Homes", "Spaces", "Developments", "Court"],
-        benefits: ["Spaces Built for Living", "Trusted Property Investment", "Modern Comfort & Security", "Building Lasting Value"]
+        seeds: ["Haven", "Crest", "Manor", "Vantage", "Arch", "Terra"],
+        evocativeAdjs: ["Sovereign", "Sterling", "Crest", "Meridian", "Aurea", "Vantage", "Prime", "Grand", "Serene", "Oak", "Crown", "Ivory"],
+        evocativeNouns: ["Haven", "Court", "Arch", "Manor", "Vista", "Stone", "Pillar", "Square", "Ridge", "Grove", "Terrace", "Domus"],
+        formats: ["Estates", "Properties", "Realty", "Homes", "Developments", "Spaces", "Living", "Group"],
+        slogans: [
+          "Spaces designed for modern living and generational value.",
+          "Architectural integrity meets timeless comfort.",
+          "Building enduring homes and high-conviction property assets.",
+          "Where thoughtful architecture becomes home.",
+          "Curated residences and developments built to appreciate.",
+          "Crafted spaces for how modern families live and grow.",
+          "Trusted property advisory and landmark developments.",
+          "Designing sanctuaries of calm, craft, and permanence.",
+          "Solid foundations. Timeless design. Lasting equity.",
+          "Redefining urban living through superior build quality.",
+          "Every square metre planned with purpose and elegance.",
+          "Distinguished properties for discerning homeowners.",
+          "Investing in spaces that stand the test of time.",
+          "Modern architecture rooted in security and serenity.",
+          "From blueprint to handover, built without compromise.",
+          "Creating addresses people are proud to call home."
+        ]
       },
       agro: {
-        seeds: ["Green", "Harvest", "Terra", "Seed"],
-        nouns: ["Agro", "Farms", "Produce", "Fields", "Commodities", "Organics", "Nutri"],
-        benefits: ["From Farm to Market", "Pure & Sustainable Harvest", "Nourishing Communities", "Quality Agricultural Supply"]
+        seeds: ["Harvest", "Terra", "Green", "Grain", "Root", "Field"],
+        evocativeAdjs: ["Green", "Pure", "Verdant", "Golden", "Prime", "Terra", "Fresh", "Sun", "Fertile", "Vital", "True", "Earth"],
+        evocativeNouns: ["Harvest", "Field", "Grain", "Root", "Seed", "Grove", "Meadow", "Crop", "Acre", "Yield", "Orchard", "Soil"],
+        formats: ["Agro", "Farms", "Produce", "Commodities", "Organics", "Foods", "Allied", "Ventures"],
+        slogans: [
+          "From fertile soil to market — pure, traceable, and sustainable.",
+          "Cultivating quality harvests that nourish communities.",
+          "Modern agribusiness built on consistency and clean supply.",
+          "Sustainably grown, carefully processed, reliably supplied.",
+          "Bridging farm-fresh harvests with everyday kitchens.",
+          "Rooted in the land. Driven by quality.",
+          "Wholesome agricultural produce at commercial scale.",
+          "Nourishing families and industries with dependable supply.",
+          "Pure harvests cultivated with care and modern agronomy.",
+          "Feeding growth from seed to shelf.",
+          "Clean, grade-A farm produce you can trust year-round.",
+          "Where sustainable farming meets reliable food supply.",
+          "Grown with integrity, harvested at peak freshness.",
+          "Strengthening the food chain from farm gate to table.",
+          "Nature's best, cultivated with precision.",
+          "Honest farming for a healthier tomorrow."
+        ]
       },
       beauty: {
-        seeds: ["Glow", "Aura", "Silk", "Pure"],
-        nouns: ["Beauty", "Botanics", "Studio", "Skincare", "Aesthetics", "Luxe", "Wellness"],
-        benefits: ["Confidence in Your Skin", "Pure Radiance Everyday", "Crafted for Natural Beauty", "Timeless Self-Care"]
+        seeds: ["Glow", "Aura", "Silk", "Bloom", "Dew", "Petal"],
+        evocativeAdjs: ["Velvet", "Radiant", "Pure", "Aurea", "Serene", "Lumina", "Opal", "Dew", "Silk", "Rose", "Soft", "Golden"],
+        evocativeNouns: ["Glow", "Aura", "Bloom", "Dew", "Elixir", "Botanica", "Skin", "Muse", "Ritual", "Essence", "Veil", "Luxe"],
+        formats: ["Atelier", "Botanics", "Skincare", "Beauty", "Studio", "Aesthetics", "Rituals", "House"],
+        slogans: [
+          "Clean, intentional rituals for radiant, healthy skin.",
+          "Where botanical purity meets visible skin transformation.",
+          "Crafted to honour your natural glow, every single day.",
+          "Luxury self-care formulated without compromise.",
+          "Gentle science. Pure botanicals. Unmistakable radiance.",
+          "Skincare and beauty rituals designed for real confidence.",
+          "Timeless beauty, thoughtfully formulated.",
+          "Nourishing formulas that let your skin breathe and shine.",
+          "Elevated beauty essentials for your daily ritual.",
+          "Pure ingredients, sensorial textures, lasting luminosity.",
+          "Because radiant skin is always in season.",
+          "Artisanal beauty crafted with care and clinical precision.",
+          "Whisper-soft luxury for skin that glows from within.",
+          "Redefining modern beauty through purity and grace.",
+          "Your daily ritual of calm, care, and confidence.",
+          "Formulated for results. Designed for indulgence."
+        ]
       },
       consulting: {
-        seeds: ["Sterling", "Vanguard", "Bridge", "Axis"],
-        nouns: ["Advisory", "Partners", "Consulting", "Capital", "Associates", "Strategy"],
-        benefits: ["Clarity for Growth", "Strategic Results That Matter", "Trusted Corporate Guidance", "Precision & Integrity"]
+        seeds: ["Sterling", "Vanguard", "Meridian", "Bridge", "Axis", "Crest"],
+        evocativeAdjs: ["Sterling", "Vanguard", "Meridian", "Sovereign", "Apex", "Crest", "Caliber", "First", "Prime", "Summit", "North", "Keystone"],
+        evocativeNouns: ["Bridge", "Axis", "Capital", "Point", "Standard", "Counsel", "Compass", "Ledger", "Vector", "Horizon", "Pillar", "Aegis"],
+        formats: ["Advisory", "Partners", "Consulting", "Capital", "Associates", "Strategy", "Group", "Co."],
+        slogans: [
+          "Clarity, strategy, and execution for complex business decisions.",
+          "Trusted advisory for leaders building enduring enterprises.",
+          "Turning strategic insight into measurable commercial growth.",
+          "Rigorous analysis. Candid counsel. Lasting results.",
+          "Partnering with ambitious founders to scale with discipline.",
+          "Where financial precision meets strategic foresight.",
+          "Guiding institutions through growth, transformation, and scale.",
+          "Independent thinking backed by deep market execution.",
+          "Structured clarity for high-stakes decisions.",
+          "Building resilient organisations through smart strategy.",
+          "Insight that moves the needle. Integrity that builds trust.",
+          "Decisive counsel for businesses navigating growth.",
+          "Precision strategy tailored to your competitive edge.",
+          "Measured advice. Proven outcomes.",
+          "Architecting sustainable growth for modern enterprises.",
+          "Principled advisory built on trust and performance."
+        ]
       },
       education: {
-        seeds: ["Bright", "Skill", "Scholar", "Learn"],
-        nouns: ["Academy", "Institute", "Learning", "Campus", "Mentors", "Prep", "Forge"],
-        benefits: ["Skills for the Real World", "Unlocking Human Potential", "Learn Faster, Lead Further", "Empowering Future Leaders"]
+        seeds: ["Scholar", "Lumina", "Forge", "Spark", "Beacon", "Path"],
+        evocativeAdjs: ["Bright", "Lumina", "Prime", "Vanguard", "Nova", "Apex", "Clear", "Noble", "True", "Forward", "Elevate", "First"],
+        evocativeNouns: ["Beacon", "Forge", "Path", "Spark", "Horizon", "Compass", "Mind", "Bridge", "Arc", "Guild", "Craft", "Chapter"],
+        formats: ["Academy", "Institute", "Learning", "School", "Lab", "Collective", "Campus", "Guild"],
+        slogans: [
+          "Practical skills and mentorship for the real world.",
+          "Where curiosity turns into career-defining mastery.",
+          "Empowering ambitious minds to learn faster and lead further.",
+          "Rigorous training designed for tomorrow's builders and leaders.",
+          "Bridging the gap between classroom theory and industry excellence.",
+          "Unlocking human potential through structured, hands-on learning.",
+          "Built for learners who want mastery, not just certificates.",
+          "Clear pathways to high-value skills and lifelong growth.",
+          "Teaching the craft, discipline, and thinking that matter.",
+          "Shaping capable leaders through transformative education.",
+          "Learn with intention. Build with confidence.",
+          "World-class curriculum tailored for ambitious talent.",
+          "Igniting capability, curiosity, and excellence.",
+          "Where dedicated mentorship meets practical mastery.",
+          "Elevating standards in modern skill development.",
+          "Knowledge that compounds for a lifetime."
+        ]
       },
       health: {
-        seeds: ["Vita", "Care", "Med", "Pulse"],
-        nouns: ["Health", "Diagnostics", "Medics", "Pharmacy", "Wellness", "Clinic", "Life"],
-        benefits: ["Compassionate Care Always", "Your Health, Our Priority", "Trusted Medical Excellence", "Accessible Wellness"]
+        seeds: ["Vita", "Pulse", "Serene", "Aegis", "haven", "Clarity"],
+        evocativeAdjs: ["Vita", "Pure", "Serene", "Prime", "True", "Clear", "Gentle", "Aegis", "Calm", "First", "Veritas", "Solis"],
+        evocativeNouns: ["Pulse", "Care", "Life", "Haven", "Cross", "Well", "Spring", "Shield", "Path", "Balance", "Heart", "Aura"],
+        formats: ["Health", "Diagnostics", "Clinic", "Wellness", "Medics", "Care", "Pharmacy", "Centre"],
+        slogans: [
+          "Compassionate, evidence-based care centred around you.",
+          "Modern diagnostics and healthcare you can trust completely.",
+          "Where clinical excellence meets genuine human empathy.",
+          "Accessible, dignified healthcare for every stage of life.",
+          "Precision diagnostics. Proactive wellness. Trusted care.",
+          "Putting patient clarity, comfort, and outcomes first.",
+          "Restoring health and peace of mind through attentive medicine.",
+          "Dependable medical care built onclinical integrity.",
+          "Thoughtful wellness and preventative care for modern families.",
+          "Clear answers, gentle care, and trusted medical expertise.",
+          "Dedicated to healthier lives and stronger communities.",
+          "Clinical accuracy delivered with warmth and respect.",
+          "Your partner in lifelong vitality and preventative health.",
+          "Modern medicine practised with patience and precision.",
+          "Safe, responsive healthcare when it matters most.",
+          "Care that listens. Expertise that heals."
+        ]
       }
     };
+
+    const KNOWN_FORMATS = new Set([
+      "atelier", "studio", "maison", "house", "boutique", "couture", "collective", "gallery",
+      "vault", "lounge", "hub", "store", "mart", "market", "exchange", "works", "forge",
+      "lab", "labs", "kitchen", "bistro", "bakehouse", "cafe", "clinic", "pharmacy",
+      "academy", "institute", "ventures", "partners", "advisory", "group", "estates",
+      "homes", "realty", "farms", "express", "logistics", "transit", "salon", "spa",
+      "parlour", "club", "room", "edit", "agency", "company", "bureau", "guild"
+    ]);
+
+    const KNOWN_DESCRIPTORS = new Set([
+      "luxury", "luxe", "bespoke", "fine", "haute", "modern", "minimal", "pure", "organic",
+      "natural", "glow", "radiant", "velvet", "silk", "golden", "royal", "sovereign",
+      "prime", "elite", "artisan", "artisanal", "crafted", "timeless", "classic", "urban",
+      "street", "vintage", "bold", "swift", "rapid", "instant", "smart", "clean", "green",
+      "fresh", "wholesome", "executive", "signature", "exclusive", "opulent", "prive",
+      "noir", "ivory", "vera", "aurea", "supreme", "global", "premier", "heritage",
+      "authentic", "chic", "sleek", "custom", "elevated", "curated", "rare", "vivid"
+    ]);
+
+    const KNOWN_DOMAINS = new Set([
+      "fashion", "design", "designs", "apparel", "clothing", "style", "wear", "tailoring",
+      "textiles", "fabric", "bridal", "bridals", "jewelry", "jewels", "accessories",
+      "footwear", "shoes", "bags", "dress", "dresses", "garments", "wardrobe",
+      "beauty", "skincare", "skin", "fragrance", "perfume", "scent", "hair", "cosmetics",
+      "makeup", "wellness", "aesthetics",
+      "tech", "technology", "pay", "payments", "fintech", "software", "data", "cloud",
+      "cyber", "ai", "digital", "web", "code", "saas", "systems", "automation",
+      "food", "foods", "bakery", "catering", "grill", "spice", "coffee", "tea", "dining",
+      "pastry", "confectionery", "cuisine", "snacks",
+      "logistics", "cargo", "freight", "dispatch", "delivery", "haulage", "shipping",
+      "courier", "fleet", "supply",
+      "property", "properties", "realestate", "estate", "architecture", "interiors",
+      "decor", "construction", "build", "housing",
+      "solar", "energy", "power",
+      "agro", "agriculture", "farm", "farming", "harvest", "produce", "grains",
+      "health", "healthcare", "medical", "care", "fitness", "diagnostics", "med",
+      "consulting", "finance", "capital", "legal", "strategy", "media", "creative",
+      "photography", "print", "events", "education", "learning", "training", "coaching",
+      "retail", "commerce", "shop", "shopping", "trade"
+    ]);
 
     const capitalize = (str) => {
       if (!str) return "";
@@ -3385,199 +3672,288 @@ Generated via AlphaTNX Digital: https://digital.alphatnx.com/tool/quotation-gene
     };
 
     const makeDomain = (name) => {
-      const clean = name.toLowerCase().replace(/[^a-z0-9]/g, "");
-      return `${clean.slice(0, 18)}.com.ng`;
+      const clean = name
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "");
+      return `${clean.slice(0, 22)}.com`;
+    };
+
+    const makeCoinedWord = (base, seedIdx) => {
+      const clean = base
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-zA-Z]/g, "");
+      if (!clean) return "Vellura";
+      const lower = clean.toLowerCase();
+      // Strip trailing vowel or 'ie'/'y' for smooth blending
+      const stem = lower.length > 4
+        ? lower.replace(/(ie|y|a|e|o|u)$/i, "")
+        : lower;
+      const capStem = capitalize(stem);
+      const endings = ["éa", "ora", "via", "era", "ia", "ova", "elle", "is", "a", "lux"];
+      const suffix = endings[seedIdx % endings.length];
+      if (capStem.toLowerCase().endsWith(suffix.replace("é", "e"))) {
+        return `${capStem}ra`;
+      }
+      return `${capStem}${suffix}`;
     };
 
     const generateIdeas = () => {
       generationSeed++;
       const rawKw = keywordsInput ? keywordsInput.value.trim() : "";
-      const industryKey = industrySelect ? industrySelect.value : "general";
+      let industryKey = industrySelect ? industrySelect.value : "general";
       const styleKey = styleSelect ? styleSelect.value : "all";
       const audienceRaw = audienceInput ? audienceInput.value.trim() : "";
 
-      const ind = industryVocab[industryKey] || industryVocab.general;
-
-      // Extract user keywords or fall back to industry seeds
-      let userWords = rawKw
+      // Parse all user keywords cleanly (up to 10 words)
+      const parsedWords = rawKw
         .split(/[\s,;/-]+/)
-        .map((w) => w.replace(/[^a-zA-Z0-9]/g, ""))
+        .map((w) => w.replace(/[^a-zA-Z0-9éèêàù]/g, ""))
         .filter((w) => w.length >= 2)
         .map(capitalize);
 
-      if (userWords.length === 0) {
-        userWords = [...ind.seeds];
+      // Classify user keywords into semantic roles
+      const anchors = [];
+      const domains = [];
+      const descriptors = [];
+      const formats = [];
+
+      parsedWords.forEach((word) => {
+        const lw = word.toLowerCase();
+        if (KNOWN_FORMATS.has(lw)) {
+          formats.push(word);
+        } else if (KNOWN_DESCRIPTORS.has(lw)) {
+          descriptors.push(word);
+        } else if (KNOWN_DOMAINS.has(lw)) {
+          domains.push(word);
+        } else {
+          anchors.push(word);
+        }
+      });
+
+      // Smart Sub-Niche Auto-Detection from Keywords
+      const allLower = parsedWords.map((w) => w.toLowerCase());
+      const hasFashionSignal = allLower.some((w) =>
+        ["fashion", "atelier", "couture", "bespoke", "apparel", "wear", "tailoring", "bridal", "dress", "style", "garment", "silhouette", "design", "designs"].includes(w)
+      );
+      const hasBeautySignal = allLower.some((w) =>
+        ["beauty", "skincare", "skin", "fragrance", "perfume", "glow", "cosmetics", "makeup", "salon", "spa", "hair"].includes(w)
+      );
+      const hasLuxurySignal = styleKey === "luxury" || allLower.some((w) =>
+        ["luxury", "luxe", "atelier", "maison", "couture", "bespoke", "sovereign", "opulent", "velvet", "silk", "fine", "haute", "prive"].includes(w)
+      );
+
+      let activeLexiconKey = industryKey;
+      if (hasFashionSignal && (industryKey === "general" || industryKey === "ecommerce")) {
+        activeLexiconKey = "fashion";
+      } else if (hasBeautySignal && (industryKey === "general" || industryKey === "ecommerce")) {
+        activeLexiconKey = "beauty";
       }
 
-      const kw1 = userWords[0];
-      const kw2 = userWords[1] || ind.seeds[generationSeed % ind.seeds.length];
-      const kw3 = userWords[2] || ind.seeds[(generationSeed + 1) % ind.seeds.length];
-
-      const audSuffix = audienceRaw ? ` for ${audienceRaw}` : " Across Nigeria";
-      const audFocus = audienceRaw ? audienceRaw : "Modern Businesses";
-
-      const modernPrefixes = ["Nexa", "Vero", "Zeno", "Kora", "Nova", "Opti", "Lumina", "Prio"];
-      const modernSuffixes = ["ly", "ify", "Flow", "Sphere", "Base", "Grid", "Mint", "Wave", "Sync", "Box"];
-      const corporatePrefixes = ["Sterling", "Apex", "Vanguard", "Crest", "Meridian", "FirstBridge", "Prime", "Summit"];
-      const nigerianRoots = ["Eko", "Naija", "Aso", "Kobo", "Oga", "Arewa", "Obodo", "Wazo", "Zobo", "Lagos"];
-      const luxuryWords = ["Maison", "Atelier", "Aura", "Velvet", "Sovereign", "Opulent", "Privé", "Crown"];
-      const actionWords = ["Swift", "Bolt", "Turbo", "Insta", "Rapid", "Flash", "Go", "Velocity"];
-
+      const lex = industryVocab[activeLexiconKey] || industryVocab.general;
       const pick = (arr, offset = 0) => arr[(generationSeed + offset) % arr.length];
 
-      const pool = [];
+      // Determine semantic slots with intelligent fallbacks
+      const primaryAnchor = anchors[0] || "";
+      const secondaryAnchor = anchors[1] || "";
+      const primaryDomain = domains[0] || pick(lex.seeds, 0);
+      const secondaryDomain = domains[1] || (domains[0] ? pick(lex.evocativeNouns, 1) : pick(lex.seeds, 2));
+      const primaryDesc = descriptors[0] || pick(lex.evocativeAdjs, 0);
+      const secondaryDesc = descriptors[1] || pick(lex.evocativeAdjs, 3);
+      const primaryFormat = formats[0] || pick(lex.formats, 0);
+      const secondaryFormat = formats[1] || pick(lex.formats, 2);
 
-      // 1. Modern & Catchy
-      pool.push(
-        {
-          style: "modern",
-          tag: "Modern Brand",
-          name: `${pick(modernPrefixes, 0)}${kw1}`,
-          slogan: `${ind.benefits[0]} — Redefining ${kw1}${audSuffix}.`
-        },
-        {
-          style: "modern",
-          tag: "Startup Compound",
-          name: `${kw1}${pick(modernSuffixes, 1)}`,
-          slogan: `The Smarter, Simpler Way to Experience ${kw1}.`
-        },
-        {
-          style: "modern",
-          tag: "Modern Brand",
-          name: `${kw1}${kw2}`,
-          slogan: `Built for ${ind.benefits[1]} and Everyday Growth.`
-        },
-        {
-          style: "modern",
-          tag: "Tech-Forward",
-          name: `${pick(modernPrefixes, 2)}${kw2} ${pick(ind.nouns, 0)}`,
-          slogan: `Powering ${audFocus} with ${ind.benefits[2]}.`
-        }
-      );
+      // Craft a rich candidate pool across diverse naming archetypes
+      const candidatePool = [];
 
-      // 2. Corporate & CAC-Ready
-      pool.push(
-        {
-          style: "corporate",
-          tag: "CAC Corporate",
-          name: `${pick(corporatePrefixes, 0)} ${kw1} ${pick(ind.nouns, 1)}`,
-          slogan: `Your Trusted Partner in ${kw1} & ${ind.benefits[2]}.`
-        },
-        {
-          style: "corporate",
-          tag: "CAC Corporate",
-          name: `${kw1} & ${kw2} ${pick(ind.nouns, 2)}`,
-          slogan: `Delivering ${ind.benefits[0]}${audSuffix}.`
-        },
-        {
-          style: "corporate",
-          tag: "Enterprise Brand",
-          name: `${pick(corporatePrefixes, 3)} ${kw2} Integrated`,
-          slogan: `Setting the Standard for ${ind.benefits[3]}.`
-        },
-        {
-          style: "corporate",
-          tag: "CAC Corporate",
-          name: `${kw1} ${pick(corporatePrefixes, 1)} ${pick(ind.nouns, 3)}`,
-          slogan: `Professional ${kw1} Solutions Built on Integrity.`
-        }
-      );
+      if (primaryAnchor) {
+        // When user includes a founder/brand name (e.g. "Jennie"), use it like a true brand house/signature
+        // AND balance it with evocative concepts from their other keywords so not all 12 repeat the same word.
+        candidatePool.push(
+          {
+            style: "luxury",
+            tag: "Signature House",
+            name: `${primaryAnchor} ${primaryFormat}`,
+            sloganIdx: 0
+          },
+          {
+            style: "luxury",
+            tag: "Maison & Label",
+            name: `Maison ${primaryAnchor}`,
+            sloganIdx: 1
+          },
+          {
+            style: "modern",
+            tag: "Eponymous Brand",
+            name: `House of ${primaryAnchor}`,
+            sloganIdx: 2
+          },
+          {
+            style: "corporate",
+            tag: "Studio Identity",
+            name: `${primaryAnchor} ${primaryDomain} ${secondaryFormat === primaryFormat ? "Studio" : secondaryFormat}`,
+            sloganIdx: 3
+          },
+          {
+            style: "modern",
+            tag: "Editorial Label",
+            name: `The ${primaryAnchor} ${formats.includes("Edit") ? "Collective" : "Edit"}`,
+            sloganIdx: 4
+          },
+          {
+            style: "luxury",
+            tag: "Designer Label",
+            name: `By ${primaryAnchor} ${descriptors[0] || ""}`.trim(),
+            sloganIdx: 5
+          },
+          {
+            style: "modern",
+            tag: "Coined Brandable",
+            name: `${makeCoinedWord(primaryAnchor, generationSeed)} ${primaryFormat}`,
+            sloganIdx: 9
+          },
+          {
+            style: "corporate",
+            tag: "CAC Corporate",
+            name: `${primaryAnchor} & Co. ${primaryDomain}`,
+            sloganIdx: 11
+          }
+        );
+      }
 
-      // 3. Nigerian & Local Fusion
-      pool.push(
-        {
-          style: "nigerian",
-          tag: "Nigerian Fusion",
-          name: `${pick(nigerianRoots, 0)}${kw1}`,
-          slogan: `Proudly Nigerian. Built for ${ind.benefits[0]}.`
-        },
-        {
-          style: "nigerian",
-          tag: "Local Heritage",
-          name: `${kw1} ${pick(nigerianRoots, 1)} ${pick(ind.nouns, 0)}`,
-          slogan: `Bringing ${ind.benefits[1]} Closer to ${audFocus}.`
-        },
-        {
-          style: "nigerian",
-          tag: "Nigerian Fusion",
-          name: `${pick(nigerianRoots, 2)}${kw2} Co.`,
-          slogan: `Authentic ${kw1} Excellence${audSuffix}.`
-        }
-      );
-
-      // 4. Premium & Boutique
-      pool.push(
+      // Multi-keyword synthesis & evocative brand names (works whether or not a founder name was entered)
+      candidatePool.push(
         {
           style: "luxury",
-          tag: "Premium Boutique",
-          name: `${pick(luxuryWords, 0)} ${kw1}`,
-          slogan: `Where ${kw1} Meets Uncompromising Luxury.`
+          tag: "Evocative Boutique",
+          name: `${pick(lex.evocativeAdjs, 1)} & ${pick(lex.evocativeNouns, 2)} ${primaryFormat}`,
+          sloganIdx: 6
+        },
+        {
+          style: "modern",
+          tag: "Modern Concept",
+          name: `${pick(lex.evocativeNouns, 4)} & ${pick(lex.evocativeNouns, 7)}`,
+          sloganIdx: 8
         },
         {
           style: "luxury",
           tag: "Upscale Identity",
-          name: `${kw1} ${pick(luxuryWords, 1)}`,
-          slogan: `Curated ${ind.benefits[0]} for Discerning Clients.`
+          name: `${pick(lex.evocativeAdjs, 5)} ${primaryDomain} ${secondaryFormat}`,
+          sloganIdx: 7
         },
         {
-          style: "luxury",
-          tag: "Signature Brand",
-          name: `${pick(luxuryWords, 2)} & ${kw2}`,
-          slogan: `Crafted for Distinction. Designed for ${audFocus}.`
-        }
-      );
-
-      // 5. Speed & Action-Oriented
-      pool.push(
+          style: "modern",
+          tag: "Brand Compound",
+          name: `${primaryDesc} & ${pick(lex.evocativeNouns, 0)}`,
+          sloganIdx: 10
+        },
+        {
+          style: "corporate",
+          tag: "CAC Corporate",
+          name: `${pick(lex.evocativeAdjs, 2)} ${primaryDomain} ${pick(lex.formats, 4)}`,
+          sloganIdx: 12
+        },
+        {
+          style: "modern",
+          tag: "Coined Brandable",
+          name: `${makeCoinedWord(primaryDesc || primaryDomain, generationSeed + 2)} ${primaryDomain}`,
+          sloganIdx: 13
+        },
+        {
+          style: "corporate",
+          tag: "Enterprise Brand",
+          name: `${secondaryAnchor || pick(lex.evocativeAdjs, 8)} ${secondaryDomain} Collective`,
+          sloganIdx: 14
+        },
         {
           style: "action",
-          tag: "Action & Speed",
-          name: `${pick(actionWords, 0)}${kw1}`,
-          slogan: `Fast, Reliable ${kw1} When It Matters Most.`
+          tag: "Direct Identity",
+          name: `Studio ${primaryAnchor || pick(lex.evocativeAdjs, 6)}`,
+          sloganIdx: 15
+        },
+        {
+          style: "nigerian",
+          tag: "Cultural Fusion",
+          name: `${pick(["Aso", "Kora", "Eko", "Zobo", "Arewa", "Odua", "Ife", "Zaria"], 0)} & ${pick(lex.evocativeNouns, 3)} ${primaryFormat}`,
+          sloganIdx: 4
+        },
+        {
+          style: "nigerian",
+          tag: "Heritage Brand",
+          name: `House of ${pick(["Kora", "Aso", "Adire", "Eko", "Oriki", "Amaka"], 2)} ${primaryDomain}`,
+          sloganIdx: 6
         },
         {
           style: "action",
           tag: "Dynamic Brand",
-          name: `${kw1} ${pick(actionWords, 1)} ${pick(ind.nouns, 4)}`,
-          slogan: `Zero Delays. 100% ${ind.benefits[1]}.`
+          name: `${pick(["Verve", "Pulse", "Apex", "Nova", "Stride", "Momentum"], 1)} ${primaryDomain} ${primaryFormat}`,
+          sloganIdx: 10
         },
         {
           style: "action",
-          tag: "Direct Action",
-          name: `${pick(actionWords, 2)}${kw2} Direct`,
-          slogan: `Accelerating ${kw1}${audSuffix}.`
+          tag: "Bold Concept",
+          name: `The ${primaryDesc} ${primaryDomain} Room`,
+          sloganIdx: 11
         }
       );
 
-      // Filter by selected style or return 12 balanced items
-      let filtered = styleKey === "all"
-        ? pool
-        : pool.filter((item) => item.style === styleKey);
+      // Filter by style if a specific tone was selected, otherwise curate a smart balanced mix
+      let selectedPool = styleKey === "all"
+        ? candidatePool
+        : candidatePool.filter((c) => c.style === styleKey || (hasLuxurySignal && c.style === "luxury"));
 
-      // If filtered has fewer than 12, pad with more variations using the selected style
-      const extraModifiers = ["Pro", "Plus", "One", "Prime", "Point", "Edge", "Core", "Craft", "Link", "Nest"];
-      let idx = 0;
-      while (filtered.length < 12) {
-        const mod = extraModifiers[(generationSeed + idx) % extraModifiers.length];
-        const baseWord = userWords[idx % userWords.length];
-        const noun = ind.nouns[(generationSeed + idx) % ind.nouns.length];
-        const benefit = ind.benefits[(generationSeed + idx) % ind.benefits.length];
-        filtered.push({
-          style: styleKey,
-          tag: styleKey === "all" ? "Brand Concept" : `${capitalize(styleKey)} Brand`,
-          name: idx % 2 === 0 ? `${baseWord}${mod} ${noun}` : `${mod}${baseWord} ${noun}`,
-          slogan: `${benefit} — Tailored for ${audFocus}.`
+      // If user selected a specific style that has < 12 items in candidatePool, top up from remaining candidates seamlessly
+      if (selectedPool.length < 12) {
+        candidatePool.forEach((c) => {
+          if (selectedPool.length < 16 && !selectedPool.includes(c)) {
+            selectedPool.push(c);
+          }
         });
-        idx++;
       }
 
-      generatedList = filtered.slice(0, 12).map((item, i) => ({
-        id: `${Date.now()}_${i}`,
-        name: item.name,
-        slogan: item.slogan,
-        tag: item.tag,
-        domain: makeDomain(item.name)
-      }));
+      // Deduplicate names and pair each with a unique, context-aware copywriter slogan
+      const usedNames = new Set();
+      const usedSlogans = new Set();
+      const finalItems = [];
+
+      for (let i = 0; i < selectedPool.length && finalItems.length < 12; i++) {
+        const item = selectedPool[(i + (generationSeed > 1 ? generationSeed : 0)) % selectedPool.length];
+        const cleanName = item.name.replace(/\s+/g, " ").trim();
+        const nameKey = cleanName.toLowerCase();
+        if (usedNames.has(nameKey)) continue;
+        usedNames.add(nameKey);
+
+        // Pick a unique slogan from the lexicon's copywriter bank
+        let sloganText = "";
+        for (let s = 0; s < lex.slogans.length; s++) {
+          const candidateSlogan = lex.slogans[(item.sloganIdx + generationSeed + s) % lex.slogans.length];
+          if (!usedSlogans.has(candidateSlogan)) {
+            sloganText = candidateSlogan;
+            usedSlogans.add(candidateSlogan);
+            break;
+          }
+        }
+        if (!sloganText) {
+          sloganText = lex.slogans[(i + generationSeed) % lex.slogans.length];
+        }
+
+        // If user specified a target audience/location, subtly tailor 3 of the slogans without breaking grammar
+        if (audienceRaw && finalItems.length % 4 === 3 && sloganText.endsWith(".")) {
+          sloganText = `${sloganText.slice(0, -1)} — crafted for ${audienceRaw}.`;
+        }
+
+        finalItems.push({
+          id: `${Date.now()}_${finalItems.length}`,
+          name: cleanName,
+          slogan: sloganText,
+          tag: item.tag,
+          domain: makeDomain(cleanName)
+        });
+      }
+
+      generatedList = finalItems;
 
       activeTab = "all";
       updateTabUI();

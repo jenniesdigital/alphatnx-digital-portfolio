@@ -13,7 +13,13 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/04_Favicons_and_App_Icons/favicon-32x32.png">
   <link rel="icon" type="image/png" href="/assets/brand/02_Logo_Marks_Monogram/Transparent_PNG_HighRes/AlphaTNX_Mark_BrandColor_512px.png">
   <link rel="apple-touch-icon" href="/assets/brand/04_Favicons_and_App_Icons/apple-touch-icon-180x180.png">
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css?v=20261013">
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 0mm !important;
+    }
+  </style>
 </head>
 <body data-away-title="Have a wonderful day ♥">
 
@@ -327,7 +333,7 @@
       <div id="print-results-sheet" class="print-results-sheet" aria-hidden="true">
         <div style="border-bottom: 2px solid #0F172A; padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: baseline;">
           <div>
-            <h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #0F172A;">AlphaTNX Digital · Unit Profit Margin Report</h2>
+            <h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #0F172A;">Unit Profit Margin Report</h2>
             <p id="print-product-name" style="margin: 4px 0 0; font-size: 13.5px; color: #475569; font-weight: 600;">Product: —</p>
           </div>
           <div style="text-align: right; font-size: 12px; color: #64748B;">
@@ -401,7 +407,7 @@
           </div>
         </div>
 
-        <div style="margin-top: 24px; padding-top: 12px; border-top: 1px solid #E2E8F0; text-align: center; font-size: 11px; color: #94A3B8;">
+        <div class="print-pm-footer" style="position: fixed; bottom: 8mm; left: 16mm; right: 16mm; padding-top: 8px; border-top: 1px solid #E2E8F0; text-align: center; font-size: 9.5px; color: #94A3B8; background: #FFFFFF;">
           AlphaTNX Digital · Digital Infrastructure for Nigerian Businesses · digital.alphatnx.com/tool/profit-margin-calculator
         </div>
       </div>
@@ -544,6 +550,6 @@
   <!-- Floating Toast Notification -->
   <div class="margin-toast" id="margin-toast" role="status" aria-live="polite">✓ Copied to clipboard!</div>
 
-  <script src="/js/main.js"></script>
+  <script src="/js/main.js?v=20261013"></script>
 </body>
 </html>

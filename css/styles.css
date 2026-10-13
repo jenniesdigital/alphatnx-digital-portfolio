@@ -8999,16 +8999,28 @@ button {
   .print-results-sheet {
     display: block !important;
     visibility: visible !important;
-    position: static !important;
+    position: relative !important;
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 auto !important;
-    padding: 15mm 16mm !important;
+    padding: 15mm 16mm 22mm 16mm !important;
     box-sizing: border-box !important;
     background: #FFFFFF !important;
     color: #0F172A !important;
     box-shadow: none !important;
     border: none !important;
+  }
+  .print-pm-footer {
+    position: fixed !important;
+    bottom: 8mm !important;
+    left: 16mm !important;
+    right: 16mm !important;
+    border-top: 1px solid #E2E8F0 !important;
+    padding-top: 8px !important;
+    text-align: center !important;
+    font-size: 9.5px !important;
+    color: #94A3B8 !important;
+    background: #FFFFFF !important;
   }
 }
 
